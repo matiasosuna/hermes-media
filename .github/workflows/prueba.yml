@@ -1,4 +1,4 @@
-# Pruebas sin publicar (se puede correr con "publicar" apagado):
+# Pruebas sin publicar (funcionan aunque "publicar" esté apagado):
 #   gh workflow run prueba -R matiasosuna/hermes-media -f modo=dry-run
 #   gh workflow run prueba -R matiasosuna/hermes-media -f modo=contenedor-prueba   (crea un contenedor de IG y NO lo publica)
 name: prueba
