@@ -4,7 +4,7 @@
 name: publicar
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '7,22,37,52 * * * *'  # minutos impares: a la hora en punto GitHub demora o saltea crons
   workflow_dispatch:
 permissions:
   contents: write
