@@ -1,4 +1,4 @@
-# Publica en Instagram + YouTube lo que ya venció en calendario.json y anota los links.
+# Publica en Instagram + YouTube lo que ya venció en calendario.json y anota los links (cada 15 min).
 # Encender / apagar:  gh workflow enable publicar -R matiasosuna/hermes-media
 #                     gh workflow disable publicar -R matiasosuna/hermes-media
 name: publicar
