@@ -66,7 +66,13 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "7jjZJrZAwwk",
+          "url": "https://youtube.com/shorts/7jjZJrZAwwk",
+          "fecha": "2026-10-16T23:01:44.812Z",
+          "privacidad": "public",
+          "via": "Mac (scripts/youtube.mjs)"
+        }
       }
     },
     {
