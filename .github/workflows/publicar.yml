@@ -1,0 +1,40 @@
+# Publica en Instagram + YouTube lo que ya venció en calendario.json y anota los links.
+# Encender / apagar:  gh workflow enable publicar -R matiasosuna/hermes-media
+#                     gh workflow disable publicar -R matiasosuna/hermes-media
+name: publicar
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Publicar lo que toca
+        env:
+          HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
+          HT_IG_USER_ID: ${{ secrets.HT_IG_USER_ID }}
+          HT_YT_CLIENT_ID: ${{ secrets.HT_YT_CLIENT_ID }}
+          HT_YT_CLIENT_SECRET: ${{ secrets.HT_YT_CLIENT_SECRET }}
+          HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
+        run: node publicar.mjs
+      - name: Guardar los links en el calendario
+        if: always()
+        run: |
+          if git diff --quiet calendario.json; then echo "sin cambios"; exit 0; fi
+          git config user.name "hermes-media"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add calendario.json
+          git commit -m "Calendario: publicaciones $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done
+          exit 1

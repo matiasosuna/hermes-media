@@ -1,0 +1,32 @@
+# Pruebas sin publicar (se puede correr con "publicar" apagado):
+#   gh workflow run prueba -R matiasosuna/hermes-media -f modo=dry-run
+#   gh workflow run prueba -R matiasosuna/hermes-media -f modo=contenedor-prueba   (crea un contenedor de IG y NO lo publica)
+name: prueba
+on:
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: dry-run | contenedor-prueba
+        required: true
+        default: dry-run
+        type: choice
+        options: [dry-run, contenedor-prueba]
+permissions:
+  contents: read
+jobs:
+  prueba:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Probar
+        env:
+          HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
+          HT_IG_USER_ID: ${{ secrets.HT_IG_USER_ID }}
+          HT_YT_CLIENT_ID: ${{ secrets.HT_YT_CLIENT_ID }}
+          HT_YT_CLIENT_SECRET: ${{ secrets.HT_YT_CLIENT_SECRET }}
+          HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
+        run: node publicar.mjs --${{ inputs.modo }}
