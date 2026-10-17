@@ -1,5 +1,6 @@
 {
-  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' lo completa el workflow: no tocarlo.",
+  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas.",
+  "pausado": false,
   "zona": "America/New_York",
   "release": "videos",
   "canal_youtube": "UC3J5gCPR3fWBIXEKcUQk9Qw",

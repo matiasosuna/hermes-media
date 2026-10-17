@@ -6,6 +6,7 @@
 //   node publicar.mjs                      → publica lo vencido (1 por plataforma por corrida)
 //   node publicar.mjs --dry-run            → próximo pendiente: URL del video, HEAD, parámetros del contenedor; no publica
 //   node publicar.mjs --contenedor-prueba  → crea el contenedor de IG del próximo pendiente y espera FINISHED; NO publica
+//   node publicar.mjs --seguir             → ¿la cadena del workflow sigue? (no si todo está publicado o "pausado": true)
 // Secretos (variables de entorno): HT_PAGE_TOKEN, HT_IG_USER_ID, HT_YT_CLIENT_ID, HT_YT_CLIENT_SECRET, HT_YT_REFRESH_TOKEN
 import { readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
@@ -36,6 +37,9 @@ export function siguiente(cal, plataforma, ahora = Date.now()) {
   if (ahora - ultimo < gap) return { item: null, proximo: item, motivo: `espera ${cal.separacion_minima_horas} h desde el último post` };
   return { item };
 }
+
+/** La cadena de corridas sigue mientras quede algo por publicar y el calendario no diga "pausado": true. */
+export const seguirCadena = (cal) => !cal.pausado && cal.items.some((i) => !i.instagram.publicado || !i.youtube.publicado);
 
 export const buscarDuplicadoIG = (media, caption) => media.find((m) => primeraLinea(m.caption) === primeraLinea(caption)) ?? null;
 export const buscarDuplicadoYT = (videos, titulo) => videos.find((v) => v.titulo.trim() === titulo.trim()) ?? null;
@@ -208,6 +212,7 @@ async function contenedorPrueba() {
 
 async function publicar() {
   const { cal, guardar } = cargar();
+  if (cal.pausado) return log('calendario en pausa ("pausado": true): no se publica nada');
   let fallas = 0;
   for (const p of ['instagram', 'youtube']) {
     const { item, motivo } = siguiente(cal, p);
@@ -231,6 +236,11 @@ async function publicar() {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const a = process.argv.slice(2);
-  const run = a.includes('--dry-run') ? dryRun : a.includes('--contenedor-prueba') ? contenedorPrueba : publicar;
+  const seguir = async () => {
+    const sigue = seguirCadena(cargar().cal);
+    log(sigue ? 'la cadena sigue' : 'la cadena se detiene: todo publicado o calendario en pausa');
+    if (env.GITHUB_OUTPUT) writeFileSync(env.GITHUB_OUTPUT, `seguir=${sigue}\n`, { flag: 'a' });
+  };
+  const run = a.includes('--dry-run') ? dryRun : a.includes('--contenedor-prueba') ? contenedorPrueba : a.includes('--seguir') ? seguir : publicar;
   run().catch((e) => { log(`❌ ${e.message}`); process.exitCode = 1; });
 }
