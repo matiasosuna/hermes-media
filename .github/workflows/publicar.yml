@@ -1,4 +1,4 @@
-# Publica en Instagram + YouTube lo que ya venció en calendario.json y anota los links.
+# Publica en Instagram + YouTube + TikTok (Buffer) lo que ya venció en calendario.json y anota los links.
 # Cadena propia: cada corrida hace una pasada, espera ~14 min, hace otra y se vuelve a lanzar
 # (gh workflow run con GITHUB_TOKEN). El cron de abajo solo la reinicia si alguna vez se corta.
 # La cadena se detiene sola cuando todo está publicado o con "pausado": true en calendario.json.
@@ -25,6 +25,7 @@ jobs:
       HT_YT_CLIENT_ID: ${{ secrets.HT_YT_CLIENT_ID }}
       HT_YT_CLIENT_SECRET: ${{ secrets.HT_YT_CLIENT_SECRET }}
       HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
+      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

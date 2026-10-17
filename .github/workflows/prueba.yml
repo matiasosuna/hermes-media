@@ -29,4 +29,5 @@ jobs:
           HT_YT_CLIENT_ID: ${{ secrets.HT_YT_CLIENT_ID }}
           HT_YT_CLIENT_SECRET: ${{ secrets.HT_YT_CLIENT_SECRET }}
           HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
         run: node publicar.mjs --${{ inputs.modo }}

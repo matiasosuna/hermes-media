@@ -1,5 +1,5 @@
 {
-  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas.",
+  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' (instagram, youtube, tiktok) lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas.",
   "pausado": false,
   "zona": "America/New_York",
   "release": "videos",
@@ -39,6 +39,14 @@
           "privacidad": "public",
           "via": "Mac (scripts/youtube.mjs)"
         }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad3220e9181b7d4b6f5e8ae",
+          "url": "https://tiktok.com/@hermestarot444/video/7697533679370816801",
+          "fecha": "2026-10-17T07:23:34.343Z",
+          "via": "Buffer (a mano)"
+        }
       }
     },
     {
@@ -74,6 +82,14 @@
           "privacidad": "public",
           "via": "Mac (scripts/youtube.mjs)"
         }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad322195461d2b5e499534e",
+          "url": "https://tiktok.com/@hermestarot444/video/7697533726661643552",
+          "fecha": "2026-10-17T07:25:45.490Z",
+          "via": "Buffer (a mano)"
+        }
       }
     },
     {
@@ -98,6 +114,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -124,6 +143,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -148,6 +170,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -174,6 +199,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -198,6 +226,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -224,6 +255,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -248,6 +282,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -274,6 +311,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -298,6 +338,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -324,6 +367,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -348,6 +394,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -374,6 +423,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -398,6 +450,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -424,6 +479,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -448,6 +506,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -474,6 +535,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -498,6 +562,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     },
@@ -524,6 +591,9 @@
           "tarot story"
         ],
         "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
       }
     },
     {
@@ -548,6 +618,9 @@
           "major arcana",
           "tarot story"
         ],
+        "publicado": null
+      },
+      "tiktok": {
         "publicado": null
       }
     }

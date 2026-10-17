@@ -1,13 +1,14 @@
 // Publicador diario de Hermes Tarot 444. Corre en GitHub Actions (este repo público), sin la Mac.
-// Lee calendario.json y publica lo que ya venció: Reel en Instagram + Short en YouTube, con el video del
-// release "videos" de este repo. Anota cada link en calendario.json (el workflow lo commitea).
+// Lee calendario.json y publica lo que ya venció: Reel en Instagram + Short en YouTube + TikTok (por Buffer), con el
+// video del release "videos" de este repo (TikTok usa tiktok-<id>.mp4: el mismo video sin perfil ICC, que TikTok rechaza). Anota cada link en calendario.json (el workflow lo commitea).
 // Nunca publica dos veces: antes de publicar busca la primera línea (IG) o el título (YT) entre lo último del canal.
 // Uso:
 //   node publicar.mjs                      → publica lo vencido (1 por plataforma por corrida)
 //   node publicar.mjs --dry-run            → próximo pendiente: URL del video, HEAD, parámetros del contenedor; no publica
 //   node publicar.mjs --contenedor-prueba  → crea el contenedor de IG del próximo pendiente y espera FINISHED; NO publica
 //   node publicar.mjs --seguir             → ¿la cadena del workflow sigue? (no si todo está publicado o "pausado": true)
-// Secretos (variables de entorno): HT_PAGE_TOKEN, HT_IG_USER_ID, HT_YT_CLIENT_ID, HT_YT_CLIENT_SECRET, HT_YT_REFRESH_TOKEN
+// Secretos (variables de entorno): HT_PAGE_TOKEN, HT_IG_USER_ID, HT_YT_CLIENT_ID, HT_YT_CLIENT_SECRET, HT_YT_REFRESH_TOKEN,
+// BUFFER_API_KEY
 import { readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
@@ -17,7 +18,10 @@ export const CANAL_YT = 'UC3J5gCPR3fWBIXEKcUQk9Qw';
 const CAL = new URL('./calendario.json', import.meta.url);
 const V = 'v21.0';
 const env = process.env;
-const SECRETOS = ['HT_PAGE_TOKEN', 'HT_YT_CLIENT_SECRET', 'HT_YT_REFRESH_TOKEN'].map((k) => env[k]).filter(Boolean);
+const SECRETOS = ['HT_PAGE_TOKEN', 'HT_YT_CLIENT_SECRET', 'HT_YT_REFRESH_TOKEN', 'BUFFER_API_KEY'].map((k) => env[k]).filter(Boolean);
+export const PLATAFORMAS = ['instagram', 'youtube', 'tiktok'];
+export const BUFFER_ORG = '6acc932a96c596c8b8c17194', BUFFER_TIKTOK = '6ad3219a778b240e2f368ecb';
+const falta = (i) => PLATAFORMAS.some((p) => !i[p]?.publicado);
 
 export const assetUrl = (archivo, repo = REPO) => `https://github.com/${repo}/releases/download/${RELEASE}/${archivo}`;
 export const primeraLinea = (t) => String(t ?? '').split('\n')[0].trim();
@@ -29,9 +33,9 @@ const log = (...a) => console.log(new Date().toISOString().slice(0, 19).replace(
  *  desde el último publicado (si el workflow estuvo apagado, se pone al día de a uno, sin ráfagas). */
 export function siguiente(cal, plataforma, ahora = Date.now()) {
   const gap = (cal.separacion_minima_horas ?? 0.5) * 3600e3;
-  const fechas = cal.items.map((i) => i[plataforma].publicado?.fecha).filter(Boolean).map((f) => Date.parse(f));
+  const fechas = cal.items.map((i) => i[plataforma]?.publicado?.fecha).filter(Boolean).map((f) => Date.parse(f));
   const ultimo = fechas.length ? Math.max(...fechas) : 0;
-  const item = cal.items.filter((i) => !i[plataforma].publicado).sort((a, b) => Date.parse(a.cuando) - Date.parse(b.cuando))[0];
+  const item = cal.items.filter((i) => !i[plataforma]?.publicado).sort((a, b) => Date.parse(a.cuando) - Date.parse(b.cuando))[0];
   if (!item) return { item: null, motivo: 'no queda nada pendiente' };
   if (Date.parse(item.cuando) > ahora) return { item: null, proximo: item, motivo: `el próximo es ${item.id} (${item.cuando})` };
   if (ahora - ultimo < gap) return { item: null, proximo: item, motivo: `espera ${cal.separacion_minima_horas} h desde el último post` };
@@ -39,7 +43,7 @@ export function siguiente(cal, plataforma, ahora = Date.now()) {
 }
 
 /** La cadena de corridas sigue mientras quede algo por publicar y el calendario no diga "pausado": true. */
-export const seguirCadena = (cal) => !cal.pausado && cal.items.some((i) => !i.instagram.publicado || !i.youtube.publicado);
+export const seguirCadena = (cal) => !cal.pausado && cal.items.some(falta);
 
 export const buscarDuplicadoIG = (media, caption) => media.find((m) => primeraLinea(m.caption) === primeraLinea(caption)) ?? null;
 export const buscarDuplicadoYT = (videos, titulo) => videos.find((v) => v.titulo.trim() === titulo.trim()) ?? null;
@@ -174,12 +178,57 @@ async function publicarYT(item) {
   return res;
 }
 
+// ── TikTok por Buffer (canal @hermestarot444): shareNow y se espera a que quede "sent" para anotar el link
+export const assetTikTok = (item) => `tiktok-${item.id}.mp4`;
+export const buscarDuplicadoTT = (posts, caption) =>
+  posts.find((p) => p.status !== 'error' && primeraLinea(p.text) === primeraLinea(caption)) ?? null;
+export const mutacionTikTok = (item, repo = REPO) => `mutation { createPost(input: { text: ${JSON.stringify(item.instagram.caption)}, channelId: "${BUFFER_TIKTOK}", schedulingType: automatic, mode: shareNow, assets: [{ video: { url: "${assetUrl(assetTikTok(item), repo)}", metadata: { thumbnailOffset: 100 } } }] }) { ... on PostActionSuccess { post { id } } ... on MutationError { message } } }`;
+const hayTT = () => Boolean(env.BUFFER_API_KEY);
+async function gql(query) {
+  const r = await fetch('https://api.buffer.com', { method: 'POST', headers: { authorization: `Bearer ${env.BUFFER_API_KEY}`, 'content-type': 'application/json' }, body: JSON.stringify({ query }) });
+  const j = await r.json();
+  if (j.errors) throw new Error(`Buffer: ${JSON.stringify(j.errors).slice(0, 300)}`);
+  return j.data;
+}
+const CAMPOS_POST = 'id status text externalLink sentAt error { message }';
+async function recientesTT() {
+  const d = await gql(`{ posts(first: 50, input: { organizationId: "${BUFFER_ORG}", filter: { channelIds: ["${BUFFER_TIKTOK}"] } }) { edges { node { ${CAMPOS_POST} } } } }`);
+  return d.posts.edges.map((e) => e.node);
+}
+/** Espera a que Buffer termine de mandar el post a TikTok (suele tardar 1–3 min) y devuelve el link. */
+async function esperarEnviado(id, vueltas = 40) {
+  for (let i = 0; i < vueltas; i++) {
+    const p = (await gql(`{ post(input: { id: "${id}" }) { ${CAMPOS_POST} } }`)).post;
+    if (p.status === 'sent' && p.externalLink) return { id: p.id, url: p.externalLink, fecha: new Date(p.sentAt ?? Date.now()).toISOString() };
+    if (p.status === 'error') throw new Error(`Buffer no pudo publicar en TikTok: ${p.error?.message ?? 'error'}`);
+    if (i % 4 === 0) log(`  TikTok: ${p.status}…`);
+    await sleep(15000);
+  }
+  throw new Error(`el post ${id} de Buffer sigue sin salir; se retoma en la próxima corrida`);
+}
+async function publicarTT(item, guardar) {
+  const previo = buscarDuplicadoTT(await recientesTT(), item.instagram.caption);
+  if (previo) {
+    log(`TT ${item.id}: ya está en Buffer (${previo.status}), solo lo anoto`);
+    return previo.status === 'sent' && previo.externalLink
+      ? { id: previo.id, url: previo.externalLink, fecha: new Date(previo.sentAt ?? Date.now()).toISOString() }
+      : esperarEnviado(previo.id);
+  }
+  const info = await verificarAsset(assetUrl(assetTikTok(item)));
+  log(`TT ${item.id}: video ok (${(info.bytes / 1e6).toFixed(1)} MB); mandando a Buffer…`);
+  const r = (await gql(mutacionTikTok(item))).createPost;
+  if (!r.post) throw new Error(`Buffer rechazó el post: ${r.message}`);
+  item.tiktok.post = { id: r.post.id, creado: new Date().toISOString() };
+  guardar();
+  return esperarEnviado(r.post.id);
+}
+
 // ── corridas
 function cargar() {
   const cal = JSON.parse(readFileSync(CAL, 'utf8'));
   return { cal, guardar: () => writeFileSync(CAL, `${JSON.stringify(cal, null, 2)}\n`) };
 }
-const proximoPendiente = (cal) => cal.items.filter((i) => !i.instagram.publicado || !i.youtube.publicado)
+const proximoPendiente = (cal) => cal.items.filter(falta)
   .sort((a, b) => Date.parse(a.cuando) - Date.parse(b.cuando))[0];
 
 async function dryRun() {
@@ -192,7 +241,14 @@ async function dryRun() {
   log('HEAD:', JSON.stringify(await verificarAsset(url)));
   log('contenedor IG:', JSON.stringify(parametrosContenedor(item), null, 2));
   log('YouTube:', JSON.stringify(cuerpoYT(item), null, 2));
-  for (const p of ['instagram', 'youtube']) log(`${p}: ${siguiente(cal, p).item ? 'le toca publicar en esta corrida' : siguiente(cal, p).motivo}`);
+  const tt = assetUrl(assetTikTok(item));
+  log(`TikTok: ${tt}`);
+  log('HEAD TikTok:', JSON.stringify(await verificarAsset(tt)));
+  for (const p of PLATAFORMAS) log(`${p}: ${siguiente(cal, p).item ? 'le toca publicar en esta corrida' : siguiente(cal, p).motivo}`);
+  if (hayTT()) {
+    const previo = buscarDuplicadoTT(await recientesTT(), item.instagram.caption);
+    log(`TikTok por Buffer: clave ok; ${previo ? `ya está en Buffer (${previo.status})` : 'el próximo no está en Buffer todavía'}`);
+  } else log('TikTok por Buffer: sin BUFFER_API_KEY (se saltea)');
   if (!hayYT()) return log('YouTube en la nube: sin credenciales (se saltea)');
   const subidos = await recientesYT(await accesoYT()); // verifica token y canal (no sube nada)
   const previo = buscarDuplicadoYT(subidos, item.youtube.titulo);
@@ -214,15 +270,16 @@ async function publicar() {
   const { cal, guardar } = cargar();
   if (cal.pausado) return log('calendario en pausa ("pausado": true): no se publica nada');
   let fallas = 0;
-  for (const p of ['instagram', 'youtube']) {
+  for (const p of PLATAFORMAS) {
     const { item, motivo } = siguiente(cal, p);
     if (!item) { log(`${p}: nada que publicar ahora (${motivo})`); continue; }
-    if (p === 'youtube' && !hayYT()) { log(`youtube: toca ${item.id} pero no hay credenciales en los secretos; queda pendiente`); continue; }
+    if ((p === 'youtube' && !hayYT()) || (p === 'tiktok' && !hayTT())) { log(`${p}: toca ${item.id} pero faltan credenciales en los secretos; queda pendiente`); continue; }
     log(`${p}: toca ${item.id} (programado ${item.cuando})`);
     try {
-      const res = p === 'instagram' ? await publicarIG(item, guardar) : await publicarYT(item);
+      const res = p === 'instagram' ? await publicarIG(item, guardar) : p === 'youtube' ? await publicarYT(item) : await publicarTT(item, guardar);
       item[p].publicado = res;
       delete item[p].contenedor;
+      delete item[p].post;
       guardar();
       log(`${p}: ✅ ${item.id} → ${res.permalink ?? res.url}`);
     } catch (e) {
