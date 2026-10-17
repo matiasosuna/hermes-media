@@ -1,0 +1,27 @@
+# Status diario (calendario + métricas de IG, YouTube, TikTok y la web) → STATUS.md en el repo privado hermes-videos.
+name: status
+on:
+  schedule: [{ cron: '0 13 * * *' }]
+  workflow_dispatch:
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/checkout@v4
+        with: { repository: matiasosuna/hermes-videos, path: privado, token: '${{ secrets.PRIVADO_TOKEN }}', sparse-checkout: STATUS.md }
+      - name: armar STATUS.md
+        env:
+          HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
+          HT_IG_USER_ID: ${{ secrets.HT_IG_USER_ID }}
+          HT_YT_CLIENT_ID: ${{ secrets.HT_YT_CLIENT_ID }}
+          HT_YT_CLIENT_SECRET: ${{ secrets.HT_YT_CLIENT_SECRET }}
+          HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
+          HT_STATS_TOKEN: ${{ secrets.HT_STATS_TOKEN }}
+        run: node status.mjs > privado/STATUS.md && cat privado/STATUS.md >> "$GITHUB_STEP_SUMMARY"
+      - name: guardar
+        run: |
+          cd privado && git config user.name hermes-bot && git config user.email hermes-bot@users.noreply.github.com
+          git add STATUS.md && git commit -qm "Status $(date -u +%F)" && git push -q || echo "sin cambios"
