@@ -1,11 +1,15 @@
 # Arma en la nube los videos para TikTok (tiktok-<id>.mp4: el mismo video sin perfil ICC, que TikTok rechaza)
 # para cada carta del calendario que todavía no lo tenga en el release "videos". No publica nada.
+# Lo lanza scripts/agregar.mjs (tarot-web) cada vez que se agrega una carta.
 #   gh workflow run tiktok-videos -R matiasosuna/hermes-media
 name: tiktok-videos
 on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: tiktok-videos
+  cancel-in-progress: false
 jobs:
   tiktok:
     runs-on: ubuntu-latest
