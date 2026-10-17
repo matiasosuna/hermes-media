@@ -140,7 +140,11 @@
       "cuando": "2026-10-17T19:00:00-04:00",
       "instagram": {
         "caption": "Can you say no without feeling guilty?\nThe Emperor's story: a man who gave everything away, until he built a wall of stones and one clear no. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #theemperor #boundaries #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18136298515728578",
+          "permalink": "https://www.instagram.com/reel/DenPV5vlZQq/",
+          "fecha": "2026-10-17T23:01:55.074Z"
+        }
       },
       "youtube": {
         "titulo": "Can you say no without feeling guilty? | The Emperor tarot ☿ #shorts",
@@ -155,10 +159,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "JGxWZ-VseG0",
+          "url": "https://youtube.com/shorts/JGxWZ-VseG0",
+          "fecha": "2026-10-17T23:01:59.136Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad3fe68769b45793499adc4",
+          "url": "https://tiktok.com/@hermestarot444/video/7697775974343019808",
+          "fecha": "2026-10-17T23:03:44.632Z"
+        }
       }
     },
     {
