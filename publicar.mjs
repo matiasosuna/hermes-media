@@ -189,7 +189,10 @@ async function dryRun() {
   log('contenedor IG:', JSON.stringify(parametrosContenedor(item), null, 2));
   log('YouTube:', JSON.stringify(cuerpoYT(item), null, 2));
   for (const p of ['instagram', 'youtube']) log(`${p}: ${siguiente(cal, p).item ? 'le toca publicar en esta corrida' : siguiente(cal, p).motivo}`);
-  log(`YouTube en la nube: ${hayYT() ? 'credenciales presentes' : 'sin credenciales (se saltea)'}`);
+  if (!hayYT()) return log('YouTube en la nube: sin credenciales (se saltea)');
+  const subidos = await recientesYT(await accesoYT()); // verifica token y canal (no sube nada)
+  const previo = buscarDuplicadoYT(subidos, item.youtube.titulo);
+  log(`YouTube en la nube: token ok, canal Hermes Tarot 444, ${subidos.length} videos recientes; ${previo ? `"${item.youtube.titulo}" ya está subido (${previo.id})` : 'el próximo no está subido todavía'}`);
 }
 
 async function contenedorPrueba() {
