@@ -1,0 +1,30 @@
+# Arma en la nube los videos para TikTok (tiktok-<id>.mp4: el mismo video sin perfil ICC, que TikTok rechaza)
+# para cada carta del calendario que todavía no lo tenga en el release "videos". No publica nada.
+#   gh workflow run tiktok-videos -R matiasosuna/hermes-media
+name: tiktok-videos
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  tiktok:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: ffmpeg
+        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg >/dev/null && ffmpeg -version | head -1
+      - name: Videos sin ICC que faltan
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -u
+          tienen=$(gh release view videos --json assets --jq '.assets[].name')
+          for id in $(node -e "for (const i of require('./calendario.json').items) console.log(i.id)"); do
+            echo "$tienen" | grep -qx "tiktok-$id.mp4" && { echo "ya está: $id"; continue; }
+            gh release download videos -p "$id.mp4" -O "$id.mp4" --clobber
+            ffmpeg -v error -y -i "$id.mp4" -vf "sidedata=mode=delete:type=ICC_PROFILE,format=yuv420p" -c:v libx264 -preset medium -crf 20 -maxrate 6M -bufsize 12M -c:a copy -movflags +faststart -map_metadata -1 "tiktok-$id.mp4"
+            gh release upload videos "tiktok-$id.mp4" --clobber
+            echo "listo: tiktok-$id.mp4 ($(stat -c %s "tiktok-$id.mp4") bytes)"
+            rm -f "$id.mp4" "tiktok-$id.mp4"
+          done
