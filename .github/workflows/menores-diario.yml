@@ -1,80 +1,24 @@
 # Arcanos menores pendientes (sin config.json en hermes-videos), de a una tanda por día para no pasar el cupo
-# gratis de Gemini (se renueva 00:00 hora del Pacífico). Corre en este repo público (minutos gratis):
-# escenas + revisión con Gemini → render en paralelo (un job por carta) → calendario en orden.
-# El código y los videos quedan en el repo privado; acá los logs no muestran nada (repo público).
-# Respaldo pago: scripts/modal_render.py en hermes-videos (Modal).
+# gratis de Gemini (se renueva 00:00 hora del Pacífico): Modal hace escenas + revisión + render + calendario.
 name: menores-diario
 on:
   schedule: [{ cron: '30 8 * * *' }]
   workflow_dispatch:
     inputs:
       tanda: { description: 'cuántas cartas', default: '6' }
-      cartas: { description: 'solo render de estas (ej. "58 59"), sin Gemini', default: '' }
-concurrency: { group: menores, cancel-in-progress: false }
-env: { GH_TOKEN: '${{ secrets.PRIVADO_TOKEN }}' }
 jobs:
-  escenas:
+  tanda:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
-    outputs: { nns: '${{ steps.g.outputs.nns }}' }
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
         with: { repository: matiasosuna/hermes-videos, token: '${{ secrets.PRIVADO_TOKEN }}' }
-      - uses: actions/setup-node@v4
-        with: { node-version: 22 }
-      - if: ${{ !inputs.cartas }}
-        run: pip install -q pillow numpy && npm ci --silent > /dev/null 2>&1
-      - id: g
-        env: { GEMINI_API_KEY: '${{ secrets.GEMINI_API_KEY }}' }
+      - name: Modal
+        env: { MODAL_TOKEN_ID: '${{ secrets.MODAL_TOKEN_ID }}', MODAL_TOKEN_SECRET: '${{ secrets.MODAL_TOKEN_SECRET }}' }
         run: |
-          if [ -n "${{ inputs.cartas }}" ]; then L="${{ inputs.cartas }}"; else
-            P=""; for n in $(seq 22 77); do [ -f src/carta-$n/timeline.json ] && [ ! -f src/carta-$n/config.json ] && P="$P $n"; done
-            T=$(echo $P | tr ' ' '\n' | head -${{ inputs.tanda || 6 }})
-            echo "pendientes:$P → hoy: $(echo $T)"
-            git config user.name hermes-bot; git config user.email hermes-bot@users.noreply.github.com
-            L=""
-            for n in $T; do
-              if scripts/gemini-carta.sh $n > /dev/null 2>&1; then
-                git add src/ && git commit -qm "Carta $n: escenas y config (Gemini, Actions)" && git pull -q --rebase && git push -q && L="$L $n" && echo "$n ok"
-              else
-                echo "$n no pasó"; git checkout -- src/ 2>/dev/null; git clean -fdq src/
-              fi
-              gh release upload entregas out/q/$n-hoja.jpg out/q/$n-revision.json --clobber > /dev/null 2>&1 || true
-            done
-          fi
-          echo "nns=$(echo $L | tr ' ' '\n' | grep . | jq -R . | jq -sc .)" >> "$GITHUB_OUTPUT"
-  render:
-    needs: escenas
-    if: ${{ needs.escenas.outputs.nns != '[]' && needs.escenas.outputs.nns != '' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    strategy:
-      fail-fast: false
-      matrix: { nn: '${{ fromJson(needs.escenas.outputs.nns) }}' }
-    steps:
-      - uses: actions/checkout@v4
-        with: { repository: matiasosuna/hermes-videos, token: '${{ secrets.PRIVADO_TOKEN }}', ref: main }
-      - uses: actions/setup-node@v4
-        with: { node-version: 22 }
-      - run: (sudo apt-get update -q && sudo apt-get install -yq ffmpeg fonts-noto-color-emoji && pip install -q numpy pillow && npm ci) > /dev/null 2>&1
-      - run: |
-          scripts/render-carta.sh ${{ matrix.nn }} > /tmp/r.log 2>&1 || { echo "falló el render"; exit 1; }
-          gh release upload entregas entrega/* --clobber -R matiasosuna/hermes-videos > /dev/null && echo "${{ matrix.nn }} renderizada"
-  agregar:
-    needs: [escenas, render]
-    if: ${{ always() && needs.escenas.outputs.nns != '[]' && needs.escenas.outputs.nns != '' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with: { repository: matiasosuna/hermes-videos, token: '${{ secrets.PRIVADO_TOKEN }}' }
-      - uses: actions/checkout@v4
-        with: { path: hermes-media, token: '${{ secrets.PRIVADO_TOKEN }}' }
-      - env: { MEDIA_DIR: '${{ github.workspace }}/hermes-media' }
-        run: |
-          git -C hermes-media config user.name hermes-bot; git -C hermes-media config user.email hermes-bot@users.noreply.github.com
-          mkdir -p e
-          for n in $(echo '${{ needs.escenas.outputs.nns }}' | jq -r '.[]' | sort -n); do
-            ID=$(node -e "console.log(Object.values(require('./scripts/guiones/menores.json')).find(x=>x.nn==='$n').id)")
-            gh release download entregas -D e -p "$ID.*" --clobber -R matiasosuna/hermes-videos > /dev/null 2>&1 || { echo "$n sin render"; continue; }
-            node scripts/agregar.mjs "$ID" "e/$ID.mp4" "e/$ID.caption.txt" "e/$ID.youtube.json" > /dev/null 2>&1 && echo "$n al calendario" || echo "$n no se agregó"
-          done
+          P=""; for n in $(seq 22 77); do [ -f src/carta-$n/timeline.json ] && [ ! -f src/carta-$n/config.json ] && P="$P $n"; done
+          T=$(echo $P | tr ' ' '\n' | head -${{ inputs.tanda || 6 }} | tr '\n' ' ')
+          echo "pendientes:$P → hoy: $T" | tee -a "$GITHUB_STEP_SUMMARY"
+          [ -z "$T" ] && exit 0
+          pip install -q modal
+          modal run scripts/modal_render.py --cartas "$T" --escenas > /dev/null 2>&1; echo "listo (detalle en el calendario y en STATUS.md)"
