@@ -21,4 +21,4 @@ jobs:
           echo "pendientes:$P → hoy: $T" | tee -a "$GITHUB_STEP_SUMMARY"
           [ -z "$T" ] && exit 0
           pip install -q modal
-          modal run scripts/modal_render.py --cartas "$T" --escenas | tee -a "$GITHUB_STEP_SUMMARY"
+          modal run scripts/modal_render.py --cartas "$T" --escenas > /dev/null 2>&1; echo "listo (detalle en el calendario y en STATUS.md)"

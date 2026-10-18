@@ -27,7 +27,7 @@ jobs:
           HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
           HT_STATS_TOKEN: ${{ secrets.HT_STATS_TOKEN }}
           PRIVADO_TOKEN: ${{ secrets.PRIVADO_TOKEN }}
-        run: node status.mjs > privado/STATUS.md && cat privado/STATUS.md >> "$GITHUB_STEP_SUMMARY"
+        run: node status.mjs > privado/STATUS.md
       - name: guardar
         run: |
           cd privado && git config user.name hermes-bot && git config user.email hermes-bot@users.noreply.github.com
