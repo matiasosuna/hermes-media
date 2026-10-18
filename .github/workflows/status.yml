@@ -12,6 +12,12 @@ jobs:
         with: { node-version: 22 }
       - uses: actions/checkout@v4
         with: { repository: matiasosuna/hermes-videos, path: privado, token: '${{ secrets.PRIVADO_TOKEN }}', sparse-checkout: STATUS.md }
+      - name: crédito de Modal
+        env: { MODAL_TOKEN_ID: '${{ secrets.MODAL_TOKEN_ID }}', MODAL_TOKEN_SECRET: '${{ secrets.MODAL_TOKEN_SECRET }}' }
+        run: |
+          pip install -q modal
+          modal billing summary > m.txt 2>&1 || true
+          node -e "const t=require('fs').readFileSync('m.txt','utf8');const g=k=>Number((t.match(new RegExp(k+':\\s*\\$?(-?[0-9.]+)'))||[])[1]);const c=-g('Credits'),b=g('Billed Cost');require('fs').writeFileSync('modal.json',JSON.stringify(isNaN(c)?{error:t.trim().slice(-120)}:{texto:'USD '+c.toFixed(2)+' usados · quedan ~USD '+(30-c).toFixed(2)+(b>0?' · ⚠️ cobrado USD '+b:'')}))"
       - name: armar STATUS.md
         env:
           HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
@@ -20,6 +26,7 @@ jobs:
           HT_YT_CLIENT_SECRET: ${{ secrets.HT_YT_CLIENT_SECRET }}
           HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
           HT_STATS_TOKEN: ${{ secrets.HT_STATS_TOKEN }}
+          PRIVADO_TOKEN: ${{ secrets.PRIVADO_TOKEN }}
         run: node status.mjs > privado/STATUS.md && cat privado/STATUS.md >> "$GITHUB_STEP_SUMMARY"
       - name: guardar
         run: |

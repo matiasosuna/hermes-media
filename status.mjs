@@ -92,4 +92,22 @@ if (web.error) p(`⚠️ ${web.error}`); else {
   for (const [k, v] of Object.entries(r7.clicks)) p(`| clic ${k} | ${n(v)} | ${n(tot.clicks[k])} |`);
   if (web.journal) p(`\nJournal: ${Object.entries(web.journal).filter(([, v]) => typeof v !== 'object').map(([k, v]) => `${k} ${n(v)}`).join(' · ')}`);
 }
+// ---------- cuentas (créditos y cupos) ----------
+p(); p('## Cuentas');
+const gh = await intentar(async () => {
+  const f = new Date(); const r = await fetch(`https://api.github.com/users/matiasosuna/settings/billing/usage?year=${f.getUTCFullYear()}&month=${f.getUTCMonth() + 1}`,
+    { headers: { authorization: `Bearer ${env.PRIVADO_TOKEN}`, accept: 'application/vnd.github+json' } });
+  if (!r.ok) throw new Error(`GitHub HTTP ${r.status}`);
+  const privados = new Set((env.REPOS_PRIVADOS || 'mitologias hermes-videos').split(' '));
+  return (await r.json()).usageItems.filter((i) => i.product === 'actions' && privados.has(i.repositoryName)).reduce((s, i) => s + i.quantity, 0);
+});
+let modal = { error: 'sin datos' };
+try { modal = JSON.parse(readFileSync('modal.json', 'utf8')); } catch {}
+const md = modal.error ? null : Object.fromEntries((modal.items || modal.rows || []).map((x) => [x.name ?? x.label, x.value ?? x.amount]));
+p('| Cuenta | Uso del mes |'); p('|---|---|');
+p(`| Modal (crédito USD 30) | ${modal.error ? '⚠️ ' + modal.error : modal.texto} |`);
+p(`| GitHub Actions privados (2.000 min) | ${gh.error ? '⚠️ ' + gh.error : `${n(Math.round(gh))} min${gh >= 2000 ? ' ⚠️ agotado (render va por Modal)' : ''}`} |`);
+p('| GitHub Actions públicos | ilimitado (publicador y status) |');
+p('| Gemini (proyecto Hermes Tarot) | gratis, cupo diario propio |');
+p('| Cloudflare (web) | plan USD 5/mes |');
 console.log(out.join('\n'));
