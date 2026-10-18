@@ -304,7 +304,11 @@
       "cuando": "2026-10-18T13:00:00-04:00",
       "instagram": {
         "caption": "Spears made the lion louder. She brought roses.\nStrength is the gentlest card in the tarot. Here is why, in a two-minute story. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #strengthtarot #innerstrength #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18199401433383236",
+          "permalink": "https://www.instagram.com/reel/DepMblIjy1u/",
+          "fecha": "2026-10-18T17:15:00.710Z"
+        }
       },
       "youtube": {
         "titulo": "Spears made the lion louder. She brought roses. | Strength tarot ☿ #shorts",
@@ -319,10 +323,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "sCOYfP9STL0",
+          "url": "https://youtube.com/shorts/sCOYfP9STL0",
+          "fecha": "2026-10-18T17:15:03.521Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad4fe980b0d72757a30c161",
+          "url": "https://tiktok.com/@hermestarot444/video/7698057668413410592",
+          "fecha": "2026-10-18T17:16:49.228Z"
+        }
       }
     },
     {
