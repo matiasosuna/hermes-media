@@ -263,7 +263,11 @@
       "cuando": "2026-10-18T07:00:00-04:00",
       "instagram": {
         "caption": "A chariot pulled by two sphinxes, and no reins.\nHow do you move forward when two parts of you want different things? The Chariot has an answer. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thechariot #focus #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18102620450561571",
+          "permalink": "https://www.instagram.com/reel/Deohuemks3_/",
+          "fecha": "2026-10-18T11:01:59.176Z"
+        }
       },
       "youtube": {
         "titulo": "Two sphinxes, no reins: the secret of The Chariot ☿ Tarot story #shorts",
@@ -278,10 +282,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "tOmQdKMmENQ",
+          "url": "https://youtube.com/shorts/tOmQdKMmENQ",
+          "fecha": "2026-10-18T11:02:04.759Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad4a72e0a208cb3236052d0",
+          "url": "https://tiktok.com/@hermestarot444/video/7697961876604341537",
+          "fecha": "2026-10-18T11:05:05.755Z"
+        }
       }
     },
     {
