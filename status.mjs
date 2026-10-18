@@ -90,6 +90,15 @@ if (web.error) p(`⚠️ ${web.error}`); else {
   p(`| Visitas | ${n(r7.visits)} | ${n(tot.visits)} |`);
   for (const [k, v] of Object.entries(r7.refs)) p(`| desde ${k} | ${n(v)} | ${n(tot.refs[k])} |`);
   for (const [k, v] of Object.entries(r7.clicks)) p(`| clic ${k} | ${n(v)} | ${n(tot.clicks[k])} |`);
+  if (web.clase) {
+    const c = web.clase, k = (x) => `${n(r7.clicks[x] || 0)} (7 d) · ${n(tot.clicks[x] || 0)} total`;
+    p(); p('### Clase de los miércoles'); p('| | |'); p('|---|---|');
+    p(`| Anotados | ${n(c.inscriptos)} (${n(c.d7)} en 7 d) |`);
+    p(`| Por origen | ${Object.entries(c.por_origen || {}).map(([o, v]) => `${o} ${n(v)}`).join(' · ') || '–'} |`);
+    p(`| Agregaron al calendario | ${k('clase_calendario')} |`);
+    p(`| Entraron a la clase | ${k('clase_entrar')} |`);
+    p(`| Clic grupo WhatsApp | ${k('whatsapp')} |`);
+  }
   if (web.journal) p(`\nJournal: ${Object.entries(web.journal).filter(([, v]) => typeof v !== 'object').map(([k, v]) => `${k} ${n(v)}`).join(' · ')}`);
 }
 // ---------- cuentas (créditos y cupos) ----------
