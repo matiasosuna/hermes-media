@@ -1,0 +1,24 @@
+# Arcanos menores pendientes (sin config.json en hermes-videos), de a una tanda por día para no pasar el cupo
+# gratis de Gemini (se renueva 00:00 hora del Pacífico): Modal hace escenas + revisión + render + calendario.
+name: menores-diario
+on:
+  schedule: [{ cron: '30 8 * * *' }]
+  workflow_dispatch:
+    inputs:
+      tanda: { description: 'cuántas cartas', default: '6' }
+jobs:
+  tanda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with: { repository: matiasosuna/hermes-videos, token: '${{ secrets.PRIVADO_TOKEN }}' }
+      - name: Modal
+        env: { MODAL_TOKEN_ID: '${{ secrets.MODAL_TOKEN_ID }}', MODAL_TOKEN_SECRET: '${{ secrets.MODAL_TOKEN_SECRET }}' }
+        run: |
+          P=""; for n in $(seq 22 77); do [ -f src/carta-$n/timeline.json ] && [ ! -f src/carta-$n/config.json ] && P="$P $n"; done
+          T=$(echo $P | tr ' ' '\n' | head -${{ inputs.tanda || 6 }} | tr '\n' ' ')
+          echo "pendientes:$P → hoy: $T" | tee -a "$GITHUB_STEP_SUMMARY"
+          [ -z "$T" ] && exit 0
+          pip install -q modal
+          modal run scripts/modal_render.py --cartas "$T" --escenas | tee -a "$GITHUB_STEP_SUMMARY"
