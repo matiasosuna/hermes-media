@@ -16,8 +16,8 @@ jobs:
         env: { MODAL_TOKEN_ID: '${{ secrets.MODAL_TOKEN_ID }}', MODAL_TOKEN_SECRET: '${{ secrets.MODAL_TOKEN_SECRET }}' }
         run: |
           pip install -q modal
-          modal billing summary > m.txt 2>&1 || true
-          node -e "const t=require('fs').readFileSync('m.txt','utf8');const g=k=>Number((t.match(new RegExp(k+':\\s*\\$?(-?[0-9.]+)'))||[])[1]);const c=-g('Credits'),b=g('Billed Cost');require('fs').writeFileSync('modal.json',JSON.stringify(isNaN(c)?{error:t.trim().slice(-120)}:{texto:'USD '+c.toFixed(2)+' usados · quedan ~USD '+(30-c).toFixed(2)+(b>0?' · ⚠️ cobrado USD '+b:'')}))"
+          modal billing summary --json > m.json 2>m.err || true
+          node -e "let o;try{const d=require('./m.json'),c=-Number(d.adjustments.credits),b=Number(d.billed_cost);o={texto:'USD '+c.toFixed(2)+' usados · quedan ~USD '+(30-c).toFixed(2)+(b>0?' · ⚠️ cobrado USD '+b.toFixed(2):'')}}catch(e){o={error:require('fs').readFileSync('m.err','utf8').slice(-120)}}require('fs').writeFileSync('modal.json',JSON.stringify(o))"
       - name: armar STATUS.md
         env:
           HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
