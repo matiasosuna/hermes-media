@@ -345,7 +345,11 @@
       "cuando": "2026-10-18T19:00:00-04:00",
       "instagram": {
         "caption": "Ever asked everyone for advice and felt even more lost?\nThe Hermit climbed a mountain to hear one voice: his own. The story of card IX, for beginners. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehermit #solitude #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18199572367381765",
+          "permalink": "https://www.instagram.com/reel/Dep1XU9kY3F/",
+          "fecha": "2026-10-18T23:12:41.510Z"
+        }
       },
       "youtube": {
         "titulo": "Asked everyone for advice and felt more lost? | The Hermit tarot ☿ #shorts",
@@ -360,10 +364,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "4skG4dXMbUo",
+          "url": "https://youtube.com/shorts/4skG4dXMbUo",
+          "fecha": "2026-10-18T23:12:46.437Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad5526f938409f1d0ee35b8",
+          "url": "https://tiktok.com/@hermestarot444/video/7698149807864499489",
+          "fecha": "2026-10-18T23:14:32.699Z"
+        }
       }
     },
     {
