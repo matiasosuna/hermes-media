@@ -181,7 +181,11 @@
       "cuando": "2026-10-17T22:00:00-04:00",
       "instagram": {
         "caption": "Two students. One memorized every word. The other kept asking why.\nThe Hierophant for beginners: tradition you understand, not rules you repeat. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehierophant #tarotmeaning #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17955677163262401",
+          "permalink": "https://www.instagram.com/reel/DenkxIPm6dV/",
+          "fecha": "2026-10-18T02:09:18.762Z"
+        }
       },
       "youtube": {
         "titulo": "One student memorized. The other asked why. | The Hierophant tarot ☿ #shorts",
@@ -196,10 +200,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "fKmp_9FLcyQ",
+          "url": "https://youtube.com/shorts/fKmp_9FLcyQ",
+          "fecha": "2026-10-18T02:09:24.390Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad42a560b0d72757a035134",
+          "url": "https://tiktok.com/@hermestarot444/video/7697824224567676192",
+          "fecha": "2026-10-18T02:13:10.495Z"
+        }
       }
     },
     {
