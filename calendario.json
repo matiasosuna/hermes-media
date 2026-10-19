@@ -1,1950 +1,1950 @@
 {
- "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' (instagram, youtube, tiktok) lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas.",
- "pausado": true,
- "zona": "America/New_York",
- "release": "videos",
- "canal_youtube": "UC3J5gCPR3fWBIXEKcUQk9Qw",
- "separacion_minima_horas": 0.5,
- "items": [
-  {
-   "id": "00-fool",
-   "carta": "The Fool",
-   "archivo": "00-fool.mp4",
-   "cuando": "2026-10-16T18:00:00-04:00",
-   "instagram": {
-    "caption": "What would you begin tomorrow if you didn't need to know how it ends?\nThe Fool's story: a boy, a white rose, and one step off the edge. New to tarot? Start here, with card 0. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thefool #learntarot #tarotforbeginners #majorarcana",
-    "publicado": {
-     "id": "18126270544662112",
-     "permalink": "https://www.instagram.com/reel/Dekl64nDOow/",
-     "fecha": "2026-10-16T22:21:29.573Z"
+  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' (instagram, youtube, tiktok) lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas.",
+  "pausado": true,
+  "zona": "America/New_York",
+  "release": "videos",
+  "canal_youtube": "UC3J5gCPR3fWBIXEKcUQk9Qw",
+  "separacion_minima_horas": 0.5,
+  "items": [
+    {
+      "id": "00-fool",
+      "carta": "The Fool",
+      "archivo": "00-fool.mp4",
+      "cuando": "2026-10-16T18:00:00-04:00",
+      "instagram": {
+        "caption": "What would you begin tomorrow if you didn't need to know how it ends?\nThe Fool's story: a boy, a white rose, and one step off the edge. New to tarot? Start here, with card 0. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thefool #learntarot #tarotforbeginners #majorarcana",
+        "publicado": {
+          "id": "18126270544662112",
+          "permalink": "https://www.instagram.com/reel/Dekl64nDOow/",
+          "fecha": "2026-10-16T22:21:29.573Z"
+        }
+      },
+      "youtube": {
+        "titulo": "What would you start if you didn't need to know the ending? | The Fool tarot ☿ #shorts",
+        "descripcion": "What would you begin tomorrow if you didn't need to know how it ends?\nThe Fool's story: a boy, a white rose, and one step off the edge. New to tarot? Start here, with card 0. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thefool #learntarot #tarotforbeginners #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the fool",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "onV_3MyVRzA",
+          "url": "https://youtube.com/shorts/onV_3MyVRzA",
+          "fecha": "2026-10-16T22:22:03.667Z",
+          "privacidad": "public",
+          "via": "Mac (scripts/youtube.mjs)"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad3220e9181b7d4b6f5e8ae",
+          "url": "https://tiktok.com/@hermestarot444/video/7697533679370816801",
+          "fecha": "2026-10-17T07:23:34.343Z",
+          "via": "Buffer (a mano)"
+        }
+      }
+    },
+    {
+      "id": "02-high-priestess",
+      "carta": "The High Priestess",
+      "archivo": "02-high-priestess.mp4",
+      "cuando": "2026-10-16T19:00:00-04:00",
+      "instagram": {
+        "caption": "She never spoke first. She just knew.\nThe High Priestess, told as a story: the girl between two pillars, and the quiet voice you already trust. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehighpriestess #intuition #learntarot #majorarcana",
+        "publicado": {
+          "id": "18119005244099399",
+          "permalink": "https://www.instagram.com/reel/DekqgWxgad4/",
+          "fecha": "2026-10-16T23:01:33.672Z"
+        }
+      },
+      "youtube": {
+        "titulo": "She never spoke first. She just knew. | The High Priestess tarot ☿ #shorts",
+        "descripcion": "She never spoke first. She just knew.\nThe High Priestess, told as a story: the girl between two pillars, and the quiet voice you already trust. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thehighpriestess #intuition #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the high priestess",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "7jjZJrZAwwk",
+          "url": "https://youtube.com/shorts/7jjZJrZAwwk",
+          "fecha": "2026-10-16T23:01:44.812Z",
+          "privacidad": "public",
+          "via": "Mac (scripts/youtube.mjs)"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad322195461d2b5e499534e",
+          "url": "https://tiktok.com/@hermestarot444/video/7697533726661643552",
+          "fecha": "2026-10-17T07:25:45.490Z",
+          "via": "Buffer (a mano)"
+        }
+      }
+    },
+    {
+      "id": "03-empress",
+      "carta": "The Empress",
+      "archivo": "03-empress.mp4",
+      "cuando": "2026-10-17T10:00:00-04:00",
+      "instagram": {
+        "caption": "Her field wouldn't grow until she stopped pushing.\nThe Empress is not only about motherhood. Watch her story, then ask what in your life needs care instead of force. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #theempress #selfcare #learntarot #majorarcana",
+        "publicado": {
+          "id": "17868938034662501",
+          "permalink": "https://www.instagram.com/reel/DemSslVD_-m/",
+          "fecha": "2026-10-17T14:12:12.746Z"
+        }
+      },
+      "youtube": {
+        "titulo": "Her field wouldn't grow until she stopped pushing | The Empress tarot ☿ #shorts",
+        "descripcion": "Her field wouldn't grow until she stopped pushing.\nThe Empress is not only about motherhood. Watch her story, then ask what in your life needs care instead of force. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #theempress #selfcare #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the empress",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "Qck5c_HnyVM",
+          "url": "https://youtube.com/shorts/Qck5c_HnyVM",
+          "fecha": "2026-10-17T14:12:19.239Z",
+          "privacidad": "public"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad382440b0d72757addd2e5",
+          "url": "https://tiktok.com/@hermestarot444/video/7697639500935122208",
+          "fecha": "2026-10-17T14:16:06.108Z"
+        }
+      }
+    },
+    {
+      "id": "04-emperor",
+      "carta": "The Emperor",
+      "archivo": "04-emperor.mp4",
+      "cuando": "2026-10-17T19:00:00-04:00",
+      "instagram": {
+        "caption": "Can you say no without feeling guilty?\nThe Emperor's story: a man who gave everything away, until he built a wall of stones and one clear no. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #theemperor #boundaries #learntarot #majorarcana",
+        "publicado": {
+          "id": "18136298515728578",
+          "permalink": "https://www.instagram.com/reel/DenPV5vlZQq/",
+          "fecha": "2026-10-17T23:01:55.074Z"
+        }
+      },
+      "youtube": {
+        "titulo": "Can you say no without feeling guilty? | The Emperor tarot ☿ #shorts",
+        "descripcion": "Can you say no without feeling guilty?\nThe Emperor's story: a man who gave everything away, until he built a wall of stones and one clear no. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #theemperor #boundaries #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the emperor",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "JGxWZ-VseG0",
+          "url": "https://youtube.com/shorts/JGxWZ-VseG0",
+          "fecha": "2026-10-17T23:01:59.136Z",
+          "privacidad": "public"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad3fe68769b45793499adc4",
+          "url": "https://tiktok.com/@hermestarot444/video/7697775974343019808",
+          "fecha": "2026-10-17T23:03:44.632Z"
+        }
+      }
+    },
+    {
+      "id": "05-hierophant",
+      "carta": "The Hierophant",
+      "archivo": "05-hierophant.mp4",
+      "cuando": "2026-10-17T22:00:00-04:00",
+      "instagram": {
+        "caption": "Two students. One memorized every word. The other kept asking why.\nThe Hierophant for beginners: tradition you understand, not rules you repeat. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehierophant #tarotmeaning #learntarot #majorarcana",
+        "publicado": {
+          "id": "17955677163262401",
+          "permalink": "https://www.instagram.com/reel/DenkxIPm6dV/",
+          "fecha": "2026-10-18T02:09:18.762Z"
+        }
+      },
+      "youtube": {
+        "titulo": "One student memorized. The other asked why. | The Hierophant tarot ☿ #shorts",
+        "descripcion": "Two students. One memorized every word. The other kept asking why.\nThe Hierophant for beginners: tradition you understand, not rules you repeat. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thehierophant #tarotmeaning #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the hierophant",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "fKmp_9FLcyQ",
+          "url": "https://youtube.com/shorts/fKmp_9FLcyQ",
+          "fecha": "2026-10-18T02:09:24.390Z",
+          "privacidad": "public"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad42a560b0d72757a035134",
+          "url": "https://tiktok.com/@hermestarot444/video/7697824224567676192",
+          "fecha": "2026-10-18T02:13:10.495Z"
+        }
+      }
+    },
+    {
+      "id": "06-lovers",
+      "carta": "The Lovers",
+      "archivo": "06-lovers.mp4",
+      "cuando": "2026-10-18T01:00:00-04:00",
+      "instagram": {
+        "caption": "Is The Lovers card really about romance?\nTwo people, two trees, one choice. The story behind card VI, and what you let go of when you choose. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thelovers #tarotlove #learntarot #majorarcana",
+        "publicado": {
+          "id": "17966406963249157",
+          "permalink": "https://www.instagram.com/reel/Den40wzDBGM/",
+          "fecha": "2026-10-18T05:04:32.427Z"
+        }
+      },
+      "youtube": {
+        "titulo": "Is The Lovers card really about romance? ☿ Tarot story #shorts",
+        "descripcion": "Is The Lovers card really about romance?\nTwo people, two trees, one choice. The story behind card VI, and what you let go of when you choose. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thelovers #tarotlove #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the lovers",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "DKu9G8Kseyk",
+          "url": "https://youtube.com/shorts/DKu9G8Kseyk",
+          "fecha": "2026-10-18T05:04:35.226Z",
+          "privacidad": "public"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad453646d56c60a73f7c75d",
+          "url": "https://tiktok.com/@hermestarot444/video/7697869267206802721",
+          "fecha": "2026-10-18T05:06:20.039Z"
+        }
+      }
+    },
+    {
+      "id": "07-chariot",
+      "carta": "The Chariot",
+      "archivo": "07-chariot.mp4",
+      "cuando": "2026-10-18T07:00:00-04:00",
+      "instagram": {
+        "caption": "A chariot pulled by two sphinxes, and no reins.\nHow do you move forward when two parts of you want different things? The Chariot has an answer. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thechariot #focus #learntarot #majorarcana",
+        "publicado": {
+          "id": "18102620450561571",
+          "permalink": "https://www.instagram.com/reel/Deohuemks3_/",
+          "fecha": "2026-10-18T11:01:59.176Z"
+        }
+      },
+      "youtube": {
+        "titulo": "Two sphinxes, no reins: the secret of The Chariot ☿ Tarot story #shorts",
+        "descripcion": "A chariot pulled by two sphinxes, and no reins.\nHow do you move forward when two parts of you want different things? The Chariot has an answer. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thechariot #focus #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the chariot",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "tOmQdKMmENQ",
+          "url": "https://youtube.com/shorts/tOmQdKMmENQ",
+          "fecha": "2026-10-18T11:02:04.759Z",
+          "privacidad": "public"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad4a72e0a208cb3236052d0",
+          "url": "https://tiktok.com/@hermestarot444/video/7697961876604341537",
+          "fecha": "2026-10-18T11:05:05.755Z"
+        }
+      }
+    },
+    {
+      "id": "08-strength",
+      "carta": "Strength",
+      "archivo": "08-strength.mp4",
+      "cuando": "2026-10-18T13:00:00-04:00",
+      "instagram": {
+        "caption": "Spears made the lion louder. She brought roses.\nStrength is the gentlest card in the tarot. Here is why, in a two-minute story. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #strengthtarot #innerstrength #learntarot #majorarcana",
+        "publicado": {
+          "id": "18199401433383236",
+          "permalink": "https://www.instagram.com/reel/DepMblIjy1u/",
+          "fecha": "2026-10-18T17:15:00.710Z"
+        }
+      },
+      "youtube": {
+        "titulo": "Spears made the lion louder. She brought roses. | Strength tarot ☿ #shorts",
+        "descripcion": "Spears made the lion louder. She brought roses.\nStrength is the gentlest card in the tarot. Here is why, in a two-minute story. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #strengthtarot #innerstrength #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "strength",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "sCOYfP9STL0",
+          "url": "https://youtube.com/shorts/sCOYfP9STL0",
+          "fecha": "2026-10-18T17:15:03.521Z",
+          "privacidad": "public"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad4fe980b0d72757a30c161",
+          "url": "https://tiktok.com/@hermestarot444/video/7698057668413410592",
+          "fecha": "2026-10-18T17:16:49.228Z"
+        }
+      }
+    },
+    {
+      "id": "09-hermit",
+      "carta": "The Hermit",
+      "archivo": "09-hermit.mp4",
+      "cuando": "2026-10-18T19:00:00-04:00",
+      "instagram": {
+        "caption": "Ever asked everyone for advice and felt even more lost?\nThe Hermit climbed a mountain to hear one voice: his own. The story of card IX, for beginners. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehermit #solitude #learntarot #majorarcana",
+        "publicado": {
+          "id": "18199572367381765",
+          "permalink": "https://www.instagram.com/reel/Dep1XU9kY3F/",
+          "fecha": "2026-10-18T23:12:41.510Z"
+        }
+      },
+      "youtube": {
+        "titulo": "Asked everyone for advice and felt more lost? | The Hermit tarot ☿ #shorts",
+        "descripcion": "Ever asked everyone for advice and felt even more lost?\nThe Hermit climbed a mountain to hear one voice: his own. The story of card IX, for beginners. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thehermit #solitude #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the hermit",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "4skG4dXMbUo",
+          "url": "https://youtube.com/shorts/4skG4dXMbUo",
+          "fecha": "2026-10-18T23:12:46.437Z",
+          "privacidad": "public"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad5526f938409f1d0ee35b8",
+          "url": "https://tiktok.com/@hermestarot444/video/7698149807864499489",
+          "fecha": "2026-10-18T23:14:32.699Z"
+        }
+      }
+    },
+    {
+      "id": "10-wheel-of-fortune",
+      "carta": "Wheel of Fortune",
+      "archivo": "10-wheel-of-fortune.mp4",
+      "cuando": "2026-10-19T01:00:00-04:00",
+      "instagram": {
+        "caption": "What keeps repeating in your life?\nA potter, a turning wheel, and the lesson that comes back until you learn it. The Wheel of Fortune isn't about luck. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #wheeloffortune #tarotreading #learntarot #majorarcana",
+        "publicado": {
+          "id": "17934753948146810",
+          "permalink": "https://www.instagram.com/reel/DeqeYH9Eadr/",
+          "fecha": "2026-10-19T05:10:58.385Z"
+        }
+      },
+      "youtube": {
+        "titulo": "What keeps repeating in your life? | Wheel of Fortune tarot ☿ #shorts",
+        "descripcion": "What keeps repeating in your life?\nA potter, a turning wheel, and the lesson that comes back until you learn it. The Wheel of Fortune isn't about luck. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #wheeloffortune #tarotreading #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "wheel of fortune",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": {
+          "id": "gNeOHHpaJ6Q",
+          "url": "https://youtube.com/shorts/gNeOHHpaJ6Q",
+          "fecha": "2026-10-19T05:11:02.189Z",
+          "privacidad": "public"
+        }
+      },
+      "tiktok": {
+        "publicado": {
+          "id": "6ad5a667ae173d6e003184d6",
+          "url": "https://tiktok.com/@hermestarot444/video/7698242157391432993",
+          "fecha": "2026-10-19T05:12:47.150Z"
+        }
+      }
+    },
+    {
+      "id": "11-justice",
+      "carta": "Justice",
+      "archivo": "11-justice.mp4",
+      "cuando": "2026-10-19T07:00:00-04:00",
+      "instagram": {
+        "caption": "\"Before you judge me, weigh what you did.\"\nThe judge who had to put herself on the scales. Justice, card XI, told as a story. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #justicetarot #truth #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "\"Before you judge me, weigh what you did\" | Justice tarot ☿ #shorts",
+        "descripcion": "\"Before you judge me, weigh what you did.\"\nThe judge who had to put herself on the scales. Justice, card XI, told as a story. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #justicetarot #truth #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "justice",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "12-hanged-man",
+      "carta": "The Hanged Man",
+      "archivo": "12-hanged-man.mp4",
+      "cuando": "2026-10-19T13:00:00-04:00",
+      "instagram": {
+        "caption": "Why is this man hanging upside down, and so calm?\nThe Hanged Man looks scary to beginners. His story is about the pause that changes how you see everything. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehangedman #letgo #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Why is he hanging upside down, and so calm? | The Hanged Man tarot ☿ #shorts",
+        "descripcion": "Why is this man hanging upside down, and so calm?\nThe Hanged Man looks scary to beginners. His story is about the pause that changes how you see everything. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thehangedman #letgo #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the hanged man",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "13-death",
+      "carta": "Death",
+      "archivo": "13-death.mp4",
+      "cuando": "2026-10-19T19:00:00-04:00",
+      "instagram": {
+        "caption": "Pulled the Death card? Breathe. It doesn't mean what you think.\nA king, a garden of dry roses, and a rider on a white horse. The real story of card XIII. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #deathcard #newbeginnings #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Pulled the Death card? It doesn't mean what you think ☿ Tarot #shorts",
+        "descripcion": "Pulled the Death card? Breathe. It doesn't mean what you think.\nA king, a garden of dry roses, and a rider on a white horse. The real story of card XIII. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #deathcard #newbeginnings #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "death",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "14-temperance",
+      "carta": "Temperance",
+      "archivo": "14-temperance.mp4",
+      "cuando": "2026-10-20T01:00:00-04:00",
+      "instagram": {
+        "caption": "All or nothing, every single week?\nAn angel pours water between two cups and never spills a drop. Temperance, and your own right measure. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #temperance #balance #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "All or nothing, every week? | Temperance tarot story ☿ #shorts",
+        "descripcion": "All or nothing, every single week?\nAn angel pours water between two cups and never spills a drop. Temperance, and your own right measure. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #temperance #balance #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "temperance",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "15-devil",
+      "carta": "The Devil",
+      "archivo": "15-devil.mp4",
+      "cuando": "2026-10-20T07:00:00-04:00",
+      "instagram": {
+        "caption": "Look closely at the chains on The Devil card.\nThey are loose. The story of the couple in the cave, and the habits that hold you only while you hold them. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thedevil #breakfree #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Look closely at the chains on The Devil card ☿ Tarot story #shorts",
+        "descripcion": "Look closely at the chains on The Devil card.\nThey are loose. The story of the couple in the cave, and the habits that hold you only while you hold them. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thedevil #breakfree #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the devil",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "16-tower",
+      "carta": "The Tower",
+      "archivo": "16-tower.mp4",
+      "cuando": "2026-10-20T13:00:00-04:00",
+      "instagram": {
+        "caption": "What if the scariest card in the tarot is actually a gift?\nA tower built on \"we are never wrong\", and the lightning that set the truth free. The Tower, card XVI. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thetower #change #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "What if the scariest tarot card is a gift? | The Tower ☿ #shorts",
+        "descripcion": "What if the scariest card in the tarot is actually a gift?\nA tower built on \"we are never wrong\", and the lightning that set the truth free. The Tower, card XVI. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thetower #change #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the tower",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "17-star",
+      "carta": "The Star",
+      "archivo": "17-star.mp4",
+      "cuando": "2026-10-20T19:00:00-04:00",
+      "instagram": {
+        "caption": "After everything you've been through, what still gives you hope?\nShe lost almost everything, and kept pouring water anyway. The Star's story, card XVII. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thestar #hope #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "After everything, what still gives you hope? | The Star tarot ☿ #shorts",
+        "descripcion": "After everything you've been through, what still gives you hope?\nShe lost almost everything, and kept pouring water anyway. The Star's story, card XVII. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thestar #hope #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the star",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "18-moon",
+      "carta": "The Moon",
+      "archivo": "18-moon.mp4",
+      "cuando": "2026-10-21T01:00:00-04:00",
+      "instagram": {
+        "caption": "A dog and a wolf howl at the same moon. Both live inside you.\nThe Moon for beginners: the fears that shape your choices when you can't see clearly. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #themoon #intuition #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "A dog and a wolf howl at the same moon | The Moon tarot ☿ #shorts",
+        "descripcion": "A dog and a wolf howl at the same moon. Both live inside you.\nThe Moon for beginners: the fears that shape your choices when you can't see clearly. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #themoon #intuition #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the moon",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "19-sun",
+      "carta": "The Sun",
+      "archivo": "19-sun.mp4",
+      "cuando": "2026-10-21T07:00:00-04:00",
+      "instagram": {
+        "caption": "When did you last laugh out loud, like a kid?\nA careful man opens the gate in his garden wall. The Sun is about more than happiness. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thesun #joy #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "When did you last laugh like a kid? | The Sun tarot story ☿ #shorts",
+        "descripcion": "When did you last laugh out loud, like a kid?\nA careful man opens the gate in his garden wall. The Sun is about more than happiness. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thesun #joy #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the sun",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "20-judgement",
+      "carta": "Judgement",
+      "archivo": "20-judgement.mp4",
+      "cuando": "2026-10-21T13:00:00-04:00",
+      "instagram": {
+        "caption": "What have you been answering with \"not yet\" for years?\nA woman, a trumpet only she could hear, and boxes full of old dreams. Judgement, card XX. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #judgement #wakeupcall #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "What have you been answering with \"not yet\"? | Judgement tarot ☿ #shorts",
+        "descripcion": "What have you been answering with \"not yet\" for years?\nA woman, a trumpet only she could hear, and boxes full of old dreams. Judgement, card XX. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #judgement #wakeupcall #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "judgement",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "21-world",
+      "carta": "The World",
+      "archivo": "21-world.mp4",
+      "cuando": "2026-10-21T19:00:00-04:00",
+      "instagram": {
+        "caption": "The last card of the Major Arcana is a dancer who finally stops to look back.\nThe World: finishing a chapter, and letting yourself celebrate it. The end of the Fool's journey. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #theworld #completion #learntarot #majorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The last tarot card: a dancer who stops to look back | The World ☿ #shorts",
+        "descripcion": "The last card of the Major Arcana is a dancer who finally stops to look back.\nThe World: finishing a chapter, and letting yourself celebrate it. The end of the Fool's journey. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #theworld #completion #learntarot #majorarcana",
+        "etiquetas": [
+          "tarot",
+          "the world",
+          "tarot reading",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "major arcana",
+          "tarot story"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "22-ace-of-wands",
+      "carta": "Ace of Wands",
+      "archivo": "22-ace-of-wands.mp4",
+      "cuando": "2026-10-22T01:00:00-04:00",
+      "instagram": {
+        "caption": "One hand. One branch. One chance. And most people let it go by.\nAce of Wands: the spark of a new beginning, and taking it while it's still warm. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #aceofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "One hand, one branch, one chance | Ace of Wands tarot ☿ #shorts",
+        "descripcion": "One hand. One branch. One chance. And most people let it go by.\nAce of Wands: the spark of a new beginning, and taking it while it's still warm. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #aceofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "ace of wands",
+          "wands",
+          "new beginnings"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "23-two-of-wands",
+      "carta": "Two of Wands",
+      "archivo": "23-two-of-wands.mp4",
+      "cuando": "2026-10-22T07:00:00-04:00",
+      "instagram": {
+        "caption": "He already has a castle. Safe walls. A view of the sea. So why does he look so restless?\nTwo of Wands: planning the bigger life, and deciding to step beyond your walls. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #twoofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "He has a castle, so why is he restless? | Two of Wands tarot ☿ #shorts",
+        "descripcion": "He already has a castle. Safe walls. A view of the sea. So why does he look so restless?\nTwo of Wands: planning the bigger life, and deciding to step beyond your walls. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #twoofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "two of wands",
+          "wands",
+          "planning"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "24-three-of-wands",
+      "carta": "Three of Wands",
+      "archivo": "24-three-of-wands.mp4",
+      "cuando": "2026-10-22T13:00:00-04:00",
+      "instagram": {
+        "caption": "The hardest part isn't the work. It's the waiting after the work.\nThree of Wands: trusting what you've already set in motion, and watching it come back to you. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #threeofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The hardest part is the waiting | Three of Wands tarot ☿ #shorts",
+        "descripcion": "The hardest part isn't the work. It's the waiting after the work.\nThree of Wands: trusting what you've already set in motion, and watching it come back to you. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #threeofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "three of wands",
+          "wands",
+          "patience"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "25-four-of-wands",
+      "carta": "Four of Wands",
+      "archivo": "25-four-of-wands.mp4",
+      "cuando": "2026-10-22T19:00:00-04:00",
+      "instagram": {
+        "caption": "When was the last time you celebrated something? Not a big thing. Something real.\nFour of Wands: home, harmony, and stopping to celebrate what you built together. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fourofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "When did you last celebrate something real? | Four of Wands tarot ☿ #shorts",
+        "descripcion": "When was the last time you celebrated something? Not a big thing. Something real.\nFour of Wands: home, harmony, and stopping to celebrate what you built together. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fourofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "four of wands",
+          "wands",
+          "celebration"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "26-five-of-wands",
+      "carta": "Five of Wands",
+      "archivo": "26-five-of-wands.mp4",
+      "cuando": "2026-10-23T01:00:00-04:00",
+      "instagram": {
+        "caption": "Five people. Five wands. And every single one of them is sure they're right.\nFive of Wands: competition and friction, and the bridge it can become when someone listens. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fiveofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Five people, five wands, everyone is right | Five of Wands tarot ☿ #shorts",
+        "descripcion": "Five people. Five wands. And every single one of them is sure they're right.\nFive of Wands: competition and friction, and the bridge it can become when someone listens. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fiveofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "five of wands",
+          "wands",
+          "conflict"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "27-six-of-wands",
+      "carta": "Six of Wands",
+      "archivo": "27-six-of-wands.mp4",
+      "cuando": "2026-10-23T07:00:00-04:00",
+      "instagram": {
+        "caption": "Everybody loves you when you win. The real question is what you do next.\nSix of Wands: victory and recognition, shared with the people who carried you there. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sixofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Everybody loves you when you win | Six of Wands tarot ☿ #shorts",
+        "descripcion": "Everybody loves you when you win. The real question is what you do next.\nSix of Wands: victory and recognition, shared with the people who carried you there. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sixofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "six of wands",
+          "wands",
+          "victory"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "28-seven-of-wands",
+      "carta": "Seven of Wands",
+      "archivo": "28-seven-of-wands.mp4",
+      "cuando": "2026-10-23T13:00:00-04:00",
+      "instagram": {
+        "caption": "What do you do when everybody wants what you built? Look at his shoes. He wasn't ready for this.\nSeven of Wands: courage and perseverance, defending what matters even when you're not ready. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sevenofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "When everybody wants what you built | Seven of Wands tarot ☿ #shorts",
+        "descripcion": "What do you do when everybody wants what you built? Look at his shoes. He wasn't ready for this.\nSeven of Wands: courage and perseverance, defending what matters even when you're not ready. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sevenofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "seven of wands",
+          "wands",
+          "courage"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "29-eight-of-wands",
+      "carta": "Eight of Wands",
+      "archivo": "29-eight-of-wands.mp4",
+      "cuando": "2026-10-23T19:00:00-04:00",
+      "instagram": {
+        "caption": "Nothing happens for months. And then everything happens at once.\nEight of Wands: speed, news and momentum, when the way is finally clear. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #eightofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Nothing for months, then everything at once | Eight of Wands tarot ☿ #shorts",
+        "descripcion": "Nothing happens for months. And then everything happens at once.\nEight of Wands: speed, news and momentum, when the way is finally clear. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #eightofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "eight of wands",
+          "wands",
+          "momentum"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "30-nine-of-wands",
+      "carta": "Nine of Wands",
+      "archivo": "30-nine-of-wands.mp4",
+      "cuando": "2026-10-24T01:00:00-04:00",
+      "instagram": {
+        "caption": "He's tired. He's hurt. And he's still standing.\nNine of Wands: resilience and one more stand, when you're closer to the end than you think. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #nineofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "He's tired, he's hurt, and still standing | Nine of Wands tarot ☿ #shorts",
+        "descripcion": "He's tired. He's hurt. And he's still standing.\nNine of Wands: resilience and one more stand, when you're closer to the end than you think. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #nineofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "nine of wands",
+          "wands",
+          "resilience"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "31-ten-of-wands",
+      "carta": "Ten of Wands",
+      "archivo": "31-ten-of-wands.mp4",
+      "cuando": "2026-10-24T07:00:00-04:00",
+      "instagram": {
+        "caption": "He said yes to everything. Now look at him.\nTen of Wands: the burden you chose, and the freedom of setting down what isn't yours. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #tenofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "He said yes to everything. Now look at him | Ten of Wands tarot ☿ #shorts",
+        "descripcion": "He said yes to everything. Now look at him.\nTen of Wands: the burden you chose, and the freedom of setting down what isn't yours. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #tenofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "ten of wands",
+          "wands",
+          "burden"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "32-page-of-wands",
+      "carta": "Page of Wands",
+      "archivo": "32-page-of-wands.mp4",
+      "cuando": "2026-10-24T13:00:00-04:00",
+      "instagram": {
+        "caption": "Remember when you wanted to try everything? He still does.\nPage of Wands: enthusiasm and discovery, and following one spark until it grows. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #pageofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Remember when you wanted to try everything? | Page of Wands tarot ☿ #shorts",
+        "descripcion": "Remember when you wanted to try everything? He still does.\nPage of Wands: enthusiasm and discovery, and following one spark until it grows. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #pageofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "page of wands",
+          "wands",
+          "curiosity"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "33-knight-of-wands",
+      "carta": "Knight of Wands",
+      "archivo": "33-knight-of-wands.mp4",
+      "cuando": "2026-10-24T19:00:00-04:00",
+      "instagram": {
+        "caption": "He's brave. He's fast. And he has never finished a single journey.\nKnight of Wands: energy and adventure, and the moment passion finally picks a direction. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #knightofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Brave, fast, and never finishes a journey | Knight of Wands tarot ☿ #shorts",
+        "descripcion": "He's brave. He's fast. And he has never finished a single journey.\nKnight of Wands: energy and adventure, and the moment passion finally picks a direction. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #knightofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "knight of wands",
+          "wands",
+          "passion"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "34-queen-of-wands",
+      "carta": "Queen of Wands",
+      "archivo": "34-queen-of-wands.mp4",
+      "cuando": "2026-10-25T01:00:00-04:00",
+      "instagram": {
+        "caption": "Some people walk into a room and everything gets warmer. She was told that was too much.\nQueen of Wands: confidence and warmth, and never dimming your light to fit in. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #queenofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "She was told she was too much | Queen of Wands tarot ☿ #shorts",
+        "descripcion": "Some people walk into a room and everything gets warmer. She was told that was too much.\nQueen of Wands: confidence and warmth, and never dimming your light to fit in. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #queenofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "queen of wands",
+          "wands",
+          "confidence"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "35-king-of-wands",
+      "carta": "King of Wands",
+      "archivo": "35-king-of-wands.mp4",
+      "cuando": "2026-10-25T07:00:00-04:00",
+      "instagram": {
+        "caption": "A real leader doesn't carry the fire alone. He lights it in others.\nKing of Wands: vision and leadership that lights the fire in other people. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #kingofwands #wands #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "A real leader lights the fire in others | King of Wands tarot ☿ #shorts",
+        "descripcion": "A real leader doesn't carry the fire alone. He lights it in others.\nKing of Wands: vision and leadership that lights the fire in other people. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #kingofwands #wands #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "king of wands",
+          "wands",
+          "leadership"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "36-ace-of-cups",
+      "carta": "Ace of Cups",
+      "archivo": "36-ace-of-cups.mp4",
+      "cuando": "2026-10-25T13:00:00-04:00",
+      "instagram": {
+        "caption": "What if love isn't something you find? What if it's something that pours out of you?\nAce of Cups: new love and a full heart, and love that starts inside you. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #aceofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "What if love pours out of you? | Ace of Cups tarot ☿ #shorts",
+        "descripcion": "What if love isn't something you find? What if it's something that pours out of you?\nAce of Cups: new love and a full heart, and love that starts inside you. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #aceofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "ace of cups",
+          "cups",
+          "love"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "37-two-of-cups",
+      "carta": "Two of Cups",
+      "archivo": "37-two-of-cups.mp4",
+      "cuando": "2026-10-25T19:00:00-04:00",
+      "instagram": {
+        "caption": "Two strangers. Two cups. And one promise that changed both of them.\nTwo of Cups: partnership and connection between equals, where both people give. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #twoofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Two strangers, two cups, one promise | Two of Cups tarot ☿ #shorts",
+        "descripcion": "Two strangers. Two cups. And one promise that changed both of them.\nTwo of Cups: partnership and connection between equals, where both people give. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #twoofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "two of cups",
+          "cups",
+          "partnership"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "38-three-of-cups",
+      "carta": "Three of Cups",
+      "archivo": "38-three-of-cups.mp4",
+      "cuando": "2026-10-26T01:00:00-04:00",
+      "instagram": {
+        "caption": "Some things are only finished when you celebrate them with your people.\nThree of Cups: friendship, community, and joy that grows when you share it. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #threeofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Some things are only finished when you celebrate | Three of Cups tarot ☿ #shorts",
+        "descripcion": "Some things are only finished when you celebrate them with your people.\nThree of Cups: friendship, community, and joy that grows when you share it. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #threeofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "three of cups",
+          "cups",
+          "friendship"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "39-four-of-cups",
+      "carta": "Four of Cups",
+      "archivo": "39-four-of-cups.mp4",
+      "cuando": "2026-10-26T07:00:00-04:00",
+      "instagram": {
+        "caption": "He has everything he asked for. So why is he so bored?\nFour of Cups: apathy and reflection, and the offer you miss while you're looking away. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fourofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "He has everything, so why is he bored? | Four of Cups tarot ☿ #shorts",
+        "descripcion": "He has everything he asked for. So why is he so bored?\nFour of Cups: apathy and reflection, and the offer you miss while you're looking away. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fourofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "four of cups",
+          "cups",
+          "reflection"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "40-five-of-cups",
+      "carta": "Five of Cups",
+      "archivo": "40-five-of-cups.mp4",
+      "cuando": "2026-10-26T13:00:00-04:00",
+      "instagram": {
+        "caption": "Three cups spilled. And he can't stop looking at them.\nFive of Cups: grief and regret, and the two cups still standing behind you. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fiveofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Three cups spilled and he can't look away | Five of Cups tarot ☿ #shorts",
+        "descripcion": "Three cups spilled. And he can't stop looking at them.\nFive of Cups: grief and regret, and the two cups still standing behind you. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fiveofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "five of cups",
+          "cups",
+          "grief"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "41-six-of-cups",
+      "carta": "Six of Cups",
+      "archivo": "41-six-of-cups.mp4",
+      "cuando": "2026-10-26T19:00:00-04:00",
+      "instagram": {
+        "caption": "Do you remember who you were before the world told you who to be?\nSix of Cups: nostalgia and the inner child, memories that remind you who you are. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sixofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Who were you before the world told you? | Six of Cups tarot ☿ #shorts",
+        "descripcion": "Do you remember who you were before the world told you who to be?\nSix of Cups: nostalgia and the inner child, memories that remind you who you are. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sixofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "six of cups",
+          "cups",
+          "inner child"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "42-seven-of-cups",
+      "carta": "Seven of Cups",
+      "archivo": "42-seven-of-cups.mp4",
+      "cuando": "2026-10-27T01:00:00-04:00",
+      "instagram": {
+        "caption": "Seven dreams. Only one of them is real.\nSeven of Cups: choices and illusions, and choosing the one dream that's real. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sevenofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Seven dreams, only one is real | Seven of Cups tarot ☿ #shorts",
+        "descripcion": "Seven dreams. Only one of them is real.\nSeven of Cups: choices and illusions, and choosing the one dream that's real. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sevenofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "seven of cups",
+          "cups",
+          "choices"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "43-eight-of-cups",
+      "carta": "Eight of Cups",
+      "archivo": "43-eight-of-cups.mp4",
+      "cuando": "2026-10-27T07:00:00-04:00",
+      "instagram": {
+        "caption": "Sometimes the bravest thing is leaving something that's almost enough.\nEight of Cups: walking away from what no longer fulfills you, toward something deeper. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #eightofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The bravest thing is leaving almost enough | Eight of Cups tarot ☿ #shorts",
+        "descripcion": "Sometimes the bravest thing is leaving something that's almost enough.\nEight of Cups: walking away from what no longer fulfills you, toward something deeper. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #eightofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "eight of cups",
+          "cups",
+          "moving on"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "44-nine-of-cups",
+      "carta": "Nine of Cups",
+      "archivo": "44-nine-of-cups.mp4",
+      "cuando": "2026-10-27T13:00:00-04:00",
+      "instagram": {
+        "caption": "What would you wish for, if you knew it would come true? Careful. It might.\nNine of Cups: the wish card. Contentment, and feeling that what you have is enough. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #nineofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "What would you wish for if it came true? | Nine of Cups tarot ☿ #shorts",
+        "descripcion": "What would you wish for, if you knew it would come true? Careful. It might.\nNine of Cups: the wish card. Contentment, and feeling that what you have is enough. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #nineofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "nine of cups",
+          "cups",
+          "wishes"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "45-ten-of-cups",
+      "carta": "Ten of Cups",
+      "archivo": "45-ten-of-cups.mp4",
+      "cuando": "2026-10-27T19:00:00-04:00",
+      "instagram": {
+        "caption": "Happiness doesn't always look like what you planned. Sometimes it looks like this.\nTen of Cups: family, harmony, and recognizing happiness that's already here. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #tenofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Happiness doesn't look like what you planned | Ten of Cups tarot ☿ #shorts",
+        "descripcion": "Happiness doesn't always look like what you planned. Sometimes it looks like this.\nTen of Cups: family, harmony, and recognizing happiness that's already here. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #tenofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "ten of cups",
+          "cups",
+          "family"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "46-page-of-cups",
+      "carta": "Page of Cups",
+      "archivo": "46-page-of-cups.mp4",
+      "cuando": "2026-10-28T01:00:00-04:00",
+      "instagram": {
+        "caption": "What would you do if your cup started talking to you? He listened.\nPage of Cups: creative messages from the heart that sound silly, until you listen. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #pageofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "What if your cup started talking to you? | Page of Cups tarot ☿ #shorts",
+        "descripcion": "What would you do if your cup started talking to you? He listened.\nPage of Cups: creative messages from the heart that sound silly, until you listen. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #pageofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "page of cups",
+          "cups",
+          "creativity"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "47-knight-of-cups",
+      "carta": "Knight of Cups",
+      "archivo": "47-knight-of-cups.mp4",
+      "cuando": "2026-10-28T07:00:00-04:00",
+      "instagram": {
+        "caption": "Everybody rushes toward what they want. This knight rides slowly. On purpose.\nKnight of Cups: romance and offers of the heart, carried with care, not in a rush. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #knightofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Everybody rushes; this knight rides slowly | Knight of Cups tarot ☿ #shorts",
+        "descripcion": "Everybody rushes toward what they want. This knight rides slowly. On purpose.\nKnight of Cups: romance and offers of the heart, carried with care, not in a rush. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #knightofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "knight of cups",
+          "cups",
+          "romance"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "48-queen-of-cups",
+      "carta": "Queen of Cups",
+      "archivo": "48-queen-of-cups.mp4",
+      "cuando": "2026-10-28T13:00:00-04:00",
+      "instagram": {
+        "caption": "She doesn't fix your problems. She does something better.\nQueen of Cups: compassion and intuition, and listening before fixing. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #queenofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "She doesn't fix your problems, she does better | Queen of Cups tarot ☿ #shorts",
+        "descripcion": "She doesn't fix your problems. She does something better.\nQueen of Cups: compassion and intuition, and listening before fixing. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #queenofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "queen of cups",
+          "cups",
+          "compassion"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "49-king-of-cups",
+      "carta": "King of Cups",
+      "archivo": "49-king-of-cups.mp4",
+      "cuando": "2026-10-28T19:00:00-04:00",
+      "instagram": {
+        "caption": "The sea around him is wild. So why is he so calm?\nKing of Cups: emotional balance and calm wisdom. Feel everything, don't let it steer. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #kingofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The sea is wild, so why is he so calm? | King of Cups tarot ☿ #shorts",
+        "descripcion": "The sea around him is wild. So why is he so calm?\nKing of Cups: emotional balance and calm wisdom. Feel everything, don't let it steer. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #kingofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "king of cups",
+          "cups",
+          "balance"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "50-ace-of-swords",
+      "carta": "Ace of Swords",
+      "archivo": "50-ace-of-swords.mp4",
+      "cuando": "2026-10-29T01:00:00-04:00",
+      "instagram": {
+        "caption": "The truth doesn't always feel good. But it always feels clear.\nAce of Swords: clarity and truth, the breakthrough that cuts through confusion. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #aceofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The truth always feels clear | Ace of Swords tarot ☿ #shorts",
+        "descripcion": "The truth doesn't always feel good. But it always feels clear.\nAce of Swords: clarity and truth, the breakthrough that cuts through confusion. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #aceofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "ace of swords",
+          "swords",
+          "clarity"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "51-two-of-swords",
+      "carta": "Two of Swords",
+      "archivo": "51-two-of-swords.mp4",
+      "cuando": "2026-10-29T07:00:00-04:00",
+      "instagram": {
+        "caption": "She's not blind. She chose the blindfold.\nTwo of Swords: a hard choice, and the decision we avoid by refusing to look. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #twoofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "She's not blind. She chose the blindfold | Two of Swords tarot ☿ #shorts",
+        "descripcion": "She's not blind. She chose the blindfold.\nTwo of Swords: a hard choice, and the decision we avoid by refusing to look. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #twoofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "two of swords",
+          "swords",
+          "decisions"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "52-three-of-swords",
+      "carta": "Three of Swords",
+      "archivo": "52-three-of-swords.mp4",
+      "cuando": "2026-10-29T13:00:00-04:00",
+      "instagram": {
+        "caption": "This is the card nobody wants. And one of the most honest in the deck.\nThree of Swords: heartbreak and grief, and pain you let yourself feel so it can move. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #threeofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The card nobody wants, and the most honest | Three of Swords tarot ☿ #shorts",
+        "descripcion": "This is the card nobody wants. And one of the most honest in the deck.\nThree of Swords: heartbreak and grief, and pain you let yourself feel so it can move. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #threeofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "three of swords",
+          "swords",
+          "heartbreak"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "53-four-of-swords",
+      "carta": "Four of Swords",
+      "archivo": "53-four-of-swords.mp4",
+      "cuando": "2026-10-29T19:00:00-04:00",
+      "instagram": {
+        "caption": "Rest is not quitting. Rest is part of the fight.\nFour of Swords: rest and recovery, taken on purpose, before you break. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fourofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Rest is not quitting | Four of Swords tarot ☿ #shorts",
+        "descripcion": "Rest is not quitting. Rest is part of the fight.\nFour of Swords: rest and recovery, taken on purpose, before you break. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fourofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "four of swords",
+          "swords",
+          "rest"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "57-eight-of-swords",
+      "carta": "Eight of Swords",
+      "archivo": "57-eight-of-swords.mp4",
+      "cuando": "2026-10-30T19:00:00-04:00",
+      "instagram": {
+        "caption": "She thinks she's trapped. Look at her feet.\nEight of Swords: a trap made of beliefs, and a way out closer than you think. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #eightofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "She thinks she's trapped. Look at her feet | Eight of Swords tarot ☿ #shorts",
+        "descripcion": "She thinks she's trapped. Look at her feet.\nEight of Swords: a trap made of beliefs, and a way out closer than you think. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #eightofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "eight of swords",
+          "swords",
+          "freedom"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "54-five-of-swords",
+      "carta": "Five of Swords",
+      "archivo": "54-five-of-swords.mp4",
+      "cuando": "2026-10-30T01:00:00-04:00",
+      "instagram": {
+        "caption": "He won the argument. So why is he standing there alone?\nFive of Swords: conflict and pride, and the win that costs more than it's worth. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fiveofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "He won the argument, so why is he alone? | Five of Swords tarot ☿ #shorts",
+        "descripcion": "He won the argument. So why is he standing there alone?\nFive of Swords: conflict and pride, and the win that costs more than it's worth. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fiveofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "five of swords",
+          "swords",
+          "conflict"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "55-six-of-swords",
+      "carta": "Six of Swords",
+      "archivo": "55-six-of-swords.mp4",
+      "cuando": "2026-10-30T07:00:00-04:00",
+      "instagram": {
+        "caption": "You don't have to know where you're going. Only that you can't stay here.\nSix of Swords: transition and healing, moving through a hard time toward calmer water. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sixofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "You only have to know you can't stay | Six of Swords tarot ☿ #shorts",
+        "descripcion": "You don't have to know where you're going. Only that you can't stay here.\nSix of Swords: transition and healing, moving through a hard time toward calmer water. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sixofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "six of swords",
+          "swords",
+          "transition"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "56-seven-of-swords",
+      "carta": "Seven of Swords",
+      "archivo": "56-seven-of-swords.mp4",
+      "cuando": "2026-10-30T13:00:00-04:00",
+      "instagram": {
+        "caption": "He thinks nobody saw him. Look at his smile.\nSeven of Swords: strategy and secrets, and what shortcuts really cost. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sevenofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "He thinks nobody saw him | Seven of Swords tarot ☿ #shorts",
+        "descripcion": "He thinks nobody saw him. Look at his smile.\nSeven of Swords: strategy and secrets, and what shortcuts really cost. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sevenofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "seven of swords",
+          "swords",
+          "honesty"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "58-nine-of-swords",
+      "carta": "Nine of Swords",
+      "archivo": "58-nine-of-swords.mp4",
+      "cuando": "2026-10-31T01:00:00-04:00",
+      "instagram": {
+        "caption": "Three in the morning. Every worry feels like the truth.\nNine of Swords: anxiety and sleepless worry, and fears that grow in the dark. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #nineofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "3 a.m. and every worry feels true | Nine of Swords tarot ☿ #shorts",
+        "descripcion": "Three in the morning. Every worry feels like the truth.\nNine of Swords: anxiety and sleepless worry, and fears that grow in the dark. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #nineofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "nine of swords",
+          "swords",
+          "anxiety"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "59-ten-of-swords",
+      "carta": "Ten of Swords",
+      "archivo": "59-ten-of-swords.mp4",
+      "cuando": "2026-10-31T07:00:00-04:00",
+      "instagram": {
+        "caption": "It's the darkest-looking card in the deck. Now look at the horizon.\nTen of Swords: rock bottom and painful endings, and the dawn that always follows. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #tenofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The darkest card in the deck. Look at the horizon | Ten of Swords tarot ☿ #shorts",
+        "descripcion": "It's the darkest-looking card in the deck. Now look at the horizon.\nTen of Swords: rock bottom and painful endings, and the dawn that always follows. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #tenofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "ten of swords",
+          "swords",
+          "endings"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "60-page-of-swords",
+      "carta": "Page of Swords",
+      "archivo": "60-page-of-swords.mp4",
+      "cuando": "2026-10-31T13:00:00-04:00",
+      "instagram": {
+        "caption": "Why? Why? Why? Some people called her annoying. She called it curious.\nPage of Swords: curiosity and new ideas, and a sharp mind that keeps asking. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #pageofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "They called her annoying. She called it curious | Page of Swords tarot ☿ #shorts",
+        "descripcion": "Why? Why? Why? Some people called her annoying. She called it curious.\nPage of Swords: curiosity and new ideas, and a sharp mind that keeps asking. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #pageofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "page of swords",
+          "swords",
+          "curiosity"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "61-knight-of-swords",
+      "carta": "Knight of Swords",
+      "archivo": "61-knight-of-swords.mp4",
+      "cuando": "2026-10-31T19:00:00-04:00",
+      "instagram": {
+        "caption": "He's the fastest knight in the kingdom. That's exactly his problem.\nKnight of Swords: ambition and fast action, and drive that aims before it charges. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #knightofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The fastest knight, and that's his problem | Knight of Swords tarot ☿ #shorts",
+        "descripcion": "He's the fastest knight in the kingdom. That's exactly his problem.\nKnight of Swords: ambition and fast action, and drive that aims before it charges. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #knightofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "knight of swords",
+          "swords",
+          "ambition"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "62-queen-of-swords",
+      "carta": "Queen of Swords",
+      "archivo": "62-queen-of-swords.mp4",
+      "cuando": "2026-11-01T01:00:00-04:00",
+      "instagram": {
+        "caption": "She's been hurt before. That's why she can see so clearly.\nQueen of Swords: clear thinking and honesty, offered with an open hand. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #queenofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "She's been hurt. That's why she sees clearly | Queen of Swords tarot ☿ #shorts",
+        "descripcion": "She's been hurt before. That's why she can see so clearly.\nQueen of Swords: clear thinking and honesty, offered with an open hand. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #queenofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "queen of swords",
+          "swords",
+          "honesty"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
+    },
+    {
+      "id": "63-king-of-swords",
+      "carta": "King of Swords",
+      "archivo": "63-king-of-swords.mp4",
+      "cuando": "2026-11-01T07:00:00-05:00",
+      "instagram": {
+        "caption": "Two people. One sword. And a decision nobody else could make fairly.\nKing of Swords: intellect and fairness, authority that decides with reason. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #kingofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Two people, one sword, one fair decision | King of Swords tarot ☿ #shorts",
+        "descripcion": "Two people. One sword. And a decision nobody else could make fairly.\nKing of Swords: intellect and fairness, authority that decides with reason. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #kingofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "king of swords",
+          "swords",
+          "fairness"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      }
     }
-   },
-   "youtube": {
-    "titulo": "What would you start if you didn't need to know the ending? | The Fool tarot ☿ #shorts",
-    "descripcion": "What would you begin tomorrow if you didn't need to know how it ends?\nThe Fool's story: a boy, a white rose, and one step off the edge. New to tarot? Start here, with card 0. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thefool #learntarot #tarotforbeginners #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the fool",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "onV_3MyVRzA",
-     "url": "https://youtube.com/shorts/onV_3MyVRzA",
-     "fecha": "2026-10-16T22:22:03.667Z",
-     "privacidad": "public",
-     "via": "Mac (scripts/youtube.mjs)"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad3220e9181b7d4b6f5e8ae",
-     "url": "https://tiktok.com/@hermestarot444/video/7697533679370816801",
-     "fecha": "2026-10-17T07:23:34.343Z",
-     "via": "Buffer (a mano)"
-    }
-   }
-  },
-  {
-   "id": "02-high-priestess",
-   "carta": "The High Priestess",
-   "archivo": "02-high-priestess.mp4",
-   "cuando": "2026-10-16T19:00:00-04:00",
-   "instagram": {
-    "caption": "She never spoke first. She just knew.\nThe High Priestess, told as a story: the girl between two pillars, and the quiet voice you already trust. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehighpriestess #intuition #learntarot #majorarcana",
-    "publicado": {
-     "id": "18119005244099399",
-     "permalink": "https://www.instagram.com/reel/DekqgWxgad4/",
-     "fecha": "2026-10-16T23:01:33.672Z"
-    }
-   },
-   "youtube": {
-    "titulo": "She never spoke first. She just knew. | The High Priestess tarot ☿ #shorts",
-    "descripcion": "She never spoke first. She just knew.\nThe High Priestess, told as a story: the girl between two pillars, and the quiet voice you already trust. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thehighpriestess #intuition #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the high priestess",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "7jjZJrZAwwk",
-     "url": "https://youtube.com/shorts/7jjZJrZAwwk",
-     "fecha": "2026-10-16T23:01:44.812Z",
-     "privacidad": "public",
-     "via": "Mac (scripts/youtube.mjs)"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad322195461d2b5e499534e",
-     "url": "https://tiktok.com/@hermestarot444/video/7697533726661643552",
-     "fecha": "2026-10-17T07:25:45.490Z",
-     "via": "Buffer (a mano)"
-    }
-   }
-  },
-  {
-   "id": "03-empress",
-   "carta": "The Empress",
-   "archivo": "03-empress.mp4",
-   "cuando": "2026-10-17T10:00:00-04:00",
-   "instagram": {
-    "caption": "Her field wouldn't grow until she stopped pushing.\nThe Empress is not only about motherhood. Watch her story, then ask what in your life needs care instead of force. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #theempress #selfcare #learntarot #majorarcana",
-    "publicado": {
-     "id": "17868938034662501",
-     "permalink": "https://www.instagram.com/reel/DemSslVD_-m/",
-     "fecha": "2026-10-17T14:12:12.746Z"
-    }
-   },
-   "youtube": {
-    "titulo": "Her field wouldn't grow until she stopped pushing | The Empress tarot ☿ #shorts",
-    "descripcion": "Her field wouldn't grow until she stopped pushing.\nThe Empress is not only about motherhood. Watch her story, then ask what in your life needs care instead of force. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #theempress #selfcare #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the empress",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "Qck5c_HnyVM",
-     "url": "https://youtube.com/shorts/Qck5c_HnyVM",
-     "fecha": "2026-10-17T14:12:19.239Z",
-     "privacidad": "public"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad382440b0d72757addd2e5",
-     "url": "https://tiktok.com/@hermestarot444/video/7697639500935122208",
-     "fecha": "2026-10-17T14:16:06.108Z"
-    }
-   }
-  },
-  {
-   "id": "04-emperor",
-   "carta": "The Emperor",
-   "archivo": "04-emperor.mp4",
-   "cuando": "2026-10-17T19:00:00-04:00",
-   "instagram": {
-    "caption": "Can you say no without feeling guilty?\nThe Emperor's story: a man who gave everything away, until he built a wall of stones and one clear no. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #theemperor #boundaries #learntarot #majorarcana",
-    "publicado": {
-     "id": "18136298515728578",
-     "permalink": "https://www.instagram.com/reel/DenPV5vlZQq/",
-     "fecha": "2026-10-17T23:01:55.074Z"
-    }
-   },
-   "youtube": {
-    "titulo": "Can you say no without feeling guilty? | The Emperor tarot ☿ #shorts",
-    "descripcion": "Can you say no without feeling guilty?\nThe Emperor's story: a man who gave everything away, until he built a wall of stones and one clear no. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #theemperor #boundaries #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the emperor",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "JGxWZ-VseG0",
-     "url": "https://youtube.com/shorts/JGxWZ-VseG0",
-     "fecha": "2026-10-17T23:01:59.136Z",
-     "privacidad": "public"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad3fe68769b45793499adc4",
-     "url": "https://tiktok.com/@hermestarot444/video/7697775974343019808",
-     "fecha": "2026-10-17T23:03:44.632Z"
-    }
-   }
-  },
-  {
-   "id": "05-hierophant",
-   "carta": "The Hierophant",
-   "archivo": "05-hierophant.mp4",
-   "cuando": "2026-10-17T22:00:00-04:00",
-   "instagram": {
-    "caption": "Two students. One memorized every word. The other kept asking why.\nThe Hierophant for beginners: tradition you understand, not rules you repeat. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehierophant #tarotmeaning #learntarot #majorarcana",
-    "publicado": {
-     "id": "17955677163262401",
-     "permalink": "https://www.instagram.com/reel/DenkxIPm6dV/",
-     "fecha": "2026-10-18T02:09:18.762Z"
-    }
-   },
-   "youtube": {
-    "titulo": "One student memorized. The other asked why. | The Hierophant tarot ☿ #shorts",
-    "descripcion": "Two students. One memorized every word. The other kept asking why.\nThe Hierophant for beginners: tradition you understand, not rules you repeat. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thehierophant #tarotmeaning #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the hierophant",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "fKmp_9FLcyQ",
-     "url": "https://youtube.com/shorts/fKmp_9FLcyQ",
-     "fecha": "2026-10-18T02:09:24.390Z",
-     "privacidad": "public"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad42a560b0d72757a035134",
-     "url": "https://tiktok.com/@hermestarot444/video/7697824224567676192",
-     "fecha": "2026-10-18T02:13:10.495Z"
-    }
-   }
-  },
-  {
-   "id": "06-lovers",
-   "carta": "The Lovers",
-   "archivo": "06-lovers.mp4",
-   "cuando": "2026-10-18T01:00:00-04:00",
-   "instagram": {
-    "caption": "Is The Lovers card really about romance?\nTwo people, two trees, one choice. The story behind card VI, and what you let go of when you choose. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thelovers #tarotlove #learntarot #majorarcana",
-    "publicado": {
-     "id": "17966406963249157",
-     "permalink": "https://www.instagram.com/reel/Den40wzDBGM/",
-     "fecha": "2026-10-18T05:04:32.427Z"
-    }
-   },
-   "youtube": {
-    "titulo": "Is The Lovers card really about romance? ☿ Tarot story #shorts",
-    "descripcion": "Is The Lovers card really about romance?\nTwo people, two trees, one choice. The story behind card VI, and what you let go of when you choose. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thelovers #tarotlove #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the lovers",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "DKu9G8Kseyk",
-     "url": "https://youtube.com/shorts/DKu9G8Kseyk",
-     "fecha": "2026-10-18T05:04:35.226Z",
-     "privacidad": "public"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad453646d56c60a73f7c75d",
-     "url": "https://tiktok.com/@hermestarot444/video/7697869267206802721",
-     "fecha": "2026-10-18T05:06:20.039Z"
-    }
-   }
-  },
-  {
-   "id": "07-chariot",
-   "carta": "The Chariot",
-   "archivo": "07-chariot.mp4",
-   "cuando": "2026-10-18T07:00:00-04:00",
-   "instagram": {
-    "caption": "A chariot pulled by two sphinxes, and no reins.\nHow do you move forward when two parts of you want different things? The Chariot has an answer. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thechariot #focus #learntarot #majorarcana",
-    "publicado": {
-     "id": "18102620450561571",
-     "permalink": "https://www.instagram.com/reel/Deohuemks3_/",
-     "fecha": "2026-10-18T11:01:59.176Z"
-    }
-   },
-   "youtube": {
-    "titulo": "Two sphinxes, no reins: the secret of The Chariot ☿ Tarot story #shorts",
-    "descripcion": "A chariot pulled by two sphinxes, and no reins.\nHow do you move forward when two parts of you want different things? The Chariot has an answer. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thechariot #focus #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the chariot",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "tOmQdKMmENQ",
-     "url": "https://youtube.com/shorts/tOmQdKMmENQ",
-     "fecha": "2026-10-18T11:02:04.759Z",
-     "privacidad": "public"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad4a72e0a208cb3236052d0",
-     "url": "https://tiktok.com/@hermestarot444/video/7697961876604341537",
-     "fecha": "2026-10-18T11:05:05.755Z"
-    }
-   }
-  },
-  {
-   "id": "08-strength",
-   "carta": "Strength",
-   "archivo": "08-strength.mp4",
-   "cuando": "2026-10-18T13:00:00-04:00",
-   "instagram": {
-    "caption": "Spears made the lion louder. She brought roses.\nStrength is the gentlest card in the tarot. Here is why, in a two-minute story. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #strengthtarot #innerstrength #learntarot #majorarcana",
-    "publicado": {
-     "id": "18199401433383236",
-     "permalink": "https://www.instagram.com/reel/DepMblIjy1u/",
-     "fecha": "2026-10-18T17:15:00.710Z"
-    }
-   },
-   "youtube": {
-    "titulo": "Spears made the lion louder. She brought roses. | Strength tarot ☿ #shorts",
-    "descripcion": "Spears made the lion louder. She brought roses.\nStrength is the gentlest card in the tarot. Here is why, in a two-minute story. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #strengthtarot #innerstrength #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "strength",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "sCOYfP9STL0",
-     "url": "https://youtube.com/shorts/sCOYfP9STL0",
-     "fecha": "2026-10-18T17:15:03.521Z",
-     "privacidad": "public"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad4fe980b0d72757a30c161",
-     "url": "https://tiktok.com/@hermestarot444/video/7698057668413410592",
-     "fecha": "2026-10-18T17:16:49.228Z"
-    }
-   }
-  },
-  {
-   "id": "09-hermit",
-   "carta": "The Hermit",
-   "archivo": "09-hermit.mp4",
-   "cuando": "2026-10-18T19:00:00-04:00",
-   "instagram": {
-    "caption": "Ever asked everyone for advice and felt even more lost?\nThe Hermit climbed a mountain to hear one voice: his own. The story of card IX, for beginners. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehermit #solitude #learntarot #majorarcana",
-    "publicado": {
-     "id": "18199572367381765",
-     "permalink": "https://www.instagram.com/reel/Dep1XU9kY3F/",
-     "fecha": "2026-10-18T23:12:41.510Z"
-    }
-   },
-   "youtube": {
-    "titulo": "Asked everyone for advice and felt more lost? | The Hermit tarot ☿ #shorts",
-    "descripcion": "Ever asked everyone for advice and felt even more lost?\nThe Hermit climbed a mountain to hear one voice: his own. The story of card IX, for beginners. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thehermit #solitude #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the hermit",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "4skG4dXMbUo",
-     "url": "https://youtube.com/shorts/4skG4dXMbUo",
-     "fecha": "2026-10-18T23:12:46.437Z",
-     "privacidad": "public"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad5526f938409f1d0ee35b8",
-     "url": "https://tiktok.com/@hermestarot444/video/7698149807864499489",
-     "fecha": "2026-10-18T23:14:32.699Z"
-    }
-   }
-  },
-  {
-   "id": "10-wheel-of-fortune",
-   "carta": "Wheel of Fortune",
-   "archivo": "10-wheel-of-fortune.mp4",
-   "cuando": "2026-10-19T01:00:00-04:00",
-   "instagram": {
-    "caption": "What keeps repeating in your life?\nA potter, a turning wheel, and the lesson that comes back until you learn it. The Wheel of Fortune isn't about luck. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #wheeloffortune #tarotreading #learntarot #majorarcana",
-    "publicado": {
-     "id": "17934753948146810",
-     "permalink": "https://www.instagram.com/reel/DeqeYH9Eadr/",
-     "fecha": "2026-10-19T05:10:58.385Z"
-    }
-   },
-   "youtube": {
-    "titulo": "What keeps repeating in your life? | Wheel of Fortune tarot ☿ #shorts",
-    "descripcion": "What keeps repeating in your life?\nA potter, a turning wheel, and the lesson that comes back until you learn it. The Wheel of Fortune isn't about luck. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #wheeloffortune #tarotreading #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "wheel of fortune",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": {
-     "id": "gNeOHHpaJ6Q",
-     "url": "https://youtube.com/shorts/gNeOHHpaJ6Q",
-     "fecha": "2026-10-19T05:11:02.189Z",
-     "privacidad": "public"
-    }
-   },
-   "tiktok": {
-    "publicado": {
-     "id": "6ad5a667ae173d6e003184d6",
-     "url": "https://tiktok.com/@hermestarot444/video/7698242157391432993",
-     "fecha": "2026-10-19T05:12:47.150Z"
-    }
-   }
-  },
-  {
-   "id": "11-justice",
-   "carta": "Justice",
-   "archivo": "11-justice.mp4",
-   "cuando": "2026-10-19T07:00:00-04:00",
-   "instagram": {
-    "caption": "\"Before you judge me, weigh what you did.\"\nThe judge who had to put herself on the scales. Justice, card XI, told as a story. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #justicetarot #truth #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "\"Before you judge me, weigh what you did\" | Justice tarot ☿ #shorts",
-    "descripcion": "\"Before you judge me, weigh what you did.\"\nThe judge who had to put herself on the scales. Justice, card XI, told as a story. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #justicetarot #truth #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "justice",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "12-hanged-man",
-   "carta": "The Hanged Man",
-   "archivo": "12-hanged-man.mp4",
-   "cuando": "2026-10-19T13:00:00-04:00",
-   "instagram": {
-    "caption": "Why is this man hanging upside down, and so calm?\nThe Hanged Man looks scary to beginners. His story is about the pause that changes how you see everything. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehangedman #letgo #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Why is he hanging upside down, and so calm? | The Hanged Man tarot ☿ #shorts",
-    "descripcion": "Why is this man hanging upside down, and so calm?\nThe Hanged Man looks scary to beginners. His story is about the pause that changes how you see everything. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thehangedman #letgo #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the hanged man",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "13-death",
-   "carta": "Death",
-   "archivo": "13-death.mp4",
-   "cuando": "2026-10-19T19:00:00-04:00",
-   "instagram": {
-    "caption": "Pulled the Death card? Breathe. It doesn't mean what you think.\nA king, a garden of dry roses, and a rider on a white horse. The real story of card XIII. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #deathcard #newbeginnings #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Pulled the Death card? It doesn't mean what you think ☿ Tarot #shorts",
-    "descripcion": "Pulled the Death card? Breathe. It doesn't mean what you think.\nA king, a garden of dry roses, and a rider on a white horse. The real story of card XIII. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #deathcard #newbeginnings #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "death",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "14-temperance",
-   "carta": "Temperance",
-   "archivo": "14-temperance.mp4",
-   "cuando": "2026-10-20T01:00:00-04:00",
-   "instagram": {
-    "caption": "All or nothing, every single week?\nAn angel pours water between two cups and never spills a drop. Temperance, and your own right measure. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #temperance #balance #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "All or nothing, every week? | Temperance tarot story ☿ #shorts",
-    "descripcion": "All or nothing, every single week?\nAn angel pours water between two cups and never spills a drop. Temperance, and your own right measure. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #temperance #balance #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "temperance",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "15-devil",
-   "carta": "The Devil",
-   "archivo": "15-devil.mp4",
-   "cuando": "2026-10-20T07:00:00-04:00",
-   "instagram": {
-    "caption": "Look closely at the chains on The Devil card.\nThey are loose. The story of the couple in the cave, and the habits that hold you only while you hold them. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thedevil #breakfree #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Look closely at the chains on The Devil card ☿ Tarot story #shorts",
-    "descripcion": "Look closely at the chains on The Devil card.\nThey are loose. The story of the couple in the cave, and the habits that hold you only while you hold them. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thedevil #breakfree #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the devil",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "16-tower",
-   "carta": "The Tower",
-   "archivo": "16-tower.mp4",
-   "cuando": "2026-10-20T13:00:00-04:00",
-   "instagram": {
-    "caption": "What if the scariest card in the tarot is actually a gift?\nA tower built on \"we are never wrong\", and the lightning that set the truth free. The Tower, card XVI. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thetower #change #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "What if the scariest tarot card is a gift? | The Tower ☿ #shorts",
-    "descripcion": "What if the scariest card in the tarot is actually a gift?\nA tower built on \"we are never wrong\", and the lightning that set the truth free. The Tower, card XVI. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thetower #change #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the tower",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "17-star",
-   "carta": "The Star",
-   "archivo": "17-star.mp4",
-   "cuando": "2026-10-20T19:00:00-04:00",
-   "instagram": {
-    "caption": "After everything you've been through, what still gives you hope?\nShe lost almost everything, and kept pouring water anyway. The Star's story, card XVII. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thestar #hope #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "After everything, what still gives you hope? | The Star tarot ☿ #shorts",
-    "descripcion": "After everything you've been through, what still gives you hope?\nShe lost almost everything, and kept pouring water anyway. The Star's story, card XVII. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thestar #hope #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the star",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "18-moon",
-   "carta": "The Moon",
-   "archivo": "18-moon.mp4",
-   "cuando": "2026-10-21T01:00:00-04:00",
-   "instagram": {
-    "caption": "A dog and a wolf howl at the same moon. Both live inside you.\nThe Moon for beginners: the fears that shape your choices when you can't see clearly. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #themoon #intuition #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "A dog and a wolf howl at the same moon | The Moon tarot ☿ #shorts",
-    "descripcion": "A dog and a wolf howl at the same moon. Both live inside you.\nThe Moon for beginners: the fears that shape your choices when you can't see clearly. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #themoon #intuition #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the moon",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "19-sun",
-   "carta": "The Sun",
-   "archivo": "19-sun.mp4",
-   "cuando": "2026-10-21T07:00:00-04:00",
-   "instagram": {
-    "caption": "When did you last laugh out loud, like a kid?\nA careful man opens the gate in his garden wall. The Sun is about more than happiness. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thesun #joy #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "When did you last laugh like a kid? | The Sun tarot story ☿ #shorts",
-    "descripcion": "When did you last laugh out loud, like a kid?\nA careful man opens the gate in his garden wall. The Sun is about more than happiness. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #thesun #joy #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the sun",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "20-judgement",
-   "carta": "Judgement",
-   "archivo": "20-judgement.mp4",
-   "cuando": "2026-10-21T13:00:00-04:00",
-   "instagram": {
-    "caption": "What have you been answering with \"not yet\" for years?\nA woman, a trumpet only she could hear, and boxes full of old dreams. Judgement, card XX. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #judgement #wakeupcall #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "What have you been answering with \"not yet\"? | Judgement tarot ☿ #shorts",
-    "descripcion": "What have you been answering with \"not yet\" for years?\nA woman, a trumpet only she could hear, and boxes full of old dreams. Judgement, card XX. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #judgement #wakeupcall #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "judgement",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "21-world",
-   "carta": "The World",
-   "archivo": "21-world.mp4",
-   "cuando": "2026-10-21T19:00:00-04:00",
-   "instagram": {
-    "caption": "The last card of the Major Arcana is a dancer who finally stops to look back.\nThe World: finishing a chapter, and letting yourself celebrate it. The end of the Fool's journey. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #theworld #completion #learntarot #majorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "The last tarot card: a dancer who stops to look back | The World ☿ #shorts",
-    "descripcion": "The last card of the Major Arcana is a dancer who finally stops to look back.\nThe World: finishing a chapter, and letting yourself celebrate it. The end of the Fool's journey. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #theworld #completion #learntarot #majorarcana",
-    "etiquetas": [
-     "tarot",
-     "the world",
-     "tarot reading",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "major arcana",
-     "tarot story"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "22-ace-of-wands",
-   "carta": "Ace of Wands",
-   "archivo": "22-ace-of-wands.mp4",
-   "cuando": "2026-10-22T01:00:00-04:00",
-   "instagram": {
-    "caption": "One hand. One branch. One chance. And most people let it go by.\nAce of Wands: the spark of a new beginning, and taking it while it's still warm. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #aceofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "One hand, one branch, one chance | Ace of Wands tarot ☿ #shorts",
-    "descripcion": "One hand. One branch. One chance. And most people let it go by.\nAce of Wands: the spark of a new beginning, and taking it while it's still warm. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #aceofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "ace of wands",
-     "wands",
-     "new beginnings"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "23-two-of-wands",
-   "carta": "Two of Wands",
-   "archivo": "23-two-of-wands.mp4",
-   "cuando": "2026-10-22T07:00:00-04:00",
-   "instagram": {
-    "caption": "He already has a castle. Safe walls. A view of the sea. So why does he look so restless?\nTwo of Wands: planning the bigger life, and deciding to step beyond your walls. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #twoofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "He has a castle, so why is he restless? | Two of Wands tarot ☿ #shorts",
-    "descripcion": "He already has a castle. Safe walls. A view of the sea. So why does he look so restless?\nTwo of Wands: planning the bigger life, and deciding to step beyond your walls. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #twoofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "two of wands",
-     "wands",
-     "planning"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "24-three-of-wands",
-   "carta": "Three of Wands",
-   "archivo": "24-three-of-wands.mp4",
-   "cuando": "2026-10-22T13:00:00-04:00",
-   "instagram": {
-    "caption": "The hardest part isn't the work. It's the waiting after the work.\nThree of Wands: trusting what you've already set in motion, and watching it come back to you. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #threeofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "The hardest part is the waiting | Three of Wands tarot ☿ #shorts",
-    "descripcion": "The hardest part isn't the work. It's the waiting after the work.\nThree of Wands: trusting what you've already set in motion, and watching it come back to you. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #threeofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "three of wands",
-     "wands",
-     "patience"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "25-four-of-wands",
-   "carta": "Four of Wands",
-   "archivo": "25-four-of-wands.mp4",
-   "cuando": "2026-10-22T19:00:00-04:00",
-   "instagram": {
-    "caption": "When was the last time you celebrated something? Not a big thing. Something real.\nFour of Wands: home, harmony, and stopping to celebrate what you built together. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fourofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "When did you last celebrate something real? | Four of Wands tarot ☿ #shorts",
-    "descripcion": "When was the last time you celebrated something? Not a big thing. Something real.\nFour of Wands: home, harmony, and stopping to celebrate what you built together. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fourofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "four of wands",
-     "wands",
-     "celebration"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "26-five-of-wands",
-   "carta": "Five of Wands",
-   "archivo": "26-five-of-wands.mp4",
-   "cuando": "2026-10-23T01:00:00-04:00",
-   "instagram": {
-    "caption": "Five people. Five wands. And every single one of them is sure they're right.\nFive of Wands: competition and friction, and the bridge it can become when someone listens. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fiveofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Five people, five wands, everyone is right | Five of Wands tarot ☿ #shorts",
-    "descripcion": "Five people. Five wands. And every single one of them is sure they're right.\nFive of Wands: competition and friction, and the bridge it can become when someone listens. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fiveofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "five of wands",
-     "wands",
-     "conflict"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "27-six-of-wands",
-   "carta": "Six of Wands",
-   "archivo": "27-six-of-wands.mp4",
-   "cuando": "2026-10-23T07:00:00-04:00",
-   "instagram": {
-    "caption": "Everybody loves you when you win. The real question is what you do next.\nSix of Wands: victory and recognition, shared with the people who carried you there. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sixofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Everybody loves you when you win | Six of Wands tarot ☿ #shorts",
-    "descripcion": "Everybody loves you when you win. The real question is what you do next.\nSix of Wands: victory and recognition, shared with the people who carried you there. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sixofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "six of wands",
-     "wands",
-     "victory"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "28-seven-of-wands",
-   "carta": "Seven of Wands",
-   "archivo": "28-seven-of-wands.mp4",
-   "cuando": "2026-10-23T13:00:00-04:00",
-   "instagram": {
-    "caption": "What do you do when everybody wants what you built? Look at his shoes. He wasn't ready for this.\nSeven of Wands: courage and perseverance, defending what matters even when you're not ready. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sevenofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "When everybody wants what you built | Seven of Wands tarot ☿ #shorts",
-    "descripcion": "What do you do when everybody wants what you built? Look at his shoes. He wasn't ready for this.\nSeven of Wands: courage and perseverance, defending what matters even when you're not ready. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sevenofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "seven of wands",
-     "wands",
-     "courage"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "29-eight-of-wands",
-   "carta": "Eight of Wands",
-   "archivo": "29-eight-of-wands.mp4",
-   "cuando": "2026-10-23T19:00:00-04:00",
-   "instagram": {
-    "caption": "Nothing happens for months. And then everything happens at once.\nEight of Wands: speed, news and momentum, when the way is finally clear. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #eightofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Nothing for months, then everything at once | Eight of Wands tarot ☿ #shorts",
-    "descripcion": "Nothing happens for months. And then everything happens at once.\nEight of Wands: speed, news and momentum, when the way is finally clear. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #eightofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "eight of wands",
-     "wands",
-     "momentum"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "30-nine-of-wands",
-   "carta": "Nine of Wands",
-   "archivo": "30-nine-of-wands.mp4",
-   "cuando": "2026-10-24T01:00:00-04:00",
-   "instagram": {
-    "caption": "He's tired. He's hurt. And he's still standing.\nNine of Wands: resilience and one more stand, when you're closer to the end than you think. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #nineofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "He's tired, he's hurt, and still standing | Nine of Wands tarot ☿ #shorts",
-    "descripcion": "He's tired. He's hurt. And he's still standing.\nNine of Wands: resilience and one more stand, when you're closer to the end than you think. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #nineofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "nine of wands",
-     "wands",
-     "resilience"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "31-ten-of-wands",
-   "carta": "Ten of Wands",
-   "archivo": "31-ten-of-wands.mp4",
-   "cuando": "2026-10-24T07:00:00-04:00",
-   "instagram": {
-    "caption": "He said yes to everything. Now look at him.\nTen of Wands: the burden you chose, and the freedom of setting down what isn't yours. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #tenofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "He said yes to everything. Now look at him | Ten of Wands tarot ☿ #shorts",
-    "descripcion": "He said yes to everything. Now look at him.\nTen of Wands: the burden you chose, and the freedom of setting down what isn't yours. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #tenofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "ten of wands",
-     "wands",
-     "burden"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "32-page-of-wands",
-   "carta": "Page of Wands",
-   "archivo": "32-page-of-wands.mp4",
-   "cuando": "2026-10-24T13:00:00-04:00",
-   "instagram": {
-    "caption": "Remember when you wanted to try everything? He still does.\nPage of Wands: enthusiasm and discovery, and following one spark until it grows. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #pageofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Remember when you wanted to try everything? | Page of Wands tarot ☿ #shorts",
-    "descripcion": "Remember when you wanted to try everything? He still does.\nPage of Wands: enthusiasm and discovery, and following one spark until it grows. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #pageofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "page of wands",
-     "wands",
-     "curiosity"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "33-knight-of-wands",
-   "carta": "Knight of Wands",
-   "archivo": "33-knight-of-wands.mp4",
-   "cuando": "2026-10-24T19:00:00-04:00",
-   "instagram": {
-    "caption": "He's brave. He's fast. And he has never finished a single journey.\nKnight of Wands: energy and adventure, and the moment passion finally picks a direction. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #knightofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Brave, fast, and never finishes a journey | Knight of Wands tarot ☿ #shorts",
-    "descripcion": "He's brave. He's fast. And he has never finished a single journey.\nKnight of Wands: energy and adventure, and the moment passion finally picks a direction. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #knightofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "knight of wands",
-     "wands",
-     "passion"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "34-queen-of-wands",
-   "carta": "Queen of Wands",
-   "archivo": "34-queen-of-wands.mp4",
-   "cuando": "2026-10-25T01:00:00-04:00",
-   "instagram": {
-    "caption": "Some people walk into a room and everything gets warmer. She was told that was too much.\nQueen of Wands: confidence and warmth, and never dimming your light to fit in. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #queenofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "She was told she was too much | Queen of Wands tarot ☿ #shorts",
-    "descripcion": "Some people walk into a room and everything gets warmer. She was told that was too much.\nQueen of Wands: confidence and warmth, and never dimming your light to fit in. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #queenofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "queen of wands",
-     "wands",
-     "confidence"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "35-king-of-wands",
-   "carta": "King of Wands",
-   "archivo": "35-king-of-wands.mp4",
-   "cuando": "2026-10-25T07:00:00-04:00",
-   "instagram": {
-    "caption": "A real leader doesn't carry the fire alone. He lights it in others.\nKing of Wands: vision and leadership that lights the fire in other people. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #kingofwands #wands #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "A real leader lights the fire in others | King of Wands tarot ☿ #shorts",
-    "descripcion": "A real leader doesn't carry the fire alone. He lights it in others.\nKing of Wands: vision and leadership that lights the fire in other people. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #kingofwands #wands #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "king of wands",
-     "wands",
-     "leadership"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "36-ace-of-cups",
-   "carta": "Ace of Cups",
-   "archivo": "36-ace-of-cups.mp4",
-   "cuando": "2026-10-25T13:00:00-04:00",
-   "instagram": {
-    "caption": "What if love isn't something you find? What if it's something that pours out of you?\nAce of Cups: new love and a full heart, and love that starts inside you. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #aceofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "What if love pours out of you? | Ace of Cups tarot ☿ #shorts",
-    "descripcion": "What if love isn't something you find? What if it's something that pours out of you?\nAce of Cups: new love and a full heart, and love that starts inside you. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #aceofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "ace of cups",
-     "cups",
-     "love"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "37-two-of-cups",
-   "carta": "Two of Cups",
-   "archivo": "37-two-of-cups.mp4",
-   "cuando": "2026-10-25T19:00:00-04:00",
-   "instagram": {
-    "caption": "Two strangers. Two cups. And one promise that changed both of them.\nTwo of Cups: partnership and connection between equals, where both people give. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #twoofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Two strangers, two cups, one promise | Two of Cups tarot ☿ #shorts",
-    "descripcion": "Two strangers. Two cups. And one promise that changed both of them.\nTwo of Cups: partnership and connection between equals, where both people give. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #twoofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "two of cups",
-     "cups",
-     "partnership"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "38-three-of-cups",
-   "carta": "Three of Cups",
-   "archivo": "38-three-of-cups.mp4",
-   "cuando": "2026-10-26T01:00:00-04:00",
-   "instagram": {
-    "caption": "Some things are only finished when you celebrate them with your people.\nThree of Cups: friendship, community, and joy that grows when you share it. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #threeofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Some things are only finished when you celebrate | Three of Cups tarot ☿ #shorts",
-    "descripcion": "Some things are only finished when you celebrate them with your people.\nThree of Cups: friendship, community, and joy that grows when you share it. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #threeofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "three of cups",
-     "cups",
-     "friendship"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "39-four-of-cups",
-   "carta": "Four of Cups",
-   "archivo": "39-four-of-cups.mp4",
-   "cuando": "2026-10-26T07:00:00-04:00",
-   "instagram": {
-    "caption": "He has everything he asked for. So why is he so bored?\nFour of Cups: apathy and reflection, and the offer you miss while you're looking away. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fourofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "He has everything, so why is he bored? | Four of Cups tarot ☿ #shorts",
-    "descripcion": "He has everything he asked for. So why is he so bored?\nFour of Cups: apathy and reflection, and the offer you miss while you're looking away. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fourofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "four of cups",
-     "cups",
-     "reflection"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "40-five-of-cups",
-   "carta": "Five of Cups",
-   "archivo": "40-five-of-cups.mp4",
-   "cuando": "2026-10-26T13:00:00-04:00",
-   "instagram": {
-    "caption": "Three cups spilled. And he can't stop looking at them.\nFive of Cups: grief and regret, and the two cups still standing behind you. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fiveofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Three cups spilled and he can't look away | Five of Cups tarot ☿ #shorts",
-    "descripcion": "Three cups spilled. And he can't stop looking at them.\nFive of Cups: grief and regret, and the two cups still standing behind you. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fiveofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "five of cups",
-     "cups",
-     "grief"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "41-six-of-cups",
-   "carta": "Six of Cups",
-   "archivo": "41-six-of-cups.mp4",
-   "cuando": "2026-10-26T19:00:00-04:00",
-   "instagram": {
-    "caption": "Do you remember who you were before the world told you who to be?\nSix of Cups: nostalgia and the inner child, memories that remind you who you are. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sixofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Who were you before the world told you? | Six of Cups tarot ☿ #shorts",
-    "descripcion": "Do you remember who you were before the world told you who to be?\nSix of Cups: nostalgia and the inner child, memories that remind you who you are. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sixofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "six of cups",
-     "cups",
-     "inner child"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "42-seven-of-cups",
-   "carta": "Seven of Cups",
-   "archivo": "42-seven-of-cups.mp4",
-   "cuando": "2026-10-27T01:00:00-04:00",
-   "instagram": {
-    "caption": "Seven dreams. Only one of them is real.\nSeven of Cups: choices and illusions, and choosing the one dream that's real. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sevenofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Seven dreams, only one is real | Seven of Cups tarot ☿ #shorts",
-    "descripcion": "Seven dreams. Only one of them is real.\nSeven of Cups: choices and illusions, and choosing the one dream that's real. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sevenofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "seven of cups",
-     "cups",
-     "choices"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "43-eight-of-cups",
-   "carta": "Eight of Cups",
-   "archivo": "43-eight-of-cups.mp4",
-   "cuando": "2026-10-27T07:00:00-04:00",
-   "instagram": {
-    "caption": "Sometimes the bravest thing is leaving something that's almost enough.\nEight of Cups: walking away from what no longer fulfills you, toward something deeper. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #eightofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "The bravest thing is leaving almost enough | Eight of Cups tarot ☿ #shorts",
-    "descripcion": "Sometimes the bravest thing is leaving something that's almost enough.\nEight of Cups: walking away from what no longer fulfills you, toward something deeper. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #eightofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "eight of cups",
-     "cups",
-     "moving on"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "44-nine-of-cups",
-   "carta": "Nine of Cups",
-   "archivo": "44-nine-of-cups.mp4",
-   "cuando": "2026-10-27T13:00:00-04:00",
-   "instagram": {
-    "caption": "What would you wish for, if you knew it would come true? Careful. It might.\nNine of Cups: the wish card. Contentment, and feeling that what you have is enough. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #nineofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "What would you wish for if it came true? | Nine of Cups tarot ☿ #shorts",
-    "descripcion": "What would you wish for, if you knew it would come true? Careful. It might.\nNine of Cups: the wish card. Contentment, and feeling that what you have is enough. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #nineofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "nine of cups",
-     "cups",
-     "wishes"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "45-ten-of-cups",
-   "carta": "Ten of Cups",
-   "archivo": "45-ten-of-cups.mp4",
-   "cuando": "2026-10-27T19:00:00-04:00",
-   "instagram": {
-    "caption": "Happiness doesn't always look like what you planned. Sometimes it looks like this.\nTen of Cups: family, harmony, and recognizing happiness that's already here. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #tenofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Happiness doesn't look like what you planned | Ten of Cups tarot ☿ #shorts",
-    "descripcion": "Happiness doesn't always look like what you planned. Sometimes it looks like this.\nTen of Cups: family, harmony, and recognizing happiness that's already here. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #tenofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "ten of cups",
-     "cups",
-     "family"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "46-page-of-cups",
-   "carta": "Page of Cups",
-   "archivo": "46-page-of-cups.mp4",
-   "cuando": "2026-10-28T01:00:00-04:00",
-   "instagram": {
-    "caption": "What would you do if your cup started talking to you? He listened.\nPage of Cups: creative messages from the heart that sound silly, until you listen. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #pageofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "What if your cup started talking to you? | Page of Cups tarot ☿ #shorts",
-    "descripcion": "What would you do if your cup started talking to you? He listened.\nPage of Cups: creative messages from the heart that sound silly, until you listen. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #pageofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "page of cups",
-     "cups",
-     "creativity"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "47-knight-of-cups",
-   "carta": "Knight of Cups",
-   "archivo": "47-knight-of-cups.mp4",
-   "cuando": "2026-10-28T07:00:00-04:00",
-   "instagram": {
-    "caption": "Everybody rushes toward what they want. This knight rides slowly. On purpose.\nKnight of Cups: romance and offers of the heart, carried with care, not in a rush. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #knightofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Everybody rushes; this knight rides slowly | Knight of Cups tarot ☿ #shorts",
-    "descripcion": "Everybody rushes toward what they want. This knight rides slowly. On purpose.\nKnight of Cups: romance and offers of the heart, carried with care, not in a rush. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #knightofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "knight of cups",
-     "cups",
-     "romance"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "48-queen-of-cups",
-   "carta": "Queen of Cups",
-   "archivo": "48-queen-of-cups.mp4",
-   "cuando": "2026-10-28T13:00:00-04:00",
-   "instagram": {
-    "caption": "She doesn't fix your problems. She does something better.\nQueen of Cups: compassion and intuition, and listening before fixing. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #queenofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "She doesn't fix your problems, she does better | Queen of Cups tarot ☿ #shorts",
-    "descripcion": "She doesn't fix your problems. She does something better.\nQueen of Cups: compassion and intuition, and listening before fixing. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #queenofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "queen of cups",
-     "cups",
-     "compassion"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "49-king-of-cups",
-   "carta": "King of Cups",
-   "archivo": "49-king-of-cups.mp4",
-   "cuando": "2026-10-28T19:00:00-04:00",
-   "instagram": {
-    "caption": "The sea around him is wild. So why is he so calm?\nKing of Cups: emotional balance and calm wisdom. Feel everything, don't let it steer. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #kingofcups #cups #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "The sea is wild, so why is he so calm? | King of Cups tarot ☿ #shorts",
-    "descripcion": "The sea around him is wild. So why is he so calm?\nKing of Cups: emotional balance and calm wisdom. Feel everything, don't let it steer. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #kingofcups #cups #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "king of cups",
-     "cups",
-     "balance"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "50-ace-of-swords",
-   "carta": "Ace of Swords",
-   "archivo": "50-ace-of-swords.mp4",
-   "cuando": "2026-10-29T01:00:00-04:00",
-   "instagram": {
-    "caption": "The truth doesn't always feel good. But it always feels clear.\nAce of Swords: clarity and truth, the breakthrough that cuts through confusion. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #aceofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "The truth always feels clear | Ace of Swords tarot ☿ #shorts",
-    "descripcion": "The truth doesn't always feel good. But it always feels clear.\nAce of Swords: clarity and truth, the breakthrough that cuts through confusion. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #aceofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "ace of swords",
-     "swords",
-     "clarity"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "51-two-of-swords",
-   "carta": "Two of Swords",
-   "archivo": "51-two-of-swords.mp4",
-   "cuando": "2026-10-29T07:00:00-04:00",
-   "instagram": {
-    "caption": "She's not blind. She chose the blindfold.\nTwo of Swords: a hard choice, and the decision we avoid by refusing to look. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #twoofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "She's not blind. She chose the blindfold | Two of Swords tarot ☿ #shorts",
-    "descripcion": "She's not blind. She chose the blindfold.\nTwo of Swords: a hard choice, and the decision we avoid by refusing to look. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #twoofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "two of swords",
-     "swords",
-     "decisions"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "52-three-of-swords",
-   "carta": "Three of Swords",
-   "archivo": "52-three-of-swords.mp4",
-   "cuando": "2026-10-29T13:00:00-04:00",
-   "instagram": {
-    "caption": "This is the card nobody wants. And one of the most honest in the deck.\nThree of Swords: heartbreak and grief, and pain you let yourself feel so it can move. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #threeofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "The card nobody wants, and the most honest | Three of Swords tarot ☿ #shorts",
-    "descripcion": "This is the card nobody wants. And one of the most honest in the deck.\nThree of Swords: heartbreak and grief, and pain you let yourself feel so it can move. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #threeofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "three of swords",
-     "swords",
-     "heartbreak"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "53-four-of-swords",
-   "carta": "Four of Swords",
-   "archivo": "53-four-of-swords.mp4",
-   "cuando": "2026-10-29T19:00:00-04:00",
-   "instagram": {
-    "caption": "Rest is not quitting. Rest is part of the fight.\nFour of Swords: rest and recovery, taken on purpose, before you break. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fourofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Rest is not quitting | Four of Swords tarot ☿ #shorts",
-    "descripcion": "Rest is not quitting. Rest is part of the fight.\nFour of Swords: rest and recovery, taken on purpose, before you break. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fourofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "four of swords",
-     "swords",
-     "rest"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "57-eight-of-swords",
-   "carta": "Eight of Swords",
-   "archivo": "57-eight-of-swords.mp4",
-   "cuando": "2026-10-30T19:00:00-04:00",
-   "instagram": {
-    "caption": "She thinks she's trapped. Look at her feet.\nEight of Swords: a trap made of beliefs, and a way out closer than you think. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #eightofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "She thinks she's trapped. Look at her feet | Eight of Swords tarot ☿ #shorts",
-    "descripcion": "She thinks she's trapped. Look at her feet.\nEight of Swords: a trap made of beliefs, and a way out closer than you think. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #eightofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "eight of swords",
-     "swords",
-     "freedom"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "54-five-of-swords",
-   "carta": "Five of Swords",
-   "archivo": "54-five-of-swords.mp4",
-   "cuando": "2026-10-30T01:00:00-04:00",
-   "instagram": {
-    "caption": "He won the argument. So why is he standing there alone?\nFive of Swords: conflict and pride, and the win that costs more than it's worth. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fiveofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "He won the argument, so why is he alone? | Five of Swords tarot ☿ #shorts",
-    "descripcion": "He won the argument. So why is he standing there alone?\nFive of Swords: conflict and pride, and the win that costs more than it's worth. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fiveofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "five of swords",
-     "swords",
-     "conflict"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "55-six-of-swords",
-   "carta": "Six of Swords",
-   "archivo": "55-six-of-swords.mp4",
-   "cuando": "2026-10-30T07:00:00-04:00",
-   "instagram": {
-    "caption": "You don't have to know where you're going. Only that you can't stay here.\nSix of Swords: transition and healing, moving through a hard time toward calmer water. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sixofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "You only have to know you can't stay | Six of Swords tarot ☿ #shorts",
-    "descripcion": "You don't have to know where you're going. Only that you can't stay here.\nSix of Swords: transition and healing, moving through a hard time toward calmer water. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sixofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "six of swords",
-     "swords",
-     "transition"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "56-seven-of-swords",
-   "carta": "Seven of Swords",
-   "archivo": "56-seven-of-swords.mp4",
-   "cuando": "2026-10-30T13:00:00-04:00",
-   "instagram": {
-    "caption": "He thinks nobody saw him. Look at his smile.\nSeven of Swords: strategy and secrets, and what shortcuts really cost. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #sevenofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "He thinks nobody saw him | Seven of Swords tarot ☿ #shorts",
-    "descripcion": "He thinks nobody saw him. Look at his smile.\nSeven of Swords: strategy and secrets, and what shortcuts really cost. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sevenofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "seven of swords",
-     "swords",
-     "honesty"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "58-nine-of-swords",
-   "carta": "Nine of Swords",
-   "archivo": "58-nine-of-swords.mp4",
-   "cuando": "2026-10-31T01:00:00-04:00",
-   "instagram": {
-    "caption": "Three in the morning. Every worry feels like the truth.\nNine of Swords: anxiety and sleepless worry, and fears that grow in the dark. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #nineofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "3 a.m. and every worry feels true | Nine of Swords tarot ☿ #shorts",
-    "descripcion": "Three in the morning. Every worry feels like the truth.\nNine of Swords: anxiety and sleepless worry, and fears that grow in the dark. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #nineofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "nine of swords",
-     "swords",
-     "anxiety"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "59-ten-of-swords",
-   "carta": "Ten of Swords",
-   "archivo": "59-ten-of-swords.mp4",
-   "cuando": "2026-10-31T07:00:00-04:00",
-   "instagram": {
-    "caption": "It's the darkest-looking card in the deck. Now look at the horizon.\nTen of Swords: rock bottom and painful endings, and the dawn that always follows. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #tenofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "The darkest card in the deck. Look at the horizon | Ten of Swords tarot ☿ #shorts",
-    "descripcion": "It's the darkest-looking card in the deck. Now look at the horizon.\nTen of Swords: rock bottom and painful endings, and the dawn that always follows. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #tenofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "ten of swords",
-     "swords",
-     "endings"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "60-page-of-swords",
-   "carta": "Page of Swords",
-   "archivo": "60-page-of-swords.mp4",
-   "cuando": "2026-10-31T13:00:00-04:00",
-   "instagram": {
-    "caption": "Why? Why? Why? Some people called her annoying. She called it curious.\nPage of Swords: curiosity and new ideas, and a sharp mind that keeps asking. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #pageofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "They called her annoying. She called it curious | Page of Swords tarot ☿ #shorts",
-    "descripcion": "Why? Why? Why? Some people called her annoying. She called it curious.\nPage of Swords: curiosity and new ideas, and a sharp mind that keeps asking. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #pageofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "page of swords",
-     "swords",
-     "curiosity"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "61-knight-of-swords",
-   "carta": "Knight of Swords",
-   "archivo": "61-knight-of-swords.mp4",
-   "cuando": "2026-10-31T19:00:00-04:00",
-   "instagram": {
-    "caption": "He's the fastest knight in the kingdom. That's exactly his problem.\nKnight of Swords: ambition and fast action, and drive that aims before it charges. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #knightofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "The fastest knight, and that's his problem | Knight of Swords tarot ☿ #shorts",
-    "descripcion": "He's the fastest knight in the kingdom. That's exactly his problem.\nKnight of Swords: ambition and fast action, and drive that aims before it charges. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #knightofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "knight of swords",
-     "swords",
-     "ambition"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "62-queen-of-swords",
-   "carta": "Queen of Swords",
-   "archivo": "62-queen-of-swords.mp4",
-   "cuando": "2026-11-01T01:00:00-04:00",
-   "instagram": {
-    "caption": "She's been hurt before. That's why she can see so clearly.\nQueen of Swords: clear thinking and honesty, offered with an open hand. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #queenofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "She's been hurt. That's why she sees clearly | Queen of Swords tarot ☿ #shorts",
-    "descripcion": "She's been hurt before. That's why she can see so clearly.\nQueen of Swords: clear thinking and honesty, offered with an open hand. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #queenofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "queen of swords",
-     "swords",
-     "honesty"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  },
-  {
-   "id": "63-king-of-swords",
-   "carta": "King of Swords",
-   "archivo": "63-king-of-swords.mp4",
-   "cuando": "2026-11-01T07:00:00-05:00",
-   "instagram": {
-    "caption": "Two people. One sword. And a decision nobody else could make fairly.\nKing of Swords: intellect and fairness, authority that decides with reason. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #kingofswords #swords #learntarot #minorarcana",
-    "publicado": null
-   },
-   "youtube": {
-    "titulo": "Two people, one sword, one fair decision | King of Swords tarot ☿ #shorts",
-    "descripcion": "Two people. One sword. And a decision nobody else could make fairly.\nKing of Swords: intellect and fairness, authority that decides with reason. ☿\n\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #kingofswords #swords #learntarot #minorarcana",
-    "etiquetas": [
-     "tarot",
-     "learn tarot",
-     "tarot for beginners",
-     "rider waite",
-     "minor arcana",
-     "tarot story",
-     "king of swords",
-     "swords",
-     "fairness"
-    ],
-    "publicado": null
-   },
-   "tiktok": {
-    "publicado": null
-   }
-  }
- ]
+  ]
 }
