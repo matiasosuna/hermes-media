@@ -468,7 +468,11 @@
       "cuando": "2026-10-19T09:00:00-04:00",
       "instagram": {
         "caption": "Why is this man hanging upside down, and so calm?\nThe Hanged Man looks scary to beginners. His story is about the pause that changes how you see everything. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thehangedman #letgo #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18130719704501963",
+          "permalink": "https://www.instagram.com/reel/DerVnS-ijfB/",
+          "fecha": "2026-10-19T13:13:58.213Z"
+        }
       },
       "youtube": {
         "titulo": "Why is he hanging upside down, and so calm? | The Hanged Man tarot ☿ #shorts",
@@ -483,10 +487,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "21NEhVUXUuw",
+          "url": "https://youtube.com/shorts/21NEhVUXUuw",
+          "fecha": "2026-10-19T13:14:01.046Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad6179af8ab1a796320aada",
+          "url": "https://tiktok.com/@hermestarot444/video/7698366643524717857",
+          "fecha": "2026-10-19T13:15:47.281Z"
+        }
       }
     },
     {
