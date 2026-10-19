@@ -39,7 +39,14 @@ const ig = await intentar(async () => {
     const v = Object.fromEntries((ins.data || []).map((d) => [d.name, d.values?.[0]?.value]));
     vids.push({ carta: i.carta, views: v.views, likes: m.like_count, coment: m.comments_count, guardados: v.saved, compart: v.shares });
   }
-  return { seguidores: perfil.followers_count, posts: perfil.media_count, vids };
+  // comentarios de los últimos 7 días (sin los nuestros) y cuántos pidieron "class"
+  let c7 = 0, clase7 = 0;
+  const media = (await (await fetch(`${G}/${env.HT_IG_USER_ID}/media?fields=id,comments_count&limit=25&access_token=${env.HT_PAGE_TOKEN}`)).json()).data || [];
+  for (const m of media.filter((x) => x.comments_count)) {
+    const cs = (await (await fetch(`${G}/${m.id}/comments?fields=text,username,timestamp&limit=100&access_token=${env.HT_PAGE_TOKEN}`)).json()).data || [];
+    for (const c of cs) if (c.username !== 'hermestarot444' && Date.parse(c.timestamp) > ahora - 7 * 864e5) { c7++; if (/\b(class|clase)\b/i.test(c.text || '')) clase7++; }
+  }
+  return { seguidores: perfil.followers_count, posts: perfil.media_count, vids, c7, clase7 };
 });
 
 // ---------- YouTube ----------
@@ -78,7 +85,8 @@ const web = await intentar(async () => {
 
 const tabla = (filas, cols) => { p(`| Carta | ${cols.map((c) => c[0]).join(' | ')} |`); p(`|---|${cols.map(() => '---:').join('|')}|`); for (const f of filas) p(`| ${f.carta} | ${cols.map((c) => n(f[c[1]])).join(' | ')} |`); };
 p(); p('## Instagram');
-if (ig.error) p(`⚠️ ${ig.error}`); else { p(`Seguidores **${n(ig.seguidores)}** · posts ${n(ig.posts)}`); p(); tabla(ig.vids, [['Views', 'views'], ['Likes', 'likes'], ['Coment.', 'coment'], ['Guardados', 'guardados'], ['Compart.', 'compart']]); }
+if (ig.error) p(`⚠️ ${ig.error}`); else { p(`Seguidores **${n(ig.seguidores)}** · posts ${n(ig.posts)}`);
+  p(`Comentarios 7 d **${n(ig.c7)}** · pidieron class ${n(ig.clase7)} · DM enviados ${web.clase?.dms ? n(web.clase.dms.d7) : '–'} (ver todos en hermestarot444.pages.dev/panel/)`); p(); tabla(ig.vids, [['Views', 'views'], ['Likes', 'likes'], ['Coment.', 'coment'], ['Guardados', 'guardados'], ['Compart.', 'compart']]); }
 p(); p('## YouTube');
 if (yt.error) p(`⚠️ ${yt.error}`); else { p(`Suscriptores **${n(yt.subs)}** · vistas del canal ${n(yt.vistas)}`); p(); tabla(yt.vids, [['Views', 'viewCount'], ['Likes', 'likeCount'], ['Coment.', 'commentCount']]); }
 p(); p('## TikTok');
