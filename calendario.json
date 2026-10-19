@@ -386,7 +386,11 @@
       "cuando": "2026-10-19T01:00:00-04:00",
       "instagram": {
         "caption": "What keeps repeating in your life?\nA potter, a turning wheel, and the lesson that comes back until you learn it. The Wheel of Fortune isn't about luck. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #wheeloffortune #tarotreading #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17934753948146810",
+          "permalink": "https://www.instagram.com/reel/DeqeYH9Eadr/",
+          "fecha": "2026-10-19T05:10:58.385Z"
+        }
       },
       "youtube": {
         "titulo": "What keeps repeating in your life? | Wheel of Fortune tarot ☿ #shorts",
@@ -401,10 +405,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "gNeOHHpaJ6Q",
+          "url": "https://youtube.com/shorts/gNeOHHpaJ6Q",
+          "fecha": "2026-10-19T05:11:02.189Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad5a667ae173d6e003184d6",
+          "url": "https://tiktok.com/@hermestarot444/video/7698242157391432993",
+          "fecha": "2026-10-19T05:12:47.150Z"
+        }
       }
     },
     {
