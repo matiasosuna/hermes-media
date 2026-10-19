@@ -509,7 +509,11 @@
       "cuando": "2026-10-19T19:00:00-04:00",
       "instagram": {
         "caption": "Pulled the Death card? Breathe. It doesn't mean what you think.\nA king, a garden of dry roses, and a rider on a white horse. The real story of card XIII. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #deathcard #newbeginnings #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18135431527635847",
+          "permalink": "https://www.instagram.com/reel/DesZiOmFbXz/",
+          "fecha": "2026-10-19T23:07:22.969Z"
+        }
       },
       "youtube": {
         "titulo": "Pulled the Death card? It doesn't mean what you think ☿ Tarot #shorts",
@@ -524,10 +528,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "ZvZKhDBrIXc",
+          "url": "https://youtube.com/shorts/ZvZKhDBrIXc",
+          "fecha": "2026-10-19T23:07:28.583Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad6a2b2cba41b01404f42eb",
+          "url": "https://tiktok.com/@hermestarot444/video/7698519525070785824",
+          "fecha": "2026-10-19T23:09:14.067Z"
+        }
       },
       "v2": {
         "fecha": "2026-10-19T19:36:58Z",
