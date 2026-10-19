@@ -28,6 +28,8 @@ p(`| Atrasados/fallados | ${fallas.length ? '⚠️ ' + fallas.map((i) => `${i.c
 
 // ---------- Instagram ----------
 const G = 'https://graph.facebook.com/v21.0';
+// igual que tarot-web/comentarios: "tarot"/"class" en un comentario corto (≤ 3 palabras)
+const pide = (t = '') => { const w = String(t).toLowerCase().replace(/[^\p{L}\s]/gu, ' ').split(/\s+/).filter(Boolean); return w.length > 0 && w.length <= 3 && w.some((x) => ['tarot', 'class', 'clase'].includes(x)); };
 const ig = await intentar(async () => {
   const perfil = await (await fetch(`${G}/${env.HT_IG_USER_ID}?fields=followers_count,media_count&access_token=${env.HT_PAGE_TOKEN}`)).json();
   if (perfil.error) throw new Error(perfil.error.message);
@@ -44,7 +46,7 @@ const ig = await intentar(async () => {
   const media = (await (await fetch(`${G}/${env.HT_IG_USER_ID}/media?fields=id,comments_count&limit=25&access_token=${env.HT_PAGE_TOKEN}`)).json()).data || [];
   for (const m of media.filter((x) => x.comments_count)) {
     const cs = (await (await fetch(`${G}/${m.id}/comments?fields=text,username,timestamp&limit=100&access_token=${env.HT_PAGE_TOKEN}`)).json()).data || [];
-    for (const c of cs) if (c.username !== 'hermestarot444' && Date.parse(c.timestamp) > ahora - 7 * 864e5) { c7++; if (/\b(class|clase)\b/i.test(c.text || '')) clase7++; }
+    for (const c of cs) if (c.username !== 'hermestarot444' && Date.parse(c.timestamp) > ahora - 7 * 864e5) { c7++; if (pide(c.text)) clase7++; }
   }
   return { seguidores: perfil.followers_count, posts: perfil.media_count, vids, c7, clase7 };
 });
@@ -86,7 +88,7 @@ const web = await intentar(async () => {
 const tabla = (filas, cols) => { p(`| Carta | ${cols.map((c) => c[0]).join(' | ')} |`); p(`|---|${cols.map(() => '---:').join('|')}|`); for (const f of filas) p(`| ${f.carta} | ${cols.map((c) => n(f[c[1]])).join(' | ')} |`); };
 p(); p('## Instagram');
 if (ig.error) p(`⚠️ ${ig.error}`); else { p(`Seguidores **${n(ig.seguidores)}** · posts ${n(ig.posts)}`);
-  p(`Comentarios 7 d **${n(ig.c7)}** · pidieron class ${n(ig.clase7)} · DM enviados ${web.clase?.dms ? n(web.clase.dms.d7) : '–'} (ver todos en hermestarot444.pages.dev/panel/)`); p(); tabla(ig.vids, [['Views', 'views'], ['Likes', 'likes'], ['Coment.', 'coment'], ['Guardados', 'guardados'], ['Compart.', 'compart']]); }
+  p(`Comentarios 7 d **${n(ig.c7)}** · pidieron el link ${n(ig.clase7)} · DM enviados ${web.clase?.dms ? n(web.clase.dms.d7) : '–'} (ver todos en hermestarot444.pages.dev/panel/)`); p(); tabla(ig.vids, [['Views', 'views'], ['Likes', 'likes'], ['Coment.', 'coment'], ['Guardados', 'guardados'], ['Compart.', 'compart']]); }
 p(); p('## YouTube');
 if (yt.error) p(`⚠️ ${yt.error}`); else { p(`Suscriptores **${n(yt.subs)}** · vistas del canal ${n(yt.vistas)}`); p(); tabla(yt.vids, [['Views', 'viewCount'], ['Likes', 'likeCount'], ['Coment.', 'commentCount']]); }
 p(); p('## TikTok');
