@@ -38,6 +38,8 @@ export function siguiente(cal, plataforma, ahora = Date.now()) {
   const item = cal.items.filter((i) => !i[plataforma]?.publicado).sort((a, b) => Date.parse(a.cuando) - Date.parse(b.cuando))[0];
   if (!item) return { item: null, motivo: 'no queda nada pendiente' };
   if (Date.parse(item.cuando) > ahora) return { item: null, proximo: item, motivo: `el próximo es ${item.id} (${item.cuando})` };
+  // con "requiere_v2": nada sale sin el video rehecho con el inicio nuevo (lo marca modal_render.py::preparar)
+  if (cal.requiere_v2 && !item.v2) return { item: null, proximo: item, motivo: `${item.id} todavía no tiene el video con el inicio nuevo (v2)` };
   if (ahora - ultimo < gap) return { item: null, proximo: item, motivo: `espera ${cal.separacion_minima_horas} h desde el último post` };
   return { item };
 }
