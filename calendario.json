@@ -427,7 +427,11 @@
       "cuando": "2026-10-19T07:00:00-04:00",
       "instagram": {
         "caption": "\"Before you judge me, weigh what you did.\"\nThe judge who had to put herself on the scales. Justice, card XI, told as a story. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #justicetarot #truth #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18118219841517596",
+          "permalink": "https://www.instagram.com/reel/DerGop2FOFq/",
+          "fecha": "2026-10-19T11:02:51.837Z"
+        }
       },
       "youtube": {
         "titulo": "\"Before you judge me, weigh what you did\" | Justice tarot ☿ #shorts",
@@ -442,10 +446,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "1Y8SUjeATVI",
+          "url": "https://youtube.com/shorts/1Y8SUjeATVI",
+          "fecha": "2026-10-19T11:02:55.806Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad5f8e138bcdab6ee4feb60",
+          "url": "https://tiktok.com/@hermestarot444/video/7698332844719967520",
+          "fecha": "2026-10-19T11:04:40.998Z"
+        }
       }
     },
     {
