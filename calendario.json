@@ -640,7 +640,8 @@
       },
       "tiktok": {
         "publicado": null
-      }
+      },
+      "v2_pausado": true
     },
     {
       "id": "17-star",
@@ -668,7 +669,8 @@
       },
       "tiktok": {
         "publicado": null
-      }
+      },
+      "v2_pausado": true
     },
     {
       "id": "18-moon",
@@ -696,7 +698,8 @@
       },
       "tiktok": {
         "publicado": null
-      }
+      },
+      "v2_pausado": true
     },
     {
       "id": "19-sun",
@@ -724,7 +727,8 @@
       },
       "tiktok": {
         "publicado": null
-      }
+      },
+      "v2_pausado": true
     },
     {
       "id": "20-judgement",
@@ -752,7 +756,8 @@
       },
       "tiktok": {
         "publicado": null
-      }
+      },
+      "v2_pausado": true
     },
     {
       "id": "21-world",
@@ -780,7 +785,8 @@
       },
       "tiktok": {
         "publicado": null
-      }
+      },
+      "v2_pausado": true
     },
     {
       "id": "22-ace-of-wands",
