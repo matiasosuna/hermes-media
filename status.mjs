@@ -87,7 +87,11 @@ const web = await intentar(async () => {
 
 const tabla = (filas, cols) => { p(`| Carta | ${cols.map((c) => c[0]).join(' | ')} |`); p(`|---|${cols.map(() => '---:').join('|')}|`); for (const f of filas) p(`| ${f.carta} | ${cols.map((c) => n(f[c[1]])).join(' | ')} |`); };
 p(); p('## Instagram');
+// metas de la bio (300 ya tachado): avisar cuando se cruza la próxima para tacharla
+const METAS = [300, 500, 1000, 5000, 10000, 100000];
 if (ig.error) p(`⚠️ ${ig.error}`); else { p(`Seguidores **${n(ig.seguidores)}** · posts ${n(ig.posts)}`);
+  const cruzadas = METAS.filter((m) => ig.seguidores >= m);
+  p(`Metas de la bio: ${METAS.map((m) => (ig.seguidores >= m ? `~~${n(m)}~~` : n(m))).join(' · ')}${cruzadas.at(-1) > 300 ? ` — ⚠️ tachar ${n(cruzadas.at(-1))} en la bio si todavía no está` : ''}`);
   p(`Comentarios 7 d **${n(ig.c7)}** · pidieron el link ${n(ig.clase7)} · DM enviados ${web.clase?.dms ? n(web.clase.dms.d7) : '–'} (ver todos en hermestarot444.pages.dev/panel/)`); p(); tabla(ig.vids, [['Views', 'views'], ['Likes', 'likes'], ['Coment.', 'coment'], ['Guardados', 'guardados'], ['Compart.', 'compart']]); }
 p(); p('## YouTube');
 if (yt.error) p(`⚠️ ${yt.error}`); else { p(`Suscriptores **${n(yt.subs)}** · vistas del canal ${n(yt.vistas)}`); p(); tabla(yt.vids, [['Views', 'viewCount'], ['Likes', 'likeCount'], ['Coment.', 'commentCount']]); }
