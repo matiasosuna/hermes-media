@@ -601,7 +601,11 @@
       "cuando": "2026-10-20T19:00:00-04:00",
       "instagram": {
         "caption": "Look closely at the chains on The Devil card.\nThey are loose. The story of the couple in the cave, and the habits that hold you only while you hold them. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thedevil #breakfree #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18029334767858183",
+          "permalink": "https://www.instagram.com/reel/Deu-qfpiiZc/",
+          "fecha": "2026-10-20T23:10:26.875Z"
+        }
       },
       "youtube": {
         "titulo": "Look closely at the chains on The Devil card ☿ Tarot story #shorts",
@@ -616,10 +620,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "TigKWvjH_WA",
+          "url": "https://youtube.com/shorts/TigKWvjH_WA",
+          "fecha": "2026-10-20T23:10:31.982Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad7f4e9c8c16a2bbdb5156e",
+          "url": "https://tiktok.com/@hermestarot444/video/7698891421239086369",
+          "fecha": "2026-10-20T23:12:17.845Z"
+        }
       },
       "v2_pausado": {
         "fecha": "2026-10-20T08:26:08Z",
