@@ -555,7 +555,11 @@
       "cuando": "2026-10-20T09:00:00-04:00",
       "instagram": {
         "caption": "All or nothing, every single week?\nAn angel pours water between two cups and never spills a drop. Temperance, and your own right measure. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #temperance #balance #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18396638158205239",
+          "permalink": "https://www.instagram.com/reel/Det5w_SlAnl/",
+          "fecha": "2026-10-20T13:08:21.600Z"
+        }
       },
       "youtube": {
         "titulo": "All or nothing, every week? | Temperance tarot story ☿ #shorts",
@@ -570,10 +574,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "lfUVsDXizx4",
+          "url": "https://youtube.com/shorts/lfUVsDXizx4",
+          "fecha": "2026-10-20T13:08:25.044Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad767ca892e8621b52bc3a4",
+          "url": "https://tiktok.com/@hermestarot444/video/7698736277558021408",
+          "fecha": "2026-10-20T13:12:21.134Z"
+        }
       },
       "v2": {
         "fecha": "2026-10-20T09:13:25Z",
