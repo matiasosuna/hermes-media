@@ -719,7 +719,12 @@
       "tiktok": {
         "publicado": null
       },
-      "v2_pausado": true
+      "v2_pausado": true,
+      "v2": {
+        "fecha": "2026-10-22T05:54:22Z",
+        "17-star.mp4": "e807b0f18039",
+        "tiktok-17-star.mp4": "a24c2f5860c8"
+      }
     },
     {
       "id": "18-moon",
