@@ -714,10 +714,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "06at97qNmoI",
+          "url": "https://youtube.com/shorts/06at97qNmoI",
+          "fecha": "2026-10-22T06:00:01.033Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ad9a6631093844846e271af",
+          "url": "https://tiktok.com/@hermestarot444/video/7699368028697365793",
+          "fecha": "2026-10-22T06:03:49.457Z"
+        }
       },
       "v2_pausado": true,
       "v2": {
