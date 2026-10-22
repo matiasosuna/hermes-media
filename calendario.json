@@ -800,7 +800,12 @@
       "tiktok": {
         "publicado": null
       },
-      "v2_pausado": true
+      "v2_pausado": true,
+      "v2": {
+        "fecha": "2026-10-22T10:12:50Z",
+        "19-sun.mp4": "1e63aaf31870",
+        "tiktok-19-sun.mp4": "d9c324b31d96"
+      }
     },
     {
       "id": "20-judgement",
