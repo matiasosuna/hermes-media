@@ -793,7 +793,11 @@
       "cuando": "2026-10-22T19:00:00-04:00",
       "instagram": {
         "caption": "When did you last laugh out loud, like a kid?\nA careful man opens the gate in his garden wall. The Sun is about more than happiness. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #thesun #joy #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18235031548323472",
+          "permalink": "https://www.instagram.com/reel/De0HQlBDhI7/",
+          "fecha": "2026-10-22T23:01:33.283Z"
+        }
       },
       "youtube": {
         "titulo": "When did you last laugh like a kid? | The Sun tarot story ☿ #shorts",
@@ -808,10 +812,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "m5dquUU3Mr4",
+          "url": "https://youtube.com/shorts/m5dquUU3Mr4",
+          "fecha": "2026-10-22T23:01:36.445Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ada95d2cc1b7cdc08bdab04",
+          "url": "https://tiktok.com/@hermestarot444/video/7699631422662839585",
+          "fecha": "2026-10-22T23:04:10.090Z"
+        }
       },
       "v2_pausado": true,
       "v2": {
