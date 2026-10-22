@@ -746,7 +746,11 @@
       "cuando": "2026-10-22T09:00:00-04:00",
       "instagram": {
         "caption": "A dog and a wolf howl at the same moon. Both live inside you.\nThe Moon for beginners: the fears that shape your choices when you can't see clearly. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #themoon #intuition #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17881114812630137",
+          "permalink": "https://www.instagram.com/reel/DezD95Fjn13/",
+          "fecha": "2026-10-22T13:13:31.668Z"
+        }
       },
       "youtube": {
         "titulo": "A dog and a wolf howl at the same moon | The Moon tarot ☿ #shorts",
@@ -761,10 +765,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "LAbDlCuGeqI",
+          "url": "https://youtube.com/shorts/LAbDlCuGeqI",
+          "fecha": "2026-10-22T13:13:35.526Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ada0c001cc831fdc3bca1ff",
+          "url": "https://tiktok.com/@hermestarot444/video/7699479778306362656",
+          "fecha": "2026-10-22T13:17:21.541Z"
+        }
       },
       "v2_pausado": true,
       "v2": {
