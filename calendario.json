@@ -840,7 +840,11 @@
       "cuando": "2026-10-23T05:50:00-04:00",
       "instagram": {
         "caption": "What have you been answering with \"not yet\" for years?\nA woman, a trumpet only she could hear, and boxes full of old dreams. Judgement, card XX. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #judgement #wakeupcall #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17964097968230144",
+          "permalink": "https://www.instagram.com/reel/De1SYC4lDF2/",
+          "fecha": "2026-10-23T09:58:20.776Z"
+        }
       },
       "youtube": {
         "titulo": "What have you been answering with \"not yet\"? | Judgement tarot ☿ #shorts",
@@ -855,10 +859,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "RHr5tAP2Z70",
+          "url": "https://youtube.com/shorts/RHr5tAP2Z70",
+          "fecha": "2026-10-23T09:58:23.454Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6adb2fc0da167f502687e9e0",
+          "url": "https://tiktok.com/@hermestarot444/video/7699800543442586912",
+          "fecha": "2026-10-23T10:00:08.871Z"
+        }
       },
       "v2_pausado": true,
       "v2": {
