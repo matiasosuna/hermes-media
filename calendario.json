@@ -907,7 +907,12 @@
       "tiktok": {
         "publicado": null
       },
-      "v2_pausado": true
+      "v2_pausado": true,
+      "v2": {
+        "fecha": "2026-10-23T10:14:12Z",
+        "21-world.mp4": "f5c2e4efd91b",
+        "tiktok-21-world.mp4": "cbad25f60773"
+      }
     },
     {
       "id": "22-ace-of-wands",
