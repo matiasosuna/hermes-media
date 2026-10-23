@@ -887,7 +887,11 @@
       "cuando": "2026-10-23T19:00:00-04:00",
       "instagram": {
         "caption": "The last card of the Major Arcana is a dancer who finally stops to look back.\nThe World: finishing a chapter, and letting yourself celebrate it. The end of the Fool's journey. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #theworld #completion #learntarot #majorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17901161421386773",
+          "permalink": "https://www.instagram.com/reel/De2sQ-4Coms/",
+          "fecha": "2026-10-23T23:03:24.005Z"
+        }
       },
       "youtube": {
         "titulo": "The last tarot card: a dancer who stops to look back | The World ☿ #shorts",
@@ -902,10 +906,19 @@
           "major arcana",
           "tarot story"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "Wv2hTWedk6A",
+          "url": "https://youtube.com/shorts/Wv2hTWedk6A",
+          "fecha": "2026-10-23T23:03:27.977Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6adbe7c13d5b27036b568c87",
+          "url": "https://tiktok.com/@hermestarot444/video/7700002853556882721",
+          "fecha": "2026-10-23T23:05:13.545Z"
+        }
       },
       "v2_pausado": true,
       "v2": {
