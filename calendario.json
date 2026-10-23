@@ -4,7 +4,7 @@
   "zona": "America/New_York",
   "release": "videos",
   "canal_youtube": "UC3J5gCPR3fWBIXEKcUQk9Qw",
-  "separacion_minima_horas": 0.5,
+  "separacion_minima_horas": 20,
   "items": [
     {
       "id": "00-fool",
