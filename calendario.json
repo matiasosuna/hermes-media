@@ -934,7 +934,11 @@
       "cuando": "2026-10-24T09:00:00-04:00",
       "instagram": {
         "caption": "Most people think the Ace of Wands is about waiting for the right moment. It isn't.\nAce of Wands: the spark of a new beginning, and taking it while it's still warm. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #aceofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18059704682558566",
+          "permalink": "https://www.instagram.com/reel/De4M343kr_E/",
+          "fecha": "2026-10-24T13:07:34.382Z"
+        }
       },
       "youtube": {
         "titulo": "One hand, one branch, one chance | Ace of Wands tarot ☿ #shorts",
@@ -950,10 +954,19 @@
           "wands",
           "new beginnings"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "B5LkmClnsSQ",
+          "url": "https://youtube.com/shorts/B5LkmClnsSQ",
+          "fecha": "2026-10-24T13:07:37.817Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6adcad9a3d5b27036b85f105",
+          "url": "https://tiktok.com/@hermestarot444/video/7700220414793927969",
+          "fecha": "2026-10-24T13:09:22.898Z"
+        }
       },
       "v2": {
         "fecha": "2026-10-24T05:18:57Z",
