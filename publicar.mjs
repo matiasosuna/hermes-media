@@ -120,6 +120,8 @@ async function publicarIG(item, guardar) {
 
 // ── Historia de IG con cada reel nuevo: primeros 15 s + "NEW CARD ON MY PROFILE" / "Reply and tell me what you felt"
 // (historia.sh). Solo para reels publicados hace menos de 12 h; se arma en el runner, se sube al release y se publica.
+// APAGADO 2026-10-24: Matías quiere "compartir el reel en historia" (botón de la app), no subir un video nuevo; la API no lo permite.
+export const HISTORIA_ACTIVA = false;
 export const HISTORIA_HORAS = 12, HISTORIA_DESDE = '2026-10-24T11:00:00Z'; // reels anteriores no llevan historia
 export const pideHistoria = (item, ahora = Date.now()) => {
   const pub = item.instagram?.publicado;
@@ -323,7 +325,7 @@ async function publicar() {
       log(`${p}: ❌ ${item.id}: ${e.message} (se reintenta en la próxima corrida)`);
     }
   }
-  for (const item of cal.items.filter((i) => pideHistoria(i))) {
+  for (const item of cal.items.filter((i) => HISTORIA_ACTIVA && pideHistoria(i))) {
     try {
       item.instagram.historia = await publicarHistoria(item, guardar);
       guardar();
