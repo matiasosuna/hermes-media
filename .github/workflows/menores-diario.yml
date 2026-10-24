@@ -2,7 +2,7 @@
 # gratis de Gemini (se renueva 00:00 hora del Pacífico): Modal hace escenas + revisión + render + calendario.
 name: menores-diario
 on:
-  schedule: [{ cron: '30 8 * * *' }]
+  # sin cron desde 2026-10-24: nada por adelantado (las escenas se hacen cuando la carta se acerca)
   workflow_dispatch:
     inputs:
       tanda: { description: 'cuántas cartas', default: '6' }
