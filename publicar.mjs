@@ -9,7 +9,8 @@
 //   node publicar.mjs --seguir             → ¿la cadena del workflow sigue? (no si todo está publicado o "pausado": true)
 // Secretos (variables de entorno): HT_PAGE_TOKEN, HT_IG_USER_ID, HT_YT_CLIENT_ID, HT_YT_CLIENT_SECRET, HT_YT_REFRESH_TOKEN,
 // BUFFER_API_KEY
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 
 export const REPO = process.env.GITHUB_REPOSITORY || 'matiasosuna/hermes-media';
@@ -115,6 +116,38 @@ async function publicarIG(item, guardar) {
     if (m) return { id: m.id, permalink: m.permalink, fecha: new Date().toISOString() };
     throw e;
   }
+}
+
+// ── Historia de IG con cada reel nuevo: primeros 15 s + "NEW CARD ON MY PROFILE" / "Reply and tell me what you felt"
+// (historia.sh). Solo para reels publicados hace menos de 12 h; se arma en el runner, se sube al release y se publica.
+export const HISTORIA_HORAS = 12, HISTORIA_DESDE = '2026-10-24T11:00:00Z'; // reels anteriores no llevan historia
+export const pideHistoria = (item, ahora = Date.now()) => {
+  const pub = item.instagram?.publicado;
+  if (!pub || item.instagram.historia) return false;
+  const t = Date.parse(pub.fecha);
+  return t >= Date.parse(HISTORIA_DESDE) && ahora - t < HISTORIA_HORAS * 3600e3;
+};
+async function publicarHistoria(item, guardar) {
+  let cont = item.instagram.historia_contenedor;
+  if (!cont || Date.now() - Date.parse(cont.creado) > 20 * 3600e3) {
+    const arch = `historia-${item.id}.mp4`;
+    if (!existsSync(arch)) {
+      const r = await fetch(assetUrl(item.archivo));
+      if (!r.ok) throw new Error(`no pude bajar ${item.archivo} (${r.status})`);
+      writeFileSync('reel.mp4', Buffer.from(await r.arrayBuffer()));
+      execFileSync('bash', ['historia.sh', 'reel.mp4', arch], { stdio: 'inherit' });
+    }
+    execFileSync('gh', ['release', 'upload', RELEASE, arch, '--clobber', '-R', REPO], { stdio: 'inherit' });
+    await verificarAsset(assetUrl(arch));
+    const c = await g('POST', `/${env.HT_IG_USER_ID}/media`, { media_type: 'STORIES', video_url: assetUrl(arch) });
+    cont = item.instagram.historia_contenedor = { id: c.id, creado: new Date().toISOString() };
+    guardar();
+  }
+  try { await esperarContenedor(cont.id); }
+  catch (e) { if (/ERROR|EXPIRED/.test(e.message)) { delete item.instagram.historia_contenedor; guardar(); } throw e; }
+  const pub = await g('POST', `/${env.HT_IG_USER_ID}/media_publish`, { creation_id: cont.id });
+  delete item.instagram.historia_contenedor;
+  return { id: pub.id, fecha: new Date().toISOString() };
 }
 
 // ── YouTube (cliente OAuth propio de "hermes-tarot-444", en producción: el refresh token no vence)
@@ -288,6 +321,17 @@ async function publicar() {
       fallas++;
       guardar();
       log(`${p}: ❌ ${item.id}: ${e.message} (se reintenta en la próxima corrida)`);
+    }
+  }
+  for (const item of cal.items.filter((i) => pideHistoria(i))) {
+    try {
+      item.instagram.historia = await publicarHistoria(item, guardar);
+      guardar();
+      log(`historia: ✅ ${item.id}`);
+    } catch (e) {
+      fallas++;
+      guardar();
+      log(`historia: ❌ ${item.id}: ${e.message} (se reintenta en la próxima corrida)`);
     }
   }
   if (fallas) process.exitCode = 1;
