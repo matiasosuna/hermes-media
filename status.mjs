@@ -85,7 +85,24 @@ const web = await intentar(async () => {
   return r.json();
 });
 
-const tabla = (filas, cols) => { p(`| Carta | ${cols.map((c) => c[0]).join(' | ')} |`); p(`|---|${cols.map(() => '---:').join('|')}|`); for (const f of filas) p(`| ${f.carta} | ${cols.map((c) => n(f[c[1]])).join(' | ')} |`); };
+// historias activas (la API solo da las de las últimas 24 h); métricas de a una para que una que no aplica no tire las otras
+const HIST_MET = [['Views', 'views'], ['Alcance', 'reach'], ['Respuestas', 'replies'], ['Compart.', 'shares'], ['Visitas perfil', 'profile_visits'], ['Seguidores', 'follows']];
+const hist = await intentar(async () => {
+  const r = await (await fetch(`${G}/${env.HT_IG_USER_ID}/stories?fields=id,media_type,timestamp&access_token=${env.HT_PAGE_TOKEN}`)).json();
+  if (r.error) throw new Error(r.error.message);
+  const filas = [];
+  for (const h of r.data || []) {
+    const f = { carta: `${ny(h.timestamp)} · ${h.media_type === 'VIDEO' ? 'video' : 'imagen'}` };
+    for (const [, k] of HIST_MET) {
+      const ins = await (await fetch(`${G}/${h.id}/insights?metric=${k}&access_token=${env.HT_PAGE_TOKEN}`)).json();
+      f[k] = ins.data?.[0]?.values?.[0]?.value ?? ins.data?.[0]?.total_value?.value;
+    }
+    filas.push(f);
+  }
+  return filas.sort((a, b) => a.carta.localeCompare(b.carta));
+});
+
+const tabla = (filas, cols, primera = 'Carta') => { p(`| ${primera} | ${cols.map((c) => c[0]).join(' | ')} |`); p(`|---|${cols.map(() => '---:').join('|')}|`); for (const f of filas) p(`| ${f.carta} | ${cols.map((c) => n(f[c[1]])).join(' | ')} |`); };
 p(); p('## Instagram');
 // metas de la bio (300 ya tachado): avisar cuando se cruza la próxima para tacharla
 const METAS = [300, 500, 1000, 5000, 10000, 100000];
@@ -93,6 +110,8 @@ if (ig.error) p(`⚠️ ${ig.error}`); else { p(`Seguidores **${n(ig.seguidores)
   const cruzadas = METAS.filter((m) => ig.seguidores >= m);
   p(`Metas de la bio: ${METAS.map((m) => (ig.seguidores >= m ? `~~${n(m)}~~` : n(m))).join(' · ')}${cruzadas.at(-1) > 300 ? ` — ⚠️ tachar ${n(cruzadas.at(-1))} en la bio si todavía no está` : ''}`);
   p(`Comentarios 7 d **${n(ig.c7)}** · pidieron el link ${n(ig.clase7)} · DM enviados ${web.clase?.dms ? n(web.clase.dms.d7) : '–'} (ver todos en hermestarot444.pages.dev/panel/)`); p(); tabla(ig.vids, [['Views', 'views'], ['Likes', 'likes'], ['Coment.', 'coment'], ['Guardados', 'guardados'], ['Compart.', 'compart']]); }
+p(); p('### Historias (últimas 24 h)');
+if (hist.error) p(`⚠️ ${hist.error}`); else if (!hist.length) p('Ninguna activa.'); else tabla(hist, HIST_MET, 'Subida (NY)');
 p(); p('## YouTube');
 if (yt.error) p(`⚠️ ${yt.error}`); else { p(`Suscriptores **${n(yt.subs)}** · vistas del canal ${n(yt.vistas)}`); p(); tabla(yt.vids, [['Views', 'viewCount'], ['Likes', 'likeCount'], ['Coment.', 'commentCount']]); }
 p(); p('## TikTok');
