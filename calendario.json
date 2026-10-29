@@ -1,5 +1,5 @@
 {
-  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' (instagram, youtube, tiktok) lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas.",
+  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' (instagram, youtube, tiktok) lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas. 'pedir_status': true dispara el status (con comentarios sin responder) en la próxima corrida y se borra solo.",
   "pausado": false,
   "zona": "America/New_York",
   "release": "videos",
@@ -2205,5 +2205,6 @@
       }
     }
   ],
-  "requiere_v2": true
+  "requiere_v2": true,
+  "pedir_status": true
 }
