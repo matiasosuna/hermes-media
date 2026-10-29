@@ -2205,6 +2205,5 @@
       }
     }
   ],
-  "requiere_v2": true,
-  "pedir_status": true
+  "requiere_v2": true
 }
