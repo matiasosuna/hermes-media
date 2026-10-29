@@ -2,6 +2,7 @@
 // Calendario (qué salió y hasta cuándo hay contenido), métricas por red (IG, YouTube, TikTok) y de la web (/api/panel).
 // Uso: node status.mjs > STATUS.md   (env: HT_PAGE_TOKEN, HT_IG_USER_ID, HT_YT_*, HT_STATS_TOKEN)
 import { readFileSync } from 'node:fs';
+import { comentarios } from './comentarios.mjs';
 
 const env = process.env;
 const cal = JSON.parse(readFileSync(new URL('./calendario.json', import.meta.url), 'utf8'));
@@ -152,4 +153,6 @@ p(`| GitHub Actions privados (2.000 min) | ${gh.error ? '⚠️ ' + gh.error : `
 p('| GitHub Actions públicos | ilimitado (publicador y status) |');
 p('| Gemini (proyecto Hermes Tarot) | gratis, cupo diario propio |');
 p('| Cloudflare (web) | plan USD 5/mes |');
+p();
+try { for (const l of await comentarios()) p(l); } catch (e) { p(`⚠️ comentarios: ${String(e.message || e).slice(0, 120)}`); }
 console.log(out.join('\n'));
