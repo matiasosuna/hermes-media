@@ -347,13 +347,22 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     if (env.GITHUB_OUTPUT) writeFileSync(env.GITHUB_OUTPUT, `seguir=${sigue}\n`, { flag: 'a' });
   };
   // Pedido a mano: "pedir_status": true en calendario.json → dispara el workflow status (STATUS.md con comentarios sin responder)
-  const pedidos = () => { try {
+  // "responder": [{ id, texto }] en calendario.json → responde esos comentarios de IG y los saca de la lista (3 intentos)
+  const pedidos = async () => { try {
     const { cal, guardar } = cargar();
-    if (!cal.pedir_status || !env.GITHUB_ACTIONS) return;
-    execFileSync('gh', ['workflow', 'run', 'status', '-R', REPO, '--ref', 'main'], { stdio: 'inherit' });
-    delete cal.pedir_status; guardar(); log('status pedido a mano: disparado');
-  } catch (e) { log(`⚠️ pedido de status: ${e.message}`); } };
-  if (!a.length) pedidos();
+    if (cal.pedir_status && env.GITHUB_ACTIONS) {
+      execFileSync('gh', ['workflow', 'run', 'status', '-R', REPO, '--ref', 'main'], { stdio: 'inherit' });
+      delete cal.pedir_status; guardar(); log('status pedido a mano: disparado');
+    }
+    if (!cal.responder?.length) return;
+    const quedan = [];
+    for (const r of cal.responder) {
+      try { await g('POST', `/${r.id}/replies`, { message: r.texto }); log(`respondido ${r.id}`); await sleep(1500); }
+      catch (e) { r.intentos = (r.intentos || 0) + 1; r.error = e.message; log(`⚠️ respuesta ${r.id}: ${e.message}`); if (r.intentos < 3) quedan.push(r); }
+    }
+    if (quedan.length) cal.responder = quedan; else delete cal.responder;
+    guardar();
+  } catch (e) { log(`⚠️ pedidos: ${e.message}`); } };
   const run = a.includes('--dry-run') ? dryRun : a.includes('--contenedor-prueba') ? contenedorPrueba : a.includes('--seguir') ? seguir : publicar;
-  run().catch((e) => { log(`❌ ${e.message}`); process.exitCode = 1; });
+  (a.length ? Promise.resolve() : pedidos()).then(run).catch((e) => { log(`❌ ${e.message}`); process.exitCode = 1; });
 }

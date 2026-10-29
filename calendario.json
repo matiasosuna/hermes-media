@@ -1,5 +1,5 @@
 {
-  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' (instagram, youtube, tiktok) lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas. 'pedir_status': true dispara el status (con comentarios sin responder) en la próxima corrida y se borra solo.",
+  "nota": "Calendario del publicador diario. 'cuando' = hora de Nueva York con su desfase. Para mover un video, cambiar 'cuando'; para sacarlo, borrar el ítem. 'publicado' (instagram, youtube, tiktok) lo completa el workflow: no tocarlo. 'pausado': true frena publicaciones y la cadena de corridas. 'pedir_status': true dispara el status (con comentarios sin responder) en la próxima corrida y se borra solo. 'responder': [{id, texto}] responde comentarios de IG en la próxima corrida.",
   "pausado": false,
   "zona": "America/New_York",
   "release": "videos",
@@ -2205,5 +2205,167 @@
       }
     }
   ],
-  "requiere_v2": true
+  "requiere_v2": true,
+  "responder": [
+    {
+      "id": "18115576370122947",
+      "texto": "Nice interpretation 🔮"
+    },
+    {
+      "id": "18101494955072674",
+      "texto": "🔮"
+    },
+    {
+      "id": "18068212208783799",
+      "texto": "Interesting take ✨"
+    },
+    {
+      "id": "18439546306199139",
+      "texto": "Good word for it ⚡️"
+    },
+    {
+      "id": "18400604866202683",
+      "texto": "😄🔮"
+    },
+    {
+      "id": "18102210506063840",
+      "texto": "Nice reading, good eye 🔮"
+    },
+    {
+      "id": "17954301057275923",
+      "texto": "Good read ✨"
+    },
+    {
+      "id": "18138578866711640",
+      "texto": "I see why 🌙"
+    },
+    {
+      "id": "18070230062758878",
+      "texto": "Makes sense ⚡️"
+    },
+    {
+      "id": "18130054664503270",
+      "texto": "Nice one 🔮"
+    },
+    {
+      "id": "18114491018608546",
+      "texto": "🔥"
+    },
+    {
+      "id": "18346140715277295",
+      "texto": "Send me the word CARD by DM and it arrives in a few minutes 🔮"
+    },
+    {
+      "id": "18081233039711747",
+      "texto": "I like that ✨"
+    },
+    {
+      "id": "18025393487947448",
+      "texto": "Nice way to put it 🔮"
+    },
+    {
+      "id": "17923887102225667",
+      "texto": "That's the idea 🌙"
+    },
+    {
+      "id": "18357738343301948",
+      "texto": "Good read 🔮"
+    },
+    {
+      "id": "17884305966529132",
+      "texto": "One day at a time ✨"
+    },
+    {
+      "id": "17971402749187045",
+      "texto": "😉"
+    },
+    {
+      "id": "18094620542659284",
+      "texto": "Interesting perspective 🌙"
+    },
+    {
+      "id": "18092141786196968",
+      "texto": "True, context matters 🔮"
+    },
+    {
+      "id": "18147677812568505",
+      "texto": "Nice interpretation ✨"
+    },
+    {
+      "id": "18234702922321667",
+      "texto": "Free class every Wednesday 4:44 PM NY. Link in bio 🔮"
+    },
+    {
+      "id": "18104094203235858",
+      "texto": "Thanks ⚡️"
+    },
+    {
+      "id": "17994761585848401",
+      "texto": "Keep practicing 🔮"
+    },
+    {
+      "id": "18647152723053369",
+      "texto": "Thank you ✨"
+    },
+    {
+      "id": "18110046512148538",
+      "texto": "Thank you ✨"
+    },
+    {
+      "id": "18128616787867330",
+      "texto": "Thank you ✨"
+    },
+    {
+      "id": "17962241670249399",
+      "texto": "Thank you ✨"
+    },
+    {
+      "id": "18046601258819789",
+      "texto": "Thank you ✨"
+    },
+    {
+      "id": "18114365417137627",
+      "texto": "🔮"
+    },
+    {
+      "id": "18190463305420305",
+      "texto": "🔮"
+    },
+    {
+      "id": "18147088609579605",
+      "texto": "🔮"
+    },
+    {
+      "id": "17952546117288018",
+      "texto": "🔮"
+    },
+    {
+      "id": "18081519632347943",
+      "texto": "🔮"
+    },
+    {
+      "id": "18132596428781258",
+      "texto": "🔮"
+    },
+    {
+      "id": "17872044330648045",
+      "texto": "🔮"
+    },
+    {
+      "id": "18099302618641010",
+      "texto": "🔮"
+    },
+    {
+      "id": "18075075161758290",
+      "texto": "🔮"
+    },
+    {
+      "id": "18287590714290697",
+      "texto": "🔮"
+    },
+    {
+      "id": "18134669936483916",
+      "texto": "🔮"
+    }
+  ]
 }
