@@ -15,8 +15,8 @@ for (const m of media.filter((x) => x.comments_count)) {
   if (!sin.length) continue;
   out.push(`### ${(m.caption || '').split('\n')[0].slice(0, 70)}`, m.permalink, '');
   for (const c of sin.sort((a, b) => a.timestamp.localeCompare(b.timestamp))) {
-    out.push(`- **@${c.username}** (${ny(c.timestamp)}) \`${c.id}\`: ${c.text.replace(/\n/g, ' ')}`);
-    for (const r of c.replies?.data || []) out.push(`  - ↳ @${r.username}: ${r.text.replace(/\n/g, ' ')}`);
+    out.push(`- **@${c.username}** (${ny(c.timestamp)}) \`${c.id}\`: ${(c.text || '(sin texto)').replace(/\n/g, ' ')}`);
+    for (const r of c.replies?.data || []) out.push(`  - ↳ @${r.username}: ${(r.text || '').replace(/\n/g, ' ')}`);
     total++;
   }
   out.push('');
