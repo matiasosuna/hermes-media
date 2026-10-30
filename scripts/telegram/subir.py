@@ -117,6 +117,25 @@ def datos_video(archivo: Path, carpeta: Path):
     return dur, w, h, thumb
 
 
+def a_mp4(archivo: Path, carpeta: Path) -> Path:
+    """Las grabaciones de la sala vienen en .webm: en el celular Telegram no las reproduce ahí mismo.
+    Se pasan a MP4 (H.264 + AAC, se puede ver mientras carga). Si ffmpeg falla, se sube el original."""
+    if archivo.suffix.lower() not in ('.webm', '.mkv') or not shutil.which('ffmpeg'):
+        return archivo
+    salida = carpeta / (archivo.stem + '.mp4')
+    print(f'Pasando {archivo.name} a MP4…', flush=True)
+    r = subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', str(archivo),
+                        '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', '-r', '30', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23',
+                        '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', str(salida)],
+                       capture_output=True, text=True)
+    if r.returncode != 0 or not salida.exists() or salida.stat().st_size == 0:
+        print(f'  (no se pudo pasar a MP4, se sube el original: {r.stderr.strip()[-300:]})')
+        return archivo
+    archivo.unlink(missing_ok=True)  # libera el disco del runner
+    print(f'  listo: {salida.name} ({mb(salida.stat().st_size)})')
+    return salida
+
+
 # ---------------- Telegram ----------------
 async def subir_telegram(archivo: Path, leyenda: str, carpeta: Path) -> str:
     from telethon import TelegramClient

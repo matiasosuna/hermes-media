@@ -84,6 +84,7 @@ def procesar(g: dict) -> str:
     with tempfile.TemporaryDirectory(prefix='grabacion-') as tmp:  # se borra al terminar cada una (disco del runner)
         carpeta = Path(tmp)
         archivo = bajar_con_reintentos(g, carpeta)
+        archivo = subir.a_mp4(archivo, carpeta)
         link = asyncio.run(subir.subir_telegram(archivo, titulo, carpeta))
     print(f'En Telegram: {link}')
     try:
