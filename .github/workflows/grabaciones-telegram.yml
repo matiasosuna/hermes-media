@@ -1,0 +1,65 @@
+# Pasa las grabaciones de la sala (/sala/, guardadas en R2 como "pendiente") al canal privado de Telegram y a la
+# Biblioteca de /comunidad/. Corre solo cada 20 minutos (o a mano). Si no hay nada pendiente, el job
+# termina en segundos (un curl) sin instalar nada. Vive acá (repo público: minutos de Actions gratis e
+# ilimitados); el código de la web está en tarot-web. Secretos: TELEGRAM_* (los pone tarot-web/scripts/telegram/configurar.py) y BIBLIOTECA_TOKEN.
+name: Grabaciones de la sala → Telegram
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: grabaciones-telegram
+  cancel-in-progress: false
+
+jobs:
+  pendientes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      GRABACIONES_URL: https://hermestarot444.pages.dev/api/grabaciones
+    steps:
+      - name: ¿Hay grabaciones pendientes?
+        id: ver
+        env:
+          BIBLIOTECA_TOKEN: ${{ secrets.BIBLIOTECA_TOKEN }}
+        run: |
+          if [ -z "$BIBLIOTECA_TOKEN" ]; then echo "Todavía sin BIBLIOTECA_TOKEN (correr configurar.py): no hago nada."; echo "hay=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          codigo=$(curl -sS --max-time 30 --retry 2 -o "$RUNNER_TEMP/pendientes.json" -w '%{http_code}' \
+            -H "Authorization: Bearer $BIBLIOTECA_TOKEN" "$GRABACIONES_URL/pendientes") || codigo=000
+          if [ "$codigo" != 200 ]; then
+            echo "::error::/api/grabaciones/pendientes respondió $codigo"
+            head -c 300 "$RUNNER_TEMP/pendientes.json" 2>/dev/null; exit 1
+          fi
+          n=$(jq '.grabaciones | length' "$RUNNER_TEMP/pendientes.json")
+          echo "Pendientes: $n"
+          echo "hay=$([ "$n" -gt 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - if: steps.ver.outputs.hay == 'true'
+        uses: actions/checkout@v4
+
+      - if: steps.ver.outputs.hay == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Dependencias
+        if: steps.ver.outputs.hay == 'true'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          pip install -q telethon
+          pip install -q cryptg || echo "sin cryptg: la subida anda igual, más lenta"
+
+      - name: Subir pendientes
+        if: steps.ver.outputs.hay == 'true'
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
+          TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL }}
+          BIBLIOTECA_TOKEN: ${{ secrets.BIBLIOTECA_TOKEN }}
+        run: python scripts/telegram/pendientes.py
