@@ -1,7 +1,8 @@
 # Pasa las grabaciones de la sala (/sala/, guardadas en R2 como "pendiente") al canal privado de Telegram y a la
 # Biblioteca de /comunidad/. Corre solo cada 20 minutos (o a mano). Si no hay nada pendiente, el job
 # termina en segundos (un curl) sin instalar nada. Vive acá (repo público: minutos de Actions gratis e
-# ilimitados); el código de la web está en tarot-web. Secretos: TELEGRAM_* (los pone tarot-web/scripts/telegram/configurar.py) y BIBLIOTECA_TOKEN.
+# ilimitados); el código de la web está en tarot-web. Secretos: TELEGRAM_* (los pone tarot-web/scripts/telegram/configurar.py), BIBLIOTECA_TOKEN
+# y GEMINI_API_KEY (transcripción + resumen de cada clase, scripts/telegram/resumen.py). Los logs son públicos: no se imprime texto de las clases.
 name: Grabaciones de la sala → Telegram
 
 on:
@@ -19,7 +20,7 @@ concurrency:
 jobs:
   pendientes:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 350  # subir 4 GB puede llevar horas; + hasta 15 min de Gemini por grabación (resumen.py)
     env:
       GRABACIONES_URL: https://hermestarot444.pages.dev/api/grabaciones
     steps:
@@ -62,4 +63,5 @@ jobs:
           TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
           TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL }}
           BIBLIOTECA_TOKEN: ${{ secrets.BIBLIOTECA_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}  # transcripción y resumen (gratis); sin ella se sube igual
         run: python scripts/telegram/pendientes.py

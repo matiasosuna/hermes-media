@@ -3,13 +3,15 @@
 
   python3 pendientes.py
 
-Por cada grabación pendiente: la baja de /api/grabaciones/archivo/{id}, la sube a Telegram (leyenda = título), la agrega
-a la biblioteca y avisa /hecha/{id} con el link (el servidor borra el archivo de R2). Si una falla, avisa /error/{id}
-(no se vuelve a listar) y sigue con la próxima; al final sale con código 1 si alguna falló.
+Por cada grabación pendiente: la baja de /api/grabaciones/archivo/{id}, la pasa a MP4, la sube a Telegram (leyenda = título),
+saca transcripción y resumen con Gemini (resumen.py: la transcripción va al canal como .txt; el resumen, a la descripción),
+la agrega a la biblioteca (más un ítem "Transcripción · título") y avisa /hecha/{id} con el link (el servidor borra el
+archivo de R2). Si Gemini o la transcripción fallan, la grabación se sube y se marca hecha igual.
+Si una grabación falla, avisa /error/{id} (no se vuelve a listar) y sigue con la próxima; al final sale con código 1 si alguna falló.
 Si la sesión de Telegram no sirve, corta todo sin marcar nada (las grabaciones siguen pendientes).
 
-Variables: las mismas de subir.py (TELEGRAM_*, BIBLIOTECA_TOKEN; nunca se imprimen) y
-  GRABACIONES_URL (opcional) → por defecto https://hermestarot444.pages.dev/api/grabaciones
+Variables: las mismas de subir.py (TELEGRAM_*, BIBLIOTECA_TOKEN; nunca se imprimen), GEMINI_API_KEY (sin ella no hay
+transcripción ni resumen) y GRABACIONES_URL (opcional) → por defecto https://hermestarot444.pages.dev/api/grabaciones
 """
 import asyncio
 import json
@@ -23,7 +25,8 @@ import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import subir  # noqa: E402  (bajar, subir_telegram, agregar_biblioteca)
+import resumen  # noqa: E402  (transcribir_y_resumir)
+import subir  # noqa: E402  (bajar, subir_telegram, subir_documento, agregar_biblioteca)
 
 API = 'https://hermestarot444.pages.dev/api/grabaciones'
 
@@ -73,8 +76,31 @@ def bajar_con_reintentos(g: dict, carpeta: Path) -> Path:
     raise RuntimeError('no se pudo bajar el archivo')
 
 
+def nombre_txt(titulo: str) -> str:
+    return 'Transcripcion - ' + (re.sub(r'[^\w\- ]+', '-', titulo).strip(' -') or 'clase')[:80] + '.txt'
+
+
+def extras(archivo: Path, titulo: str, fecha: str, carpeta: Path):
+    """Transcripción (.txt al canal) y resumen, con Gemini → (resumen, link del .txt). Nunca corta la subida:
+    si algo falla, devuelve lo que haya ('' / None). En el log solo tamaños y estados (el repo es público)."""
+    r = resumen.transcribir_y_resumir(archivo, carpeta)
+    if not r:
+        return '', None
+    link_txt = None
+    try:
+        txt = carpeta / nombre_txt(titulo)
+        txt.write_text(f'{titulo}' + (f' · {fecha}' if fecha else '') +
+                       '\nTranscripción automática (Gemini): puede tener errores.\n\n' + r['transcripcion'] + '\n', encoding='utf-8')
+        link_txt = asyncio.run(subir.subir_documento(txt, f'Transcripción · {titulo}'))
+        print(f'Transcripción en Telegram: {link_txt}')
+    except (Exception, SystemExit) as e:  # incluye SesionInvalida: el video ya está, esto es un extra
+        print(f'  (no se pudo subir la transcripción: {e.__class__.__name__})')
+    return r['resumen'], link_txt
+
+
 def procesar(g: dict) -> str:
-    """Una grabación de punta a punta → link de Telegram. Cualquier error sale como excepción (o SystemExit de subir.py)."""
+    """Una grabación de punta a punta → link de Telegram. Cualquier error sale como excepción (o SystemExit de subir.py).
+    La transcripción y el resumen son extras: si fallan, la grabación cuenta como hecha igual."""
     fecha = str(g.get('fecha') or '')[:10]
     if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', fecha):
         fecha = ''
@@ -85,12 +111,21 @@ def procesar(g: dict) -> str:
         carpeta = Path(tmp)
         archivo = bajar_con_reintentos(g, carpeta)
         archivo = subir.a_mp4(archivo, carpeta)
+        # primero el video: si Telegram falla no se gasta el cupo gratis de Gemini en cada corrida
         link = asyncio.run(subir.subir_telegram(archivo, titulo, carpeta))
-    print(f'En Telegram: {link}')
+        print(f'En Telegram: {link}')
+        descripcion, link_txt = extras(archivo, titulo, fecha, carpeta)
     try:
-        subir.agregar_biblioteca({'tipo': 'recording', 'titulo': titulo, 'descripcion': '', 'link': link, 'fecha': fecha})
+        subir.agregar_biblioteca({'tipo': 'recording', 'titulo': titulo, 'descripcion': descripcion[:8000], 'link': link, 'fecha': fecha})
     except SystemExit as e:
         raise RuntimeError(f'subida a {link} pero no se agregó a la biblioteca: {e.code}') from None
+    if link_txt:
+        try:
+            subir.agregar_biblioteca({'tipo': 'file', 'titulo': f'Transcripción · {titulo}'[:120],
+                                      'descripcion': 'Transcripción automática de la clase (Gemini): puede tener errores.',
+                                      'link': link_txt, 'fecha': fecha})
+        except SystemExit as e:
+            print(f'  (la transcripción está en {link_txt} pero no se agregó a la biblioteca: {e.code})')
     return link
 
 

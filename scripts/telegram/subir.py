@@ -14,6 +14,7 @@ Variables (secretos de GitHub Actions o del entorno; nunca se imprimen):
 """
 import argparse
 import asyncio
+import contextlib
 import datetime as dt
 import json
 import os
@@ -137,19 +138,33 @@ def a_mp4(archivo: Path, carpeta: Path) -> Path:
 
 
 # ---------------- Telegram ----------------
-async def subir_telegram(archivo: Path, leyenda: str, carpeta: Path) -> str:
+@contextlib.asynccontextmanager
+async def canal():
+    """Conecta con la cuenta (TELEGRAM_SESSION) y entrega (client, canal). Sesión rota → SesionInvalida."""
     from telethon import TelegramClient
     from telethon.sessions import StringSession
-    from telethon.tl.types import DocumentAttributeVideo
 
-    api_id, api_hash, sesion, canal = int(falta('TELEGRAM_API_ID')), falta('TELEGRAM_API_HASH'), falta('TELEGRAM_SESSION'), falta('TELEGRAM_CANAL')
+    api_id, api_hash, sesion, canal_id = int(falta('TELEGRAM_API_ID')), falta('TELEGRAM_API_HASH'), falta('TELEGRAM_SESSION'), falta('TELEGRAM_CANAL')
     client = TelegramClient(StringSession(sesion), api_id, api_hash)
     await client.connect()
-    if not await client.is_user_authorized():
-        raise SesionInvalida('La sesión de Telegram no sirve más: correr login.py de nuevo y actualizar TELEGRAM_SESSION')
     try:
+        if not await client.is_user_authorized():
+            raise SesionInvalida('La sesión de Telegram no sirve más: correr login.py de nuevo y actualizar TELEGRAM_SESSION')
         await client.get_dialogs()  # la sesión en texto no guarda canales: se cargan para poder usar el id
-        destino = await client.get_entity(int(canal) if re.fullmatch(r'-?\d+', canal) else canal)
+        yield client, await client.get_entity(int(canal_id) if re.fullmatch(r'-?\d+', canal_id) else canal_id)
+    finally:
+        await client.disconnect()
+
+
+def link_de(destino, msg) -> str:
+    usuario = getattr(destino, 'username', None)
+    return f'https://t.me/{usuario}/{msg.id}' if usuario else f'https://t.me/c/{destino.id}/{msg.id}'
+
+
+async def subir_telegram(archivo: Path, leyenda: str, carpeta: Path) -> str:
+    from telethon.tl.types import DocumentAttributeVideo
+
+    async with canal() as (client, destino):
         extra = {}
         v = datos_video(archivo, carpeta)
         if v:
@@ -167,10 +182,15 @@ async def subir_telegram(archivo: Path, leyenda: str, carpeta: Path) -> str:
 
         print(f'Subiendo {archivo.name} ({mb(archivo.stat().st_size)}) al canal…')
         msg = await client.send_file(destino, str(archivo), caption=leyenda[:1024], progress_callback=progreso, **extra)
-        usuario = getattr(destino, 'username', None)
-        return f'https://t.me/{usuario}/{msg.id}' if usuario else f'https://t.me/c/{destino.id}/{msg.id}'
-    finally:
-        await client.disconnect()
+        return link_de(destino, msg)
+
+
+async def subir_documento(archivo: Path, leyenda: str) -> str:
+    """Un archivo chico (ej. la transcripción .txt) al mismo canal, como documento → link al mensaje."""
+    async with canal() as (client, destino):
+        print(f'Subiendo {archivo.name} ({archivo.stat().st_size // 1024} KB) al canal…')
+        msg = await client.send_file(destino, str(archivo), caption=leyenda[:1024], force_document=True)
+        return link_de(destino, msg)
 
 
 # ---------------- biblioteca ----------------
