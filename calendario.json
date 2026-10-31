@@ -1122,7 +1122,11 @@
       "cuando": "2026-10-31T09:00:00-04:00",
       "instagram": {
         "caption": "Most people think the Five of Wands is about a fight someone has to lose. It isn't.\nFive of Wands: competition and friction, and the bridge it can become when someone listens. ☿\nFree Hermes Journal + free tarot class Wed 4:44 (NY) → link in bio\n#tarot #fiveofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18105185372572850",
+          "permalink": "https://www.instagram.com/reel/DfKObP0DgAN/",
+          "fecha": "2026-10-31T13:07:29.946Z"
+        }
       },
       "youtube": {
         "titulo": "Five people, five wands, everyone is right | Five of Wands tarot ☿ #shorts",
@@ -1138,10 +1142,19 @@
           "wands",
           "conflict"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "VSLBqBdcklQ",
+          "url": "https://youtube.com/shorts/VSLBqBdcklQ",
+          "fecha": "2026-10-31T13:07:33.135Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ae5e816ceb491e585fa5bdd",
+          "url": "https://tiktok.com/@hermestarot444/video/7702817994040167713",
+          "fecha": "2026-10-31T13:09:18.898Z"
+        }
       },
       "v2": {
         "fecha": "2026-10-30T10:10:41Z",
