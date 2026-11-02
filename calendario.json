@@ -1169,7 +1169,11 @@
       "cuando": "2026-11-01T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Six of Wands is about being the hero everyone cheers for. It isn't.\nSix of Wands: victory and recognition, shared with the people who carried you there. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #sixofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18422830273158158",
+          "permalink": "https://www.instagram.com/reel/DfONomhAgRZ/",
+          "fecha": "2026-11-02T02:17:25.394Z"
+        }
       },
       "youtube": {
         "titulo": "Everybody loves you when you win | Six of Wands tarot ☿ #shorts",
@@ -1185,10 +1189,19 @@
           "wands",
           "victory"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "zbJdFFxbccY",
+          "url": "https://youtube.com/shorts/zbJdFFxbccY",
+          "fecha": "2026-11-02T02:17:28.228Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ae7f2b9902c3fb1decdd4d5",
+          "url": "https://tiktok.com/@hermestarot444/video/7703392571736739104",
+          "fecha": "2026-11-02T02:21:14.102Z"
+        }
       },
       "v2": {
         "fecha": "2026-10-31T20:20:24Z",
