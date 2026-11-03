@@ -1216,7 +1216,11 @@
       "cuando": "2026-11-02T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Seven of Wands is about a fight you're going to lose. It isn't.\nSeven of Wands: courage and perseverance, defending what matters even when you're not ready. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #sevenofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18105396662376691",
+          "permalink": "https://www.instagram.com/reel/DfQxMFmjhCO/",
+          "fecha": "2026-11-03T02:06:29.043Z"
+        }
       },
       "youtube": {
         "titulo": "When everybody wants what you built | Seven of Wands tarot ☿ #shorts",
@@ -1232,10 +1236,19 @@
           "wands",
           "courage"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "bek43yh7rz0",
+          "url": "https://youtube.com/shorts/bek43yh7rz0",
+          "fecha": "2026-11-03T02:06:32.637Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6ae941a90d3397810d0873ff",
+          "url": "https://tiktok.com/@hermestarot444/video/7703760718285278497",
+          "fecha": "2026-11-03T02:08:19.136Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-01T10:07:38Z",
