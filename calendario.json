@@ -1263,7 +1263,11 @@
       "cuando": "2026-11-03T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Eight of Wands is about waiting for something to finally happen. It isn't.\nEight of Wands: speed, news and momentum, when the way is finally clear. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #eightofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18152144686552423",
+          "permalink": "https://www.instagram.com/reel/DfToCvXiZet/",
+          "fecha": "2026-11-04T04:44:18.111Z"
+        }
       },
       "youtube": {
         "titulo": "Nothing for months, then everything at once | Eight of Wands tarot ☿ #shorts",
@@ -1279,10 +1283,19 @@
           "wands",
           "momentum"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "5diPpXtrQCs",
+          "url": "https://youtube.com/shorts/5diPpXtrQCs",
+          "fecha": "2026-11-04T04:44:22.369Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6aeab827ff887f055ceb681a",
+          "url": "https://tiktok.com/@hermestarot444/video/7704172621956697377",
+          "fecha": "2026-11-04T04:48:08.321Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-04T04:31:39Z",
