@@ -1310,7 +1310,11 @@
       "cuando": "2026-11-04T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Nine of Wands is about being beaten down. It isn't.\nNine of Wands: resilience and one more stand, when you're closer to the end than you think. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #nineofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17982511284125708",
+          "permalink": "https://www.instagram.com/reel/DfV6mpiDNBw/",
+          "fecha": "2026-11-05T02:04:47.789Z"
+        }
       },
       "youtube": {
         "titulo": "He's tired, he's hurt, and still standing | Nine of Wands tarot ☿ #shorts",
@@ -1326,10 +1330,19 @@
           "wands",
           "resilience"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "R0kf_cm36ck",
+          "url": "https://youtube.com/shorts/R0kf_cm36ck",
+          "fecha": "2026-11-05T02:04:50.468Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6aebe4430d0de73ccef777df",
+          "url": "https://tiktok.com/@hermestarot444/video/7704496293090987296",
+          "fecha": "2026-11-05T02:06:35.931Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-03T10:08:25Z",
