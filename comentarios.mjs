@@ -25,3 +25,19 @@ out.splice(1, 0, `${total} comentarios de otras personas sin respuesta de @${YO}
 return out;
 }
 if (import.meta.url === `file://${process.argv[1]}`) console.log((await comentarios()).join('\n'));
+
+/** DMs de las últimas 48 h (para revisar el flow de "card": qué escribió cada uno y qué le contestó el bot). */
+export async function dms() {
+  const desde2 = Date.now() - 2 * 864e5;
+  const convs = (await get(`${G}/${env.HT_PAGE_ID || 'me'}/conversations?platform=instagram&fields=messages.limit(12){from,message,created_time,attachments}&limit=40`)).data || [];
+  const out = ['## DMs (últimas 48 h)', ''];
+  for (const c of convs) {
+    const ms = (c.messages?.data || []).filter((m) => Date.parse(m.created_time) > desde2).reverse();
+    if (!ms.some((m) => m.from?.username !== YO)) continue;
+    const quien = ms.find((m) => m.from?.username !== YO)?.from?.username || '?';
+    out.push(`### @${quien}`);
+    for (const m of ms) out.push(`- ${ny(m.created_time)} ${m.from?.username === YO ? '🤖' : '👤'} ${(m.message || (m.attachments ? '[adjunto]' : '(vacío)')).replace(/\n/g, ' ').slice(0, 90)}`);
+    out.push('');
+  }
+  return out;
+}
