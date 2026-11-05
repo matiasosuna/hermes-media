@@ -1,5 +1,5 @@
-# Pasa las grabaciones de la sala (/sala/, guardadas en R2 como "pendiente") al canal privado de Telegram y a la
-# Biblioteca de /comunidad/. Corre solo cada 20 minutos (o a mano). Si no hay nada pendiente, el job
+# Pasa las grabaciones de la sala (/sala/, guardadas en R2 como "pendiente") al canal privado de Telegram, a la
+# Biblioteca de /comunidad/ y a YouTube como no listado (el video de /club/recordings/). Corre solo cada 20 minutos (o a mano). Si no hay nada pendiente, el job
 # termina en segundos (un curl) sin instalar nada. Vive acá (repo público: minutos de Actions gratis e
 # ilimitados); el código de la web está en tarot-web. Secretos: TELEGRAM_* (los pone tarot-web/scripts/telegram/configurar.py), BIBLIOTECA_TOKEN
 # y GEMINI_API_KEY (transcripción + resumen de cada clase, scripts/telegram/resumen.py). Los logs son públicos: no se imprime texto de las clases.
@@ -64,4 +64,8 @@ jobs:
           TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL }}
           BIBLIOTECA_TOKEN: ${{ secrets.BIBLIOTECA_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}  # transcripción y resumen (gratis); sin ella se sube igual
+          # YouTube no listado (el embed de /club/recordings/); sin estas se sube solo a Telegram
+          HT_YT_CLIENT_ID: ${{ secrets.HT_YT_CLIENT_ID }}
+          HT_YT_CLIENT_SECRET: ${{ secrets.HT_YT_CLIENT_SECRET }}
+          HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
         run: python scripts/telegram/pendientes.py

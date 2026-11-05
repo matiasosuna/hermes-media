@@ -27,6 +27,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import resumen  # noqa: E402  (transcribir_y_resumir)
 import subir  # noqa: E402  (bajar, subir_telegram, subir_documento, agregar_biblioteca)
+import youtube  # noqa: E402  (subir: no listado, para /club/recordings/)
 
 API = 'https://hermestarot444.pages.dev/api/grabaciones'
 
@@ -98,8 +99,8 @@ def extras(archivo: Path, titulo: str, fecha: str, carpeta: Path):
     return r['resumen'], link_txt
 
 
-def procesar(g: dict) -> str:
-    """Una grabación de punta a punta → link de Telegram. Cualquier error sale como excepción (o SystemExit de subir.py).
+def procesar(g: dict) -> tuple:
+    """Una grabación de punta a punta → (link de Telegram, id de YouTube o ''). Cualquier error sale como excepción (o SystemExit de subir.py).
     La transcripción y el resumen son extras: si fallan, la grabación cuenta como hecha igual."""
     fecha = str(g.get('fecha') or '')[:10]
     if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', fecha):
@@ -114,6 +115,13 @@ def procesar(g: dict) -> str:
         # primero el video: si Telegram falla no se gasta el cupo gratis de Gemini en cada corrida
         link = asyncio.run(subir.subir_telegram(archivo, titulo, carpeta))
         print(f'En Telegram: {link}')
+        yt = ''
+        if youtube.hay():  # el video que se ve en /club/recordings/; si falla, queda solo Telegram y el admin pega el link
+            try:
+                yt = youtube.subir(archivo, titulo, fecha)
+                print('En YouTube (no listado): listo')
+            except Exception as e:  # noqa: BLE001
+                print(f'  (no se pudo subir a YouTube: {e.__class__.__name__} {getattr(e, "code", "")})')
         descripcion, link_txt = extras(archivo, titulo, fecha, carpeta)
     try:
         subir.agregar_biblioteca({'tipo': 'recording', 'titulo': titulo, 'descripcion': descripcion[:8000], 'link': link, 'fecha': fecha})
@@ -126,7 +134,7 @@ def procesar(g: dict) -> str:
                                       'link': link_txt, 'fecha': fecha})
         except SystemExit as e:
             print(f'  (la transcripción está en {link_txt} pero no se agregó a la biblioteca: {e.code})')
-    return link
+    return link, yt
 
 
 def main() -> int:
@@ -143,7 +151,7 @@ def main() -> int:
         gid = g.get('id')
         print(f'\n— #{gid} {g.get("titulo") or ""} ({g.get("nombre") or "?"}, {subir.mb(int(g.get("tamano") or 0))})', flush=True)
         try:
-            link = procesar(g)
+            link, yt = procesar(g)
         except subir.SesionInvalida:
             raise  # no es culpa de la grabación: queda pendiente para la próxima corrida
         except (Exception, SystemExit) as e:
@@ -156,7 +164,7 @@ def main() -> int:
                 print(f'  (tampoco se pudo marcar el error: {e2})')
             continue
         try:
-            pedir(f'hecha/{gid}', {'link': link})
+            pedir(f'hecha/{gid}', {'link': link, **({'youtube': yt} if yt else {})})
             print(f'  ✓ #{gid} lista')
         except RuntimeError as e:
             fallas += 1
