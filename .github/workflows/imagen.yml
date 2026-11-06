@@ -1,0 +1,38 @@
+# Imagen de historia para un hito de seguidores. Se baja como artefacto "hito".
+#   gh workflow run imagen -R matiasosuna/hermes-media -f numero="5,000" -f siguiente="Next: 10,000"
+name: imagen
+on:
+  workflow_dispatch:
+    inputs:
+      numero:
+        description: Número grande
+        required: true
+        default: "5,000"
+      siguiente:
+        description: Línea de abajo
+        required: true
+        default: "Next: 10,000"
+      carta:
+        description: Carta (archivo en imagenes/)
+        required: true
+        default: XXI.jpg
+permissions:
+  contents: read
+jobs:
+  imagen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: ffmpeg
+        run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      - name: Armar
+        env:
+          NUMERO: ${{ inputs.numero }}
+          SIGUIENTE: ${{ inputs.siguiente }}
+          CARTA: ${{ inputs.carta }}
+        run: ./imagenes/hito.sh "$NUMERO" "$SIGUIENTE" "imagenes/$CARTA" hito.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hito
+          path: hito.png
