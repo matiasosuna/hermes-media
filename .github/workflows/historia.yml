@@ -1,0 +1,29 @@
+# Renderiza una historia de IG hecha en HTML (1080x1920) con el Chrome del runner, no en la Mac. Se baja como artefacto "historia".
+#   gh workflow run historia -R matiasosuna/hermes-media -f archivo=imagenes/hito-5000.html
+name: historia
+on:
+  workflow_dispatch:
+    inputs:
+      archivo:
+        description: HTML de la historia (ruta en el repo)
+        required: true
+        default: imagenes/hito-5000.html
+permissions:
+  contents: read
+jobs:
+  historia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Renderizar
+        env:
+          ARCHIVO: ${{ inputs.archivo }}
+        run: |
+          google-chrome --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+            --window-size=1080,1920 --virtual-time-budget=10000 --screenshot="$PWD/historia.png" "file://$PWD/$ARCHIVO"
+          file historia.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: historia
+          path: historia.png

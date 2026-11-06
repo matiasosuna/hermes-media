@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Historia de IG: hito de 5,000 seguidores, con el estilo de las historias de la marca (carta-del-dia, clase-countdown).
+     Se renderiza en GitHub Actions: gh workflow run historia -R matiasosuna/hermes-media -f archivo=imagenes/hito-5000.html -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--noche:#12142E;--dorado:#F2B84B;--crema:#F6EBD2}
+*{margin:0;box-sizing:border-box}
+body{width:1080px;height:1920px;background:radial-gradient(ellipse at 50% 48%,#2a2d5e 0%,var(--noche) 60%,#08091a 100%);color:var(--crema);font-family:'EB Garamond',serif;overflow:hidden;position:relative}
+.estrellas{position:absolute;inset:0}
+.estrellas i{position:absolute;border-radius:50%;background:#fff}
+.top{position:absolute;top:210px;width:100%;text-align:center}
+.top .k{font-family:Cinzel;font-weight:700;letter-spacing:12px;color:var(--dorado);font-size:42px}
+.top h1{font-family:Cinzel;font-weight:700;font-size:210px;line-height:1;margin-top:26px;letter-spacing:4px;color:var(--dorado);text-shadow:0 0 60px rgba(242,184,75,.55)}
+.mesa{position:absolute;top:700px;left:0;width:100%;height:640px}
+.c{position:absolute;left:50%;top:40px;width:300px;height:520px;margin-left:-150px;border-radius:22px;background:linear-gradient(160deg,#1d2050,#0d0f27);border:4px solid var(--dorado);box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(242,184,75,.25);display:flex;align-items:center;justify-content:center}
+.c::before{content:'';position:absolute;inset:16px;border:2px solid rgba(242,184,75,.55);border-radius:12px}
+.c span{font-size:90px;color:var(--dorado);opacity:.6;text-shadow:0 0 30px rgba(242,184,75,.7)}
+.c1{transform:translateX(-270px) translateY(50px) rotate(-14deg)}
+.c3{transform:translateX(270px) translateY(50px) rotate(14deg)}
+.mundo{position:absolute;left:50%;top:0;width:350px;margin-left:-175px;z-index:2;padding:10px;border-radius:20px;background:var(--dorado);box-shadow:0 24px 70px rgba(0,0,0,.65),0 0 80px rgba(242,184,75,.45)}
+.mundo img{display:block;width:100%;border-radius:12px}
+.metas{position:absolute;top:1430px;width:100%;text-align:center;font-family:Cinzel;font-weight:700;font-size:46px;letter-spacing:4px}
+.metas s{color:var(--dorado);text-decoration-thickness:4px;margin:0 16px}
+.metas .hoy{color:var(--dorado);text-shadow:0 0 30px rgba(242,184,75,.8)}
+.sig{position:absolute;top:1530px;width:100%;text-align:center;font-style:italic;font-size:52px;opacity:.9}
+.marca{position:absolute;bottom:110px;width:100%;text-align:center;font-family:Cinzel;letter-spacing:6px;font-size:34px;color:var(--dorado);opacity:.85}
+</style></head><body>
+<div class="estrellas" id="e"></div>
+<div class="top"><div class="k">THANK YOU</div><h1>5,000</h1></div>
+<div class="mesa"><div class="c c1"><span>☿</span></div><div class="c c3"><span>☿</span></div><div class="mundo"><img src="XXI.jpg" alt=""></div></div>
+<div class="metas"><s>300</s><s>500</s><s>1K</s><s class="hoy">5K</s></div>
+<div class="sig">Next: 10,000</div>
+<div class="marca">☿ HERMES TAROT 444</div>
+<script>let s=7;const r=()=>(s=(s*9301+49297)%233280)/233280;const e=document.getElementById('e');for(let i=0;i<140;i++){const d=document.createElement('i');d.style.left=r()*1080+'px';d.style.top=r()*1920+'px';const z=1+r()*3;d.style.width=d.style.height=z+'px';d.style.opacity=.2+r()*.6;e.appendChild(d)}</script>
+</body></html>
