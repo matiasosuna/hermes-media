@@ -1,5 +1,7 @@
 # Renderiza una historia de IG hecha en HTML (1080x1920) con el Chrome del runner, no en la Mac. Se baja como artefacto "historia".
+# Con publicar=si, además la sube al release "videos" como JPG y la publica en @hermestarot444.
 #   gh workflow run historia -R matiasosuna/hermes-media -f archivo=imagenes/hito-5000.html
+#   gh workflow run historia -R matiasosuna/hermes-media -f archivo=imagenes/hito-5000.html -f publicar=si
 name: historia
 on:
   workflow_dispatch:
@@ -8,8 +10,14 @@ on:
         description: HTML de la historia (ruta en el repo)
         required: true
         default: imagenes/hito-5000.html
+      publicar:
+        description: Publicarla en Instagram (si/no)
+        required: true
+        default: "no"
+        type: choice
+        options: ["no", "si"]
 permissions:
-  contents: read
+  contents: write
 jobs:
   historia:
     runs-on: ubuntu-latest
@@ -27,3 +35,16 @@ jobs:
         with:
           name: historia
           path: historia.png
+      - name: Publicar en Instagram
+        if: inputs.publicar == 'si'
+        env:
+          ARCHIVO: ${{ inputs.archivo }}
+          GH_TOKEN: ${{ github.token }}
+          HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
+          HT_IG_USER_ID: ${{ secrets.HT_IG_USER_ID }}
+        run: |
+          command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+          JPG="historia-$(basename "$ARCHIVO" .html).jpg"
+          ffmpeg -loglevel error -y -i historia.png -q:v 2 "$JPG"
+          gh release upload videos "$JPG" --clobber -R "$GITHUB_REPOSITORY"
+          node historia-publicar.mjs "https://github.com/$GITHUB_REPOSITORY/releases/download/videos/$JPG"
