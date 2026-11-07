@@ -126,7 +126,7 @@ if (web.error) p(`⚠️ ${web.error}`); else {
   for (const [k, v] of Object.entries(r7.clicks)) p(`| clic ${k} | ${n(v)} | ${n(tot.clicks[k])} |`);
   if (web.clase) {
     const c = web.clase, k = (x) => `${n(r7.clicks[x] || 0)} (7 d) · ${n(tot.clicks[x] || 0)} total`;
-    p(); p('### Clase de los miércoles'); p('| | |'); p('|---|---|');
+    p(); p('### Clase gratis'); p('| | |'); p('|---|---|');
     p(`| Anotados | ${n(c.inscriptos)} (${n(c.d7)} en 7 d) |`);
     p(`| Por origen | ${Object.entries(c.por_origen || {}).map(([o, v]) => `${o} ${n(v)}`).join(' · ') || '–'} |`);
     p(`| Agregaron al calendario | ${k('clase_calendario')} |`);
