@@ -1404,7 +1404,11 @@
       "cuando": "2026-11-06T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Page of Wands is about a restless kid who can't focus. It isn't.\nPage of Wands: enthusiasm and discovery, and following one spark until it grows. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #pageofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18135341224767078",
+          "permalink": "https://www.instagram.com/reel/DfbEyyyjbLe/",
+          "fecha": "2026-11-07T02:10:14.331Z"
+        }
       },
       "youtube": {
         "titulo": "Remember when you wanted to try everything? | Page of Wands tarot ☿ #shorts",
@@ -1420,10 +1424,19 @@
           "wands",
           "curiosity"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "uhO5EuBZ7uM",
+          "url": "https://youtube.com/shorts/uhO5EuBZ7uM",
+          "fecha": "2026-11-07T02:10:17.390Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6aee888aaf7e526d43f4d033",
+          "url": "https://tiktok.com/@hermestarot444/video/7705246138374360353",
+          "fecha": "2026-11-07T02:12:03.109Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-05T10:07:10Z",
