@@ -1,8 +1,8 @@
 # Pasa las grabaciones de la sala (/sala/, guardadas en R2 como "pendiente") al canal privado de Telegram, a la
-# Biblioteca de /comunidad/ y a YouTube como no listado (el video de /club/recordings/). Corre solo cada 20 minutos (o a mano). Si no hay nada pendiente, el job
+# Biblioteca de /comunidad/ y a Modal (el video de /club/recordings/, con link firmado; desde el 8/11/2026 en vez de YouTube). Corre solo cada 20 minutos (o a mano). Si no hay nada pendiente, el job
 # termina en segundos (un curl) sin instalar nada. Vive acá (repo público: minutos de Actions gratis e
 # ilimitados); el código de la web está en tarot-web. Secretos: TELEGRAM_* (los pone tarot-web/scripts/telegram/configurar.py), BIBLIOTECA_TOKEN
-# y GEMINI_API_KEY (transcripción + resumen de cada clase, scripts/telegram/resumen.py). Los logs son públicos: no se imprime texto de las clases.
+# GEMINI_API_KEY (transcripción + resumen de cada clase, scripts/telegram/resumen.py) y MODAL_TOKEN_ID/SECRET (bóveda modal-tarot). Los logs son públicos: no se imprime texto de las clases.
 name: Grabaciones de la sala → Telegram
 
 on:
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 350  # subir 4 GB puede llevar horas; + hasta 15 min de Gemini por grabación (resumen.py)
     env:
-      GRABACIONES_URL: https://hermestarot444.pages.dev/api/grabaciones
+      GRABACIONES_URL: https://hermestarot444.com/api/grabaciones
     steps:
       - name: ¿Hay grabaciones pendientes?
         id: ver
@@ -52,7 +52,7 @@ jobs:
         if: steps.ver.outputs.hay == 'true'
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
-          pip install -q telethon
+          pip install -q telethon modal
           pip install -q cryptg || echo "sin cryptg: la subida anda igual, más lenta"
 
       - name: Subir pendientes
@@ -64,8 +64,7 @@ jobs:
           TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL }}
           BIBLIOTECA_TOKEN: ${{ secrets.BIBLIOTECA_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}  # transcripción y resumen (gratis); sin ella se sube igual
-          # YouTube no listado (el embed de /club/recordings/); sin estas se sube solo a Telegram
-          HT_YT_CLIENT_ID: ${{ secrets.HT_YT_CLIENT_ID }}
-          HT_YT_CLIENT_SECRET: ${{ secrets.HT_YT_CLIENT_SECRET }}
-          HT_YT_REFRESH_TOKEN: ${{ secrets.HT_YT_REFRESH_TOKEN }}
+          # el video de /club/recordings/ (Volume hermes-grabaciones de Modal); sin estas se sube solo a Telegram
+          MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+          MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
         run: python scripts/telegram/pendientes.py

@@ -4,6 +4,8 @@
   python3 pendientes.py
 
 Por cada grabación pendiente: la baja de /api/grabaciones/archivo/{id}, la pasa a MP4, la sube a Telegram (leyenda = título),
+(si es solo audio —«audio»: true, …-audio.webm, .m4a o sin pista de video— la pasa a M4A, va como audio y no a Recordings),
+el video lo sube a Modal (modal_video.py: lo que se ve en Club > Recordings; desde el 8/11/2026 en vez de YouTube no listado),
 saca transcripción y resumen con Gemini (resumen.py: la transcripción va al canal como .txt; el resumen, a la descripción),
 la agrega a la biblioteca (más un ítem "Transcripción · título") y avisa /hecha/{id} con el link (el servidor borra el
 archivo de R2). Si Gemini o la transcripción fallan, la grabación se sube y se marca hecha igual.
@@ -11,7 +13,8 @@ Si una grabación falla, avisa /error/{id} (no se vuelve a listar) y sigue con l
 Si la sesión de Telegram no sirve, corta todo sin marcar nada (las grabaciones siguen pendientes).
 
 Variables: las mismas de subir.py (TELEGRAM_*, BIBLIOTECA_TOKEN; nunca se imprimen), GEMINI_API_KEY (sin ella no hay
-transcripción ni resumen) y GRABACIONES_URL (opcional) → por defecto https://hermestarot444.pages.dev/api/grabaciones
+transcripción ni resumen), MODAL_TOKEN_ID/SECRET (sin ellas, solo Telegram) y GRABACIONES_URL (opcional) → por defecto
+https://hermestarot444.com/api/grabaciones
 """
 import asyncio
 import json
@@ -27,9 +30,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import resumen  # noqa: E402  (transcribir_y_resumir)
 import subir  # noqa: E402  (bajar, subir_telegram, subir_documento, agregar_biblioteca)
-import youtube  # noqa: E402  (subir: no listado, para /club/recordings/)
+import modal_video  # noqa: E402  (subir: el video de /club/recordings/)
 
-API = 'https://hermestarot444.pages.dev/api/grabaciones'
+API = 'https://hermestarot444.com/api/grabaciones'
 
 
 def base() -> str:
@@ -100,7 +103,7 @@ def extras(archivo: Path, titulo: str, fecha: str, carpeta: Path):
 
 
 def procesar(g: dict) -> tuple:
-    """Una grabación de punta a punta → (link de Telegram, id de YouTube o ''). Cualquier error sale como excepción (o SystemExit de subir.py).
+    """Una grabación de punta a punta → (link de Telegram, video en Modal 'g<ID>' o ''). Cualquier error sale como excepción (o SystemExit de subir.py).
     La transcripción y el resumen son extras: si fallan, la grabación cuenta como hecha igual."""
     fecha = str(g.get('fecha') or '')[:10]
     if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', fecha):
@@ -111,17 +114,22 @@ def procesar(g: dict) -> tuple:
     with tempfile.TemporaryDirectory(prefix='grabacion-') as tmp:  # se borra al terminar cada una (disco del runner)
         carpeta = Path(tmp)
         archivo = bajar_con_reintentos(g, carpeta)
-        archivo = subir.a_mp4(archivo, carpeta)
-        # primero el video: si Telegram falla no se gasta el cupo gratis de Gemini en cada corrida
-        link = asyncio.run(subir.subir_telegram(archivo, titulo, carpeta))
+        audio = bool(g.get('audio')) or subir.es_audio(str(g.get('nombre') or '')) or subir.es_audio(archivo.name) or subir.sin_video(archivo)
+        # primero Telegram: si falla no se gasta el cupo gratis de Gemini en cada corrida
+        if audio:  # «Solo audio»: va como audio y no a Recordings
+            archivo = subir.a_m4a(archivo, carpeta)
+            link = asyncio.run(subir.subir_telegram(archivo, titulo, carpeta, audio=True))
+        else:
+            archivo = subir.a_mp4(archivo, carpeta)
+            link = asyncio.run(subir.subir_telegram(archivo, titulo, carpeta))
         print(f'En Telegram: {link}')
-        yt = ''
-        if youtube.hay():  # el video que se ve en /club/recordings/; si falla, queda solo Telegram y el admin pega el link
+        video = ''
+        if not audio and modal_video.hay():  # el video que se ve en /club/recordings/; si falla, queda solo en Telegram
             try:
-                yt = youtube.subir(archivo, titulo, fecha)
-                print('En YouTube (no listado): listo')
+                video = modal_video.subir(archivo, g['id'], carpeta)
+                print('En Modal (Recordings): listo')
             except Exception as e:  # noqa: BLE001
-                print(f'  (no se pudo subir a YouTube: {e.__class__.__name__} {getattr(e, "code", "")})')
+                print(f'  (no se pudo subir a Modal: {e.__class__.__name__})')
         descripcion, link_txt = extras(archivo, titulo, fecha, carpeta)
     try:
         subir.agregar_biblioteca({'tipo': 'recording', 'titulo': titulo, 'descripcion': descripcion[:8000], 'link': link, 'fecha': fecha})
@@ -134,7 +142,7 @@ def procesar(g: dict) -> tuple:
                                       'link': link_txt, 'fecha': fecha})
         except SystemExit as e:
             print(f'  (la transcripción está en {link_txt} pero no se agregó a la biblioteca: {e.code})')
-    return link, yt
+    return link, video
 
 
 def main() -> int:
@@ -151,7 +159,7 @@ def main() -> int:
         gid = g.get('id')
         print(f'\n— #{gid} {g.get("titulo") or ""} ({g.get("nombre") or "?"}, {subir.mb(int(g.get("tamano") or 0))})', flush=True)
         try:
-            link, yt = procesar(g)
+            link, video = procesar(g)
         except subir.SesionInvalida:
             raise  # no es culpa de la grabación: queda pendiente para la próxima corrida
         except (Exception, SystemExit) as e:
@@ -164,7 +172,7 @@ def main() -> int:
                 print(f'  (tampoco se pudo marcar el error: {e2})')
             continue
         try:
-            pedir(f'hecha/{gid}', {'link': link, **({'youtube': yt} if yt else {})})
+            pedir(f'hecha/{gid}', {'link': link, **({'video': video} if video else {})})
             print(f'  ✓ #{gid} lista')
         except RuntimeError as e:
             fallas += 1

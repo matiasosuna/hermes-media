@@ -137,6 +137,59 @@ def a_mp4(archivo: Path, carpeta: Path) -> Path:
     return salida
 
 
+# ---------------- solo audio ----------------
+def es_audio(nombre: str) -> bool:
+    """Grabación de la sala con «Solo audio»: termina en -audio.webm (Chrome, Firefox) o .m4a (Safari)."""
+    return bool(re.search(r'-audio\.\w+$|\.m4a$', nombre or '', re.I))
+
+
+def sin_video(archivo: Path) -> bool:
+    """True solo si ffprobe lee el archivo y no tiene ninguna pista de video (si no se puede saber: False, va como video)."""
+    if not shutil.which('ffprobe'):
+        return False
+    try:
+        out = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'stream=codec_type', '-of', 'json', str(archivo)],
+                             capture_output=True, text=True, timeout=120, check=True).stdout
+        tipos = [s.get('codec_type') for s in json.loads(out).get('streams') or []]
+    except Exception:  # noqa: BLE001
+        return False
+    return 'audio' in tipos and 'video' not in tipos
+
+
+def duracion(archivo: Path) -> int:
+    if not shutil.which('ffprobe'):
+        return 0
+    try:
+        out = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(archivo)],
+                             capture_output=True, text=True, timeout=120).stdout
+        return int(float(out.strip() or 0))
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return 0
+
+
+def a_m4a(archivo: Path, carpeta: Path) -> Path:
+    """Solo audio → M4A (AAC, ~50 MB/h), que Telegram reproduce en cualquier celular y con duración.
+    El .webm (Opus) se recodifica; el .m4a de Safari (fragmentado) solo se reacomoda. Si ffmpeg falla, se sube el original."""
+    if not shutil.which('ffmpeg'):
+        return archivo
+    destino = carpeta / 'm4a'
+    destino.mkdir(exist_ok=True)
+    salida = destino / (archivo.stem + '.m4a')
+    aac = ['-c:a', 'aac', '-b:a', '112k']
+    print(f'Pasando {archivo.name} a M4A…', flush=True)
+    for codec in ([['-c:a', 'copy']] if archivo.suffix.lower() in ('.m4a', '.mp4') else []) + [aac]:
+        r = subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', str(archivo), '-vn', *codec, '-movflags', '+faststart', str(salida)],
+                           capture_output=True, text=True)
+        if r.returncode == 0 and salida.exists() and salida.stat().st_size > 0:
+            break
+    if r.returncode != 0 or not salida.exists() or salida.stat().st_size == 0:
+        print(f'  (no se pudo pasar a M4A, se sube el original: {r.stderr.strip()[-300:]})')
+        return archivo
+    archivo.unlink(missing_ok=True)
+    print(f'  listo: {salida.name} ({mb(salida.stat().st_size)})')
+    return salida
+
+
 # ---------------- Telegram ----------------
 @contextlib.asynccontextmanager
 async def canal():
@@ -161,12 +214,18 @@ def link_de(destino, msg) -> str:
     return f'https://t.me/{usuario}/{msg.id}' if usuario else f'https://t.me/c/{destino.id}/{msg.id}'
 
 
-async def subir_telegram(archivo: Path, leyenda: str, carpeta: Path) -> str:
-    from telethon.tl.types import DocumentAttributeVideo
+async def subir_telegram(archivo: Path, leyenda: str, carpeta: Path, audio: bool = False) -> str:
+    """audio=True: grabación sin video → mensaje de audio (con reproductor y duración), o archivo si no quedó en .m4a."""
+    from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 
     async with canal() as (client, destino):
         extra = {}
-        v = datos_video(archivo, carpeta)
+        v = None if audio else datos_video(archivo, carpeta)
+        if audio and archivo.suffix.lower() == '.m4a':
+            extra['attributes'] = [DocumentAttributeAudio(duration=duracion(archivo), title=leyenda.split('\n')[0][:64])]
+            extra['mime_type'] = 'audio/mp4'
+        elif audio:
+            extra['force_document'] = True
         if v:
             dur, w, h, thumb = v
             extra['attributes'] = [DocumentAttributeVideo(duration=dur, w=w, h=h, supports_streaming=True)]
