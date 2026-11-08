@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Historia de IG 3/3 del Tarot Club: el precio y a dónde ir (Matías, 8/11/2026; serie de 3 que propuso el crítico).
+     Precios de tarot-web worker/preventa.js: los primeros 10 pagan USD 11/mes y lo mantienen mientras sigan (si cancelan y vuelven,
+     pagan el precio de ese momento); después USD 22 hasta el 1/12 y USD 44 desde el 1/12. Hoy se cobra el primer mes (cubre diciembre)
+     y pide tarjeta: no decir «free» ni «no card». Sin contador de lugares (envejece).
+     Lugar libre para el sticker de link centrado en y≈1350 (lo pone Matías al publicar).
+     Todo el texto entre y=300 y 1580 (IG tapa arriba y abajo). Estilo de las historias de la marca (hito-5000.html).
+     Se renderiza en GitHub Actions: gh workflow run historia -R matiasosuna/hermes-media -f archivo=imagenes/club-historia-3.html -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--noche:#12142E;--dorado:#F2B84B;--crema:#F6EBD2}
+*{margin:0;box-sizing:border-box}
+body{width:1080px;height:1920px;background:radial-gradient(ellipse at 50% 34%,#2a2d5e 0%,var(--noche) 58%,#08091a 100%);color:var(--crema);font-family:'EB Garamond',serif;overflow:hidden;position:relative}
+.estrellas{position:absolute;inset:0}
+.estrellas i{position:absolute;border-radius:50%;background:#fff}
+.c{position:absolute;width:100%;text-align:center}
+.k{top:330px;font-family:Cinzel;font-weight:700;letter-spacing:10px;color:var(--dorado);font-size:32px;opacity:.9}
+.et{top:430px;font-family:Cinzel;font-weight:700;font-size:40px;letter-spacing:8px;color:var(--crema);opacity:.9}
+.n{top:490px;font-family:Cinzel;font-weight:700;font-size:230px;line-height:1;color:var(--dorado);text-shadow:0 0 60px rgba(242,184,75,.55)}
+.n .m{font-size:64px;letter-spacing:2px;vertical-align:120px;margin-right:12px}
+.n .p{font-size:54px;letter-spacing:2px}
+.fija{top:750px;font-style:italic;font-size:54px;opacity:.95}
+.luego{top:835px;font-size:40px;opacity:.75}
+.pill{position:absolute;top:925px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:16px 42px;border:2.5px solid var(--dorado);border-radius:999px;font-family:Cinzel;font-weight:700;font-size:32px;letter-spacing:4px;color:var(--dorado)}
+.abre{top:1035px;font-style:italic;font-size:44px;opacity:.9}
+.ir{top:1170px;font-family:Cinzel;font-weight:700;font-size:32px;letter-spacing:6px;color:var(--dorado)}
+.dm{top:1490px;font-style:italic;font-size:44px;opacity:.92}
+.dm b{font-family:Cinzel;font-style:normal;font-weight:700;color:var(--dorado);letter-spacing:2px}
+</style></head><body>
+<div class="estrellas" id="e"></div>
+<div class="c k">☿ TAROT CLUB</div>
+<div class="c et">FOUNDER PRICE</div>
+<div class="c n"><span class="m">USD</span>11<span class="p">/MONTH</span></div>
+<div class="c fija">Locked in while you stay.</div>
+<div class="c luego">After the first 10: USD 22 · from Dec 1: USD 44</div>
+<div class="pill">ONLY 10 FOUNDER SPOTS</div>
+<div class="c abre">The Club opens December 1.</div>
+<div class="c ir">TAP TO JOIN ↓</div>
+<div class="c dm">or reply <b>CLUB</b> and I’ll send you the link</div>
+<script>let s=37;const r=()=>(s=(s*9301+49297)%233280)/233280;const e=document.getElementById('e');for(let i=0;i<140;i++){const d=document.createElement('i');d.style.left=r()*1080+'px';d.style.top=r()*1920+'px';const z=1+r()*3;d.style.width=d.style.height=z+'px';d.style.opacity=.2+r()*.6;e.appendChild(d)}</script>
+</body></html>
