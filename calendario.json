@@ -1451,7 +1451,11 @@
       "cuando": "2026-11-07T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Knight of Wands is about rushing in without thinking. It isn't.\nKnight of Wands: energy and adventure, and the moment passion finally picks a direction. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #knightofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17920369053528865",
+          "permalink": "https://www.instagram.com/reel/DfdpQS_jIpA/",
+          "fecha": "2026-11-08T02:07:19.663Z"
+        }
       },
       "youtube": {
         "titulo": "Brave, fast, and never finishes a journey | Knight of Wands tarot ☿ #shorts",
@@ -1467,10 +1471,19 @@
           "wands",
           "passion"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "DgJCph84fiE",
+          "url": "https://youtube.com/shorts/DgJCph84fiE",
+          "fecha": "2026-11-08T02:07:22.829Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6aefd95b562f2e6de9919e74",
+          "url": "https://tiktok.com/@hermestarot444/video/7705616466170662177",
+          "fecha": "2026-11-08T02:09:09.445Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-06T10:05:42Z",
