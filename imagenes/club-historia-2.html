@@ -22,6 +22,8 @@ h2{position:absolute;top:395px;width:100%;text-align:center;font-family:Cinzel;f
 .resto{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;column-gap:28px}
 .resto li{display:grid;grid-template-columns:44px 1fr;align-items:start;font-size:42px;line-height:1.15;margin-top:24px}
 .resto li::before{content:'✓';color:var(--dorado);font-size:36px;line-height:1.3}
+.dm{position:absolute;top:1430px;width:100%;text-align:center;font-style:italic;font-size:54px;line-height:1.2}
+.dm b{font-family:Cinzel;font-style:normal;font-weight:700;font-size:76px;color:var(--dorado);letter-spacing:3px;text-shadow:0 0 40px rgba(242,184,75,.45)}
 .sig{position:absolute;top:1350px;width:100%;text-align:center;font-family:Cinzel;font-weight:700;font-size:32px;letter-spacing:6px;color:var(--dorado)}
 </style></head><body>
 <div class="estrellas" id="e"></div>
@@ -44,5 +46,7 @@ h2{position:absolute;top:395px;width:100%;text-align:center;font-family:Cinzel;f
   </ul>
 </div>
 <div class="sig">FOUNDER PRICE → NEXT</div>
+<!-- «reply CLUB» en las 3 historias (Matías, 8/11): el bot contesta CLUB con el link del Club -->
+<div class="dm">Reply <b>CLUB</b> for the link</div>
 <script>let s=23;const r=()=>(s=(s*9301+49297)%233280)/233280;const e=document.getElementById('e');for(let i=0;i<140;i++){const d=document.createElement('i');d.style.left=r()*1080+'px';d.style.top=r()*1920+'px';const z=1+r()*3;d.style.width=d.style.height=z+'px';d.style.opacity=.2+r()*.6;e.appendChild(d)}</script>
 </body></html>
