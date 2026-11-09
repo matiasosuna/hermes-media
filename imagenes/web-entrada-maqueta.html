@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Maqueta (no es la web): la entrada de hermestarot444.com sin sesión, con el estilo de las historias de la marca
+     (azul noche, dorado, una carta grande). Mismos textos y filas que index.html de tarot-web. Para que Matías la apruebe (8/11/2026).
+     gh workflow run historia -R matiasosuna/hermes-media -f archivo=imagenes/web-entrada-maqueta.html -f tamano=390,1010 -f escala=3 -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=EB+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--noche:#12142E;--dorado:#F2B84B;--crema:#F6EBD2}
+*{margin:0;box-sizing:border-box}
+body{width:390px;min-height:1010px;background:radial-gradient(ellipse at 50% 22%,#2a2d5e 0%,var(--noche) 55%,#08091a 100%);color:var(--crema);font-family:Inter,sans-serif;overflow:hidden;position:relative}
+.estrellas{position:absolute;inset:0}
+.estrellas i{position:absolute;border-radius:50%;background:#fff}
+.pag{position:relative;padding:34px 20px 40px}
+.mesa{position:relative;height:262px}
+.c{position:absolute;left:50%;top:44px;width:118px;height:204px;margin-left:-59px;border-radius:11px;background:linear-gradient(160deg,#1d2050,#0d0f27);border:2px solid var(--dorado);box-shadow:0 10px 30px rgba(0,0,0,.6),0 0 20px rgba(242,184,75,.22);display:flex;align-items:center;justify-content:center}
+.c::before{content:'';position:absolute;inset:7px;border:1px solid rgba(242,184,75,.55);border-radius:6px}
+.c span{font-size:36px;color:var(--dorado);opacity:.6;text-shadow:0 0 16px rgba(242,184,75,.7)}
+.c1{transform:translateX(-82px) translateY(18px) rotate(-13deg)}
+.c3{transform:translateX(82px) translateY(18px) rotate(13deg)}
+.mundo{position:absolute;left:50%;top:0;width:150px;margin-left:-75px;z-index:2;padding:5px;border-radius:12px;background:var(--dorado);box-shadow:0 14px 40px rgba(0,0,0,.65),0 0 46px rgba(242,184,75,.45)}
+.mundo img{display:block;width:100%;border-radius:8px}
+h1{margin-top:26px;text-align:center;font-family:Cinzel;font-weight:700;font-size:34px;line-height:1.08;letter-spacing:2px;color:var(--dorado);text-shadow:0 0 30px rgba(242,184,75,.45)}
+.sub{margin-top:10px;text-align:center;font-family:'EB Garamond',serif;font-style:italic;font-size:21px;opacity:.92}
+.g{margin:26px auto 0;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:52px;border-radius:999px;background:var(--crema);color:#1b1d3a;font-weight:600;font-size:16px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.g svg{width:20px;height:20px}
+.filas{margin-top:26px;display:flex;flex-direction:column;gap:10px}
+.fila{display:flex;align-items:center;gap:14px;padding:10px 14px 10px 10px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(242,184,75,.35)}
+.mini{flex:none;width:40px;height:68px;border-radius:5px;background-size:cover;background-position:center;border:1.5px solid var(--dorado)}
+.t{flex:1;display:flex;flex-direction:column;gap:3px}
+.t b{font-family:Cinzel;font-weight:700;font-size:16px;letter-spacing:.5px;color:var(--crema)}
+.t span{font-size:13px;color:var(--dorado)}
+.fl{flex:none;width:18px;height:18px;color:var(--dorado)}
+.pie{margin-top:26px;text-align:center;font-family:Cinzel;letter-spacing:4px;font-size:12px;color:var(--dorado);opacity:.7}
+</style></head><body>
+<div class="estrellas" id="e"></div>
+<div class="pag">
+  <div class="mesa"><div class="c c1"><span>☿</span></div><div class="c c3"><span>☿</span></div><div class="mundo"><img src="XXI.jpg" alt=""></div></div>
+  <h1>HERMES<br>TAROT 444</h1>
+  <p class="sub">Tarot by video call, classes and community.</p>
+  <div class="g"><svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.2 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C.9 16.6 0 20.2 0 24s.9 7.4 2.6 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>Sign in with Google</div>
+  <div class="filas">
+    <div class="fila"><span class="mini" style="background-image:url(https://hermestarot444.com/cards/mini/XIX.webp)"></span><span class="t"><b>Free class</b><span>Free</span></span><svg class="fl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></div>
+    <div class="fila"><span class="mini" style="background-image:url(https://hermestarot444.com/cards/mini/I.webp)"></span><span class="t"><b>Tarot reading</b><span>1 hour · USD 44</span></span><svg class="fl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></div>
+    <div class="fila"><span class="mini" style="background-image:url(https://hermestarot444.com/cards/mini/II.webp)"></span><span class="t"><b>Tarot Club</b><span>Community and practice</span></span><svg class="fl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></div>
+    <div class="fila"><span class="mini" style="background-image:url(https://hermestarot444.com/cards/mini/XIV.webp)"></span><span class="t"><b>Hermes Journal</b><span>Free · write your own tarot book</span></span><svg class="fl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></div>
+  </div>
+  <div class="pie">☿ HERMESTAROT444.COM</div>
+</div>
+<script>let s=3;const r=()=>(s=(s*9301+49297)%233280)/233280;const e=document.getElementById('e');for(let i=0;i<70;i++){const d=document.createElement('i');d.style.left=r()*390+'px';d.style.top=r()*1010+'px';const z=.8+r()*1.8;d.style.width=d.style.height=z+'px';d.style.opacity=.2+r()*.6;e.appendChild(d)}</script>
+</body></html>
