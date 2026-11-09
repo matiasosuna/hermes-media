@@ -1498,7 +1498,11 @@
       "cuando": "2026-11-08T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Queen of Wands is about being too much. It isn't.\nQueen of Wands: confidence and warmth, and never dimming your light to fit in. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #queenofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18118629329038948",
+          "permalink": "https://www.instagram.com/reel/DfgNvuujHkN/",
+          "fecha": "2026-11-09T02:04:55.912Z"
+        }
       },
       "youtube": {
         "titulo": "She was told she was too much | Queen of Wands tarot ☿ #shorts",
@@ -1514,10 +1518,19 @@
           "wands",
           "confidence"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "h_JM2e_WlIo",
+          "url": "https://youtube.com/shorts/h_JM2e_WlIo",
+          "fecha": "2026-11-09T02:04:58.871Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6af12a4c8fcbda2a3a9d5cab",
+          "url": "https://tiktok.com/@hermestarot444/video/7705986844378336544",
+          "fecha": "2026-11-09T02:06:45.291Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-07T10:06:31Z",
