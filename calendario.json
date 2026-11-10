@@ -1545,7 +1545,11 @@
       "cuando": "2026-11-09T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the King of Wands is about having everything under control. It isn't.\nKing of Wands: vision and leadership that lights the fire in other people. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #kingofwands #wands #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18149924776642539",
+          "permalink": "https://www.instagram.com/reel/DfiyeEnDi_W/",
+          "fecha": "2026-11-10T02:03:55.694Z"
+        }
       },
       "youtube": {
         "titulo": "A real leader lights the fire in others | King of Wands tarot ☿ #shorts",
@@ -1561,10 +1565,19 @@
           "wands",
           "leadership"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "NKSNzAMDzDk",
+          "url": "https://youtube.com/shorts/NKSNzAMDzDk",
+          "fecha": "2026-11-10T02:03:59.591Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6af27b9005af22d726fd3e6e",
+          "url": "https://tiktok.com/@hermestarot444/video/7706357615705591072",
+          "fecha": "2026-11-10T02:05:44.997Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-09T10:03:48Z",
