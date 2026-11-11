@@ -1592,7 +1592,11 @@
       "cuando": "2026-11-10T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Ace of Cups is about waiting for love to find you. It isn't.\nAce of Cups: new love and a full heart, and love that starts inside you. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #aceofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18234785935326157",
+          "permalink": "https://www.instagram.com/reel/DflXsG8DcM2/",
+          "fecha": "2026-11-11T02:07:49.964Z"
+        }
       },
       "youtube": {
         "titulo": "What if love pours out of you? | Ace of Cups tarot ☿ #shorts",
@@ -1608,10 +1612,19 @@
           "cups",
           "love"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "QlUWpqTPU9E",
+          "url": "https://youtube.com/shorts/QlUWpqTPU9E",
+          "fecha": "2026-11-11T02:07:53.553Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6af3cdfa61555afe9eefe55e",
+          "url": "https://tiktok.com/@hermestarot444/video/7706729806896925985",
+          "fecha": "2026-11-11T02:09:38.773Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-09T10:06:38Z",
