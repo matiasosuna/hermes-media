@@ -121,6 +121,22 @@ async function publicarIG(item, guardar) {
 // ── Historia de IG con cada reel nuevo: primeros 15 s + "NEW CARD ON MY PROFILE" / "Reply and tell me what you felt"
 // (historia.sh). Solo para reels publicados hace menos de 12 h; se arma en el runner, se sube al release y se publica.
 // APAGADO 2026-10-24: Matías quiere "compartir el reel en historia" (botón de la app), no subir un video nuevo; la API no lo permite.
+// Prueba de horarios (Matías, 11/11/2026: «dale rota»): 8, 12 y 19 h NY, con días de 0, 1 y 2 posts. El alcance de cada reel
+// se anota a las 48 h (entre 48 y 72 h, para que sean comparables) en instagram.metricas_48h.
+export const pideMetricas = (item, ahora = Date.now()) => {
+  const pub = item.instagram?.publicado, edad = ahora - Date.parse(pub?.fecha ?? '');
+  return !!pub?.id && !item.instagram.metricas_48h && edad >= 48 * 3600e3 && edad < 72 * 3600e3;
+};
+export const horaNY = (iso) => new Intl.DateTimeFormat('en-GB', { timeZone: 'America/New_York', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(iso));
+async function metricas48(item) {
+  const id = item.instagram.publicado.id, m = { medido: new Date().toISOString(), publicado_ny: horaNY(item.instagram.publicado.fecha) };
+  for (const k of ['reach', 'views', 'saved', 'shares', 'total_interactions']) {
+    try { const d = (await g('GET', `/${id}/insights`, { metric: k })).data?.[0]; m[k] = d?.values?.[0]?.value ?? d?.total_value?.value ?? null; }
+    catch { m[k] = null; }
+  }
+  return m;
+}
+
 export const HISTORIA_ACTIVA = false;
 export const HISTORIA_HORAS = 12, HISTORIA_DESDE = '2026-10-24T11:00:00Z'; // reels anteriores no llevan historia
 export const pideHistoria = (item, ahora = Date.now()) => {
@@ -335,6 +351,13 @@ async function publicar() {
       guardar();
       log(`historia: ❌ ${item.id}: ${e.message} (se reintenta en la próxima corrida)`);
     }
+  }
+  for (const item of cal.items.filter((i) => pideMetricas(i))) {
+    try {
+      item.instagram.metricas_48h = await metricas48(item);
+      guardar();
+      log(`métricas 48 h: ${item.id} (${item.instagram.metricas_48h.publicado_ny} NY) alcance ${item.instagram.metricas_48h.reach}`);
+    } catch (e) { log(`métricas 48 h: ❌ ${item.id}: ${e.message} (se reintenta)`); }
   }
   if (fallas) process.exitCode = 1;
 }
