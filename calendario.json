@@ -1704,7 +1704,11 @@
       "cuando": "2026-11-12T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Three of Cups is about celebrating your own success. It isn't.\nThree of Cups: friendship, community, and joy that grows when you share it. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #threeofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18077499194726203",
+          "permalink": "https://www.instagram.com/reel/DfpkEefgD-c/",
+          "fecha": "2026-11-12T17:13:02.150Z"
+        }
       },
       "youtube": {
         "titulo": "Some things are only finished when you celebrate | Three of Cups tarot ☿ #shorts",
@@ -1720,10 +1724,19 @@
           "cups",
           "friendship"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "k884aQfIWIQ",
+          "url": "https://youtube.com/shorts/k884aQfIWIQ",
+          "fecha": "2026-11-12T17:13:04.896Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6af5f3a29a65ab9528bcaf53",
+          "url": "https://tiktok.com/@hermestarot444/video/7707334288923987232",
+          "fecha": "2026-11-12T17:14:50.170Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-11T10:05:14Z",
