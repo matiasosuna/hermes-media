@@ -1558,6 +1558,15 @@
           "id": "18149924776642539",
           "permalink": "https://www.instagram.com/reel/DfiyeEnDi_W/",
           "fecha": "2026-11-10T02:03:55.694Z"
+        },
+        "metricas_48h": {
+          "medido": "2026-11-12T02:08:04.324Z",
+          "publicado_ny": "Mon 21:03",
+          "reach": 3975,
+          "views": 5457,
+          "saved": 135,
+          "shares": 21,
+          "total_interactions": 529
         }
       },
       "youtube": {
@@ -1648,7 +1657,11 @@
       "cuando": "2026-11-11T21:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Two of Cups is only about romance. It isn't.\nTwo of Cups: partnership and connection between equals, where both people give. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #twoofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18132867718785180",
+          "permalink": "https://www.instagram.com/reel/Dfn8RObHKDp/",
+          "fecha": "2026-11-12T02:06:02.359Z"
+        }
       },
       "youtube": {
         "titulo": "Two strangers, two cups, one promise | Two of Cups tarot ☿ #shorts",
@@ -1664,10 +1677,19 @@
           "cups",
           "partnership"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "rxjNQ4Klte4",
+          "url": "https://youtube.com/shorts/rxjNQ4Klte4",
+          "fecha": "2026-11-12T02:06:06.144Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6af51f0f3d8c751bfd0a8020",
+          "url": "https://tiktok.com/@hermestarot444/video/7707100434212588833",
+          "fecha": "2026-11-12T02:07:51.925Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-10T10:06:17Z",
