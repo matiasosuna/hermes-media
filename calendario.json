@@ -1760,7 +1760,11 @@
       "cuando": "2026-11-13T08:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Four of Cups is about having nothing new to look forward to. It isn't.\nFour of Cups: apathy and reflection, and the offer you miss while you're looking away. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #fourofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18081557807708287",
+          "permalink": "https://www.instagram.com/reel/DfrtKEzj_PE/",
+          "fecha": "2026-11-13T13:11:18.438Z"
+        }
       },
       "youtube": {
         "titulo": "He has everything, so why is he bored? | Four of Cups tarot ☿ #shorts",
@@ -1776,10 +1780,19 @@
           "cups",
           "reflection"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "vku1lV5yLao",
+          "url": "https://youtube.com/shorts/vku1lV5yLao",
+          "fecha": "2026-11-13T13:11:22.827Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6af70c7c49bae9df2d096e65",
+          "url": "https://tiktok.com/@hermestarot444/video/7707643063178497313",
+          "fecha": "2026-11-13T13:13:11.902Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-12T10:05:01Z",
