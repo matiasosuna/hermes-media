@@ -3,6 +3,7 @@
 // Uso: node status.mjs > STATUS.md   (env: HT_PAGE_TOKEN, HT_IG_USER_ID, HT_YT_*, HT_STATS_TOKEN)
 import { readFileSync } from 'node:fs';
 import { comentarios, dms } from './comentarios.mjs';
+import { mandarRedes } from './control.mjs'; // sección Redes del panel de la web
 
 const env = process.env;
 const cal = JSON.parse(readFileSync(new URL('./calendario.json', import.meta.url), 'utf8'));
@@ -157,4 +158,5 @@ p();
 try { for (const l of await comentarios()) p(l); } catch (e) { p(`⚠️ comentarios: ${String(e.message || e).slice(0, 120)}`); }
 p();
 try { for (const l of await dms()) p(l); } catch (e) { p(`⚠️ DMs: ${String(e.message || e).slice(0, 120)}`); }
+await mandarRedes({ ig, yt, tt, historias: hist });
 console.log(out.join('\n'));

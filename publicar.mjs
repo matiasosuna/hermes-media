@@ -12,6 +12,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
+import { control } from './control.mjs'; // panel de la web: pedidos (pausar, seguir, historia, status) y foto del calendario
 
 export const REPO = process.env.GITHUB_REPOSITORY || 'matiasosuna/hermes-media';
 export const RELEASE = 'videos';
@@ -19,7 +20,7 @@ export const CANAL_YT = 'UC3J5gCPR3fWBIXEKcUQk9Qw';
 const CAL = new URL('./calendario.json', import.meta.url);
 const V = 'v21.0';
 const env = process.env;
-const SECRETOS = ['HT_PAGE_TOKEN', 'HT_YT_CLIENT_SECRET', 'HT_YT_REFRESH_TOKEN', 'BUFFER_API_KEY'].map((k) => env[k]).filter(Boolean);
+const SECRETOS = ['HT_PAGE_TOKEN', 'HT_YT_CLIENT_SECRET', 'HT_YT_REFRESH_TOKEN', 'BUFFER_API_KEY', 'HT_STATS_TOKEN'].map((k) => env[k]).filter(Boolean);
 export const PLATAFORMAS = ['instagram', 'youtube', 'tiktok'];
 export const BUFFER_ORG = '6acc932a96c596c8b8c17194', BUFFER_TIKTOK = '6ad3219a778b240e2f368ecb';
 const falta = (i) => PLATAFORMAS.some((p) => !i[p]?.publicado);
@@ -387,5 +388,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     guardar();
   } catch (e) { log(`⚠️ pedidos: ${e.message}`); } };
   const run = a.includes('--dry-run') ? dryRun : a.includes('--contenedor-prueba') ? contenedorPrueba : a.includes('--seguir') ? seguir : publicar;
-  (a.length ? Promise.resolve() : pedidos()).then(run).catch((e) => { log(`❌ ${e.message}`); process.exitCode = 1; });
+  const panel = async () => { const { cal, guardar } = cargar(); await control({ cal, guardar, log, repo: REPO }); };
+  (a.length ? Promise.resolve() : pedidos().then(panel)).then(run).catch((e) => { log(`❌ ${e.message}`); process.exitCode = 1; });
 }
