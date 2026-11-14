@@ -1863,7 +1863,11 @@
       "cuando": "2026-11-14T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Six of Cups is about living in the past. It isn't.\nSix of Cups: nostalgia and the inner child, memories that remind you who you are. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #sixofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18496799572129021",
+          "permalink": "https://www.instagram.com/reel/DfutArTEvqR/",
+          "fecha": "2026-11-14T17:07:25.276Z"
+        }
       },
       "youtube": {
         "titulo": "Who were you before the world told you? | Six of Cups tarot ☿ #shorts",
@@ -1879,10 +1883,19 @@
           "cups",
           "inner child"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "fCBisPcfvWI",
+          "url": "https://youtube.com/shorts/fCBisPcfvWI",
+          "fecha": "2026-11-14T17:07:29.519Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6af8955276c23bf1c72c205a",
+          "url": "https://tiktok.com/@hermestarot444/video/7708075154580016417",
+          "fecha": "2026-11-14T17:09:43.399Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-13T10:06:11Z",
