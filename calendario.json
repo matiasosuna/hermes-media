@@ -1807,7 +1807,11 @@
       "cuando": "2026-11-13T19:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Five of Cups is about losing everything. It isn't.\nFive of Cups: grief and regret, and the two cups still standing behind you. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #fiveofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17940518316124775",
+          "permalink": "https://www.instagram.com/reel/Dfs5EUmgEmb/",
+          "fecha": "2026-11-14T00:14:16.889Z"
+        }
       },
       "youtube": {
         "titulo": "Three cups spilled and he can't look away | Five of Cups tarot ☿ #shorts",
@@ -1823,10 +1827,19 @@
           "cups",
           "grief"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "WJhWvl3MwYI",
+          "url": "https://youtube.com/shorts/WJhWvl3MwYI",
+          "fecha": "2026-11-14T00:14:19.273Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6af7a7dc4b28296eb1241f8b",
+          "url": "https://tiktok.com/@hermestarot444/video/7707813905648586016",
+          "fecha": "2026-11-14T00:16:06.263Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-12T10:07:38Z",
