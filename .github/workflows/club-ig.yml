@@ -1,0 +1,38 @@
+# Renderiza las destacadas y stories del Tarot Club (imagenes/club-ig/slide.html?s=<id>) con el Chrome del runner, no en la Mac.
+# Se bajan como artefacto "club-ig" (PNG 1080x1920). No publica nada.
+#   gh workflow run club-ig -R matiasosuna/hermes-media --ref club-ig -f ids="club-1 club-study"
+name: club-ig
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: Ids separados por espacio (vacío = todos)
+        required: false
+        default: ""
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Renderizar
+        env:
+          IDS: ${{ inputs.ids }}
+        run: |
+          set -euo pipefail
+          T=imagenes/club-ig/slide.html
+          [ -n "$IDS" ] || IDS=$(grep -oE "^  '[a-z0-9-]+':" "$T" | tr -d "': ")
+          mkdir -p out
+          for id in $IDS; do
+            [[ "$id" =~ ^[a-z0-9-]+$ ]] || { echo "id inválido: $id"; exit 1; }
+            google-chrome --headless=new --disable-gpu --hide-scrollbars --window-size=1080,1920 --virtual-time-budget=15000 \
+              --screenshot="$PWD/out/$id.png" "file://$PWD/$T?s=$id" 2>/dev/null
+            echo "ok $id"
+          done
+          ls -la out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: club-ig
+          path: out/*.png
