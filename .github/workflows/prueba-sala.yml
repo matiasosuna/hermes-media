@@ -1,0 +1,74 @@
+# Prueba de carga de la sala de video (tarot-web), sin gente real (Matías, 14/11/2026: «Probala vos»).
+# 18 Chrome headless (anfitrión + 17 alumnos) contra la sala real con D1 en memoria y el Realtime de PREVIEW: no toca
+# producción ni la D1 compartida. Red de lejos con tc netem (solo UDP). Corre «ahora» (main) y «antes» (800837e, antes
+# del arreglo del audio) en paralelo, con la misma red y la misma señalización. Repo público: los logs y el artefacto
+# solo tienen números; el código de tarot-web se baja con PRIVADO_TOKEN y no se sube a ningún lado.
+name: prueba-sala
+on:
+  push:
+    branches: [prueba-sala]
+    paths: ['prueba-sala/**', '.github/workflows/prueba-sala.yml']
+  workflow_dispatch:
+    inputs:
+      ref_ahora: { description: 'ref de tarot-web a probar', default: 'main' }
+      escala: { description: 'largo de las fases (1 = ~10 min)', default: '1' }
+permissions:
+  contents: read
+concurrency:
+  group: prueba-sala
+  cancel-in-progress: true
+jobs:
+  carga:
+    strategy:
+      fail-fast: false
+      matrix:
+        v:
+          - { nombre: ahora, ref: main }
+          - { nombre: antes, ref: 800837ec13a02d1a44b78cc96a5fe7d401a61355 }
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+      VERSION: ${{ matrix.v.nombre }}
+      N: '17'
+      ESCALA: ${{ inputs.escala || '1' }}
+      REQ_MS: '20'
+      D1_MS: '150'
+      RETARDO: '100'
+      JITTER: '10'
+      PERDIDA: '1.5'
+      RED: 'RTT ~200 ms, 1,5 % de pérdida por sentido (~3 % entre dos personas), jitter ±10 ms, solo UDP'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: matiasosuna/tarot-web
+          ref: ${{ matrix.v.nombre == 'ahora' && (inputs.ref_ahora || 'main') || matrix.v.ref }}
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Dependencias (puppeteer-core, sin bajar Chrome: usa el del runner)
+        working-directory: prueba-sala
+        run: npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 >/dev/null && google-chrome --version
+      - name: Red de lejos (netem)
+        run: sudo -E bash prueba-sala/red.sh
+      - name: Sala de prueba (servidor local)
+        run: |
+          node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 "$N" > servidor.log 2>&1 &
+          for i in $(seq 1 30); do curl -s -o /dev/null http://127.0.0.1:8798/room/ && break; sleep 1; done
+          cat servidor.log
+      - name: Clase de prueba
+        working-directory: prueba-sala
+        run: OUT="$GITHUB_WORKSPACE/resultados-$VERSION" node carga.mjs
+      - name: Resumen
+        if: always()
+        run: |
+          cat "resultados-$VERSION/resumen.md" >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "sin resumen" >> "$GITHUB_STEP_SUMMARY"
+          grep -c . servidor.log || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultados-${{ matrix.v.nombre }}
+          path: resultados-${{ matrix.v.nombre }}
