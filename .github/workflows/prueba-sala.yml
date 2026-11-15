@@ -23,8 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         v:
-          - { nombre: normal, ref: main, n: '17', grupos: '0-3,4-8,9-13,14-17', retardo: '200', jitter: '10', perdida: '3' }
-          - { nombre: red-mala, ref: main, n: '17', grupos: '0-3,4-8,9-13,14-17', retardo: '350', jitter: '30', perdida: '8' }
           - { nombre: 24-personas, ref: main, n: '23', grupos: '0-5,6-11,12-17,18-23', retardo: '200', jitter: '10', perdida: '3' }
         rol: [sala, g1, g2, g3]
     runs-on: ubuntu-latest

@@ -118,7 +118,7 @@ async function espiar(i) {
       sender: S.pub?.audio ? { rs: S.pub.audio.sender.track?.readyState, en: S.pub.audio.sender.track?.enabled, label: S.pub.audio.sender.track?.label?.slice(0, 30), mid: S.pub.audio.transceiver?.mid ?? S.pub.audio.mid } : null,
       gente: (S.todos || []).map((g) => ({ n: g.nombre, s: String(g.sessionId).slice(0, 8), yo: !!g.yo, mio: !!g.mio, extra: !!g.extra, grupo: g.grupo, tracks: (g.tracks || []).map((x) => x.kind + ':' + x.trackName) })),
       enGente: (S.gente || []).length,
-      tirados: [...(S.tirados || new Map())].map(([k, v]) => ({ k: k.slice(0, 8) + k.slice(k.indexOf('/')), mid: v.mid })),
+      tirados: [...(S.tirados || new Map())].map(([k, v]) => ({ k: k.slice(0, 8) + k.slice(k.indexOf('/')), mid: v.mid, n: (S.todos || []).find((g) => g.sessionId === v.sessionId)?.nombre })),
       pidiendo: [...(S.pidiendo || [])].map((k) => k.slice(0, 8) + k.slice(k.indexOf('/'))),
       fallo: [...(S.fallo || new Map())].map(([k, t]) => [k.slice(0, 8) + k.slice(k.indexOf('/')), Date.now() - t]),
       tr, inb, out, ev: window.__ev.slice(-12), err: window.__err.slice(-5),
@@ -175,7 +175,7 @@ const orden = (para, accion, arg) => ctl('/control/orden', { para, g: para == nu
   while (Date.now() < hasta) { const { grupos } = await ctl('/control/hola'); if (grupos.length >= GRUPOS.length) break; await dormir(3000); }
   const { grupos } = await ctl('/control/hola'); log(`máquinas listas: ${grupos.length}/${GRUPOS.length}`);
 }
-const vivos = new Set(), hablando = new Map(), ventanas = [], fases = [];
+const vivos = new Set(), hablando = new Map(), ventanas = [], fases = [], espias = [];
 const fase = (nombre) => { fases.push({ nombre, desde: ahora() }); log('— fase', nombre); };
 const s = (ms) => Math.round(ms * ESCALA);
 async function entra(i) { const r = await orden(i, 'abrir'); if (r.ok) vivos.add(i); return r; }
@@ -197,12 +197,15 @@ log(`entraron ${vivos.size}/${NP}`);
 await dormir(10e3);
 
 fase('A');  // uno por uno: prende el mic, habla 8 s, lo apaga
-for (let i = 0; i <= N; i++) { await hablar2(i, true); await dormir(s(8000)); await hablar2(i, false); await dormir(2000); }
+for (let i = 0; i <= N; i++) {
+  await hablar2(i, true);
+  if (i >= N - 1) { await dormir(3000); await espiarA([i, 1], `A P${i} habla +3 s`); await dormir(s(8000) - 3000); } else await dormir(s(8000));
+  await hablar2(i, false); await dormir(2000);
+}
 
 fase('B');  // varios a la vez y cambios de cámara; dos se van y vuelven (y hablan al volver)
 const finB = Date.now() + s(180e3), pendientes = [];
-const espias = [];
-const espiarA = async (quien, por) => { for (const j of quien) espias.push({ por, ...(await orden(j, 'espiar')) }); };
+async function espiarA(quien, por) { for (const j of quien) espias.push({ por, ...(await orden(j, 'espiar')) }); }
 const vuelve = (i) => entra(i).then(() => dormir(3000)).then(() => espiarA([i, 1], `P${i} volvió +3 s`)).then(() => dormir(12e3))
   .then(() => hablar2(i, true)).then(() => dormir(2500)).then(() => espiarA([i, 1], `P${i} habla +2.5 s`)).then(() => dormir(2500)).then(() => hablar2(i, false));
 for (const [ms, f] of [[s(50e3), () => sale(5)], [s(60e3), () => vuelve(5)], [s(110e3), () => sale(12)], [s(120e3), () => vuelve(12)]])
