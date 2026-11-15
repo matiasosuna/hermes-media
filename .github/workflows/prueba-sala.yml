@@ -49,7 +49,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - name: Dependencias (puppeteer-core, sin bajar Chrome: usa el del runner)
+      - name: Dependencias (puppeteer-core con el Chrome del runner)
         working-directory: prueba-sala
         run: npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 >/dev/null && google-chrome --version
       - name: Red de lejos (netem)
