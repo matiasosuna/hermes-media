@@ -23,16 +23,19 @@ jobs:
       fail-fast: false
       matrix:
         v:
-          - { nombre: ahora, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3' }
-          - { nombre: reconexion, ref: sala-reconexion, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3' }
+          - { nombre: celulares, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', celulares: '4,5', sin_d: '1' }
+          - { nombre: larga, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', larga: '1' }
         rol: [sala, g1, g2, g3, g4, g5]
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 100
     env:
       REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
       GH_TOKEN: ${{ github.token }}
       VERSION: ${{ matrix.v.nombre }}
       SIN_DTX: ${{ matrix.v.sin_dtx || '' }}
+      CELULARES: ${{ matrix.v.celulares || '' }}
+      SIN_D: ${{ matrix.v.sin_d || '' }}
+      LARGA: ${{ matrix.v.larga || '' }}
       N: ${{ matrix.v.n }}
       GRUPOS: ${{ matrix.v.grupos }}
       ESCALA: '1'
@@ -62,7 +65,12 @@ jobs:
         working-directory: prueba-sala
         run: npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 >/dev/null && google-chrome --version
       - name: Red de lejos (netem)
-        run: sudo env RETARDO="$RETARDO" JITTER="$JITTER" PERDIDA="$PERDIDA" bash prueba-sala/red.sh
+        run: |
+          R="${{ matrix.rol }}"; TASA=""
+          # máquinas que hacen de celular: 4G flojo, más pérdida y subida con tope (≈1 Mbps por persona)
+          if [ "$R" != sala ] && [[ ",$CELULARES," == *",${R#g},"* ]]; then PERDIDA=5; TASA=3000kbit; fi
+          echo "PERDIDA=$PERDIDA" >> "$GITHUB_ENV"; echo "TASA=$TASA" >> "$GITHUB_ENV"
+          sudo env RETARDO="$RETARDO" JITTER="$JITTER" PERDIDA="$PERDIDA" TASA="$TASA" bash prueba-sala/red.sh
       - name: Sala de prueba y túnel
         if: matrix.rol == 'sala'
         run: |

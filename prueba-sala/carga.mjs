@@ -6,7 +6,7 @@
 // y dos se van y vuelven (fase B), y el anfitrión da la clase con alguna pregunta (fase C). Cada oyente anota cuándo
 // empieza a oír a cada uno (tono propio por persona) y los cortes; además getStats y errores de los pulls.
 // Todos los tiempos van en el reloj del servidor (cada máquina mide su diferencia con /control/hora).
-import puppeteer from 'puppeteer-core';
+import puppeteer, { KnownDevices } from 'puppeteer-core';
 import { createRequire } from 'node:module';
 import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import os from 'node:os';
@@ -23,6 +23,8 @@ const CHROME = process.env.CHROME || '/usr/bin/google-chrome';
 const VERSION = process.env.VERSION || '?';
 const OUT = process.env.OUT || 'resultados';
 const ESCALA = +(process.env.ESCALA || 1);
+const CELULARES = new Set((process.env.CELULARES || '').split(',').filter(Boolean).map(Number)); // máquinas que hacen de celular lento
+const LARGA = !!process.env.LARGA, SIN_D = !!process.env.SIN_D;
 const T0 = Date.now();
 const log = (...a) => console.log(`[${((Date.now() - T0) / 1000).toFixed(0).padStart(4)} s] [g${G}]`, ...a);
 const dormir = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -59,12 +61,16 @@ async function abrir(i) {
     executablePath: CHROME, headless: true, defaultViewport: { width: 960, height: 540 },
     args: ['--no-sandbox', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required',
       '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows',
-      '--window-size=960,540', ...(process.env.CHROME_EXTRA || '').split(' ').filter(Boolean)],
+      '--window-size=960,540', '--enable-precise-memory-info', ...(process.env.CHROME_EXTRA || '').split(' ').filter(Boolean)],
   });
   try {
     const page = await browser.newPage();
     page.on('pageerror', (e) => consola.push([i, 'pageerror', String(e.message).slice(0, 220), ahora()]));
     page.on('console', (m) => { if (m.type() === 'error') consola.push([i, 'console', m.text().slice(0, 220), ahora()]); });
+    if (CELULARES.has(G)) { // celular de gama baja: pantalla y navegador de Android, procesador 3 veces más lento
+      await page.emulate(KnownDevices['Pixel 5']);
+      await (await page.createCDPSession()).send('Emulation.setCPUThrottlingRate', { rate: 3 });
+    }
     await page.evaluateOnNewDocument(inyectar, i, NP, !!process.env.SIN_DTX);
     await page.goto(`${BASE}/entrar-como?u=${i ? 'u' + i : 'owner'}&k=${TOKEN}`, { waitUntil: 'domcontentloaded', timeout: 90e3 });
     await page.waitForFunction(() => { const b = document.querySelector('#entrar'); return b && !b.disabled && b.offsetParent !== null; }, { timeout: 90e3 });
@@ -147,13 +153,19 @@ async function ejecutor() {
           else if (o.accion === 'cerrar') r = await cerrar(o.para);
           else if (o.accion === 'hablar') r = await hablar(o.para, !!o.arg);
           else if (o.accion === 'espiar') r = await espiar(o.para);
+          else if (o.accion === 'musica') { const ok = await P.get(o.para).page.evaluate((on) => window.__musica(on), !!o.arg); r = { ok: o.arg ? !!ok : true, t: ahora() }; }
+          else if (o.accion === 'pantalla') {
+            const pg = P.get(o.para).page;
+            await pg.evaluate((on) => { if (!!S.pantalla !== on) document.querySelector('#b-pantalla').click(); }, !!o.arg);
+            await dormir(3000); r = { ok: (await pg.evaluate(() => !!S.pantalla)) === !!o.arg, t: ahora() };
+          }
           else if (o.accion === 'corte') { // se le corta el Wi-Fi a esta máquina: todo lo que sale (UDP y TCP) durante o.arg s
             // («udp:45» = se corta solo el audio y el video, la señal sigue: como pasar del Wi-Fi a los datos del celular)
             const dev = execSync("ip route show default | awk '{print $5; exit}'").toString().trim(), udp = String(o.arg).startsWith('udp:'), seg = +String(o.arg).replace('udp:', '');
             const cmd = udp ? `sudo tc qdisc change dev ${dev} parent 1:3 handle 30: netem loss 100%` : `sudo tc qdisc replace dev ${dev} root netem loss 100%`;
             const t = ahora() + 500; // contesta antes de cortar (si no, la respuesta no sale) y vuelve sola
             setTimeout(() => { try { execSync(cmd); log(`corte ${udp ? 'udp ' : ''}${seg} s`); } catch (e) { log('corte falló', e.message); } }, 500);
-            setTimeout(() => { try { execSync(`sudo env RETARDO=${process.env.RETARDO || 200} JITTER=${process.env.JITTER || 10} PERDIDA=${process.env.PERDIDA || 3} bash red.sh`); log('vuelve la red'); } catch (e) { log('no volvió la red', e.message); } }, 500 + seg * 1000);
+            setTimeout(() => { try { execSync(`sudo env RETARDO=${process.env.RETARDO || 200} JITTER=${process.env.JITTER || 10} PERDIDA=${process.env.PERDIDA || 3} TASA=${process.env.TASA || ''} bash red.sh`); log('vuelve la red'); } catch (e) { log('no volvió la red', e.message); } }, 500 + seg * 1000);
             r = { ok: true, t, hasta: t + seg * 1000 };
           }
           else if (o.accion === 'datos') { clearInterval(reloj); await muestrear(); r = await datos(); }
@@ -206,6 +218,26 @@ for (let i = 0; i <= N; i++) {
   await hablar2(i, false); await dormir(2000);
 }
 
+let cortes = [], cortados = [];
+if (LARGA) { // clase de una hora: el anfitrión habla y cada tanto pregunta alguien; música (bloques 3–4) y pantalla (6–7)
+  const bloque = async (k) => {
+    fases.push({ nombre: 'L' + String(k).padStart(2, '0'), desde: ahora() }); log('— bloque', k);
+    const hasta = Date.now() + s(5 * 60e3);
+    while (Date.now() < hasta - 20e3) {
+      await hablar2(0, true); await dormir(12e3); await hablar2(0, false); await dormir(1000);
+      const i = 1 + Math.floor(Math.random() * N); await hablar2(i, true); await dormir(5000); await hablar2(i, false); await dormir(1000);
+    }
+    await dormir(Math.max(0, hasta - Date.now()));
+  };
+  let mus = null;
+  for (let k = 1; k <= 10; k++) {
+    if (k === 3) { const r = await orden(0, 'musica', true); log('música', r.ok); if (r.ok) { mus = { quien: NP, on: r.t, off: null, fase: 'MUS' }; ventanas.push(mus); } }
+    if (k === 5 && mus) { const r = await orden(0, 'musica', false); mus.off = r.t || ahora(); }
+    if (k === 6) log('pantalla', (await orden(0, 'pantalla', true)).ok);
+    if (k === 8) await orden(0, 'pantalla', false);
+    await bloque(k);
+  }
+} else {
 fase('B');  // varios a la vez y cambios de cámara; dos se van y vuelven (y hablan al volver)
 const finB = Date.now() + s(180e3), pendientes = [];
 async function espiarA(quien, por) { for (const j of quien) espias.push({ por, ...(await orden(j, 'espiar')) }); }
@@ -231,11 +263,11 @@ for (const k of [1, 2]) {
 await dormir(s(40e3));
 await hablar2(0, false);
 await dormir(3000);
+if (!SIN_D) {
 fase('D');  // se le corta el Wi-Fi a una máquina entera (sus participantes): 10 s y después 45 s (ahí el navegador reconecta)
-const gc = GRUPOS.length - 1, [c0, c1] = GRUPOS[gc], cortados = [...Array(c1 - c0 + 1).keys()].map((k) => c0 + k).filter((i) => i > 0);
+const gc = GRUPOS.length - 1, [c0, c1] = GRUPOS[gc]; cortados = [...Array(c1 - c0 + 1).keys()].map((k) => c0 + k).filter((i) => i > 0);
 const otro = (k) => 1 + (k % (c0 - 1));
 const corteG = (seg) => ctl('/control/orden', { para: null, g: gc, accion: 'corte', arg: seg }, 2).catch(() => ({ ok: false }));
-const cortes = [];
 const ronda = async (nombre, k) => { // uno de los cortados habla, después uno que no se cortó (¿lo oyen los cortados?)
   fases.push({ nombre, desde: ahora() });
   await hablar2(cortados[k % cortados.length], true); await dormir(5000); await hablar2(cortados[k % cortados.length], false); await dormir(1500);
@@ -254,6 +286,8 @@ for (const [arg, rondas] of [['10', ['D1']], ['45', ['D2', 'D3']], ['udp:45', ['
     await ronda(n, kk);
   }
   await dormir(10e3);
+}
+}
 }
 fase('fin');
 const fin = ahora();
@@ -275,28 +309,33 @@ function intervalos(inst, quien) { // [ini, fin) en que la instancia oye el tono
   if (ini != null) out.push([ini, inst.hasta]);
   return out;
 }
+const instCel = (inst) => CELULARES.has(+inst.id.slice(1, inst.id.indexOf('-')));
 const porFase = {}, detalle = [];
+const cubo = (k) => (porFase[k] ||= { lat: [], perdidas: 0, pares: 0, cortes: 0, cortesMs: [], segundos: 0 });
 for (const w of ventanas) {
   if (w.off == null) continue;
+  const musica = w.quien === NP;
   const D = { fase: w.fase, quien: w.quien, desde_s: Math.round((w.on - fases[0].desde) / 1000), dura_s: Math.round((w.off - w.on) / 1000), no: [], lentos: [] };
   detalle.push(D);
-  const F = (porFase[w.fase] ||= { lat: [], perdidas: 0, pares: 0, cortes: 0, cortesMs: [], segundos: 0 });
   for (const inst of instancias2) {
-    if (inst.i === w.quien || inst.desde == null || inst.desde > w.on - 5000 || inst.hasta < w.off) continue;
-    F.pares++;
+    if (inst.i === w.quien || (musica && inst.i === 0) || inst.desde == null || inst.desde > w.on - 5000 || inst.hasta < w.off) continue;
+    // en un celular lento el detector de la prueba mira cada ~120 ms: ahí solo cuentan los huecos de 400 ms o más
+    const oyeCel = instCel(inst), umbral = oyeCel ? 400 : 150, Fs = [cubo(w.fase)];
+    if (CELULARES.size && 'ABC'.includes(w.fase) && !musica) Fs.push(cubo(CELULARES.has(grupoDe(w.quien)) ? 'habla-cel' : oyeCel ? 'oye-cel' : 'compu'));
+    Fs.forEach((F) => F.pares++);
     const iv = intervalos(inst, w.quien).filter(([a, b]) => b > w.on && a < w.off + 1500);
     const primero = iv.find(([a]) => a >= w.on - 50);
-    if (!primero) { F.perdidas++; D.no.push(inst.id + ':P' + inst.i); continue; }
-    F.lat.push(primero[0] - w.on);
+    if (!primero) { Fs.forEach((F) => F.perdidas++); D.no.push(inst.id + ':P' + inst.i); continue; }
+    Fs.forEach((F) => F.lat.push(primero[0] - w.on));
     if (primero[0] - w.on > 800) D.lentos.push([inst.id + ':P' + inst.i, Math.round(primero[0] - w.on)]);
-    const hasta = w.off - 300; let prev = null; // cortes: huecos de 150 ms o más mientras habla
+    const hasta = w.off - 300; let prev = null; const huecos = []; // cortes: huecos mientras suena
     for (const [a, b] of iv) {
       if (a < primero[0]) continue;
-      if (prev != null && a < hasta && a - prev >= 150) { F.cortes++; F.cortesMs.push(a - prev); }
+      if (prev != null && a < hasta && a - prev >= umbral) huecos.push(a - prev);
       prev = b;
     }
-    if (prev != null && prev < hasta && hasta - prev >= 150) { F.cortes++; F.cortesMs.push(hasta - prev); }
-    F.segundos += Math.max(0, hasta - primero[0]) / 1000;
+    if (prev != null && prev < hasta && hasta - prev >= umbral) huecos.push(hasta - prev);
+    Fs.forEach((F) => { F.cortes += huecos.length; F.cortesMs.push(...huecos); F.segundos += Math.max(0, hasta - primero[0]) / 1000; });
   }
 }
 const latencia = {};
@@ -305,6 +344,13 @@ for (const [f, F] of Object.entries(porFase)) {
     en_1s: F.pares ? r1(100 * F.lat.filter((x) => x <= 1000).length / F.pares) : 0, no_se_oyo: F.perdidas,
     cortes: F.cortes, cortes_por_min: F.segundos ? r1(F.cortes / (F.segundos / 60)) : null, corte_mediano_ms: r0(med(F.cortesMs)), corte_max_ms: r0(pct(F.cortesMs, 1)) };
 }
+// memoria y tamaño de la conexión por fase (¿crece con el tiempo?)
+const memoria = {};
+fases.forEach((f, k) => {
+  const hasta = fases[k + 1]?.desde ?? Infinity, ms = muestras2.filter((m) => m.t >= f.desde && m.t < hasta);
+  const v = (c) => r0(med(ms.map((m) => m[c]).filter((x) => x != null)));
+  if (ms.length) memoria[f.nombre] = { heap_mb: v('heap'), transceivers: v('trans'), sdp_kb: v('sdp') };
+});
 const desdeA = fases.find((f) => f.nombre === 'A')?.desde || 0;
 const red = { buffer_ms: [], perdida_pct: [], ocultos_pct: [], rtt_ms: [], jitter_ms: [], audios: [], videos: [] };
 const ant = new Map();
@@ -327,7 +373,7 @@ const usoPor = {}; for (const c of cpu2) if (c.uso != null) (usoPor['g' + c.g] |
 const res = {
   version: VERSION, participantes: NP, maquinas: GRUPOS.length, entraron: instancias2.filter((x) => x.desde).length,
   red_simulada: process.env.RED || '', senal_simulada: { REQ_MS: process.env.REQ_MS, D1_MS: process.env.D1_MS },
-  latencia, red: resumenRed, errores_navegador: errNav, errores_servidor: errSrv, senal_servidor: senal,
+  latencia, memoria, red: resumenRed, errores_navegador: errNav, errores_servidor: errSrv, senal_servidor: senal,
   telemetria_sala: (servidor.filas || []).length, consola: consola2.length,
   consola_detalle: consola2.filter((c) => !/Failed to load resource/.test(c[2])).sort((a, b) => a[3] - b[3]).slice(0, 60).map((c) => ({ t_s: Math.round((c[3] - fases[0].desde) / 1000), P: c[0], m: c[2] })), consola_ejemplos: [...new Set(consola2.map((c) => c[2]))].slice(0, 8),
   fallas_inyeccion: instancias2.reduce((a, x) => a + (x.fallas?.length || 0), 0),
@@ -343,12 +389,17 @@ const res = {
 writeFileSync(`${OUT}/resultados.json`, JSON.stringify(res, null, 2));
 const L = (f) => latencia[f] || {};
 const fila = (f, nom) => `| ${nom} | ${L(f).pares ?? '-'} | ${L(f).mediana_ms ?? '-'} | ${L(f).p90_ms ?? '-'} | ${L(f).max_ms ?? '-'} | ${L(f).en_1s ?? '-'} % | ${L(f).no_se_oyo ?? '-'} | ${L(f).cortes ?? '-'} (${L(f).cortes_por_min ?? '-'}/min, máx ${L(f).corte_max_ms ?? '-'} ms) |`;
+const NOMBRES = { A: 'A: prende el mic de a uno', B: 'B: varios + cambios de cámara', C: 'C: clase + preguntas', D1: 'D1: 8 s después de un corte de Wi-Fi de 10 s',
+  D2: 'D2: 8 s después de un corte de 45 s', D3: 'D3: 25 s después del corte de 45 s', D4: 'D4: 8 s después de cortarse 45 s solo el audio/video', D5: 'D5: 25 s después de eso',
+  MUS: 'Música del anfitrión (se oye y cortes)', compu: 'A–C: habla y oye una compu', 'habla-cel': 'A–C: habla un celular lento', 'oye-cel': 'A–C: oye un celular lento' };
+const orden_ = [...fases.map((f) => f.nombre).filter((f) => latencia[f]), ...['MUS', 'compu', 'habla-cel', 'oye-cel'].filter((f) => latencia[f])];
+const filas = orden_.map((f) => fila(f, NOMBRES[f] || (f.startsWith('L') ? `Bloque ${+f.slice(1)} (min ${(+f.slice(1) - 1) * 5}–${+f.slice(1) * 5})${f === 'L03' || f === 'L04' ? ' + música' : f === 'L06' || f === 'L07' ? ' + pantalla' : ''}` : f))).join('\n');
 const md = `## Sala: ${VERSION} — ${res.entraron} entradas de ${NP} participantes en ${res.maquinas} máquinas\n\nRed simulada: ${res.red_simulada}. Señalización: ${res.senal_simulada.REQ_MS} ms por pedido + ${res.senal_simulada.D1_MS} ms por consulta a la D1.\n\n` +
   `| Fase | Pares | Se oye (mediana ms) | p90 | máx | ≤ 1 s | No se oyó | Cortes ≥150 ms |\n|---|---|---|---|---|---|---|---|\n` +
-  fila('A', 'A: prende el mic de a uno') + '\n' + fila('B', 'B: varios + cambios de cámara') + '\n' + fila('C', 'C: clase + preguntas') + '\n' +
-  fila('D1', 'D1: 8 s después de un corte de Wi-Fi de 10 s') + '\n' + fila('D2', 'D2: 8 s después de un corte de 45 s') + '\n' + fila('D3', 'D3: 25 s después del corte de 45 s') + '\n' +
-  fila('D4', 'D4: 8 s después de cortarse 45 s solo el audio/video') + '\n' + fila('D5', 'D5: 25 s después de eso') + '\n\n' +
-  `Cortes de Wi-Fi a P${cortados.join(', P')} (toda una máquina). ` +
+  filas + '\n\n' +
+  (cortados.length ? `Cortes de Wi-Fi a P${cortados.join(', P')} (toda una máquina). ` : '') +
+  (CELULARES.size ? `Celulares lentos (Android, procesador ×3, subida limitada): máquinas ${[...CELULARES].join(', ')}. ` : '') +
+  (LARGA ? `Memoria por bloque (MB · transceivers · SDP kB): ${Object.entries(memoria).map(([f, m]) => `${f} ${m.heap_mb}·${m.transceivers}·${m.sdp_kb}`).join(', ')}. ` : '') +
   `Red (getStats): buffer ${resumenRed.buffer_ms.mediana} ms (p90 ${resumenRed.buffer_ms.p90}), pérdida ${resumenRed.perdida_pct.mediana} % (p90 ${resumenRed.perdida_pct.p90}), ` +
   `audio inventado ${resumenRed.ocultos_pct.mediana} % (p90 ${resumenRed.ocultos_pct.p90}), RTT ${resumenRed.rtt_ms.mediana} ms, jitter ${resumenRed.jitter_ms.mediana} ms, audios recibidos ${resumenRed.audios.mediana}, videos ${resumenRed.videos.mediana}.\n\n` +
   `Errores de pulls/señal (navegador): ${JSON.stringify(errNav)}. Servidor: ${JSON.stringify(errSrv)}. Consola: ${consola2.length}. Telemetría guardada: ${res.telemetria_sala} filas. CPU (uso %): ${JSON.stringify(res.cpu_uso_pct)}.\n`;

@@ -27,6 +27,24 @@ function inyectar(YO, NP, SIN_DTX) {
     return c.captureStream(10).getVideoTracks()[0];
   }
   const md = navigator.mediaDevices;
+  // pantalla compartida: un lienzo de 640×360 (sin sonido)
+  md.getDisplayMedia = async () => {
+    const c = document.createElement('canvas'); c.width = 640; c.height = 360; const x = c.getContext('2d');
+    setInterval(() => { x.fillStyle = '#123'; x.fillRect(0, 0, 640, 360); x.fillStyle = '#fd0'; x.font = '40px sans-serif'; x.fillText('pantalla ' + (Date.now() % 100000), 20, 180); }, 100);
+    return c.captureStream(10);
+  };
+  // música (la pone el anfitrión): un archivo WAV de 4 s con un tono de 300 Hz que se repite (debajo de las voces)
+  window.__musica = async (on) => {
+    if (!on) return pararMusica();
+    const sr = 8000, n = sr * 4, b = new DataView(new ArrayBuffer(44 + n * 2));
+    const w = (o, t) => [...t].forEach((ch, k) => b.setUint8(o + k, ch.charCodeAt(0)));
+    w(0, 'RIFF'); b.setUint32(4, 36 + n * 2, true); w(8, 'WAVEfmt '); b.setUint32(16, 16, true); b.setUint16(20, 1, true); b.setUint16(22, 1, true);
+    b.setUint32(24, sr, true); b.setUint32(28, sr * 2, true); b.setUint16(32, 2, true); b.setUint16(34, 16, true); w(36, 'data'); b.setUint32(40, n * 2, true);
+    for (let k = 0; k < n; k++) b.setInt16(44 + k * 2, Math.round(9000 * Math.sin(2 * Math.PI * 300 * k / sr)), true);
+    await musicaArchivo(new File([b.buffer], 'tono.wav', { type: 'audio/wav' }));
+    if (S.musica?.el) S.musica.el.loop = true;
+    return !!S.musica;
+  };
   md.getUserMedia = async (c = {}) => {
     const t = [];
     if (c.audio) t.push(voz());
@@ -61,20 +79,21 @@ function inyectar(YO, NP, SIN_DTX) {
   }
   window.__fallas = [];
   window.__ev = []; // [ms, quién, 1 = se oye / 0 = deja de oírse]
-  const oigo = new Array(NP).fill(false);
+  const oigo = new Array(NP + 1).fill(false); // NP = la música del anfitrión (300 Hz)
   setInterval(() => {
     if (!AC) return;
-    const ahora = Date.now(), hay = new Array(NP).fill(false), ancho = AC.sampleRate / 2048;
+    const ahora = Date.now(), hay = new Array(NP + 1).fill(false), ancho = AC.sampleRate / 2048;
     for (const x of AN) {
       if (x.track.readyState !== 'live') continue;
       x.an.getFloatFrequencyData(x.buf);
       let mb = 0, mv = -Infinity;
       for (let b = 10; b < 140; b++) if (x.buf[b] > mv) { mv = x.buf[b]; mb = b; }
       if (mv < -50) continue; // silencio
+      if (Math.abs(mb * ancho - 300) < 2 * ancho) { hay[NP] = true; continue; }
       const s = Math.round((mb * ancho - 400) / 100);
       if (s >= 0 && s < NP && s !== YO && Math.abs(FREQ(s) - mb * ancho) < 2 * ancho) hay[s] = true;
     }
-    for (let s = 0; s < NP; s++) if (hay[s] !== oigo[s]) { oigo[s] = hay[s]; window.__ev.push([ahora, s, hay[s] ? 1 : 0]); }
+    for (let s = 0; s <= NP; s++) if (hay[s] !== oigo[s]) { oigo[s] = hay[s]; window.__ev.push([ahora, s, hay[s] ? 1 : 0]); }
   }, 40);
 
   // errores de la señalización que ve el navegador (pulls que fallan, HTTP 4xx/5xx)
@@ -96,7 +115,10 @@ function inyectar(YO, NP, SIN_DTX) {
   // resumen de getStats de todas mis conexiones (acumulado; la prueba saca las diferencias)
   window.__stats = async () => {
     const o = { lost: 0, recv: 0, jbd: 0, jbe: 0, conc: 0, tot: 0, jit: [], rtt: null, audios: 0, videos: 0, enviados: 0,
-      ac: typeof S !== 'undefined' && S.ac ? S.ac.state : 'sin', mic: typeof S !== 'undefined' ? !!S.mic : null };
+      ac: typeof S !== 'undefined' && S.ac ? S.ac.state : 'sin', mic: typeof S !== 'undefined' ? !!S.mic : null,
+      heap: performance.memory ? Math.round(performance.memory.usedJSHeapSize / 1e6) : null,
+      trans: typeof S !== 'undefined' && S.pc ? S.pc.getTransceivers().length : null,
+      sdp: typeof S !== 'undefined' && S.pc?.localDescription ? Math.round(S.pc.localDescription.sdp.length / 1000) : null };
     for (const pc of window.__pcs) {
       if (pc.connectionState === 'closed') continue;
       (await pc.getStats()).forEach((x) => {
