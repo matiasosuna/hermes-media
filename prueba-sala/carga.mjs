@@ -387,9 +387,9 @@ const usoPor = {}; for (const c of cpu2) if (c.uso != null) (usoPor['g' + c.g] |
 const res = {
   version: VERSION, participantes: NP, maquinas: GRUPOS.length, entraron: instancias2.filter((x) => x.desde).length,
   red_simulada: process.env.RED || '', senal_simulada: { REQ_MS: process.env.REQ_MS, D1_MS: process.env.D1_MS },
-  latencia, memoria, red: resumenRed, errores_navegador: errNav, errores_servidor: errSrv, senal_servidor: senal,
+  latencia, memoria, red: resumenRed, errores_navegador: errNav, errores_servidor: errSrv, senal_servidor: senal, pistas: (servidor.pistas || []).map((x) => ({ ...x, t_s: Math.round((x.t - fases[0].desde) / 1000) })),
   telemetria_sala: (servidor.filas || []).length, consola: consola2.length,
-  consola_detalle: consola2.filter((c) => !/Failed to load resource/.test(c[2])).sort((a, b) => a[3] - b[3]).slice(0, 60).map((c) => ({ t_s: Math.round((c[3] - fases[0].desde) / 1000), P: c[0], m: c[2] })), consola_ejemplos: [...new Set(consola2.map((c) => c[2]))].slice(0, 8),
+  consola_detalle: consola2.filter((c) => !/Failed to load resource/.test(c[2])).sort((a, b) => a[3] - b[3]).slice(0, 300).map((c) => ({ t_s: Math.round((c[3] - fases[0].desde) / 1000), P: c[0], m: c[2] })), consola_ejemplos: [...new Set(consola2.map((c) => c[2]))].slice(0, 8),
   fallas_inyeccion: instancias2.reduce((a, x) => a + (x.fallas?.length || 0), 0),
   cpu_uso_pct: Object.fromEntries(Object.entries(usoPor).map(([g, a]) => [g, { mediana: med(a), max: pct(a, 1) }])),
   envio: Object.fromEntries([...new Map(muestras2.map((m) => [m.inst, m])).values()].map((m) => [`P${m.i}#${m.inst}`, { enviados: m.enviados, ac: m.ac }])),

@@ -30,7 +30,7 @@ env.DB = { ...db0, prepare: (sql) => lento(db0.prepare(sql)), batch: async (s) =
 // el aviso al instante (Durable Object SalaAviso en producción): acá, WebSockets en este mismo servidor (paquete ws)
 const { WebSocketServer } = await import('ws');
 const wss = new WebSocketServer({ noServer: true }), socketsDe = new Map(); // sala → Set(ws)
-let avisos = 0;
+let avisos = 0; const pistas = []; // qué pistas quedan guardadas de cada uno después de publicar o quitar (para buscar carreras)
 env.AVISO = { idFromName: (n) => n, get: (sala) => ({ fetch: async (u) => {
   const url = new URL(u);
   if (url.pathname === '/avisar') {
@@ -102,7 +102,7 @@ const servidor = http.createServer(async (req, res) => {
     }
     if (url.pathname === '/debug/stats') { // la telemetría que guardó la sala (tabla sala_stats, si existe)
       let filas = []; try { filas = raw.prepare('SELECT * FROM sala_stats ORDER BY ts').all().map((r) => ({ ...r })); } catch (e) {}
-      res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ filas, rutas, errores, avisos }));
+      res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ filas, rutas, errores, avisos, pistas }));
     }
     if (url.pathname.startsWith('/api/')) {
       let body = ''; for await (const c of req) body += c;
@@ -125,6 +125,14 @@ const servidor = http.createServer(async (req, res) => {
           });
         } catch {}
       }
+      try {
+        const q = JSON.parse(body || '{}');
+        if ((ruta === 'sala/tracks' && (q.tracks || [])[0]?.location === 'local') || (ruta === 'sala/cerrar' && q.quitar?.length)) {
+          const g = raw.prepare('SELECT nombre, tracks FROM sala_gente WHERE session_id = ?').get(q.sessionId);
+          pistas.push({ t: Date.now(), ms: Math.round(performance.now() - t0), ruta, status: r.status, de: g?.nombre, pide: ruta === 'sala/cerrar' ? q.quitar : q.tracks.map((x) => x.trackName),
+            quedan: g ? JSON.parse(g.tracks || '[]').map((x) => x.trackName) : null });
+        }
+      } catch (e) {}
       const h = {}; r.headers.forEach((v, k) => { h[k] = v; });
       if (h['set-cookie']) h['set-cookie'] = h['set-cookie'].replace(/;\s*Secure/gi, '');
       res.writeHead(r.status, h); return res.end(buf);

@@ -43,8 +43,12 @@ function inyectar(YO, NP, SIN_DTX) {
     w(0, 'RIFF'); b.setUint32(4, 36 + n * 2, true); w(8, 'WAVEfmt '); b.setUint32(16, 16, true); b.setUint16(20, 1, true); b.setUint16(22, 1, true);
     b.setUint32(24, sr, true); b.setUint32(28, sr * 2, true); b.setUint16(32, 2, true); b.setUint16(34, 16, true); w(36, 'data'); b.setUint32(40, n * 2, true);
     for (let k = 0; k < n; k++) b.setInt16(44 + k * 2, Math.round(9000 * Math.sin(2 * Math.PI * 300 * k / sr)), true);
+    const antes = S.musica?.nombre || '-';
     await musicaArchivo(new File([b.buffer], 'tono.wav', { type: 'audio/wav' }));
     if (S.musica?.el) S.musica.el.loop = true;
+    const est = () => `${S.musica?.nombre || '-'} pub=${S.pub.musica?.mid ?? '-'}/${S.pub.musica?.direction ?? '-'} el=${S.musica?.el ? (S.musica.el.paused ? 'pausa' : 'suena') : '-'}`;
+    console.error(`MUS on antes=${antes} → ${est()}`);
+    setTimeout(() => console.error(`MUS +3s ${est()}`), 3000);
     return !!S.musica;
   };
   md.getUserMedia = async (c = {}) => {
@@ -80,6 +84,11 @@ function inyectar(YO, NP, SIN_DTX) {
     } catch (e) { window.__fallas.push(['vigilar', String(e)]); }
   }
   window.__fallas = [];
+  // registro para la prueba: avisos flotantes y quién para la música
+  document.addEventListener('DOMContentLoaded', () => setTimeout(() => {
+    if (typeof flotante === 'function') { const f = flotante; window.flotante = function (...a) { console.error('FLOT ' + String(a[0]).replace(/<[^>]+>/g, '').slice(0, 120)); return f.apply(this, a); }; }
+    if (typeof pararMusica === 'function') { const p = pararMusica; window.pararMusica = function (...a) { console.error('PARAR ' + (S.musica?.nombre || '-') + ' ' + String(new Error().stack).split('\n').slice(2, 5).map((x) => x.trim().split(' ')[1]).join(' < ')); return p.apply(this, a); }; }
+  }, 0));
   window.__ev = []; // [ms, quién, 1 = se oye / 0 = deja de oírse]
   const oigo = new Array(NP + 3).fill(false); // NP = la música del anfitrión (300 Hz), NP + 1 = veo la pantalla de otro, NP + 2 = oigo su sonido (3600 Hz)
   setInterval(() => {

@@ -23,9 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         v:
-          - { nombre: ahora, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
-          - { nombre: latido-3s, ref: sala-latido-rapido, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
-          - { nombre: aviso, ref: sala-aviso, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
+          - { nombre: aviso-a, ref: sala-aviso, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
+          - { nombre: aviso-b, ref: sala-aviso, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
         rol: [sala, g1, g2, g3, g4, g5]
     runs-on: ubuntu-latest
     timeout-minutes: 45
