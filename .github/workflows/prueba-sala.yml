@@ -23,8 +23,9 @@ jobs:
       fail-fast: false
       matrix:
         v:
-          - { nombre: ahora, ref: main }
-          - { nombre: arreglo, ref: sala-mic-rapido }
+          - { nombre: normal, ref: main, n: '17', grupos: '0-3,4-8,9-13,14-17', retardo: '200', jitter: '10', perdida: '3' }
+          - { nombre: red-mala, ref: main, n: '17', grupos: '0-3,4-8,9-13,14-17', retardo: '350', jitter: '30', perdida: '8' }
+          - { nombre: 24-personas, ref: main, n: '23', grupos: '0-5,6-11,12-17,18-23', retardo: '200', jitter: '10', perdida: '3' }
         rol: [sala, g1, g2, g3]
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -33,15 +34,15 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       VERSION: ${{ matrix.v.nombre }}
       SIN_DTX: ${{ matrix.v.sin_dtx || '' }}
-      N: '17'
-      GRUPOS: '0-3,4-8,9-13,14-17'
+      N: ${{ matrix.v.n }}
+      GRUPOS: ${{ matrix.v.grupos }}
       ESCALA: '1'
       REQ_MS: '20'
       D1_MS: '150'
-      RETARDO: '200'
-      JITTER: '10'
-      PERDIDA: '3'
-      RED: 'RTT ~200 ms, 3 % de pérdida entre dos personas, jitter ±10 ms, solo UDP'
+      RETARDO: ${{ matrix.v.retardo }}
+      JITTER: ${{ matrix.v.jitter }}
+      PERDIDA: ${{ matrix.v.perdida }}
+      RED: 'RTT ~${{ matrix.v.retardo }} ms, ${{ matrix.v.perdida }} % de pérdida entre dos personas, jitter ±${{ matrix.v.jitter }} ms, solo UDP'
     steps:
       - uses: actions/checkout@v4
       - name: Clave de la prueba
