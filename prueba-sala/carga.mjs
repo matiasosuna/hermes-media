@@ -66,7 +66,7 @@ async function abrir(i) {
     page.on('pageerror', (e) => consola.push([i, 'pageerror', String(e.message).slice(0, 160)]));
     page.on('console', (m) => { if (m.type() === 'error') consola.push([i, 'console', m.text().slice(0, 160)]); });
     await page.evaluateOnNewDocument(inyectar, i, NP, !!process.env.SIN_DTX);
-    await page.goto(`${BASE}/entrar-como?u=${i ? 'u' + i : 'owner'}&k=${TOKEN}`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/entrar-como?u=${i ? 'u' + i : 'owner'}&k=${TOKEN}`, { waitUntil: 'domcontentloaded', timeout: 90e3 });
     await page.waitForFunction(() => { const b = document.querySelector('#entrar'); return b && !b.disabled && b.offsetParent !== null; }, { timeout: 90e3 });
     await page.evaluate(() => document.querySelector('#entrar').click());
     await page.waitForFunction(() => typeof S !== 'undefined' && S.sid && S.pc && S.pc.connectionState === 'connected', { timeout: 90e3 });

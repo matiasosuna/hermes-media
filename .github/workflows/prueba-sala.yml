@@ -36,7 +36,7 @@ jobs:
       SIN_DTX: ${{ matrix.v.sin_dtx || '' }}
       N: '17'
       GRUPOS: '0-3,4-8,9-13,14-17'
-      ESCALA: '0.3'
+      ESCALA: '1'
       REQ_MS: '20'
       D1_MS: '150'
       RETARDO: '200'
@@ -72,7 +72,7 @@ jobs:
           head -3 servidor.log
           curl -sL -o cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && chmod +x cloudflared
           ./cloudflared --version
-          ./cloudflared tunnel --no-autoupdate --url http://127.0.0.1:8798 > tunel.log 2>&1 &
+          ./cloudflared tunnel --no-autoupdate --protocol http2 --url http://127.0.0.1:8798 > tunel.log 2>&1 &
           U=""; for i in $(seq 1 60); do U=$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' tunel.log | head -1); [ -n "$U" ] && break; sleep 1; done
           [ -n "$U" ] || { tail -20 tunel.log; exit 1; }
           for i in $(seq 1 60); do [ "$(curl -s -o /dev/null -w '%{http_code}' "$U/control/hora" -H "x-prueba: $PRUEBA_TOKEN")" = 200 ] && break; sleep 2; done
