@@ -23,7 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         v:
-          - { nombre: 24-personas, ref: main, n: '23', grupos: '0-3,4-7,8-11,12-15,16-19,20-23', retardo: '200', jitter: '10', perdida: '3' }
+          - { nombre: ahora, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3' }
+          - { nombre: reconexion, ref: sala-reconexion, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3' }
         rol: [sala, g1, g2, g3, g4, g5]
     runs-on: ubuntu-latest
     timeout-minutes: 45

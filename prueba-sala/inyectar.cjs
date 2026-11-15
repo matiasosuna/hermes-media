@@ -35,10 +35,12 @@ function inyectar(YO, NP, SIN_DTX) {
   };
 
   // conexiones de la sala (para getStats) y los audios que llegan (para oír los tonos)
-  window.__pcs = [];
+  window.__pcs = []; window.__pcev = [];
   const Orig = window.RTCPeerConnection;
   const PC = function (...a) {
-    const pc = new Orig(...a); window.__pcs.push(pc);
+    const pc = new Orig(...a); window.__pcs.push(pc); const n = window.__pcs.length;
+    pc.addEventListener('connectionstatechange', () => window.__pcev.push([Date.now(), n, 'c', pc.connectionState]));
+    pc.addEventListener('iceconnectionstatechange', () => window.__pcev.push([Date.now(), n, 'i', pc.iceConnectionState]));
     pc.addEventListener('track', (e) => { if (e.track.kind === 'audio') vigilar(e.track); });
     return pc;
   };

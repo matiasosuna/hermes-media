@@ -121,7 +121,8 @@ async function espiar(i) {
       tirados: [...(S.tirados || new Map())].map(([k, v]) => ({ k: k.slice(0, 8) + k.slice(k.indexOf('/')), mid: v.mid, n: (S.todos || []).find((g) => g.sessionId === v.sessionId)?.nombre })),
       pidiendo: [...(S.pidiendo || [])].map((k) => k.slice(0, 8) + k.slice(k.indexOf('/'))),
       fallo: [...(S.fallo || new Map())].map(([k, t]) => [k.slice(0, 8) + k.slice(k.indexOf('/')), Date.now() - t]),
-      tr, inb, out, ev: window.__ev.slice(-12), err: window.__err.slice(-5),
+      tr, inb, out, ev: window.__ev.slice(-12), err: window.__err.slice(-5), online: navigator.onLine,
+      pcev: (window.__pcev || []).slice(-16).map(([t, n, k, e]) => [t, n, k, e]),
     };
   }).catch((e) => ({ error: String(e.message).slice(0, 200) }));
   return { ok: true, i, inst: inst.id, t: ahora(), r };
@@ -147,9 +148,11 @@ async function ejecutor() {
           else if (o.accion === 'hablar') r = await hablar(o.para, !!o.arg);
           else if (o.accion === 'espiar') r = await espiar(o.para);
           else if (o.accion === 'corte') { // se le corta el Wi-Fi a esta máquina: todo lo que sale (UDP y TCP) durante o.arg s
-            const dev = execSync("ip route show default | awk '{print $5; exit}'").toString().trim(), seg = +o.arg;
+            // («udp:45» = se corta solo el audio y el video, la señal sigue: como pasar del Wi-Fi a los datos del celular)
+            const dev = execSync("ip route show default | awk '{print $5; exit}'").toString().trim(), udp = String(o.arg).startsWith('udp:'), seg = +String(o.arg).replace('udp:', '');
+            const cmd = udp ? `sudo tc qdisc change dev ${dev} parent 1:3 handle 30: netem loss 100%` : `sudo tc qdisc replace dev ${dev} root netem loss 100%`;
             const t = ahora() + 500; // contesta antes de cortar (si no, la respuesta no sale) y vuelve sola
-            setTimeout(() => { try { execSync(`sudo tc qdisc replace dev ${dev} root netem loss 100%`); log(`corte ${seg} s`); } catch (e) { log('corte falló', e.message); } }, 500);
+            setTimeout(() => { try { execSync(cmd); log(`corte ${udp ? 'udp ' : ''}${seg} s`); } catch (e) { log('corte falló', e.message); } }, 500);
             setTimeout(() => { try { execSync(`sudo env RETARDO=${process.env.RETARDO || 200} JITTER=${process.env.JITTER || 10} PERDIDA=${process.env.PERDIDA || 3} bash red.sh`); log('vuelve la red'); } catch (e) { log('no volvió la red', e.message); } }, 500 + seg * 1000);
             r = { ok: true, t, hasta: t + seg * 1000 };
           }
@@ -239,14 +242,16 @@ const ronda = async (nombre, k) => { // uno de los cortados habla, después uno 
   await hablar2(otro(k), true); await dormir(5000); await hablar2(otro(k), false); await dormir(1500);
 };
 await dormir(5000);
-for (const [seg, rondas] of [[10, ['D1']], [45, ['D2', 'D3']]]) {
-  const a = await corteG(seg); await dormir(seg * 1000 + 1000);
-  cortes.push({ s: seg, desde_s: a.t && Math.round((a.t - fases[0].desde) / 1000), hasta_s: a.hasta && Math.round((a.hasta - fases[0].desde) / 1000) });
+for (const [arg, rondas] of [['10', ['D1']], ['45', ['D2', 'D3']], ['udp:45', ['D4', 'D5']]]) {
+  const seg = +arg.replace('udp:', '');
+  const a = await corteG(arg); await dormir(seg * 1000 + 1000);
+  cortes.push({ tipo: arg, s: seg, desde_s: a.t && Math.round((a.t - fases[0].desde) / 1000), hasta_s: a.hasta && Math.round((a.hasta - fases[0].desde) / 1000) });
   await dormir(8000);
   for (const [k, n] of rondas.entries()) {
     if (k) await dormir(10e3);
-    await espiarA([cortados[(k + (seg === 45 ? 1 : 0)) % cortados.length], 1], `${n} antes de hablar`);
-    await ronda(n, k + (seg === 45 ? 1 : 0));
+    const kk = k + (seg === 45 ? 1 : 0) + (arg.startsWith('udp') ? 2 : 0);
+    await espiarA([cortados[kk % cortados.length], 1], `${n} antes de hablar`);
+    await ronda(n, kk);
   }
   await dormir(10e3);
 }
@@ -341,7 +346,8 @@ const fila = (f, nom) => `| ${nom} | ${L(f).pares ?? '-'} | ${L(f).mediana_ms ??
 const md = `## Sala: ${VERSION} — ${res.entraron} entradas de ${NP} participantes en ${res.maquinas} máquinas\n\nRed simulada: ${res.red_simulada}. Señalización: ${res.senal_simulada.REQ_MS} ms por pedido + ${res.senal_simulada.D1_MS} ms por consulta a la D1.\n\n` +
   `| Fase | Pares | Se oye (mediana ms) | p90 | máx | ≤ 1 s | No se oyó | Cortes ≥150 ms |\n|---|---|---|---|---|---|---|---|\n` +
   fila('A', 'A: prende el mic de a uno') + '\n' + fila('B', 'B: varios + cambios de cámara') + '\n' + fila('C', 'C: clase + preguntas') + '\n' +
-  fila('D1', 'D1: 8 s después de un corte de Wi-Fi de 10 s') + '\n' + fila('D2', 'D2: 8 s después de un corte de 45 s') + '\n' + fila('D3', 'D3: 25 s después del corte de 45 s') + '\n\n' +
+  fila('D1', 'D1: 8 s después de un corte de Wi-Fi de 10 s') + '\n' + fila('D2', 'D2: 8 s después de un corte de 45 s') + '\n' + fila('D3', 'D3: 25 s después del corte de 45 s') + '\n' +
+  fila('D4', 'D4: 8 s después de cortarse 45 s solo el audio/video') + '\n' + fila('D5', 'D5: 25 s después de eso') + '\n\n' +
   `Cortes de Wi-Fi a P${cortados.join(', P')} (toda una máquina). ` +
   `Red (getStats): buffer ${resumenRed.buffer_ms.mediana} ms (p90 ${resumenRed.buffer_ms.p90}), pérdida ${resumenRed.perdida_pct.mediana} % (p90 ${resumenRed.perdida_pct.p90}), ` +
   `audio inventado ${resumenRed.ocultos_pct.mediana} % (p90 ${resumenRed.ocultos_pct.p90}), RTT ${resumenRed.rtt_ms.mediana} ms, jitter ${resumenRed.jitter_ms.mediana} ms, audios recibidos ${resumenRed.audios.mediana}, videos ${resumenRed.videos.mediana}.\n\n` +
