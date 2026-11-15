@@ -56,7 +56,7 @@ const SLIDES = {
     h: 'TAROT CLUB', l: 'A study plan, with Hermes.', cta: CLUB },
   'club-study': { k: '☿ TAROT CLUB', arte: () => `<div class="arte"><div class="grilla">${MAZO.map((id) => `<img src="${MINI(id)}">`).join('')}</div></div>`,
     h: 'STUDY', l: 'All 78 cards, in depth.', cta: CLUB },
-  'club-journey': { k: '☿ TAROT CLUB', arte: () => carta('0'), h: 'YOUR JOURNEY', l: 'Exercises for your level, with feedback from Hermes.', cta: CLUB },
+  'club-journey': { k: '☿ TAROT CLUB', arte: () => carta('0'), h: 'YOUR JOURNEY', l: 'Exercises made for you, with feedback from Hermes.', cta: CLUB },
   'club-practices': { k: '☿ TAROT CLUB', arte: () => carta('XVII'), h: 'SPIRITUAL PRACTICES', l: 'Do them, and track your progress.', cta: CLUB },
   'club-tools': { k: '☿ TAROT CLUB', arte: () => carta('I'), h: 'ALSO INSIDE', l: 'Card table · Channels · Hermes Reader certificate', cta: CLUB },
   'club-recordings': { k: '☿ TAROT CLUB', arte: () => carta('IX'), h: 'RECORDINGS', l: 'Guided exercises and meditations by Hermes.', cta: CLUB },
@@ -64,12 +64,12 @@ const SLIDES = {
       <div class="n"><small>USD</small> 11</div><div class="m">per month · locked in while you stay</div>
       <div class="luego">Next: USD 22 · From Dec 1: USD 44</div><div class="pill">ONLY 10 FOUNDER SPOTS</div></div>`, cta: CLUB },
   // ---- destacada «Live Q&A» ----
-  'qa-1': { k: '☿ FREE · FOR EVERYONE', arte: () => carta('V'), h: 'LIVE Q&A', l: 'Bring your tarot question. Hermes answers live.', cta: BIO },
+  'qa-1': { k: '☿ TAROT CLUB', arte: () => carta('V'), h: 'LIVE Q&A', l: 'Bring your tarot question. Hermes answers live.', cta: BIO },
   'qa-2': { k: '☿ LIVE Q&A', arte: () => carta('II'), h: 'ASK BEFORE', l: 'A card, a spread, a reading you didn’t understand. Leave it on the web.', cta: BIO },
   // story del Q&A con la fecha cargada en el panel (/api/clases.js); sin fecha, el render falla a propósito y no se publica
-  'qa-fecha': { k: '☿ FREE · FOR EVERYONE', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: true, cta: BIO },
+  'qa-fecha': { k: '☿ TAROT CLUB', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: true, cta: BIO },
   // muestra para revisar el diseño (fecha de ejemplo, no se publica)
-  'qa-fecha-muestra': { k: '☿ FREE · FOR EVERYONE', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: { fecha: '2026-11-22', h: 16, mi: 44 }, cta: BIO },
+  'qa-fecha-muestra': { k: '☿ TAROT CLUB', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: { fecha: '2026-11-22', h: 16, mi: 44 }, cta: BIO },
   // ---- portadas ----
   'portada-club': { portada: '☿' },
   'portada-qa': { portada: '?' },
