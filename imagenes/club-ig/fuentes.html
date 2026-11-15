@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- Muestras de fuentes para el reel R2 del Club (15/11/2026): fuentes.html?o=A..F, 1080x1920. Solo para elegir; no se publica. -->
+<html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@700;800&family=Poppins:wght@600&family=Marcellus+SC&family=DM+Sans:opsz,wght@9..40,700&family=Playfair+Display:ital,wght@0,700;1,500&family=Lora:wght@700&display=block" rel="stylesheet">
+<style>
+:root { --dorado: #F2B84B; --crema: #F5ECDC; --noche: #0E1330; }
+* { margin: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: radial-gradient(ellipse at 50% 38%, #1d2554 0%, var(--noche) 70%); }
+.etq { position: absolute; top: 40px; left: 50px; font: 700 64px/1 'Montserrat', sans-serif; color: #fff; background: #c0392b; padding: 10px 26px; border-radius: 14px; }
+.carta { position: absolute; top: 150px; left: 50%; transform: translateX(-50%); height: 860px; border-radius: 20px; border: 3px solid var(--dorado); box-shadow: 0 0 80px rgba(242,184,75,.38), 0 34px 70px rgba(0,0,0,.6); }
+.titulo { position: absolute; top: 1050px; width: 100%; text-align: center; color: var(--dorado); text-shadow: 0 0 50px rgba(242,184,75,.45); }
+.items { position: absolute; top: 1170px; width: 100%; text-align: center; color: var(--crema); font-size: 52px; line-height: 66px; }
+.items .apag { opacity: .35; }
+.sub { position: absolute; top: 1550px; transform: translateY(-50%); width: 100%; text-align: center; color: #fff; }
+.sub b { color: #FFE14D; font-weight: inherit; }
+.marca { position: absolute; top: 1760px; width: 100%; text-align: center; font: 700 30px 'Cinzel'; letter-spacing: 8px; color: var(--dorado); opacity: .85; }
+.nombres { position: absolute; bottom: 30px; width: 100%; text-align: center; font: 600 26px 'DM Sans', sans-serif; color: rgba(255,255,255,.55); }
+</style></head><body>
+<div class="etq" id="etq"></div>
+<img class="carta" src="https://hermestarot444.com/cartas/0.jpg">
+<div class="titulo" id="t">YOUR JOURNEY</div>
+<div class="items" id="i"><div>Your level</div><div>Exercises made for you</div><div class="apag">Feedback from Hermes</div></div>
+<div class="sub" id="s">I read your <b>answers</b><br>and send you feedback.</div>
+<div class="marca">☿ HERMES TAROT 444</div>
+<div class="nombres" id="n"></div>
+<script>
+const O = {
+  // título, ítems, subtítulos
+  A: { n: 'Actual: Cinzel · EB Garamond · Arial (así sale hoy)', t: "700 92px/1 'Cinzel'", ts: '4px', i: "500 52px 'EB Garamond'", s: "700 62px/76px Arial, sans-serif", st: 'borde' },
+  B: { n: 'Cinzel · Cormorant Garamond · Montserrat', t: "700 96px/1 'Cinzel'", ts: '4px', i: "600 56px 'Cormorant Garamond'", s: "800 58px/74px 'Montserrat'", st: 'borde' },
+  C: { n: 'Cormorant Garamond · Cormorant itálica · Poppins', t: "700 104px/1 'Cormorant Garamond'", ts: '8px', i: "italic 500 58px 'Cormorant Garamond'", s: "600 58px/74px 'Poppins'", st: 'sombra' },
+  D: { n: 'Marcellus SC · EB Garamond · DM Sans en caja', t: "400 96px/1 'Marcellus SC'", ts: '4px', i: "600 54px 'EB Garamond'", s: "700 56px/72px 'DM Sans'", st: 'caja' },
+  E: { n: 'Playfair Display · Playfair itálica · Lora', t: "700 92px/1 'Playfair Display'", ts: '3px', i: "italic 500 54px 'Playfair Display'", s: "700 58px/74px 'Lora'", st: 'sombra' },
+  F: { n: 'Cinzel Decorative · Cormorant Garamond · Montserrat con palabra en caja', t: "700 84px/1 'Cinzel Decorative'", ts: '3px', i: "600 56px 'Cormorant Garamond'", s: "700 58px/76px 'Montserrat'", st: 'pastilla' },
+};
+const k = (new URLSearchParams(location.search).get('o') || 'A').toUpperCase(), o = O[k];
+document.getElementById('etq').textContent = k;
+document.getElementById('n').textContent = o.n;
+const t = document.getElementById('t'); t.style.font = o.t; t.style.letterSpacing = o.ts;
+document.getElementById('i').style.font = o.i;
+const s = document.getElementById('s'); s.style.font = o.s;
+if (o.st === 'borde') { s.style.webkitTextStroke = '10px #000'; s.style.paintOrder = 'stroke fill'; s.style.textShadow = '0 5px 10px rgba(0,0,0,.55)'; }
+if (o.st === 'sombra') { s.style.textShadow = '0 3px 18px rgba(0,0,0,.9), 0 0 4px rgba(0,0,0,.8)'; }
+if (o.st === 'caja') { s.innerHTML = '<span style="background:rgba(0,0,0,.55);padding:6px 22px;border-radius:14px;-webkit-box-decoration-break:clone;box-decoration-break:clone">I read your <b>answers</b><br>and send you feedback.</span>'; }
+if (o.st === 'pastilla') { s.style.textShadow = '0 3px 14px rgba(0,0,0,.9)'; s.innerHTML = 'I read your <b style="background:#F2B84B;color:#0E1330;padding:0 14px;border-radius:12px">answers</b><br>and send you feedback.'; }
+</script>
+</body></html>

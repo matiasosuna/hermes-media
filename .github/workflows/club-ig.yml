@@ -46,6 +46,14 @@ jobs:
           google-chrome --headless=new --disable-gpu --hide-scrollbars --window-size=1080,1350 --virtual-time-budget=15000 \
             --screenshot="$PWD/post/post-club.png" "file://$PWD/imagenes/club-ig/post.html" 2>/dev/null
           ls -la post
+      - name: Muestras de fuentes (fuentes.html?o=A..F)
+        run: |
+          mkdir -p fuentes
+          for o in A B C D E F; do
+            google-chrome --headless=new --disable-gpu --hide-scrollbars --window-size=1080,1920 --virtual-time-budget=15000 \
+              --screenshot="$PWD/fuentes/$o.png" "file://$PWD/imagenes/club-ig/fuentes.html?o=$o" 2>/dev/null
+          done
+          ffmpeg -loglevel error -y -pattern_type glob -i 'fuentes/*.png' -vf "scale=540:960,tile=3x2:padding=10:color=white" -frames:v 1 fuentes/hoja-fuentes.jpg
       - uses: actions/upload-artifact@v4
         with:
           name: club-ig
@@ -53,3 +61,4 @@ jobs:
             out/*.png
             hoja.jpg
             post/*.png
+            fuentes/*
