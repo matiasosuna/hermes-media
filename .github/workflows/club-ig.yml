@@ -26,7 +26,7 @@ jobs:
         run: |
           set -euo pipefail
           T=imagenes/club-ig/slide.html
-          [ -n "$IDS" ] || IDS=$(grep -oE "^  '[a-z0-9-]+':" "$T" | tr -d "': ")
+          [ -n "$IDS" ] || IDS=$(grep -oE "^  '[a-z0-9-]+':" "$T" | tr -d "': " | grep -vx 'qa-fecha')  # qa-fecha solo con fecha cargada
           mkdir -p out
           for id in $IDS; do
             [[ "$id" =~ ^[a-z0-9-]+$ ]] || { echo "id inválido: $id"; exit 1; }
