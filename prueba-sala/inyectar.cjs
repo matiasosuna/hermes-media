@@ -5,7 +5,7 @@
 function inyectar(YO, NP, SIN_DTX) {
   // la prueba no tiene placa de video: sin animaciones ni filtros (no cambian el audio, solo bajan la CPU)
   document.addEventListener('DOMContentLoaded', () => { const st = document.createElement('style'); st.textContent = '*,*::before,*::after{animation:none!important;transition:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important;box-shadow:none!important}'; document.head.appendChild(st); });
-  const FREQ = (i) => 400 + 120 * i;
+  const FREQ = (i) => 400 + 100 * i; // hasta 30 personas debajo de 3,4 kHz (más arriba el detector no los veía)
   let AC = null;
   const ac = () => { if (!AC) { AC = new AudioContext(); } if (AC.state !== 'running') AC.resume().catch(() => {}); return AC; };
   window.__hablando = false;
@@ -69,8 +69,8 @@ function inyectar(YO, NP, SIN_DTX) {
       let mb = 0, mv = -Infinity;
       for (let b = 10; b < 140; b++) if (x.buf[b] > mv) { mv = x.buf[b]; mb = b; }
       if (mv < -50) continue; // silencio
-      const s = Math.round((mb * ancho - 400) / 120);
-      if (s >= 0 && s < NP && s !== YO && Math.abs(FREQ(s) - mb * ancho) < 2.5 * ancho) hay[s] = true;
+      const s = Math.round((mb * ancho - 400) / 100);
+      if (s >= 0 && s < NP && s !== YO && Math.abs(FREQ(s) - mb * ancho) < 2 * ancho) hay[s] = true;
     }
     for (let s = 0; s < NP; s++) if (hay[s] !== oigo[s]) { oigo[s] = hay[s]; window.__ev.push([ahora, s, hay[s] ? 1 : 0]); }
   }, 40);
