@@ -3,6 +3,9 @@
 #   gh workflow run club-ig -R matiasosuna/hermes-media --ref club-ig -f ids="club-1 club-study"
 name: club-ig
 on:
+  push:
+    branches: [club-ig]
+    paths: ['imagenes/club-ig/**', '.github/workflows/club-ig.yml']
   workflow_dispatch:
     inputs:
       ids:
@@ -19,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Renderizar
         env:
-          IDS: ${{ inputs.ids }}
+          IDS: ${{ inputs.ids || '' }}
         run: |
           set -euo pipefail
           T=imagenes/club-ig/slide.html
