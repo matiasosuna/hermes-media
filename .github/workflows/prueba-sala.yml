@@ -53,7 +53,7 @@ jobs:
         working-directory: prueba-sala
         run: npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 >/dev/null && google-chrome --version
       - name: Red de lejos (netem)
-        run: sudo -E bash prueba-sala/red.sh
+        run: sudo env RETARDO="$RETARDO" JITTER="$JITTER" PERDIDA="$PERDIDA" bash prueba-sala/red.sh
       - name: Sala de prueba (servidor local)
         run: |
           node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 "$N" > servidor.log 2>&1 &
