@@ -87,7 +87,8 @@ function inyectar(YO, NP) {
 
   // resumen de getStats de todas mis conexiones (acumulado; la prueba saca las diferencias)
   window.__stats = async () => {
-    const o = { lost: 0, recv: 0, jbd: 0, jbe: 0, conc: 0, tot: 0, jit: [], rtt: null, audios: 0, videos: 0 };
+    const o = { lost: 0, recv: 0, jbd: 0, jbe: 0, conc: 0, tot: 0, jit: [], rtt: null, audios: 0, videos: 0, enviados: 0,
+      ac: typeof S !== 'undefined' && S.ac ? S.ac.state : 'sin', mic: typeof S !== 'undefined' ? !!S.mic : null };
     for (const pc of window.__pcs) {
       if (pc.connectionState === 'closed') continue;
       (await pc.getStats()).forEach((x) => {
@@ -98,6 +99,7 @@ function inyectar(YO, NP) {
           if (x.jitter != null && x.packetsReceived) o.jit.push(x.jitter);
         }
         if (x.type === 'inbound-rtp' && x.kind === 'video' && x.framesDecoded) o.videos++;
+        if (x.type === 'outbound-rtp' && x.kind === 'audio') o.enviados += x.packetsSent || 0;
         if (x.type === 'candidate-pair' && x.nominated && x.state === 'succeeded' && x.currentRoundTripTime != null) o.rtt = x.currentRoundTripTime;
       });
     }

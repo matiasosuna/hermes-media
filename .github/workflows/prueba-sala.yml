@@ -31,7 +31,8 @@ jobs:
       REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
       VERSION: ${{ matrix.v.nombre }}
       N: '17'
-      ESCALA: ${{ inputs.escala || '1' }}
+      ESCALA: ${{ inputs.escala || '0.3' }}
+      CHROME_EXTRA: ''
       REQ_MS: '20'
       D1_MS: '150'
       RETARDO: '200'

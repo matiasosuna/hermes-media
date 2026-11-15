@@ -58,7 +58,17 @@ http.createServer(async (req, res) => {
       const ruta = url.pathname.replace('/api/', '');
       (rutas[ruta] ||= []).push(Math.round(performance.now() - t0));
       if (r.status >= 400 && ruta !== 'sala/stats') errores.push({ t: Date.now(), ruta, status: r.status, code: (() => { try { return JSON.parse(buf).error; } catch { return ''; } })() });
-      else if (ruta === 'sala/tracks') { try { for (const x of JSON.parse(buf).tracks || []) if (x.errorCode) errores.push({ t: Date.now(), ruta, code: x.errorCode }); } catch {} }
+      else if (ruta === 'sala/tracks') {
+        try {
+          const pedidos = JSON.parse(body).tracks || [];
+          (JSON.parse(buf).tracks || []).forEach((x, k) => {
+            if (!x.errorCode) return;
+            const q = pedidos.find((p) => p.sessionId === x.sessionId && p.trackName === x.trackName) || pedidos[k] || {};
+            const g = q.sessionId && raw.prepare('SELECT nombre FROM sala_gente WHERE session_id = ?').get(q.sessionId);
+            errores.push({ t: Date.now(), ruta, code: x.errorCode, de: g ? g.nombre : 'sesión que ya no está', track: q.trackName });
+          });
+        } catch {}
+      }
       const h = {}; r.headers.forEach((v, k) => { h[k] = v; });
       if (h['set-cookie']) h['set-cookie'] = h['set-cookie'].replace(/;\s*Secure/gi, '');
       res.writeHead(r.status, h); return res.end(buf);

@@ -5,8 +5,9 @@
 // uno, los cortes, getStats (buffer, pérdida, RTT) y los errores de los pulls. Escribe resultados.json y resumen.md.
 import puppeteer from 'puppeteer-core';
 import { createRequire } from 'node:module';
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import os from 'node:os';
+import { execSync } from 'node:child_process';
 const { inyectar } = createRequire(import.meta.url)('./inyectar.cjs');
 
 const BASE = process.env.BASE || 'http://127.0.0.1:8798';
@@ -30,7 +31,7 @@ async function abrir(i) {
     executablePath: CHROME, headless: true, defaultViewport: { width: 1280, height: 720 },
     args: ['--no-sandbox', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required',
       '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows',
-      '--window-size=1280,720', '--disable-dev-shm-usage'],
+      '--window-size=1280,720', ...(process.env.CHROME_EXTRA || '').split(' ').filter(Boolean)],
   });
   const page = await browser.newPage();
   page.on('pageerror', (e) => consola.push([i, 'pageerror', String(e.message).slice(0, 160)]));
@@ -68,7 +69,19 @@ async function hablar(i, on) {
   else { hablando.get(i).off = t; hablando.delete(i); }
 }
 async function muestrear() {
-  const l = os.loadavg()[0]; cpu.push({ t: Date.now(), carga: l });
+  // CPU: uso real (de /proc/stat) y quién lo gasta (procesos de Chrome por tipo, node)
+  const st = () => readFileSync('/proc/stat', 'utf8').split('\n')[0].split(/\s+/).slice(1).map(Number);
+  const a = st(); await dormir(1000); const b = st();
+  const tot = b.reduce((x, y) => x + y, 0) - a.reduce((x, y) => x + y, 0), ocio = (b[3] + b[4]) - (a[3] + a[4]);
+  const grupos = {};
+  try {
+    for (const l of execSync('ps -eo pcpu=,args=', { encoding: 'utf8', maxBuffer: 1 << 24 }).split('\n')) {
+      const m = l.trim().match(/^([\d.]+)\s+(.*)$/); if (!m) continue;
+      const tipo = /chrome/.test(m[2]) ? 'chrome ' + ((m[2].match(/--type=([\w-]+)/) || [, 'browser'])[1] + ((m[2].match(/--utility-sub-type=([\w.]+)/) || [, ''])[1] ? ':' + m[2].match(/--utility-sub-type=([\w.]+)/)[1].split('.').pop() : '')) : /node/.test(m[2]) ? 'node' : 'otro';
+      grupos[tipo] = Math.round((grupos[tipo] || 0) + +m[1]);
+    }
+  } catch (e) {}
+  cpu.push({ t: Date.now(), carga: os.loadavg()[0], uso: tot ? Math.round(100 * (1 - ocio / tot)) : null, grupos });
   await Promise.all(P.filter(Boolean).map(async (inst) => {
     try { muestras.push({ t: Date.now(), i: inst.i, inst: instancias.indexOf(inst), ...(await inst.page.evaluate(() => window.__stats())) }); } catch (e) {}
   }));
@@ -174,7 +187,7 @@ for (const m of muestras) {
 }
 const resumenRed = Object.fromEntries(Object.entries(red).map(([k, a]) => [k, { mediana: r1(med(a)), p90: r1(pct(a, 0.9)), max: r1(pct(a, 1)) }]));
 const errNav = {}; for (const inst of instancias) for (const [, ruta, c] of inst.err || []) { const k = ruta + ' ' + c; errNav[k] = (errNav[k] || 0) + 1; }
-const errSrv = {}; for (const e of servidor.errores || []) { const k = e.ruta + ' ' + (e.code || e.status); errSrv[k] = (errSrv[k] || 0) + 1; }
+const errSrv = {}; for (const e of servidor.errores || []) { const k = e.ruta + ' ' + (e.code || e.status) + (e.de ? ` (${e.de} / ${e.track})` : ''); errSrv[k] = (errSrv[k] || 0) + 1; }
 const senal = Object.fromEntries(Object.entries(servidor.rutas || {}).map(([k, a]) => [k, { n: a.length, mediana_ms: med(a), p90_ms: pct(a, 0.9) }]));
 const entraron = instancias.filter((x) => x.desde).length;
 const res = {
@@ -182,7 +195,10 @@ const res = {
   latencia, red: resumenRed, errores_navegador: errNav, errores_servidor: errSrv, senal_servidor: senal,
   telemetria_sala: (servidor.filas || []).length, consola: consola.length, consola_ejemplos: [...new Set(consola.map((c) => c[2]))].slice(0, 8),
   fallas_inyeccion: instancias.reduce((a, x) => a + (x.fallas?.length || 0), 0),
-  carga_cpu: { mediana: r1(med(cpu.map((c) => c.carga))), max: r1(pct(cpu.map((c) => c.carga), 1)), nucleos: os.cpus().length },
+  carga_cpu: { mediana: r1(med(cpu.map((c) => c.carga))), max: r1(pct(cpu.map((c) => c.carga), 1)), nucleos: os.cpus().length,
+    uso_pct: r0(med(cpu.map((c) => c.uso).filter((x) => x != null))), grupos_mitad: cpu[Math.floor(cpu.length / 2)]?.grupos },
+  // por participante, al final: paquetes de audio que mandó y estado del AudioContext de la sala
+  envio: Object.fromEntries([...new Map(muestras.map((m) => [m.inst, m])).values()].map((m) => [`P${m.i}#${m.inst}`, { enviados: m.enviados, ac: m.ac }])),
   duracion_s: Math.round((Date.now() - T0) / 1000),
 };
 writeFileSync(`${OUT}/resultados.json`, JSON.stringify(res, null, 2));
