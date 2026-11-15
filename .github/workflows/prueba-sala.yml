@@ -34,10 +34,10 @@ jobs:
       ESCALA: ${{ inputs.escala || '1' }}
       REQ_MS: '20'
       D1_MS: '150'
-      RETARDO: '100'
+      RETARDO: '200'
       JITTER: '10'
-      PERDIDA: '1.5'
-      RED: 'RTT ~200 ms, 1,5 % de pérdida por sentido (~3 % entre dos personas), jitter ±10 ms, solo UDP'
+      PERDIDA: '3'
+      RED: 'RTT ~200 ms, 3 % de pérdida entre dos personas, jitter ±10 ms, solo UDP'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
