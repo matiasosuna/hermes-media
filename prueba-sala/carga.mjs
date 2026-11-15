@@ -103,6 +103,29 @@ async function muestrear() {
     try { muestras.push({ t: ahora(), i: inst.i, inst: inst.id, ...(await inst.page.evaluate(() => window.__stats())) }); } catch (e) {}
   }));
 }
+// foto del estado de la sala en un navegador (para entender un caso raro, ej. alguien que vuelve y no se oye)
+async function espiar(i) {
+  const inst = P.get(i); if (!inst) return { ok: false };
+  const r = await inst.page.evaluate(async () => {
+    const pc = S.pc, st = pc ? await pc.getStats() : new Map(), inb = [], out = [];
+    st.forEach((x) => {
+      if (x.type === 'inbound-rtp' && x.kind === 'audio') inb.push({ mid: x.mid, bytes: x.bytesReceived, pk: x.packetsReceived, nivel: x.audioLevel });
+      if (x.type === 'outbound-rtp' && x.kind === 'audio') out.push({ mid: x.mid, pk: x.packetsSent, bytes: x.bytesSent, act: x.active });
+    });
+    const tr = pc ? pc.getTransceivers().map((t) => ({ mid: t.mid, dir: t.currentDirection, kind: t.receiver.track?.kind, rs: t.receiver.track?.readyState, muted: t.receiver.track?.muted })) : [];
+    return {
+      sid: S.sid, mic: S.mic, sinSonido: S.sinSonido, pubAudio: !!S.pub?.audio,
+      sender: S.pub?.audio ? { rs: S.pub.audio.sender.track?.readyState, en: S.pub.audio.sender.track?.enabled, label: S.pub.audio.sender.track?.label?.slice(0, 30), mid: S.pub.audio.transceiver?.mid ?? S.pub.audio.mid } : null,
+      gente: (S.todos || []).map((g) => ({ n: g.nombre, s: String(g.sessionId).slice(0, 8), yo: !!g.yo, mio: !!g.mio, extra: !!g.extra, grupo: g.grupo, tracks: (g.tracks || []).map((x) => x.kind + ':' + x.trackName) })),
+      enGente: (S.gente || []).length,
+      tirados: [...(S.tirados || new Map())].map(([k, v]) => ({ k: k.slice(0, 8) + k.slice(k.indexOf('/')), mid: v.mid })),
+      pidiendo: [...(S.pidiendo || [])].map((k) => k.slice(0, 8) + k.slice(k.indexOf('/'))),
+      fallo: [...(S.fallo || new Map())].map(([k, t]) => [k.slice(0, 8) + k.slice(k.indexOf('/')), Date.now() - t]),
+      tr, inb, out, ev: window.__ev.slice(-12), err: window.__err.slice(-5),
+    };
+  }).catch((e) => ({ error: String(e.message).slice(0, 200) }));
+  return { ok: true, i, inst: inst.id, t: ahora(), r };
+}
 async function datos() {
   for (const inst of P.values()) await juntar(inst);
   return { g: G, cpu, consola, muestras, instancias: instancias.map(({ browser, page, ...x }) => x) }; // hasta = null: sigue adentro
@@ -122,6 +145,7 @@ async function ejecutor() {
           if (o.accion === 'abrir') r = await abrir(o.para);
           else if (o.accion === 'cerrar') r = await cerrar(o.para);
           else if (o.accion === 'hablar') r = await hablar(o.para, !!o.arg);
+          else if (o.accion === 'espiar') r = await espiar(o.para);
           else if (o.accion === 'datos') { clearInterval(reloj); await muestrear(); r = await datos(); }
           else if (o.accion === 'fin') { seguir = false; r = { ok: true }; }
         } catch (e) { r = { ok: false, error: String(e.message).slice(0, 120) }; }
@@ -170,7 +194,10 @@ for (let i = 0; i <= N; i++) { await hablar2(i, true); await dormir(s(8000)); aw
 
 fase('B');  // varios a la vez y cambios de cámara; dos se van y vuelven (y hablan al volver)
 const finB = Date.now() + s(180e3), pendientes = [];
-const vuelve = (i) => entra(i).then(() => dormir(15e3)).then(() => hablar2(i, true)).then(() => dormir(5000)).then(() => hablar2(i, false));
+const espias = [];
+const espiarA = async (quien, por) => { for (const j of quien) espias.push({ por, ...(await orden(j, 'espiar')) }); };
+const vuelve = (i) => entra(i).then(() => dormir(3000)).then(() => espiarA([i, 1], `P${i} volvió +3 s`)).then(() => dormir(12e3))
+  .then(() => hablar2(i, true)).then(() => dormir(2500)).then(() => espiarA([i, 1], `P${i} habla +2.5 s`)).then(() => dormir(2500)).then(() => hablar2(i, false));
 for (const [ms, f] of [[s(50e3), () => sale(5)], [s(60e3), () => vuelve(5)], [s(110e3), () => sale(12)], [s(120e3), () => vuelve(12)]])
   pendientes.push(dormir(ms).then(f).catch((e) => log('evento B falló:', e.message)));
 while (Date.now() < finB) {
@@ -271,6 +298,7 @@ const res = {
   duracion_s: Math.round((Date.now() - T0) / 1000),
   // las ventanas con alguien que no oyó o tardó más de 0,8 s; y cuándo entró/salió cada instancia
   ventanas_raras: detalle.filter((d) => d.no.length || d.lentos.length),
+  espias,
   instancias: instancias2.map((x) => ({ id: x.id, i: x.i, entro_s: x.desde && Math.round((x.desde - fases[0].desde) / 1000), salio_s: x.hasta === fin ? null : Math.round((x.hasta - fases[0].desde) / 1000) })),
   fases: fases.map((f) => ({ nombre: f.nombre, desde_s: Math.round((f.desde - fases[0].desde) / 1000) })),
 };
