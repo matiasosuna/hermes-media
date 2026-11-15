@@ -63,8 +63,8 @@ async function abrir(i) {
   });
   try {
     const page = await browser.newPage();
-    page.on('pageerror', (e) => consola.push([i, 'pageerror', String(e.message).slice(0, 160)]));
-    page.on('console', (m) => { if (m.type() === 'error') consola.push([i, 'console', m.text().slice(0, 160)]); });
+    page.on('pageerror', (e) => consola.push([i, 'pageerror', String(e.message).slice(0, 220), ahora()]));
+    page.on('console', (m) => { if (m.type() === 'error') consola.push([i, 'console', m.text().slice(0, 220), ahora()]); });
     await page.evaluateOnNewDocument(inyectar, i, NP, !!process.env.SIN_DTX);
     await page.goto(`${BASE}/entrar-como?u=${i ? 'u' + i : 'owner'}&k=${TOKEN}`, { waitUntil: 'domcontentloaded', timeout: 90e3 });
     await page.waitForFunction(() => { const b = document.querySelector('#entrar'); return b && !b.disabled && b.offsetParent !== null; }, { timeout: 90e3 });
@@ -114,7 +114,7 @@ async function espiar(i) {
     });
     const tr = pc ? pc.getTransceivers().map((t) => ({ mid: t.mid, dir: t.currentDirection, kind: t.receiver.track?.kind, rs: t.receiver.track?.readyState, muted: t.receiver.track?.muted })) : [];
     return {
-      sid: S.sid, mic: S.mic, sinSonido: S.sinSonido, pubAudio: !!S.pub?.audio,
+      sid: S.sid, pcEstado: S.pc?.connectionState, ice: S.pc?.iceConnectionState, pcs: (window.__pcs || []).length, reintentos: S.reintentos, reconectando: S.reconectando, mic: S.mic, sinSonido: S.sinSonido, pubAudio: !!S.pub?.audio,
       sender: S.pub?.audio ? { rs: S.pub.audio.sender.track?.readyState, en: S.pub.audio.sender.track?.enabled, label: S.pub.audio.sender.track?.label?.slice(0, 30), mid: S.pub.audio.transceiver?.mid ?? S.pub.audio.mid } : null,
       gente: (S.todos || []).map((g) => ({ n: g.nombre, s: String(g.sessionId).slice(0, 8), yo: !!g.yo, mio: !!g.mio, extra: !!g.extra, grupo: g.grupo, tracks: (g.tracks || []).map((x) => x.kind + ':' + x.trackName) })),
       enGente: (S.gente || []).length,
@@ -146,10 +146,12 @@ async function ejecutor() {
           else if (o.accion === 'cerrar') r = await cerrar(o.para);
           else if (o.accion === 'hablar') r = await hablar(o.para, !!o.arg);
           else if (o.accion === 'espiar') r = await espiar(o.para);
-          else if (o.accion === 'red') { // corte de Wi-Fi de toda esta máquina: pérdida o.arg % en la subida UDP (100 = cortado)
-            const dev = execSync("ip route show default | awk '{print $5; exit}'").toString().trim();
-            execSync(`sudo tc qdisc change dev ${dev} parent 1:3 handle 30: netem delay ${process.env.RETARDO || 200}ms ${process.env.JITTER || 10}ms distribution normal loss ${+o.arg}%`);
-            log(`red: pérdida ${o.arg} %`); r = { ok: true, t: ahora() };
+          else if (o.accion === 'corte') { // se le corta el Wi-Fi a esta máquina: todo lo que sale (UDP y TCP) durante o.arg s
+            const dev = execSync("ip route show default | awk '{print $5; exit}'").toString().trim(), seg = +o.arg;
+            const t = ahora() + 500; // contesta antes de cortar (si no, la respuesta no sale) y vuelve sola
+            setTimeout(() => { try { execSync(`sudo tc qdisc replace dev ${dev} root netem loss 100%`); log(`corte ${seg} s`); } catch (e) { log('corte falló', e.message); } }, 500);
+            setTimeout(() => { try { execSync(`sudo env RETARDO=${process.env.RETARDO || 200} JITTER=${process.env.JITTER || 10} PERDIDA=${process.env.PERDIDA || 3} bash red.sh`); log('vuelve la red'); } catch (e) { log('no volvió la red', e.message); } }, 500 + seg * 1000);
+            r = { ok: true, t, hasta: t + seg * 1000 };
           }
           else if (o.accion === 'datos') { clearInterval(reloj); await muestrear(); r = await datos(); }
           else if (o.accion === 'fin') { seguir = false; r = { ok: true }; }
@@ -226,7 +228,7 @@ await dormir(3000);
 fase('D');  // se le corta el Wi-Fi a una máquina entera (sus participantes): 10 s y después 45 s (ahí el navegador reconecta)
 const gc = GRUPOS.length - 1, [c0, c1] = GRUPOS[gc], cortados = [...Array(c1 - c0 + 1).keys()].map((k) => c0 + k).filter((i) => i > 0);
 const otro = (k) => 1 + (k % (c0 - 1));
-const redG = (p) => ctl('/control/orden', { para: null, g: gc, accion: 'red', arg: p }, 2).catch(() => ({ ok: false }));
+const corteG = (seg) => ctl('/control/orden', { para: null, g: gc, accion: 'corte', arg: seg }, 2).catch(() => ({ ok: false }));
 const cortes = [];
 const ronda = async (nombre, k) => { // uno de los cortados habla, después uno que no se cortó (¿lo oyen los cortados?)
   fases.push({ nombre, desde: ahora() });
@@ -235,10 +237,14 @@ const ronda = async (nombre, k) => { // uno de los cortados habla, después uno 
 };
 await dormir(5000);
 for (const [seg, rondas] of [[10, ['D1']], [45, ['D2', 'D3']]]) {
-  const a = await redG(100); await dormir(seg * 1000); const b = await redG(process.env.PERDIDA || 3);
-  cortes.push({ s: seg, desde_s: a.t && Math.round((a.t - fases[0].desde) / 1000), hasta_s: b.t && Math.round((b.t - fases[0].desde) / 1000) });
+  const a = await corteG(seg); await dormir(seg * 1000 + 1000);
+  cortes.push({ s: seg, desde_s: a.t && Math.round((a.t - fases[0].desde) / 1000), hasta_s: a.hasta && Math.round((a.hasta - fases[0].desde) / 1000) });
   await dormir(8000);
-  for (const [k, n] of rondas.entries()) { if (k) await dormir(10e3); await ronda(n, k + (seg === 45 ? 1 : 0)); }
+  for (const [k, n] of rondas.entries()) {
+    if (k) await dormir(10e3);
+    await espiarA([cortados[(k + (seg === 45 ? 1 : 0)) % cortados.length], 1], `${n} antes de hablar`);
+    await ronda(n, k + (seg === 45 ? 1 : 0));
+  }
   await dormir(10e3);
 }
 fase('fin');
@@ -314,7 +320,8 @@ const res = {
   version: VERSION, participantes: NP, maquinas: GRUPOS.length, entraron: instancias2.filter((x) => x.desde).length,
   red_simulada: process.env.RED || '', senal_simulada: { REQ_MS: process.env.REQ_MS, D1_MS: process.env.D1_MS },
   latencia, red: resumenRed, errores_navegador: errNav, errores_servidor: errSrv, senal_servidor: senal,
-  telemetria_sala: (servidor.filas || []).length, consola: consola2.length, consola_ejemplos: [...new Set(consola2.map((c) => c[2]))].slice(0, 8),
+  telemetria_sala: (servidor.filas || []).length, consola: consola2.length,
+  consola_detalle: consola2.filter((c) => !/Failed to load resource/.test(c[2])).sort((a, b) => a[3] - b[3]).slice(0, 60).map((c) => ({ t_s: Math.round((c[3] - fases[0].desde) / 1000), P: c[0], m: c[2] })), consola_ejemplos: [...new Set(consola2.map((c) => c[2]))].slice(0, 8),
   fallas_inyeccion: instancias2.reduce((a, x) => a + (x.fallas?.length || 0), 0),
   cpu_uso_pct: Object.fromEntries(Object.entries(usoPor).map(([g, a]) => [g, { mediana: med(a), max: pct(a, 1) }])),
   envio: Object.fromEntries([...new Map(muestras2.map((m) => [m.inst, m])).values()].map((m) => [`P${m.i}#${m.inst}`, { enviados: m.enviados, ac: m.ac }])),
