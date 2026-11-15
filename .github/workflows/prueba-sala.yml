@@ -24,12 +24,14 @@ jobs:
       matrix:
         v:
           - { nombre: ahora, ref: main }
+          - { nombre: ahora-sin-dtx, ref: main, sin_dtx: '1' }
           - { nombre: antes, ref: 800837ec13a02d1a44b78cc96a5fe7d401a61355 }
     runs-on: ubuntu-latest
     timeout-minutes: 35
     env:
       REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
       VERSION: ${{ matrix.v.nombre }}
+      SIN_DTX: ${{ matrix.v.sin_dtx || '' }}
       N: '17'
       ESCALA: ${{ inputs.escala || '0.3' }}
       CHROME_EXTRA: ''
@@ -44,7 +46,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: matiasosuna/tarot-web
-          ref: ${{ matrix.v.nombre == 'ahora' && (inputs.ref_ahora || 'main') || matrix.v.ref }}
+          ref: ${{ matrix.v.ref == 'main' && (inputs.ref_ahora || 'main') || matrix.v.ref }}
           path: web
           token: ${{ secrets.PRIVADO_TOKEN }}
           persist-credentials: false

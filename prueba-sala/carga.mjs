@@ -28,15 +28,15 @@ const consola = [], ventanas = [], muestras = [], fases = [], cpu = [];
 async function abrir(i) {
   const inst = { i, desde: null, hasta: null, ev: [], err: [], fallas: [] };
   const browser = await puppeteer.launch({
-    executablePath: CHROME, headless: true, defaultViewport: { width: 1280, height: 720 },
+    executablePath: CHROME, headless: true, defaultViewport: { width: 960, height: 540 },
     args: ['--no-sandbox', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required',
       '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows',
-      '--window-size=1280,720', ...(process.env.CHROME_EXTRA || '').split(' ').filter(Boolean)],
+      '--window-size=960,540', ...(process.env.CHROME_EXTRA || '').split(' ').filter(Boolean)],
   });
   const page = await browser.newPage();
   page.on('pageerror', (e) => consola.push([i, 'pageerror', String(e.message).slice(0, 160)]));
   page.on('console', (m) => { if (m.type() === 'error') consola.push([i, 'console', m.text().slice(0, 160)]); });
-  await page.evaluateOnNewDocument(inyectar, i, NP);
+  await page.evaluateOnNewDocument(inyectar, i, NP, !!process.env.SIN_DTX);
   await page.goto(`${BASE}/entrar-como?u=${i ? 'u' + i : 'owner'}`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => { const b = document.querySelector('#entrar'); return b && !b.disabled && b.offsetParent !== null; }, { timeout: 90e3 });
   await page.evaluate(() => document.querySelector('#entrar').click());

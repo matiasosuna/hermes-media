@@ -2,7 +2,9 @@
 // (frecuencia = 400 + 120·índice Hz) y cada pestaña escucha los audios que le llegan y anota cuándo aparece y desaparece
 // el tono de cada uno. Así se mide, sin nadie real: cuánto tarda en oírse alguien desde que prende el mic y si se corta.
 // La cámara es un canvas chico (320×180, 10 fps) para que 18 navegadores entren en una sola máquina de GitHub.
-function inyectar(YO, NP) {
+function inyectar(YO, NP, SIN_DTX) {
+  // la prueba no tiene placa de video: sin animaciones ni filtros (no cambian el audio, solo bajan la CPU)
+  document.addEventListener('DOMContentLoaded', () => { const st = document.createElement('style'); st.textContent = '*,*::before,*::after{animation:none!important;transition:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important;box-shadow:none!important}'; document.head.appendChild(st); });
   const FREQ = (i) => 400 + 120 * i;
   let AC = null;
   const ac = () => { if (!AC) { AC = new AudioContext(); } if (AC.state !== 'running') AC.resume().catch(() => {}); return AC; };
@@ -40,6 +42,10 @@ function inyectar(YO, NP) {
     pc.addEventListener('track', (e) => { if (e.track.kind === 'audio') vigilar(e.track); });
     return pc;
   };
+  if (SIN_DTX) { // variante de la prueba: la misma sala pero sin DTX (para ver si el DTX del silencio atrasa la voz)
+    const srd = Orig.prototype.setRemoteDescription;
+    Orig.prototype.setRemoteDescription = function (d, ...r) { if (d?.sdp) d = { type: d.type, sdp: d.sdp.replace(/;usedtx=1/g, '').replace(/usedtx=1;?/g, '') }; return srd.call(this, d, ...r); };
+  }
   PC.prototype = Orig.prototype; Object.setPrototypeOf(PC, Orig);
   window.RTCPeerConnection = PC;
 
@@ -67,7 +73,7 @@ function inyectar(YO, NP) {
       if (s >= 0 && s < NP && s !== YO && Math.abs(FREQ(s) - mb * ancho) < 2.5 * ancho) hay[s] = true;
     }
     for (let s = 0; s < NP; s++) if (hay[s] !== oigo[s]) { oigo[s] = hay[s]; window.__ev.push([ahora, s, hay[s] ? 1 : 0]); }
-  }, 20);
+  }, 40);
 
   // errores de la señalización que ve el navegador (pulls que fallan, HTTP 4xx/5xx)
   window.__err = [];
