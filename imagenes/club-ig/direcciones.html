@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- Direcciones de diseño para el reel R2 del Club (15/11/2026): direcciones.html?d=1..3, pantalla «Your journey», 1080x1920. Solo para elegir. -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@700&display=block" rel="stylesheet">
+<style>
+:root { --dorado: #F2B84B; --crema: #F5ECDC; --noche: #0E1330; }
+* { margin: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: radial-gradient(ellipse at 50% 38%, #1d2554 0%, var(--noche) 70%); position: relative; }
+.etq { position: absolute; top: 40px; left: 50px; font: 700 60px/1 'Montserrat', sans-serif; color: #fff; background: #c0392b; padding: 10px 26px; border-radius: 14px; z-index: 9; }
+.fondo { position: absolute; inset: -80px; background: url(https://hermestarot444.com/cartas/0.jpg) center 30%/cover; filter: blur(16px) saturate(.8); opacity: .32; }
+.velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,19,48,.55) 0%, rgba(14,19,48,.25) 40%, rgba(14,19,48,.85) 100%); }
+.carta { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 16px; border: 3px solid var(--dorado); box-shadow: 0 0 60px rgba(242,184,75,.3), 0 30px 60px rgba(0,0,0,.6); }
+.k { position: absolute; width: 100%; text-align: center; font: 700 28px 'Cinzel'; letter-spacing: 10px; color: var(--dorado); opacity: .9; }
+.titulo { position: absolute; width: 100%; text-align: center; font: 700 76px/1 'Cinzel'; letter-spacing: 4px; color: var(--dorado); text-shadow: 0 0 40px rgba(242,184,75,.4); }
+/* el camino: 3 pasos unidos por una línea */
+.camino { position: absolute; left: 170px; width: 740px; }
+.paso { position: relative; display: flex; align-items: center; gap: 34px; height: 150px; }
+.nodo { flex: 0 0 96px; height: 96px; border-radius: 50%; border: 3px solid var(--dorado); display: flex; align-items: center; justify-content: center; font: 700 44px 'Cinzel'; color: var(--dorado); background: rgba(14,19,48,.8); box-shadow: 0 0 30px rgba(242,184,75,.35); z-index: 1; }
+.paso.ok .nodo { background: var(--dorado); color: var(--noche); }
+.paso.apag { opacity: .35; }
+.paso span { font: 600 50px 'Cormorant Garamond'; color: var(--crema); }
+.linea { position: absolute; left: 46px; top: 75px; width: 4px; height: 300px; background: linear-gradient(var(--dorado), rgba(242,184,75,.15)); }
+.sub { position: absolute; top: 1560px; transform: translateY(-50%); width: 100%; text-align: center; font: 700 50px/64px 'Montserrat'; color: #fff; -webkit-text-stroke: 8px #000; paint-order: stroke fill; text-shadow: 0 4px 10px rgba(0,0,0,.55); }
+.sub b { color: #FFE14D; }
+.marca { position: absolute; top: 1770px; width: 100%; text-align: center; font: 700 28px 'Cinzel'; letter-spacing: 8px; color: var(--dorado); opacity: .8; }
+.nombre { position: absolute; bottom: 26px; width: 100%; text-align: center; font: 700 26px 'Montserrat'; color: rgba(255,255,255,.55); }
+</style></head><body>
+<div class="etq" id="etq"></div>
+<div id="arte"></div>
+<div class="sub">I read your <b>answers</b><br>and send you feedback.</div>
+<div class="marca">☿ HERMES TAROT 444</div>
+<div class="nombre" id="n"></div>
+<script>
+const camino = (top) => `<div class="camino" style="top:${top}px"><div class="linea"></div>
+  <div class="paso ok"><div class="nodo">1</div><span>Your level</span></div>
+  <div class="paso ok"><div class="nodo">2</div><span>Exercises made for you</span></div>
+  <div class="paso"><div class="nodo">3</div><span>Feedback from Hermes</span></div></div>`;
+const D = {
+  1: { n: '1 · Carta de fondo, difuminada · adelante un diseño por tema (acá: el camino)',
+       h: `<div class="fondo"></div><div class="velo"></div><div class="k" style="top:330px">☿ TAROT CLUB</div>
+           <div class="titulo" style="top:400px">YOUR JOURNEY</div>${camino(620)}` },
+  2: { n: '2 · Carta fija y más chica, sin movimiento · texto más chico',
+       h: `<img class="carta" src="https://hermestarot444.com/cartas/0.jpg" style="top:170px;height:640px">
+           <div class="titulo" style="top:880px;font-size:68px">YOUR JOURNEY</div>${camino(1000)}` },
+  3: { n: '3 · Sin carta: solo el diseño de cada tema',
+       h: `<div class="k" style="top:330px">☿ TAROT CLUB</div><div class="titulo" style="top:400px">YOUR JOURNEY</div>${camino(620)}` },
+};
+const k = new URLSearchParams(location.search).get('d') || '1', d = D[k];
+document.getElementById('etq').textContent = k;
+document.getElementById('n').textContent = d.n;
+document.getElementById('arte').innerHTML = d.h;
+</script>
+</body></html>
