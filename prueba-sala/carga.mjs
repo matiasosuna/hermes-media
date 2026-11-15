@@ -211,17 +211,20 @@ function intervalos(inst, quien) { // [ini, fin) en que la instancia oye el tono
   if (ini != null) out.push([ini, inst.hasta]);
   return out;
 }
-const porFase = {};
+const porFase = {}, detalle = [];
 for (const w of ventanas) {
   if (w.off == null) continue;
+  const D = { fase: w.fase, quien: w.quien, desde_s: Math.round((w.on - fases[0].desde) / 1000), dura_s: Math.round((w.off - w.on) / 1000), no: [], lentos: [] };
+  detalle.push(D);
   const F = (porFase[w.fase] ||= { lat: [], perdidas: 0, pares: 0, cortes: 0, cortesMs: [], segundos: 0 });
   for (const inst of instancias2) {
     if (inst.i === w.quien || inst.desde == null || inst.desde > w.on - 5000 || inst.hasta < w.off) continue;
     F.pares++;
     const iv = intervalos(inst, w.quien).filter(([a, b]) => b > w.on && a < w.off + 1500);
     const primero = iv.find(([a]) => a >= w.on - 50);
-    if (!primero) { F.perdidas++; continue; }
+    if (!primero) { F.perdidas++; D.no.push(inst.id + ':P' + inst.i); continue; }
     F.lat.push(primero[0] - w.on);
+    if (primero[0] - w.on > 800) D.lentos.push([inst.id + ':P' + inst.i, Math.round(primero[0] - w.on)]);
     const hasta = w.off - 300; let prev = null; // cortes: huecos de 150 ms o más mientras habla
     for (const [a, b] of iv) {
       if (a < primero[0]) continue;
@@ -266,6 +269,10 @@ const res = {
   cpu_uso_pct: Object.fromEntries(Object.entries(usoPor).map(([g, a]) => [g, { mediana: med(a), max: pct(a, 1) }])),
   envio: Object.fromEntries([...new Map(muestras2.map((m) => [m.inst, m])).values()].map((m) => [`P${m.i}#${m.inst}`, { enviados: m.enviados, ac: m.ac }])),
   duracion_s: Math.round((Date.now() - T0) / 1000),
+  // las ventanas con alguien que no oyó o tardó más de 0,8 s; y cuándo entró/salió cada instancia
+  ventanas_raras: detalle.filter((d) => d.no.length || d.lentos.length),
+  instancias: instancias2.map((x) => ({ id: x.id, i: x.i, entro_s: x.desde && Math.round((x.desde - fases[0].desde) / 1000), salio_s: x.hasta === fin ? null : Math.round((x.hasta - fases[0].desde) / 1000) })),
+  fases: fases.map((f) => ({ nombre: f.nombre, desde_s: Math.round((f.desde - fases[0].desde) / 1000) })),
 };
 writeFileSync(`${OUT}/resultados.json`, JSON.stringify(res, null, 2));
 const L = (f) => latencia[f] || {};

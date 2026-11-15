@@ -24,7 +24,6 @@ jobs:
       matrix:
         v:
           - { nombre: ahora, ref: main }
-          - { nombre: ahora-sin-dtx, ref: main, sin_dtx: '1' }
           - { nombre: antes, ref: 800837ec13a02d1a44b78cc96a5fe7d401a61355 }
         rol: [sala, g1, g2, g3]
     runs-on: ubuntu-latest
