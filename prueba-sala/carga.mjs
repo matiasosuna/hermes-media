@@ -193,6 +193,7 @@ const orden = (para, accion, arg) => ctl('/control/orden', { para, g: para == nu
 const vivos = new Set(), hablando = new Map(), ventanas = [], fases = [], espias = [];
 const fase = (nombre) => { fases.push({ nombre, desde: ahora() }); log('— fase', nombre); };
 const s = (ms) => Math.round(ms * ESCALA);
+async function espiarA(quien, por) { for (const j of quien) espias.push({ por, ...(await orden(j, 'espiar')) }); }
 async function entra(i) { const r = await orden(i, 'abrir'); if (r.ok) vivos.add(i); return r; }
 async function sale(i) { vivos.delete(i); hablando.delete(i); return orden(i, 'cerrar'); }
 async function hablar2(i, on) {
@@ -240,7 +241,6 @@ if (LARGA) { // clase de una hora: el anfitrión habla y cada tanto pregunta alg
 } else {
 fase('B');  // varios a la vez y cambios de cámara; dos se van y vuelven (y hablan al volver)
 const finB = Date.now() + s(180e3), pendientes = [];
-async function espiarA(quien, por) { for (const j of quien) espias.push({ por, ...(await orden(j, 'espiar')) }); }
 const vuelve = (i) => entra(i).then(() => dormir(3000)).then(() => espiarA([i, 1], `P${i} volvió +3 s`)).then(() => dormir(12e3))
   .then(() => hablar2(i, true)).then(() => dormir(2500)).then(() => espiarA([i, 1], `P${i} habla +2.5 s`)).then(() => dormir(2500)).then(() => hablar2(i, false));
 for (const [ms, f] of [[s(50e3), () => sale(5)], [s(60e3), () => vuelve(5)], [s(110e3), () => sale(12)], [s(120e3), () => vuelve(12)]])
