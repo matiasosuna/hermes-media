@@ -17,14 +17,16 @@ body{width:1080px;height:1920px;background:radial-gradient(ellipse at 50% 36%,#2
 .abanico img{position:absolute;top:60px;left:50%;height:640px;border-radius:16px;border:3px solid var(--dorado);box-shadow:0 0 50px rgba(242,184,75,.3),0 24px 50px rgba(0,0,0,.6);transform-origin:50% 120%}
 .grilla{display:grid;grid-template-columns:repeat(13,62px);gap:8px;padding:10px}
 .grilla img{width:62px;height:107px;object-fit:cover;border-radius:5px;border:1px solid rgba(242,184,75,.55)}
-h1{position:absolute;top:1190px;width:100%;text-align:center;font-family:Cinzel;font-weight:700;font-size:96px;line-height:1;letter-spacing:4px;color:var(--dorado);text-shadow:0 0 50px rgba(242,184,75,.45)}
-.l{position:absolute;top:1318px;left:90px;right:90px;text-align:center;font-style:italic;font-size:54px;line-height:1.18}
-.niveles{position:absolute;top:1440px;width:100%;text-align:center;font-family:Cinzel;font-weight:700;font-size:24px;letter-spacing:4px;color:var(--dorado);opacity:.85}
-.cta{position:absolute;top:1490px;width:100%;text-align:center;font-style:italic;font-size:58px}
+h1{text-align:center;font-family:Cinzel;font-weight:700;font-size:96px;line-height:1;letter-spacing:4px;color:var(--dorado);text-shadow:0 0 50px rgba(242,184,75,.45)}
+.abajo{position:absolute;top:1185px;left:80px;right:80px;display:flex;flex-direction:column;align-items:center;gap:30px}
+h1.largo{font-size:78px}
+.l{text-align:center;font-style:italic;font-size:54px;line-height:1.18;text-wrap:balance;margin-top:-6px}
+.niveles{text-align:center;white-space:nowrap;font-family:Cinzel;font-weight:700;font-size:24px;letter-spacing:4px;color:var(--dorado);opacity:.85}
+.cta{text-align:center;font-style:italic;font-size:58px;margin-top:14px}
 .cta b{font-family:Cinzel;font-style:normal;font-weight:700;font-size:80px;color:var(--dorado);letter-spacing:3px;text-shadow:0 0 40px rgba(242,184,75,.45)}
-.cta.chico{font-family:Cinzel;font-style:normal;font-weight:700;font-size:34px;letter-spacing:5px;color:var(--dorado);top:1530px}
+.cta.chico{font-family:Cinzel;font-style:normal;font-weight:700;font-size:34px;letter-spacing:5px;color:var(--dorado);margin-top:30px}
 /* precio */
-.precio{position:absolute;top:470px;width:100%;text-align:center}
+.precio{position:absolute;top:560px;width:100%;text-align:center}
 .precio .et{font-family:Cinzel;font-weight:700;font-size:40px;letter-spacing:8px;color:var(--dorado)}
 .precio .n{font-family:Cinzel;font-weight:700;font-size:250px;line-height:1.05;color:var(--dorado);text-shadow:0 0 70px rgba(242,184,75,.5)}
 .precio .n small{font-size:70px;letter-spacing:2px}
@@ -32,7 +34,7 @@ h1{position:absolute;top:1190px;width:100%;text-align:center;font-family:Cinzel;
 .precio .luego{margin-top:70px;font-size:46px;opacity:.9}
 .precio .pill{display:inline-block;margin-top:60px;padding:16px 42px;border:2.5px solid var(--dorado);border-radius:999px;font-family:Cinzel;font-weight:700;font-size:28px;letter-spacing:4px;color:var(--dorado)}
 /* fecha del Q&A */
-.fecha{position:absolute;top:1300px;width:100%;text-align:center}
+.fecha{text-align:center}
 .fecha .d{font-family:Cinzel;font-weight:700;font-size:62px;color:var(--crema);letter-spacing:2px}
 .fecha .zonas{margin-top:22px;font-size:40px;line-height:1.35;opacity:.92}
 /* portadas de destacadas: solo el círculo del centro */
@@ -49,12 +51,12 @@ const BIO = '<div class="cta chico">LINK IN BIO</div>';
 const carta = (id) => `<div class="arte"><img class="carta" src="${C(id)}"></div>`;
 const SLIDES = {
   // ---- destacada «Club» (y stories del Club) ----
-  'club-1': { k: '☿ HERMES TAROT 444', arte: () => `<div class="arte"><div class="abanico">${[['II', -16], ['I', 0], ['IX', 16]].map(([id, g], i) =>
-      `<img src="${C(id)}" style="transform:translateX(-50%) rotate(${g}deg);z-index:${i === 1 ? 2 : 1}">`).join('')}</div></div>`,
+  'club-1': { k: '☿ HERMES TAROT 444', arte: () => `<div class="arte"><div class="abanico">${[['X', -20, -170], ['XXI', 0, 0], ['XIX', 20, 170]].map(([id, g, dx], i) =>
+      `<img src="${C(id)}" style="transform:translateX(calc(-50% + ${dx}px)) rotate(${g}deg);z-index:${i === 1 ? 2 : 1}">`).join('')}</div></div>`,
     h: 'TAROT CLUB', l: 'A study plan, with Hermes.', cta: CLUB },
   'club-study': { k: '☿ TAROT CLUB', arte: () => `<div class="arte"><div class="grilla">${MAZO.map((id) => `<img src="${MINI(id)}">`).join('')}</div></div>`,
     h: 'STUDY', l: 'All 78 cards, in depth.', niveles: 'BEGINNER → INTERMEDIATE → ADVANCED → EXPERT', cta: CLUB },
-  'club-journey': { k: '☿ TAROT CLUB', arte: () => carta('0'), h: 'YOUR JOURNEY', l: 'Exercises for your level. Feedback from Hermes.', cta: CLUB },
+  'club-journey': { k: '☿ TAROT CLUB', arte: () => carta('0'), h: 'YOUR JOURNEY', l: 'Exercises for your level, with feedback from Hermes.', cta: CLUB },
   'club-practices': { k: '☿ TAROT CLUB', arte: () => carta('XVII'), h: 'SPIRITUAL PRACTICES', l: 'To do and to track.', cta: CLUB },
   'club-tools': { k: '☿ TAROT CLUB', arte: () => carta('I'), h: 'TOOLS', l: 'Hermes Journal · Card table', cta: CLUB },
   'club-recordings': { k: '☿ TAROT CLUB', arte: () => carta('IX'), h: 'RECORDINGS', l: 'Guided exercises and meditations by Hermes.', cta: CLUB },
@@ -66,6 +68,8 @@ const SLIDES = {
   'qa-2': { k: '☿ LIVE Q&A', arte: () => carta('II'), h: 'ASK BEFORE', l: 'A card, a spread, a reading you didn’t understand. Leave it on the web.', cta: BIO },
   // story del Q&A con la fecha cargada en el panel (/api/clases.js); sin fecha, el render falla a propósito y no se publica
   'qa-fecha': { k: '☿ FREE · FOR EVERYONE', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: true, cta: BIO },
+  // muestra para revisar el diseño (fecha de ejemplo, no se publica)
+  'qa-fecha-muestra': { k: '☿ FREE · FOR EVERYONE', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: { fecha: '2026-11-22', h: 16, mi: 44 }, cta: BIO },
   // ---- portadas ----
   'portada-club': { portada: '☿' },
   'portada-qa': { portada: '?' },
@@ -95,16 +99,18 @@ function offset(iso, tz) { // ms que tz está detrás de UTC en esa fecha
   const x = SLIDES[id]; const m = document.getElementById('m');
   if (!x) { m.innerHTML = `<h1>NO SLIDE ${id}</h1>`; return; }
   if (x.portada) { m.innerHTML = `<div class="portada"><span>${x.portada}</span></div>`; return; }
-  let h = `<div class="k">${x.k}</div>` + (x.arte ? x.arte() : '') + (x.html ? x.html() : '') + (x.h ? `<h1>${x.h}</h1>` : '') + (x.l ? `<p class="l">${x.l}</p>` : '') +
-    (x.niveles ? `<div class="niveles">${x.niveles}</div>` : '') + (x.cta || '');
+  const arriba = `<div class="k">${x.k}</div>` + (x.arte ? x.arte() : '') + (x.html ? x.html() : '');
+  let abajo = (x.h ? `<h1${x.h.length > 12 ? ' class="largo"' : ''}>${x.h}</h1>` : '') + (x.l ? `<p class="l">${x.l}</p>` : '') +
+    (x.niveles ? `<div class="niveles">${x.niveles}</div>` : '');
+  const cta = x.cta || '';
   if (x.fecha) {
-    const ahora = Date.now(); let prox = null;
-    try { await new Promise((ok, mal) => { const sc = document.createElement('script'); sc.src = 'https://hermestarot444.com/api/clases.js'; sc.onload = ok; sc.onerror = mal; document.head.appendChild(sc); });
+    const ahora = Date.now(); let prox = typeof x.fecha === 'object' ? x.fecha : null;
+    if (!prox) try { await new Promise((ok, mal) => { const sc = document.createElement('script'); sc.src = 'https://hermestarot444.com/api/clases.js'; sc.onload = ok; sc.onerror = mal; document.head.appendChild(sc); });
       prox = (window.CLASSES_DB || []).find((c) => new Date(`${c.fecha}T23:59:59Z`).getTime() >= ahora); } catch {}
-    if (!prox) { document.title = 'SIN-FECHA'; m.innerHTML = '<h1>NO Q&A DATE</h1>'; return; }
-    h += fechaHtml(prox);
+    if (!prox) { document.title = 'SIN-FECHA'; m.innerHTML = '<div class="abajo"><h1>NO Q&A DATE</h1></div>'; return; }
+    abajo += fechaHtml(prox);
   }
-  m.innerHTML = h;
+  m.innerHTML = arriba + `<div class="abajo">${abajo}${cta}</div>`;
 })();
 </script>
 </body></html>
