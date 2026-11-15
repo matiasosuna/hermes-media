@@ -25,6 +25,7 @@ jobs:
         v:
           - { nombre: ahora, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
           - { nombre: latido-3s, ref: sala-latido-rapido, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
+          - { nombre: aviso, ref: sala-aviso, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
         rol: [sala, g1, g2, g3, g4, g5]
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -64,7 +65,7 @@ jobs:
         with: { node-version: 22 }
       - name: Dependencias (puppeteer-core con el Chrome del runner)
         working-directory: prueba-sala
-        run: npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 >/dev/null && google-chrome --version
+        run: npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 ws@8.18.0 >/dev/null && google-chrome --version
       - name: Red de lejos (netem)
         run: |
           R="${{ matrix.rol }}"; TASA=""

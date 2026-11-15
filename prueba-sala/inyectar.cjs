@@ -28,10 +28,12 @@ function inyectar(YO, NP, SIN_DTX) {
   }
   const md = navigator.mediaDevices;
   // pantalla compartida: un lienzo de 640×360 (sin sonido)
-  md.getDisplayMedia = async () => {
+  md.getDisplayMedia = async (c0 = {}) => { // con sonido (pestaña con audio): un tono de 3600 Hz, por encima de todas las voces
     const c = document.createElement('canvas'); c.width = 640; c.height = 360; const x = c.getContext('2d');
     setInterval(() => { x.fillStyle = '#123'; x.fillRect(0, 0, 640, 360); x.fillStyle = '#fd0'; x.font = '40px sans-serif'; x.fillText('pantalla ' + (Date.now() % 100000), 20, 180); }, 100);
-    return c.captureStream(10);
+    const s = c.captureStream(10);
+    if (c0.audio) { const a = ac(), o = a.createOscillator(), g = a.createGain(), d = a.createMediaStreamDestination(); o.frequency.value = 3600; g.gain.value = 0.25; o.connect(g); g.connect(d); o.start(); s.addTrack(d.stream.getAudioTracks()[0]); }
+    return s;
   };
   // música (la pone el anfitrión): un archivo WAV de 4 s con un tono de 300 Hz que se repite (debajo de las voces)
   window.__musica = async (on) => {
@@ -79,23 +81,24 @@ function inyectar(YO, NP, SIN_DTX) {
   }
   window.__fallas = [];
   window.__ev = []; // [ms, quién, 1 = se oye / 0 = deja de oírse]
-  const oigo = new Array(NP + 2).fill(false); // NP = la música del anfitrión (300 Hz), NP + 1 = veo la pantalla de otro
+  const oigo = new Array(NP + 3).fill(false); // NP = la música del anfitrión (300 Hz), NP + 1 = veo la pantalla de otro, NP + 2 = oigo su sonido (3600 Hz)
   setInterval(() => {
     if (!AC) return;
-    const ahora = Date.now(), hay = new Array(NP + 2).fill(false), ancho = AC.sampleRate / 2048;
+    const ahora = Date.now(), hay = new Array(NP + 3).fill(false), ancho = AC.sampleRate / 2048;
     const vp = document.querySelector('.tile.pantalla:not(.yo) video');
     hay[NP + 1] = !!(vp && vp.videoWidth > 0 && vp.readyState >= 2 && !vp.paused);
     for (const x of AN) {
       if (x.track.readyState !== 'live') continue;
       x.an.getFloatFrequencyData(x.buf);
       let mb = 0, mv = -Infinity;
-      for (let b = 10; b < 140; b++) if (x.buf[b] > mv) { mv = x.buf[b]; mb = b; }
+      for (let b = 10; b < 170; b++) if (x.buf[b] > mv) { mv = x.buf[b]; mb = b; }
       if (mv < -50) continue; // silencio
       if (Math.abs(mb * ancho - 300) < 2 * ancho) { hay[NP] = true; continue; }
+      if (Math.abs(mb * ancho - 3600) < 2 * ancho) { hay[NP + 2] = true; continue; }
       const s = Math.round((mb * ancho - 400) / 100);
       if (s >= 0 && s < NP && s !== YO && Math.abs(FREQ(s) - mb * ancho) < 2 * ancho) hay[s] = true;
     }
-    for (let s = 0; s <= NP + 1; s++) if (hay[s] !== oigo[s]) { oigo[s] = hay[s]; window.__ev.push([ahora, s, hay[s] ? 1 : 0]); }
+    for (let s = 0; s <= NP + 2; s++) if (hay[s] !== oigo[s]) { oigo[s] = hay[s]; window.__ev.push([ahora, s, hay[s] ? 1 : 0]); }
   }, 40);
 
   // errores de la señalización que ve el navegador (pulls que fallan, HTTP 4xx/5xx)

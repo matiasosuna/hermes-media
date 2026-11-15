@@ -27,6 +27,20 @@ const lento = (st) => new Proxy(st, {
 const db0 = env.DB;
 env.DB = { ...db0, prepare: (sql) => lento(db0.prepare(sql)), batch: async (s) => { await dormir(D1_MS); return db0.batch(s); } };
 
+// el aviso al instante (Durable Object SalaAviso en producción): acá, WebSockets en este mismo servidor (paquete ws)
+const { WebSocketServer } = await import('ws');
+const wss = new WebSocketServer({ noServer: true }), socketsDe = new Map(); // sala → Set(ws)
+let avisos = 0;
+env.AVISO = { idFromName: (n) => n, get: (sala) => ({ fetch: async (u) => {
+  const url = new URL(u);
+  if (url.pathname === '/avisar') {
+    const menos = url.searchParams.get('menos'); avisos++;
+    setTimeout(() => { for (const w of socketsDe.get(sala) || []) if (w.sid !== menos) try { w.send('cambio'); } catch (e) {} }, REQ_MS);
+    return new Response('ok');
+  }
+  return new Response(null, { headers: { 'x-aviso-sala': sala, 'x-aviso-sid': url.searchParams.get('s') || '' } });
+} }) };
+
 const key = await H.makeKey(); H.mockJwks([key]);
 const cuentas = { owner: H.claims({ sub: 'owner-1', email: 'owner@example.com', name: 'Hermes' }) };
 for (let i = 1; i <= +N; i++) {
@@ -50,7 +64,7 @@ function despachar(g) {
   esperas.delete(g); clearTimeout(w.t); colas.set(g, []); json(w.res, q);
 }
 const galleta = (req) => Object.fromEntries((req.headers.cookie || '').split(/;\s*/).map((c) => c.split('=')));
-http.createServer(async (req, res) => {
+const servidor = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`); // detrás del túnel: https
     if (TOKEN) {
@@ -88,7 +102,7 @@ http.createServer(async (req, res) => {
     }
     if (url.pathname === '/debug/stats') { // la telemetría que guardó la sala (tabla sala_stats, si existe)
       let filas = []; try { filas = raw.prepare('SELECT * FROM sala_stats ORDER BY ts').all().map((r) => ({ ...r })); } catch (e) {}
-      res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ filas, rutas, errores }));
+      res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ filas, rutas, errores, avisos }));
     }
     if (url.pathname.startsWith('/api/')) {
       let body = ''; for await (const c of req) body += c;
@@ -120,4 +134,22 @@ http.createServer(async (req, res) => {
     if (!existsSync(f)) { res.writeHead(404); return res.end(); }
     res.writeHead(200, { 'content-type': tipos[f.split('.').pop()] || 'application/octet-stream' }); res.end(readFileSync(f));
   } catch (e) { console.error('error del servidor:', e.message); res.writeHead(500); res.end('error'); }
-}).listen(+PUERTO, '127.0.0.1', () => console.log(`sala de prueba lista en :${PUERTO} (REQ_MS=${REQ_MS}, D1_MS=${D1_MS}, sala=${SALA})`));
+});
+servidor.on('upgrade', async (req, socket, head) => { // WebSocket de /api/sala/eventos: lo valida la sala real (sala.js) y lo acepta el «Durable Object» de arriba
+  try {
+    const url = new URL(req.url, `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`);
+    if ((TOKEN && galleta(req).prueba !== TOKEN) || url.pathname !== '/api/sala/eventos') return socket.destroy();
+    await dormir(REQ_MS);
+    const r = await onRequest({ request: new Request(url, { method: 'GET', headers: req.headers }), env, params: {}, waitUntil: () => {}, next: () => new Response(null, { status: 404 }) });
+    const sala = r.headers.get('x-aviso-sala');
+    if (!sala) { socket.write(`HTTP/1.1 ${r.status} No\r\n\r\n`); return socket.destroy(); }
+    wss.handleUpgrade(req, socket, head, (ws) => {
+      ws.sid = r.headers.get('x-aviso-sid');
+      if (!socketsDe.has(sala)) socketsDe.set(sala, new Set());
+      socketsDe.get(sala).add(ws);
+      ws.on('message', (m) => { if (String(m) === 'ping') ws.send('pong'); });
+      ws.on('close', () => socketsDe.get(sala)?.delete(ws));
+    });
+  } catch (e) { console.error('error del aviso:', e.message); socket.destroy(); }
+});
+servidor.listen(+PUERTO, '127.0.0.1', () => console.log(`sala de prueba lista en :${PUERTO} (REQ_MS=${REQ_MS}, D1_MS=${D1_MS}, sala=${SALA})`));
