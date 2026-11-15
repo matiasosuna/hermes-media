@@ -1,19 +1,19 @@
 # Prueba de carga de la sala de video (tarot-web), sin gente real (Matías, 14/11/2026: «Probala vos»).
 # 18 Chrome headless (anfitrión + 17 alumnos) contra la sala real con D1 en memoria y el Realtime de PREVIEW: no toca
-# producción ni la D1 compartida. Red de lejos con tc netem (solo UDP). Corre «ahora» (main) y «antes» (800837e, antes
-# del arreglo del audio) en paralelo, con la misma red y la misma señalización. Repo público: los logs y el artefacto
-# solo tienen números; el código de tarot-web se baja con PRIVADO_TOKEN y no se sube a ningún lado.
+# producción ni la D1 compartida. Repartidos en 4 máquinas por versión (en una sola, 18 Chrome la saturaban): la «sala»
+# tiene el servidor, un túnel de Cloudflare (protegido con PRUEBA_TOKEN, sacado del secreto) y el director; g1–g3 abren
+# el resto. Red de lejos con tc netem (solo UDP) en cada máquina. Se comparan versiones con la misma red y señalización.
+# Repo público: los logs y los artefactos solo tienen números (y la URL del túnel, que sin el token no abre nada);
+# el código de tarot-web se baja con PRIVADO_TOKEN solo en la máquina «sala» y no se sube a ningún lado.
 name: prueba-sala
 on:
   push:
     branches: [prueba-sala]
     paths: ['prueba-sala/**', '.github/workflows/prueba-sala.yml']
   workflow_dispatch:
-    inputs:
-      ref_ahora: { description: 'ref de tarot-web a probar', default: 'main' }
-      escala: { description: 'largo de las fases (1 = ~10 min)', default: '1' }
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: prueba-sala
   cancel-in-progress: true
@@ -26,15 +26,17 @@ jobs:
           - { nombre: ahora, ref: main }
           - { nombre: ahora-sin-dtx, ref: main, sin_dtx: '1' }
           - { nombre: antes, ref: 800837ec13a02d1a44b78cc96a5fe7d401a61355 }
+        rol: [sala, g1, g2, g3]
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     env:
       REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+      GH_TOKEN: ${{ github.token }}
       VERSION: ${{ matrix.v.nombre }}
       SIN_DTX: ${{ matrix.v.sin_dtx || '' }}
       N: '17'
-      ESCALA: ${{ inputs.escala || '0.3' }}
-      CHROME_EXTRA: ''
+      GRUPOS: '0-3,4-8,9-13,14-17'
+      ESCALA: '0.3'
       REQ_MS: '20'
       D1_MS: '150'
       RETARDO: '200'
@@ -43,10 +45,15 @@ jobs:
       RED: 'RTT ~200 ms, 3 % de pérdida entre dos personas, jitter ±10 ms, solo UDP'
     steps:
       - uses: actions/checkout@v4
+      - name: Clave de la prueba
+        run: |
+          T=$(printf %s "$REALTIME_CLUB_APP_SECRET-$GITHUB_RUN_ID-$VERSION" | sha256sum | cut -c1-32)
+          echo "::add-mask::$T"; echo "PRUEBA_TOKEN=$T" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
+        if: matrix.rol == 'sala'
         with:
           repository: matiasosuna/tarot-web
-          ref: ${{ matrix.v.ref == 'main' && (inputs.ref_ahora || 'main') || matrix.v.ref }}
+          ref: ${{ matrix.v.ref }}
           path: web
           token: ${{ secrets.PRIVADO_TOKEN }}
           persist-credentials: false
@@ -57,21 +64,44 @@ jobs:
         run: npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 >/dev/null && google-chrome --version
       - name: Red de lejos (netem)
         run: sudo env RETARDO="$RETARDO" JITTER="$JITTER" PERDIDA="$PERDIDA" bash prueba-sala/red.sh
-      - name: Sala de prueba (servidor local)
+      - name: Sala de prueba y túnel
+        if: matrix.rol == 'sala'
         run: |
           node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 "$N" > servidor.log 2>&1 &
-          for i in $(seq 1 30); do curl -s -o /dev/null http://127.0.0.1:8798/room/ && break; sleep 1; done
-          cat servidor.log
+          for i in $(seq 1 30); do curl -s -o /dev/null http://127.0.0.1:8798/control/hora -H "x-prueba: $PRUEBA_TOKEN" && break; sleep 1; done
+          head -3 servidor.log
+          curl -sL -o cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && chmod +x cloudflared
+          ./cloudflared --version
+          ./cloudflared tunnel --no-autoupdate --url http://127.0.0.1:8798 > tunel.log 2>&1 &
+          U=""; for i in $(seq 1 60); do U=$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' tunel.log | head -1); [ -n "$U" ] && break; sleep 1; done
+          [ -n "$U" ] || { tail -20 tunel.log; exit 1; }
+          for i in $(seq 1 60); do [ "$(curl -s -o /dev/null -w '%{http_code}' "$U/control/hora" -H "x-prueba: $PRUEBA_TOKEN")" = 200 ] && break; sleep 2; done
+          mkdir -p tunel && echo "$U" > tunel/url && echo "túnel listo"
+      - uses: actions/upload-artifact@v4
+        if: matrix.rol == 'sala'
+        with: { name: 'tunel-${{ matrix.v.nombre }}', path: tunel/url }
+      - name: Buscar el túnel de la sala
+        if: matrix.rol != 'sala'
+        run: |
+          ID=""
+          for i in $(seq 1 120); do
+            ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" --jq ".artifacts[] | select(.name==\"tunel-$VERSION\") | .id" 2>/dev/null | head -1)
+            [ -n "$ID" ] && break; sleep 5
+          done
+          [ -n "$ID" ] || { echo "no apareció el túnel"; exit 1; }
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ID/zip" > t.zip && unzip -o -q t.zip -d tunel
+          echo "BASE=$(cat tunel/url)" >> "$GITHUB_ENV"
       - name: Clase de prueba
         working-directory: prueba-sala
-        run: OUT="$GITHUB_WORKSPACE/resultados-$VERSION" node carga.mjs
-      - name: Resumen
-        if: always()
         run: |
-          cat "resultados-$VERSION/resumen.md" >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "sin resumen" >> "$GITHUB_STEP_SUMMARY"
-          grep -c . servidor.log || true
+          R="${{ matrix.rol }}"
+          if [ "$R" = sala ]; then ROL=director G=0 OUT="$GITHUB_WORKSPACE/resultados-$VERSION" node carga.mjs
+          else ROL=grupo G="${R#g}" node carga.mjs; fi
+      - name: Resumen
+        if: always() && matrix.rol == 'sala'
+        run: cat "resultados-$VERSION/resumen.md" >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "sin resumen" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && matrix.rol == 'sala'
         with:
           name: resultados-${{ matrix.v.nombre }}
           path: resultados-${{ matrix.v.nombre }}

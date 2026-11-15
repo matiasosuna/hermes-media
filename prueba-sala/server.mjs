@@ -37,12 +37,54 @@ for (let i = 1; i <= +N; i++) {
 // lo que mide el servidor: duración por ruta y errores de los pulls (sin datos de nadie: son cuentas de prueba)
 const rutas = {}, errores = [];
 const tipos = { html: 'text/html', js: 'text/javascript', css: 'text/css', svg: 'image/svg+xml', png: 'image/png', json: 'application/json' };
+
+// Control de la prueba repartida en varias máquinas (el director manda órdenes; cada máquina las busca con long-poll).
+// Con el túnel, todo pide PRUEBA_TOKEN: cookie «prueba» en el navegador, cabecera x-prueba en las máquinas.
+const TOKEN = process.env.PRUEBA_TOKEN || '';
+const colas = new Map(), esperas = new Map(), pendientes = new Map(), hola = new Set();
+let nOrden = 0;
+const json = (res, d, st = 200) => { res.writeHead(st, { 'content-type': 'application/json' }); res.end(JSON.stringify(d)); };
+function despachar(g) {
+  const q = colas.get(g), w = esperas.get(g);
+  if (!q?.length || !w) return;
+  esperas.delete(g); clearTimeout(w.t); colas.set(g, []); json(w.res, q);
+}
+const galleta = (req) => Object.fromEntries((req.headers.cookie || '').split(/;\s*/).map((c) => c.split('=')));
 http.createServer(async (req, res) => {
   try {
-    const url = new URL(req.url, `http://${req.headers.host}`);
+    const url = new URL(req.url, `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`); // detrás del túnel: https
+    if (TOKEN) {
+      const ok = url.pathname === '/entrar-como' ? url.searchParams.get('k') === TOKEN
+        : url.pathname.startsWith('/control/') || url.pathname.startsWith('/debug/') ? req.headers['x-prueba'] === TOKEN
+        : galleta(req).prueba === TOKEN;
+      if (!ok) { res.writeHead(403); return res.end(); }
+    }
+    if (url.pathname.startsWith('/control/')) {
+      let body = ''; for await (const c of req) body += c;
+      const b = body ? JSON.parse(body) : {}, r = url.pathname.slice(9);
+      if (r === 'hora') return json(res, { t: Date.now() });
+      if (r === 'hola') { if (req.method === 'POST') hola.add(b.g); return json(res, { grupos: [...hola] }); }
+      if (r === 'ordenes') {
+        const g = +url.searchParams.get('g');
+        if (esperas.has(g)) { const w = esperas.get(g); clearTimeout(w.t); json(w.res, []); }
+        esperas.set(g, { res, t: setTimeout(() => { if (esperas.get(g)?.res === res) { esperas.delete(g); json(res, []); } }, 20e3) });
+        return despachar(g);
+      }
+      if (r === 'orden') { // espera a que la máquina la haga y devuelve lo que contestó
+        const id = ++nOrden, g = b.g;
+        if (!colas.has(g)) colas.set(g, []);
+        colas.get(g).push({ id, para: b.para, accion: b.accion, arg: b.arg });
+        pendientes.set(id, { res, t: setTimeout(() => { pendientes.delete(id); json(res, { ok: false, error: 'tiempo' }); }, 240e3) });
+        return despachar(g);
+      }
+      if (r === 'hecho') { const p = pendientes.get(b.id); if (p) { pendientes.delete(b.id); clearTimeout(p.t); json(p.res, b.r); } return json(res, { ok: true }); }
+      res.writeHead(404); return res.end();
+    }
     if (url.pathname === '/entrar-como') {
       const c = await H.login(env, key, cuentas[url.searchParams.get('u')]);
-      res.writeHead(302, { 'set-cookie': c + '; Path=/; HttpOnly; SameSite=Lax', location: '/room/?r=' + SALA }); return res.end();
+      const galletas = [c + '; Path=/; HttpOnly; SameSite=Lax'];
+      if (TOKEN) galletas.push(`prueba=${TOKEN}; Path=/; HttpOnly; SameSite=Lax`);
+      res.writeHead(302, { 'set-cookie': galletas, location: '/room/?r=' + SALA }); return res.end();
     }
     if (url.pathname === '/debug/stats') { // la telemetría que guardó la sala (tabla sala_stats, si existe)
       let filas = []; try { filas = raw.prepare('SELECT * FROM sala_stats ORDER BY ts').all().map((r) => ({ ...r })); } catch (e) {}
