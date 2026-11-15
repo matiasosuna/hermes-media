@@ -23,11 +23,11 @@ jobs:
       fail-fast: false
       matrix:
         v:
-          - { nombre: celulares, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', celulares: '4,5', sin_d: '1' }
-          - { nombre: larga, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', larga: '1' }
+          - { nombre: ahora, ref: main, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
+          - { nombre: latido-3s, ref: sala-latido-rapido, n: '17', grupos: '0-2,3-5,6-8,9-11,12-14,15-17', retardo: '200', jitter: '10', perdida: '3', media: '1', sin_d: '1' }
         rol: [sala, g1, g2, g3, g4, g5]
     runs-on: ubuntu-latest
-    timeout-minutes: 100
+    timeout-minutes: 45
     env:
       REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
       GH_TOKEN: ${{ github.token }}
@@ -36,6 +36,7 @@ jobs:
       CELULARES: ${{ matrix.v.celulares || '' }}
       SIN_D: ${{ matrix.v.sin_d || '' }}
       LARGA: ${{ matrix.v.larga || '' }}
+      MEDIA: ${{ matrix.v.media || '' }}
       N: ${{ matrix.v.n }}
       GRUPOS: ${{ matrix.v.grupos }}
       ESCALA: '1'

@@ -79,10 +79,12 @@ function inyectar(YO, NP, SIN_DTX) {
   }
   window.__fallas = [];
   window.__ev = []; // [ms, quién, 1 = se oye / 0 = deja de oírse]
-  const oigo = new Array(NP + 1).fill(false); // NP = la música del anfitrión (300 Hz)
+  const oigo = new Array(NP + 2).fill(false); // NP = la música del anfitrión (300 Hz), NP + 1 = veo la pantalla de otro
   setInterval(() => {
     if (!AC) return;
-    const ahora = Date.now(), hay = new Array(NP + 1).fill(false), ancho = AC.sampleRate / 2048;
+    const ahora = Date.now(), hay = new Array(NP + 2).fill(false), ancho = AC.sampleRate / 2048;
+    const vp = document.querySelector('.tile.pantalla:not(.yo) video');
+    hay[NP + 1] = !!(vp && vp.videoWidth > 0 && vp.readyState >= 2 && !vp.paused);
     for (const x of AN) {
       if (x.track.readyState !== 'live') continue;
       x.an.getFloatFrequencyData(x.buf);
@@ -93,7 +95,7 @@ function inyectar(YO, NP, SIN_DTX) {
       const s = Math.round((mb * ancho - 400) / 100);
       if (s >= 0 && s < NP && s !== YO && Math.abs(FREQ(s) - mb * ancho) < 2 * ancho) hay[s] = true;
     }
-    for (let s = 0; s <= NP; s++) if (hay[s] !== oigo[s]) { oigo[s] = hay[s]; window.__ev.push([ahora, s, hay[s] ? 1 : 0]); }
+    for (let s = 0; s <= NP + 1; s++) if (hay[s] !== oigo[s]) { oigo[s] = hay[s]; window.__ev.push([ahora, s, hay[s] ? 1 : 0]); }
   }, 40);
 
   // errores de la señalización que ve el navegador (pulls que fallan, HTTP 4xx/5xx)
