@@ -1838,6 +1838,15 @@
           "id": "17940518316124775",
           "permalink": "https://www.instagram.com/reel/Dfs5EUmgEmb/",
           "fecha": "2026-11-14T00:14:16.889Z"
+        },
+        "metricas_48h": {
+          "medido": "2026-11-16T00:16:47.713Z",
+          "publicado_ny": "Fri 19:14",
+          "reach": 4785,
+          "views": 6258,
+          "saved": 120,
+          "shares": 34,
+          "total_interactions": 489
         }
       },
       "youtube": {
@@ -2581,7 +2590,12 @@
       "cuando": "2026-11-15T19:00:00-05:00",
       "v2": true,
       "instagram": {
-        "caption": "What's inside the Tarot Club ☿\nLive Q&A · Your journey: exercises made for you, with feedback from Hermes · Spiritual practices & exercises · Study · Recordings\nComment CLUB to know more or join\n#tarot #learntarot #tarotstudy #tarotclub #tarotreader"
+        "caption": "What's inside the Tarot Club ☿\nLive Q&A · Your journey: exercises made for you, with feedback from Hermes · Spiritual practices & exercises · Study · Recordings\nComment CLUB to know more or join\n#tarot #learntarot #tarotstudy #tarotclub #tarotreader",
+        "publicado": {
+          "id": "18118879334021912",
+          "permalink": "https://www.instagram.com/reel/DfyC_gTip4K/",
+          "fecha": "2026-11-16T00:16:47.711Z"
+        }
       },
       "youtube": {
         "omitir": true
