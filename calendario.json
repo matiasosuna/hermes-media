@@ -2573,6 +2573,22 @@
       "tiktok": {
         "publicado": null
       }
+    },
+    {
+      "id": "club-r2",
+      "carta": "Tarot Club",
+      "archivo": "club-r2.mp4",
+      "cuando": "2026-11-15T19:00:00-05:00",
+      "v2": true,
+      "instagram": {
+        "caption": "What's inside the Tarot Club ☿\nLive Q&A · Your journey: exercises made for you, with feedback from Hermes · Spiritual practices & exercises · Study · Recordings\nComment CLUB to know more or join\n#tarot #learntarot #tarotstudy #tarotclub #tarotreader"
+      },
+      "youtube": {
+        "omitir": true
+      },
+      "tiktok": {
+        "omitir": true
+      }
     }
   ],
   "requiere_v2": true,

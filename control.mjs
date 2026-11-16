@@ -33,7 +33,7 @@ export function fotoCalendario(cal, ahora = Date.now(), dir = DIR) {
     por_hacer: pend.length - listos.length,
     hasta: listos.at(-1)?.cuando ?? null,
     publicados: pubs.slice(-5).map((i) => ({ carta: i.carta, cuando: i.cuando, ig: i.instagram.publicado?.permalink ?? null, yt: i.youtube?.publicado?.url ?? null, tt: i.tiktok?.publicado?.url ?? null })),
-    atrasados: cal.items.filter((i) => Date.parse(i.cuando) < ahora - 3 * 3600e3 && listo(i) && ['instagram', 'youtube', 'tiktok'].some((r) => !i[r]?.publicado)).map((i) => ({ carta: i.carta })),
+    atrasados: cal.items.filter((i) => Date.parse(i.cuando) < ahora - 3 * 3600e3 && listo(i) && ['instagram', 'youtube', 'tiktok'].some((r) => !i[r]?.publicado && !i[r]?.omitir)).map((i) => ({ carta: i.carta })),
     historias: historias(dir),
   };
 }

@@ -17,7 +17,7 @@ const p = (s = '') => out.push(s);
 const items = cal.items, ahora = Date.now();
 const hecho = (red) => items.filter((i) => i[red].publicado).length;
 const prox = items.filter((i) => Date.parse(i.cuando) > ahora).sort((a, b) => Date.parse(a.cuando) - Date.parse(b.cuando));
-const fallas = items.filter((i) => Date.parse(i.cuando) < ahora - 3 * 3600e3 && (!i.instagram.publicado || !i.youtube.publicado || !i.tiktok.publicado));
+const fallas = items.filter((i) => Date.parse(i.cuando) < ahora - 3 * 3600e3 && ['instagram', 'youtube', 'tiktok'].some((r) => !i[r]?.publicado && !i[r]?.omitir));
 p(`# Status Hermes Tarot 444 — ${ny(new Date().toISOString())} NY`);
 p();
 p('| Qué | Estado |');
@@ -26,7 +26,7 @@ p(`| Publicador | ${cal.pausado ? '⏸ pausado' : '✅ activo, cada 6 h'} |`);
 p(`| Publicados | IG ${hecho('instagram')} · YouTube ${hecho('youtube')} · TikTok ${hecho('tiktok')} de ${items.length} en calendario |`);
 p(`| Próximo | ${prox[0] ? `${prox[0].carta} — ${ny(prox[0].cuando)}` : '⚠️ nada agendado'} |`);
 p(`| Contenido hasta | ${prox.at(-1) ? ny(prox.at(-1).cuando) : '⚠️ sin contenido'} (${prox.length} videos en cola) |`);
-p(`| Atrasados/fallados | ${fallas.length ? '⚠️ ' + fallas.map((i) => `${i.carta} (${['instagram', 'youtube', 'tiktok'].filter((r) => !i[r].publicado).join(', ')})`).join('; ') : '✅ ninguno'} |`);
+p(`| Atrasados/fallados | ${fallas.length ? '⚠️ ' + fallas.map((i) => `${i.carta} (${['instagram', 'youtube', 'tiktok'].filter((r) => !i[r]?.publicado && !i[r]?.omitir).join(', ')})`).join('; ') : '✅ ninguno'} |`);
 
 // ---------- Instagram ----------
 const G = 'https://graph.facebook.com/v21.0';

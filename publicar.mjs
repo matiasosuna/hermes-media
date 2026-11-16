@@ -23,7 +23,9 @@ const env = process.env;
 const SECRETOS = ['HT_PAGE_TOKEN', 'HT_YT_CLIENT_SECRET', 'HT_YT_REFRESH_TOKEN', 'BUFFER_API_KEY', 'HT_STATS_TOKEN'].map((k) => env[k]).filter(Boolean);
 export const PLATAFORMAS = ['instagram', 'youtube', 'tiktok'];
 export const BUFFER_ORG = '6acc932a96c596c8b8c17194', BUFFER_TIKTOK = '6ad3219a778b240e2f368ecb';
-const falta = (i) => PLATAFORMAS.some((p) => !i[p]?.publicado);
+// "omitir": true en una plataforma = ese ítem no va ahí (ej. el reel del Club, solo IG: «comment CLUB» no sirve en YouTube/TikTok)
+export const pendiente = (i, p) => !i[p]?.publicado && !i[p]?.omitir;
+const falta = (i) => PLATAFORMAS.some((p) => pendiente(i, p));
 
 export const assetUrl = (archivo, repo = REPO) => `https://github.com/${repo}/releases/download/${RELEASE}/${archivo}`;
 export const primeraLinea = (t) => String(t ?? '').split('\n')[0].trim();
@@ -37,7 +39,7 @@ export function siguiente(cal, plataforma, ahora = Date.now()) {
   const gap = (cal.separacion_minima_horas ?? 0.5) * 3600e3;
   const fechas = cal.items.map((i) => i[plataforma]?.publicado?.fecha).filter(Boolean).map((f) => Date.parse(f));
   const ultimo = fechas.length ? Math.max(...fechas) : 0;
-  const item = cal.items.filter((i) => !i[plataforma]?.publicado).sort((a, b) => Date.parse(a.cuando) - Date.parse(b.cuando))[0];
+  const item = cal.items.filter((i) => pendiente(i, plataforma)).sort((a, b) => Date.parse(a.cuando) - Date.parse(b.cuando))[0];
   if (!item) return { item: null, motivo: 'no queda nada pendiente' };
   if (Date.parse(item.cuando) > ahora) return { item: null, proximo: item, motivo: `el próximo es ${item.id} (${item.cuando})` };
   // con "requiere_v2": nada sale sin el video rehecho con el inicio nuevo (lo marca modal_render.py::preparar)
