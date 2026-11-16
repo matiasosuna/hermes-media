@@ -54,6 +54,10 @@ const SLIDES = {
   'club-1': { k: '☿ HERMES TAROT 444', arte: () => `<div class="arte"><div class="abanico">${[['X', -14, -150], ['XXI', 0, 0], ['XIX', 14, 150]].map(([id, g, dx], i) =>
       `<img src="${C(id)}" style="transform:translateX(calc(-50% + ${dx}px)) rotate(${g}deg);z-index:${i === 1 ? 2 : 1}">`).join('')}</div></div>`,
     h: 'TAROT CLUB', l: 'A study plan, with Hermes.', cta: CLUB },
+  // portada del reel R2 (Matías 15/11: «publicaste sin portada buena… en la grilla se ve horrible»): todo dentro del recorte 3:4 de la grilla (y 240–1680)
+  'portada-reel': { k: '☿ HERMES TAROT 444', arte: () => `<div class="arte"><div class="abanico">${[['X', -14, -150], ['XXI', 0, 0], ['XIX', 14, 150]].map(([id, g, dx], i) =>
+      `<img src="${C(id)}" style="transform:translateX(calc(-50% + ${dx}px)) rotate(${g}deg);z-index:${i === 1 ? 2 : 1}">`).join('')}</div></div>`,
+    h: 'TAROT CLUB', l: 'What’s inside' },
   'club-study': { k: '☿ TAROT CLUB', arte: () => `<div class="arte"><div class="grilla">${MAZO.map((id) => `<img src="${MINI(id)}">`).join('')}</div></div>`,
     h: 'STUDY', l: 'All 78 cards, in depth.', cta: CLUB },
   'club-journey': { k: '☿ TAROT CLUB', arte: () => carta('0'), h: 'YOUR JOURNEY', l: 'Exercises made for you, with feedback from Hermes.', cta: CLUB },
