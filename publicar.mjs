@@ -55,6 +55,8 @@ export const buscarDuplicadoIG = (media, caption) => media.find((m) => primeraLi
 export const buscarDuplicadoYT = (videos, titulo) => videos.find((v) => v.titulo.trim() === titulo.trim()) ?? null;
 export const parametrosContenedor = (item, repo = REPO) => ({
   media_type: 'REELS', video_url: assetUrl(item.archivo, repo), caption: item.instagram.caption, share_to_feed: 'true',
+  // portada propia (JPG del release): sin esto IG toma un cuadro del video y en la grilla se ve mal (Matías 15/11)
+  ...(item.instagram.portada ? { cover_url: assetUrl(item.instagram.portada, repo) } : {}),
 });
 
 /** El video tiene que estar en el release y responder (GitHub redirige a su CDN; Instagram sigue la redirección). */
