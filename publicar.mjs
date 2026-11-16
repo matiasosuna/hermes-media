@@ -44,7 +44,8 @@ export function siguiente(cal, plataforma, ahora = Date.now()) {
   if (Date.parse(item.cuando) > ahora) return { item: null, proximo: item, motivo: `el próximo es ${item.id} (${item.cuando})` };
   // con "requiere_v2": nada sale sin el video rehecho con el inicio nuevo (lo marca modal_render.py::preparar)
   if (cal.requiere_v2 && !item.v2) return { item: null, proximo: item, motivo: `${item.id} todavía no tiene el video con el inicio nuevo (v2)` };
-  if (ahora - ultimo < gap) return { item: null, proximo: item, motivo: `espera ${cal.separacion_minima_horas} h desde el último post` };
+  // "sin_espera": true = sale ya aunque no pasaron las horas mínimas (ej. republicar un reel archivado)
+  if (!item.sin_espera && ahora - ultimo < gap) return { item: null, proximo: item, motivo: `espera ${cal.separacion_minima_horas} h desde el último post` };
   return { item };
 }
 

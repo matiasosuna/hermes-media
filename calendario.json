@@ -2595,7 +2595,26 @@
           "id": "18118879334021912",
           "permalink": "https://www.instagram.com/reel/DfyC_gTip4K/",
           "fecha": "2026-11-16T00:16:47.711Z"
-        }
+        },
+        "archivado": "2026-11-16: Matías lo archivó (sin portada buena); se republicó como club-r2-v2"
+      },
+      "youtube": {
+        "omitir": true
+      },
+      "tiktok": {
+        "omitir": true
+      }
+    },
+    {
+      "id": "club-r2-v2",
+      "carta": "Tarot Club",
+      "archivo": "club-r2.mp4",
+      "cuando": "2026-11-15T19:20:00-05:00",
+      "v2": true,
+      "sin_espera": true,
+      "instagram": {
+        "caption": "Inside the Tarot Club ☿\nLive Q&A · Your journey: exercises made for you, with feedback from Hermes · Spiritual practices & exercises · Study · Recordings\nComment CLUB to know more or join\n#tarot #learntarot #tarotstudy #tarotclub #tarotreader",
+        "portada": "portada-club-r2.jpg"
       },
       "youtube": {
         "omitir": true
