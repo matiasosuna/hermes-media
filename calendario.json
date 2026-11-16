@@ -2614,7 +2614,12 @@
       "sin_espera": true,
       "instagram": {
         "caption": "Inside the Tarot Club ☿\nLive Q&A · Your journey: exercises made for you, with feedback from Hermes · Spiritual practices & exercises · Study · Recordings\nComment CLUB to know more or join\n#tarot #learntarot #tarotstudy #tarotclub #tarotreader",
-        "portada": "portada-club-r2.jpg"
+        "portada": "portada-club-r2.jpg",
+        "publicado": {
+          "id": "18047158847832942",
+          "permalink": "https://www.instagram.com/reel/DfyEvoBCO-a/",
+          "fecha": "2026-11-16T00:32:20.221Z"
+        }
       },
       "youtube": {
         "omitir": true
