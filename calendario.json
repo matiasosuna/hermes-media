@@ -1937,7 +1937,11 @@
       "cuando": "2026-11-16T08:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Seven of Cups is about daydreams that never come true. It isn't.\nSeven of Cups: choices and illusions, and choosing the one dream that's real. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #sevenofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18109185281254441",
+          "permalink": "https://www.instagram.com/reel/Dfza-2nDPDA/",
+          "fecha": "2026-11-16T13:06:15.647Z"
+        }
       },
       "youtube": {
         "titulo": "Seven dreams, only one is real | Seven of Cups tarot ☿ #shorts",
@@ -1953,10 +1957,19 @@
           "cups",
           "choices"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "toCwpEr2jqg",
+          "url": "https://youtube.com/shorts/toCwpEr2jqg",
+          "fecha": "2026-11-16T13:06:18.435Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6afaffcb29bf80d48e8634cb",
+          "url": "https://tiktok.com/@hermestarot444/video/7708755580105592097",
+          "fecha": "2026-11-16T13:10:16.874Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-14T10:04:34Z",
