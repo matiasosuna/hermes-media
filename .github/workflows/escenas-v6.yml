@@ -1,0 +1,78 @@
+# Escenas v6 de las cartas, automáticas y de a una, cerca de su fecha (17/11, Matías: «armar de a una antes de publicar»,
+# «deja algo automatizado en github», «todo tiene que correr sin mi mac»).
+# Todos los días 01:07 UTC: toma de cola-retirada-2026-11-17.json las cartas que salen en las próximas 84 h y que todavía
+# no tienen escenas v6 en hermes-videos main (máximo 2 por corrida). Para cada una, Claude Code (token del plan, sin costo
+# extra) escribe src/munecos2/cartaNN.tsx siguiendo hermes-videos scripts/escenas-v6/tarea.md, prueba el clip en Modal,
+# lo pasa por la crítica de Gemini hasta nota ≥ 7 y lo sube a main. Después, reel-v6 (10:07 UTC) renderiza y agenda.
+# Si no aprueba, no sube nada: reel-v6 falla en esa carta y no sale nada viejo.
+# A mano: gh workflow run escenas-v6 -R matiasosuna/hermes-media -f carta=48
+name: escenas-v6
+on:
+  schedule:
+    - cron: '7 1 * * *'
+  workflow_dispatch:
+    inputs:
+      carta: { description: 'número de carta, ej. 48 (vacío = las que salen en las próximas 84 h)', default: '' }
+concurrency:
+  group: escenas-v6
+  cancel-in-progress: false
+jobs:
+  escenas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with: { path: media }
+      - uses: actions/checkout@v4
+        with: { repository: matiasosuna/hermes-videos, token: '${{ secrets.PRIVADO_TOKEN }}', path: videos }
+      - name: Qué cartas
+        id: cartas
+        env: { NN: '${{ inputs.carta }}' }
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import datetime as dt, json, os, re
+          cola = json.load(open("media/cola-retirada-2026-11-17.json"))["items"]
+          nn = os.environ.get("NN", "").strip()
+          ahora = dt.datetime.now(dt.timezone.utc)
+          def lista(i):
+              n = i["id"][:2]
+              p = f"videos/src/carta-{n}/escenas.tsx"
+              return os.path.exists(p) and "munecos2" in open(p).read()
+          if nn:
+              its = [i for i in cola if i["id"][:2] == nn]
+          else:
+              its = sorted((i for i in cola if ahora < dt.datetime.fromisoformat(i["cuando"]) <= ahora + dt.timedelta(hours=84)
+                            and not lista(i)), key=lambda i: i["cuando"])[:2]
+          print("lista=" + " ".join(f'{i["id"][:2]}|{i["id"]}|{i["cuando"]}' for i in its))
+          EOF
+          cat "$GITHUB_OUTPUT"
+      - name: Herramientas
+        if: steps.cartas.outputs.lista != ''
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
+          pip install -q modal
+          npm install -g @anthropic-ai/claude-code >/dev/null
+          cd videos && npm ci --no-audit --no-fund >/dev/null
+          git config user.name "hermes-escenas" && git config user.email "hermes-escenas@users.noreply.github.com"
+      - name: Claude escribe las escenas
+        if: steps.cartas.outputs.lista != ''
+        working-directory: videos
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: '${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}'
+          MODAL_TOKEN_ID: '${{ secrets.MODAL_TOKEN_ID }}'
+          MODAL_TOKEN_SECRET: '${{ secrets.MODAL_TOKEN_SECRET }}'
+          GEMINI_API_KEY: '${{ secrets.GEMINI_API_KEY }}'
+          LISTA: '${{ steps.cartas.outputs.lista }}'
+        run: |
+          mal=0
+          for x in $LISTA; do
+            IFS='|' read -r NN ID CUANDO <<< "$x"
+            sed -e "s/{{NN}}/$NN/g" -e "s/{{ID}}/$ID/g" -e "s/{{CUANDO}}/$CUANDO/g" scripts/escenas-v6/tarea.md > /tmp/tarea.md
+            git pull -q --rebase origin main
+            # el detalle del trabajo de Claude queda fuera del log público; solo la última línea
+            claude -p "$(cat /tmp/tarea.md)" --dangerously-skip-permissions --max-turns 300 > /tmp/claude-$NN.log 2>&1 || true
+            r=$(grep -h "RESULTADO:" /tmp/claude-$NN.log | tail -1)
+            echo "$ID: ${r:-sin resultado}" | tee -a "$GITHUB_STEP_SUMMARY"
+            [[ "$r" == *"RESULTADO: aprobada"* ]] || mal=1
+          done
+          exit $mal
