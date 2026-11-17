@@ -53,33 +53,33 @@ h1.grande{font-size:118px;letter-spacing:5px}
 <script>
 const C = (id) => `https://hermestarot444.com/cartas/${id}.jpg`;
 const MINI = (id) => `https://hermestarot444.com/cartas/mini/${id}.webp`;
-const CLUB = '<div class="cta">Reply <b>CLUB</b></div>';
+const CLUB = '<div class="cta">Reply <b>TAROT</b></div>';   // 17/11: Club → Tarot Mentoring; el bot de IG usa «TAROT»
 const BIO = '<div class="cta chico">LINK IN BIO</div>';
 const carta = (id) => `<div class="arte"><img class="carta" src="${C(id)}"></div>`;
 const SLIDES = {
   // ---- destacada «Club» (y stories del Club) ----
   'club-1': { k: '☿ HERMES TAROT 444', arte: () => `<div class="arte"><div class="abanico">${[['X', -14, -150], ['XXI', 0, 0], ['XIX', 14, 150]].map(([id, g, dx], i) =>
       `<img src="${C(id)}" style="transform:translateX(calc(-50% + ${dx}px)) rotate(${g}deg);z-index:${i === 1 ? 2 : 1}">`).join('')}</div></div>`,
-    h: 'TAROT CLUB', l: 'A study plan, with Hermes.', cta: CLUB },
+    h: 'TAROT<br>MENTORING', l: 'A study plan, with Hermes.', cta: CLUB },
   // portada del reel R2 (Matías 15/11: «publicaste sin portada buena… en la grilla se ve horrible»): todo dentro del recorte 3:4 de la grilla (y 240–1680)
   'portada-reel': { k: '', html: () => `<img class="fondo-carta" src="${C('XXI')}"><div class="velo"></div>
-      <div class="centro"><div class="kk">☿ HERMES TAROT 444</div><h1 class="grande">TAROT CLUB</h1><p class="l">What’s inside</p></div>` },
-  'club-study': { k: '☿ TAROT CLUB', arte: () => `<div class="arte"><div class="grilla">${MAZO.map((id) => `<img src="${MINI(id)}">`).join('')}</div></div>`,
+      <div class="centro"><div class="kk">☿ HERMES TAROT 444</div><h1 class="grande">TAROT<br>MENTORING</h1><p class="l">What’s inside</p></div>` },
+  'club-study': { k: '☿ TAROT MENTORING', arte: () => `<div class="arte"><div class="grilla">${MAZO.map((id) => `<img src="${MINI(id)}">`).join('')}</div></div>`,
     h: 'STUDY', l: 'All 78 cards, in depth.', cta: CLUB },
-  'club-journey': { k: '☿ TAROT CLUB', arte: () => carta('0'), h: 'YOUR JOURNEY', l: 'Exercises made for you, with feedback from Hermes.', cta: CLUB },
-  'club-practices': { k: '☿ TAROT CLUB', arte: () => carta('XVII'), h: 'SPIRITUAL PRACTICES', l: 'Practices and exercises from Hermes. Do them, and track your progress.', cta: CLUB },
-  'club-tools': { k: '☿ TAROT CLUB', arte: () => carta('I'), h: 'ALSO INSIDE', l: 'Card table · Channels · Hermes Reader certificate', cta: CLUB },
-  'club-recordings': { k: '☿ TAROT CLUB', arte: () => carta('IX'), h: 'RECORDINGS', l: 'Guided exercises and meditations by Hermes.', cta: CLUB },
-  'club-precio': { k: '☿ TAROT CLUB', html: () => `<div class="precio"><div class="et">FOUNDER PRICE</div>
+  'club-journey': { k: '☿ TAROT MENTORING', arte: () => carta('0'), h: 'YOUR JOURNEY', l: 'Exercises made for you, with feedback from Hermes.', cta: CLUB },
+  'club-practices': { k: '☿ TAROT MENTORING', arte: () => carta('XVII'), h: 'SPIRITUAL PRACTICES', l: 'Practices and exercises from Hermes. Do them, and track your progress.', cta: CLUB },
+  'club-tools': { k: '☿ TAROT MENTORING', arte: () => carta('I'), h: 'ALSO INSIDE', l: 'Card table · Channels · Hermes Reader certificate', cta: CLUB },
+  'club-recordings': { k: '☿ TAROT MENTORING', arte: () => carta('IX'), h: 'RECORDINGS', l: 'Guided exercises and meditations by Hermes.', cta: CLUB },
+  'club-precio': { k: '☿ TAROT MENTORING', html: () => `<div class="precio"><div class="et">FOUNDER PRICE</div>
       <div class="n"><small>USD</small> 11</div><div class="m">per month · locked in while you stay</div>
       <div class="luego">Next: USD 22 · From Dec 1: USD 44</div><div class="pill">ONLY 10 FOUNDER SPOTS</div></div>`, cta: CLUB },
   // ---- destacada «Live Q&A» ----
-  'qa-1': { k: '☿ TAROT CLUB', arte: () => carta('V'), h: 'LIVE Q&A', l: 'Bring your tarot question. Hermes answers live.', cta: BIO },
+  'qa-1': { k: '☿ HERMES TAROT 444', arte: () => carta('V'), h: 'LIVE Q&A', l: 'Bring your tarot question. Hermes answers live.', cta: BIO },
   'qa-2': { k: '☿ LIVE Q&A', arte: () => carta('II'), h: 'ASK BEFORE', l: 'A card, a spread, a reading you didn’t understand. Leave it on the web.', cta: BIO },
   // story del Q&A con la fecha cargada en el panel (/api/clases.js); sin fecha, el render falla a propósito y no se publica
-  'qa-fecha': { k: '☿ TAROT CLUB', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: true, cta: BIO },
+  'qa-fecha': { k: '☿ HERMES TAROT 444', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: true, cta: BIO },
   // muestra para revisar el diseño (fecha de ejemplo, no se publica)
-  'qa-fecha-muestra': { k: '☿ TAROT CLUB', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: { fecha: '2026-11-22', h: 16, mi: 44 }, cta: BIO },
+  'qa-fecha-muestra': { k: '☿ HERMES TAROT 444', arte: () => carta('V'), h: 'NEXT LIVE Q&A', fecha: { fecha: '2026-11-22', h: 16, mi: 44 }, cta: BIO },
   // ---- portadas ----
   'portada-club': { portada: '☿' },
   'portada-qa': { portada: '?' },
