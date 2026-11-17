@@ -1993,7 +1993,11 @@
       "cuando": "2026-11-16T19:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Eight of Cups is about walking away because you failed. It isn't.\nEight of Cups: walking away from what no longer fulfills you, toward something deeper. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #eightofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17979408051159902",
+          "permalink": "https://www.instagram.com/reel/Df0l-RaAfIS/",
+          "fecha": "2026-11-17T00:01:19.844Z"
+        }
       },
       "youtube": {
         "titulo": "The bravest thing is leaving almost enough | Eight of Cups tarot ☿ #shorts",
@@ -2009,10 +2013,19 @@
           "cups",
           "moving on"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "miurwP7WfZk",
+          "url": "https://youtube.com/shorts/miurwP7WfZk",
+          "fecha": "2026-11-17T00:01:23.201Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6afb99573e42cd001e3ca113",
+          "url": "https://tiktok.com/@hermestarot444/video/7708924112722201888",
+          "fecha": "2026-11-17T00:04:52.605Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-15T10:08:27Z",
