@@ -55,7 +55,9 @@ export const seguirCadena = (cal) => !cal.pausado && cal.items.some(falta);
 export const buscarDuplicadoIG = (media, caption) => media.find((m) => primeraLinea(m.caption) === primeraLinea(caption)) ?? null;
 export const buscarDuplicadoYT = (videos, titulo) => videos.find((v) => v.titulo.trim() === titulo.trim()) ?? null;
 export const parametrosContenedor = (item, repo = REPO) => ({
-  media_type: 'REELS', video_url: assetUrl(item.archivo, repo), caption: item.instagram.caption, share_to_feed: 'true',
+  media_type: 'REELS', video_url: assetUrl(item.archivo, repo), caption: item.instagram.caption,
+  // trial (Matías 17/11): solo a no seguidores; «MANUAL» = lo pasa él a seguidores/grilla desde la app, «SS_PERFORMANCE» = IG lo pasa si rinde
+  ...(item.instagram.trial ? { trial_params: JSON.stringify({ graduation_strategy: item.instagram.trial }) } : { share_to_feed: 'true' }),
   // portada propia (JPG del release): sin esto IG toma un cuadro del video y en la grilla se ve mal (Matías 15/11)
   ...(item.instagram.portada ? { cover_url: assetUrl(item.instagram.portada, repo) } : {}),
 });
