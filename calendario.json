@@ -2670,12 +2670,11 @@
       "cuando": "2026-11-16T22:59:00-05:00",
       "v2": true,
       "sin_espera": true,
-      "nota": "Matías 17/11: trial (solo no seguidores); el jueves 19 lo pasa él a seguidores/grilla desde la app, archiva club-r2-v2 y lo fija · 17/11: Matías dijo «esperá»; frenado (omitir) hasta su OK",
+      "nota": "Matías 17/11: trial (solo no seguidores); el jueves 19 lo pasa él a seguidores/grilla desde la app, archiva club-r2-v2 y lo fija · video con «the link is in my bio»; OK de Matías para trial con portada (17/11)",
       "instagram": {
         "caption": "Inside Tarot Mentoring ☿\nLive Q&A · Your journey: exercises made for you, with feedback from Hermes · Spiritual practices & exercises · Study · Recordings\nComment TAROT to know more or join\n#tarot #learntarot #tarotstudy #tarotmentoring #tarotreader",
         "portada": "portada-mentoring-r2.jpg",
-        "trial": "MANUAL",
-        "omitir": true
+        "trial": "MANUAL"
       },
       "youtube": {
         "omitir": true
