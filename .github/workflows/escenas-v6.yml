@@ -73,6 +73,12 @@ jobs:
             claude -p "$(cat /tmp/tarea.md)" --dangerously-skip-permissions --max-turns 300 > /tmp/claude-$NN.log 2>&1 || true
             r=$(grep -h "RESULTADO:" /tmp/claude-$NN.log | tail -1)
             echo "$ID: ${r:-sin resultado}" | tee -a "$GITHUB_STEP_SUMMARY"
-            [[ "$r" == *"RESULTADO: aprobada"* ]] || mal=1
+            [[ "$r" == *"RESULTADO: aprobada"* ]] || { mal=1; continue; }
+            # el clip aprobado, para que Matías lo vea antes de que salga (release entregas de hermes-videos)
+            if [ -f /tmp/c$NN/final.mp4 ]; then
+              cp /tmp/c$NN/final.mp4 /tmp/$NN-v6-historia.mp4
+              GH_TOKEN='${{ secrets.PRIVADO_TOKEN }}' gh release upload entregas /tmp/$NN-v6-historia.mp4 -R matiasosuna/hermes-videos --clobber \
+                && echo "video: https://github.com/matiasosuna/hermes-videos/releases/download/entregas/$NN-v6-historia.mp4" | tee -a "$GITHUB_STEP_SUMMARY"
+            fi
           done
           exit $mal
