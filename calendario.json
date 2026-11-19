@@ -2302,6 +2302,42 @@
         "47-knight-of-cups.mp4": "d0aa401f1683",
         "tiktok-47-knight-of-cups.mp4": "a600d3110ba4"
       }
+    },
+    {
+      "id": "48-queen-of-cups",
+      "carta": "Queen of Cups",
+      "archivo": "48-queen-of-cups.mp4",
+      "cuando": "2026-11-21T12:00:00-05:00",
+      "instagram": {
+        "caption": "Most people think the Queen of Cups is about fixing everyone's problems. It isn't.\nQueen of Cups: compassion and intuition, and listening before fixing. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #queenofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "She doesn't fix your problems, she does better | Queen of Cups tarot ☿ #shorts",
+        "descripcion": "Most people think the Queen of Cups is about fixing everyone's problems. It isn't.\nQueen of Cups: compassion and intuition, and listening before fixing. ☿\n\nFree Hermes Journal + free weekly tarot class → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #queenofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "queen of cups",
+          "cups",
+          "compassion"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      },
+      "v2": {
+        "fecha": "2026-11-19T15:32:02Z",
+        "motor": "v6",
+        "commit": "fafe9c8",
+        "48-queen-of-cups.mp4": "b450b286439b",
+        "tiktok-48-queen-of-cups.mp4": "73b4a127fdc1"
+      }
     }
   ],
   "requiere_v2": true,
