@@ -2202,7 +2202,11 @@
       "cuando": "2026-11-19T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Ten of Cups is about the perfect life you'll have someday. It isn't.\nTen of Cups: family, harmony, and recognizing happiness that's already here. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #tenofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17898134811426755",
+          "permalink": "https://www.instagram.com/reel/Df7kb1piTre/",
+          "fecha": "2026-11-19T17:02:37.616Z"
+        }
       },
       "youtube": {
         "titulo": "Happiness doesn't look like what you planned | Ten of Cups tarot ☿ #shorts",
@@ -2218,10 +2222,19 @@
           "cups",
           "family"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "sxqJnHwjZzs",
+          "url": "https://youtube.com/shorts/sxqJnHwjZzs",
+          "fecha": "2026-11-19T17:02:40.235Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6aff2bb45ccf408ebc9955b7",
+          "url": "https://tiktok.com/@hermestarot444/video/7709929622468709665",
+          "fecha": "2026-11-19T17:07:39.089Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-17T21:49:50Z",
