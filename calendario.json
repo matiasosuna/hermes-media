@@ -2266,6 +2266,42 @@
         "46-page-of-cups.mp4": "6d5286af8a6e",
         "tiktok-46-page-of-cups.mp4": "3fff5d50c0d0"
       }
+    },
+    {
+      "id": "47-knight-of-cups",
+      "carta": "Knight of Cups",
+      "archivo": "47-knight-of-cups.mp4",
+      "cuando": "2026-11-20T19:00:00-05:00",
+      "instagram": {
+        "caption": "Most people think the Knight of Cups is about falling for someone fast. It isn't.\nKnight of Cups: romance and offers of the heart, carried with care, not in a rush. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #knightofcups #cups #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Everybody rushes; this knight rides slowly | Knight of Cups tarot ☿ #shorts",
+        "descripcion": "Most people think the Knight of Cups is about falling for someone fast. It isn't.\nKnight of Cups: romance and offers of the heart, carried with care, not in a rush. ☿\n\nFree Hermes Journal + free weekly tarot class → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #knightofcups #cups #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "knight of cups",
+          "cups",
+          "romance"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      },
+      "v2": {
+        "fecha": "2026-11-19T15:26:47Z",
+        "motor": "v6",
+        "commit": "dad05f6",
+        "47-knight-of-cups.mp4": "d0aa401f1683",
+        "tiktok-47-knight-of-cups.mp4": "a600d3110ba4"
+      }
     }
   ],
   "requiere_v2": true,
