@@ -2260,7 +2260,11 @@
       "cuando": "2026-11-20T08:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Page of Cups is about silly ideas that go nowhere. It isn't.\nPage of Cups: creative messages from the heart that sound silly, until you listen. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #pageofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18140840779729499",
+          "permalink": "https://www.instagram.com/reel/Df9t8a3Dv0k/",
+          "fecha": "2026-11-20T13:03:58.001Z"
+        }
       },
       "youtube": {
         "titulo": "What if your cup started talking to you? | Page of Cups tarot ☿ #shorts",
@@ -2276,10 +2280,19 @@
           "cups",
           "creativity"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "k3lVN4zCNtk",
+          "url": "https://youtube.com/shorts/k3lVN4zCNtk",
+          "fecha": "2026-11-20T13:04:01.245Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6b0045435d9549971ca7c2e0",
+          "url": "https://tiktok.com/@hermestarot444/video/7710238894234537248",
+          "fecha": "2026-11-20T13:06:04.218Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-17T21:43:38Z",
