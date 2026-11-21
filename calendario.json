@@ -2215,6 +2215,15 @@
           "id": "17898134811426755",
           "permalink": "https://www.instagram.com/reel/Df7kb1piTre/",
           "fecha": "2026-11-19T17:02:37.616Z"
+        },
+        "metricas_48h": {
+          "medido": "2026-11-21T17:15:36.206Z",
+          "publicado_ny": "Thu 12:02",
+          "reach": 7797,
+          "views": 10108,
+          "saved": 186,
+          "shares": 88,
+          "total_interactions": 801
         }
       },
       "youtube": {
@@ -2358,7 +2367,11 @@
       "cuando": "2026-11-21T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Queen of Cups is about fixing everyone's problems. It isn't.\nQueen of Cups: compassion and intuition, and listening before fixing. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #queenofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18136712186506347",
+          "permalink": "https://www.instagram.com/reel/DgAvRIdJab1/",
+          "fecha": "2026-11-21T17:13:19.967Z"
+        }
       },
       "youtube": {
         "titulo": "She doesn't fix your problems, she does better | Queen of Cups tarot ☿ #shorts",
@@ -2374,10 +2387,19 @@
           "cups",
           "compassion"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "fMkzQSLA1xg",
+          "url": "https://youtube.com/shorts/fMkzQSLA1xg",
+          "fecha": "2026-11-21T17:13:23.059Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6b01d134d5eabfb8cc495eda",
+          "url": "https://tiktok.com/@hermestarot444/video/7710674150553079072",
+          "fecha": "2026-11-21T17:15:21.078Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-19T15:32:02Z",
