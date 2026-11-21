@@ -2309,7 +2309,11 @@
       "cuando": "2026-11-20T19:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Knight of Cups is about falling for someone fast. It isn't.\nKnight of Cups: romance and offers of the heart, carried with care, not in a rush. ☿\nFree Hermes Journal + free weekly tarot class → link in bio\n#tarot #knightofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17948834823360595",
+          "permalink": "https://www.instagram.com/reel/Df-6JFWD1Rs/",
+          "fecha": "2026-11-21T00:09:42.235Z"
+        }
       },
       "youtube": {
         "titulo": "Everybody rushes; this knight rides slowly | Knight of Cups tarot ☿ #shorts",
@@ -2325,10 +2329,19 @@
           "cups",
           "romance"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "5qL2-Cv2iQk",
+          "url": "https://youtube.com/shorts/5qL2-Cv2iQk",
+          "fecha": "2026-11-21T00:09:45.754Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6b00e14b5e993799d83bac2c",
+          "url": "https://tiktok.com/@hermestarot444/video/7710410344241319201",
+          "fecha": "2026-11-21T00:11:31.034Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-19T15:26:47Z",
