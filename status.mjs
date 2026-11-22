@@ -83,21 +83,24 @@ const tt = await intentar(async () => {
 // ---------- prueba sin intro (pedido de Matías, 22/11/2026) ----------
 // La 49 (King of Cups) sale sin la intro (pausa, clase gratis, CARD, 100k): «Here's the story.» y directo la historia
 // (hermes-videos src/carta-49/sin-intro.json). Se compara con la 47 y la 48, que la tienen. Duración = la del mp4 (ffprobe).
+// Desde la 49 la voz tiene menos emoción (exaggeration 0,6 → 0,4, pedido de Matías 22/11/2026): la 50 (con intro, voz 0,4)
+// es la comparación con la misma voz; la 47 y la 48 tienen la de antes.
 // IG no da por API el % que lo mira entero ni los seguidores de cada reel: «% visto prom.» = tiempo promedio ÷ duración y
 // los seguidores nuevos son de toda la cuenta, por día. Se deja de mostrar 14 días después de que sale la 49.
-const PRUEBA = [['47-knight-of-cups', 'con', 93.7], ['48-queen-of-cups', 'con', 89.2], ['49-king-of-cups', 'sin', 73.5]];
+const PRUEBA = [['47-knight-of-cups', 'con', '0,6', 93.7], ['48-queen-of-cups', 'con', '0,6', 89.2], ['49-king-of-cups', 'sin', '0,4', 73.4],
+  ['50-ace-of-swords', 'con', '0,4', 89.8]];
 const p49 = items.find((i) => i.id === PRUEBA[2][0]);
 const prueba = !p49 || ahora > Date.parse(p49.cuando) + 14 * 864e5 ? null : await intentar(async () => {
   const tok = await (await fetch('https://oauth2.googleapis.com/token', { method: 'POST', body: new URLSearchParams({
     client_id: env.HT_YT_CLIENT_ID, client_secret: env.HT_YT_CLIENT_SECRET, refresh_token: env.HT_YT_REFRESH_TOKEN, grant_type: 'refresh_token' }) })).json();
-  const its = PRUEBA.map(([id, intro, dur]) => ({ ...items.find((i) => i.id === id), intro, dur }));
+  const its = PRUEBA.map(([id, intro, voz, dur]) => ({ ...items.find((i) => i.id === id), intro, voz, dur }));
   const ytIds = its.map((i) => i.youtube?.publicado?.id).filter(Boolean);
   const ytSt = tok.access_token && ytIds.length ? Object.fromEntries(((await (await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${ytIds.join(',')}`,
     { headers: { authorization: `Bearer ${tok.access_token}` } })).json()).items || []).map((v) => [v.id, v.statistics])) : {};
   const ua = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36' };
   const filas = [];
   for (const i of its) {
-    const f = { carta: i.carta, intro: i.intro, dur: i.dur, sale: i.cuando };
+    const f = { carta: i.carta, intro: i.intro, voz: i.voz, dur: i.dur, sale: i.cuando };
     const igId = i.instagram?.publicado?.id;
     if (igId) for (const k of ['views', 'reach', 'ig_reels_avg_watch_time']) {
       const ins = await (await fetch(`${G}/${igId}/insights?metric=${k}&access_token=${env.HT_PAGE_TOKEN}`)).json();
@@ -141,13 +144,14 @@ const tabla = (filas, cols, primera = 'Carta') => { p(`| ${primera} | ${cols.map
 if (prueba) {
   p(); p('## Prueba: King of Cups sin intro');
   p('Sale sin la intro (pausa, clase gratis, CARD, 100k): «Here\'s the story.» y directo la historia. Se compara con Knight y Queen of Cups, que la tienen.');
+  p('Desde la 49 la voz tiene menos emoción (0,4; antes 0,6): la comparación justa de la intro es King of Cups contra Ace of Swords, con la misma voz.');
   p();
   if (prueba.error) p(`⚠️ ${prueba.error}`); else {
-    p('| Carta | Intro | Duración | Sale (NY) | IG views | IG alcance | Tiempo prom. | % visto prom. | YouTube views | TikTok views |');
-    p('|---|---|---:|---|---:|---:|---:|---:|---:|---:|');
+    p('| Carta | Intro | Voz | Duración | Sale (NY) | IG views | IG alcance | Tiempo prom. | % visto prom. | YouTube views | TikTok views |');
+    p('|---|---|---|---:|---|---:|---:|---:|---:|---:|---:|');
     for (const f of prueba.filas) {
       const s = f.ig_reels_avg_watch_time != null ? f.ig_reels_avg_watch_time / 1000 : null;
-      p(`| ${f.carta} | ${f.intro} | ${f.dur ? f.dur.toFixed(1).replace('.', ',') + ' s' : '–'} | ${ny(f.sale)} | ${n(f.views)} | ${n(f.reach)} | ${s == null ? '–' : s.toFixed(1).replace('.', ',') + ' s'} | ${s == null || !f.dur ? '–' : Math.round((100 * s) / f.dur) + ' %'} | ${n(f.yt)} | ${n(f.tt)} |`);
+      p(`| ${f.carta} | ${f.intro} | ${f.voz} | ${f.dur ? f.dur.toFixed(1).replace('.', ',') + ' s' : '–'} | ${ny(f.sale)} | ${n(f.views)} | ${n(f.reach)} | ${s == null ? '–' : s.toFixed(1).replace('.', ',') + ' s'} | ${s == null || !f.dur ? '–' : Math.round((100 * s) / f.dur) + ' %'} | ${n(f.yt)} | ${n(f.tt)} |`);
     }
     const dia = (iso) => new Date(Date.parse(iso) - 864e5).toLocaleDateString('es', { timeZone: 'UTC', day: 'numeric', month: 'short' });
     if (prueba.seg.length) p(`\nSeguidores nuevos en IG por día (toda la cuenta): ${prueba.seg.map((v) => `${dia(v.end_time)} ${n(v.value)}`).join(' · ')}`);
