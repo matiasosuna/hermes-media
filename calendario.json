@@ -2502,6 +2502,42 @@
         "50-ace-of-swords.mp4": "46ccf8ead867",
         "tiktok-50-ace-of-swords.mp4": "dfeca990eb09"
       }
+    },
+    {
+      "id": "51-two-of-swords",
+      "carta": "Two of Swords",
+      "archivo": "51-two-of-swords.mp4",
+      "cuando": "2026-11-24T12:00:00-05:00",
+      "instagram": {
+        "caption": "Most people think the Two of Swords is about keeping the peace. It isn't.\nTwo of Swords: a hard choice, and the decision we avoid by refusing to look. ☿\nFree weekly tarot class → link in bio\n#tarot #twoofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "She's not blind. She chose the blindfold | Two of Swords tarot ☿ #shorts",
+        "descripcion": "Most people think the Two of Swords is about keeping the peace. It isn't.\nTwo of Swords: a hard choice, and the decision we avoid by refusing to look. ☿\n\nFree weekly tarot class → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #twoofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "two of swords",
+          "swords",
+          "decisions"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      },
+      "v2": {
+        "fecha": "2026-11-22T17:55:35Z",
+        "motor": "v6",
+        "commit": "9f248a2",
+        "51-two-of-swords.mp4": "ede191ea4e03",
+        "tiktok-51-two-of-swords.mp4": "47ff8839b098"
+      }
     }
   ],
   "requiere_v2": true,
