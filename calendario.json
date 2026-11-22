@@ -2425,7 +2425,11 @@
       "cuando": "2026-11-22T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the King of Cups is about keeping your feelings locked away. It isn't.\nKing of Cups: emotional balance and calm wisdom. Feel everything, don't let it steer. ☿\nFree weekly tarot class → link in bio\n#tarot #kingofcups #cups #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18118263878032261",
+          "permalink": "https://www.instagram.com/reel/DgDULVVga_G/",
+          "fecha": "2026-11-22T17:14:06.647Z"
+        }
       },
       "youtube": {
         "titulo": "The sea is wild, so why is he so calm? | King of Cups tarot ☿ #shorts",
@@ -2441,10 +2445,19 @@
           "cups",
           "balance"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "1lBg8Qq1XOg",
+          "url": "https://youtube.com/shorts/1lBg8Qq1XOg",
+          "fecha": "2026-11-22T17:14:09.489Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6b0322e2bf5d5a73b6a9ae1d",
+          "url": "https://tiktok.com/@hermestarot444/video/7711045435124665633",
+          "fecha": "2026-11-22T17:15:54.197Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-22T13:57:24Z",
