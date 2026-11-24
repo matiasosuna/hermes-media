@@ -9,7 +9,7 @@ const OUT = process.env.OUT || `fotos-${NAV}`; mkdirSync(OUT, { recursive: true 
 const FOTO = readFileSync(process.env.FOTO || 'persona-640.jpg').toString('base64');
 const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 const registro = [], datos = { nav: NAV };
-const anotar = (s) => { console.log(s); registro.push(s); };
+const anotar = (s) => { const l = `${new Date().toISOString().slice(11, 23)} ${s}`; console.log(l); registro.push(l); };
 
 // cámara y micrófono falsos dentro de la página (antes de que cargue la sala)
 function camaraFalsa(foto) {
@@ -46,6 +46,16 @@ async function abrir(quien, tipo, opcCtx) {
     ...(tipo === firefox ? { firefoxUserPrefs: { 'webgl.force-enabled': true, 'webgl.disabled': false, 'webgl.enable-webgl2': true } } : {}) });
   const ctx = await browser.newContext(opcCtx);
   if (tipo !== chromium) await ctx.addInitScript(camaraFalsa, FOTO);
+  // el aviso de «equipo lento» se anota pero no se aplica: acá se prueba que el efecto ande en este navegador; la velocidad
+  // de esta máquina (sin placa de video) no es la de un teléfono, y se informa aparte (ms por cuadro)
+  if (quien === 'owner') await ctx.addInitScript(() => {
+    let sf;
+    Object.defineProperty(window, 'SalaFondo', { configurable: true, get: () => sf, set: (v) => {
+      const crear = v.crear;
+      v.crear = (f, o = {}) => crear(f, { ...o, alLento: () => { (window.__lentos ||= []).push(Math.round(performance.now())); console.warn('[prueba] lento (anotado, no aplicado)'); } });
+      sf = v;
+    } });
+  });
   const page = await ctx.newPage();
   // del anfitrión en WebKit/Firefox se anota todo (MediaPipe avisa por consola en qué paso va)
   page.on('console', (m) => { if ((['error', 'warning'].includes(m.type()) || (quien === 'owner' && tipo !== chromium)) && !/club-app\.js|404/.test(m.text())) anotar(`[${quien}] ${m.type()}: ${m.text().slice(0, 400)}`); });
@@ -56,7 +66,7 @@ async function abrir(quien, tipo, opcCtx) {
 }
 const foto = async (page, n) => { await page.screenshot({ path: `${OUT}/${NAV}-${n}.png` }); anotar('foto ' + n); };
 const tocar = (page, sel) => page.evaluate((s) => document.querySelector(s).click(), sel);
-const motor = (page) => page.evaluate(() => ({ vivo: !!S.motor?.vivo, ms: S.motor?.ms ?? null, fps: S.motor?.fps ?? null, forma: S.motor?.forma ?? null, fondo: S.fondo,
+const motor = (page) => page.evaluate(() => ({ vivo: !!S.motor?.vivo, ms: S.motor?.ms ?? null, msSeg: S.motor?.msSeg ?? null, medias: !!S.motor?.medias, lentos: (window.__lentos || []).length, fps: S.motor?.fps ?? null, forma: S.motor?.forma ?? null, fondo: S.fondo,
   manda: ((tr) => (!S.pub.video ? 'sin-publicar' : !tr ? 'nada' : tr === S.motor?.track ? 'efecto' : tr === S.video ? 'camara' : 'otro'))(S.pub.video?.sender.track) }));
 // espera a que el efecto ande o a que la sala lo saque (aviso de error o de equipo lento)
 const hastaMotor = (page, ms = 120e3) => page.waitForFunction(() => (S.motor?.vivo && !S.fondoCargando) || !S.fondo, null, { timeout: ms, polling: 250 });

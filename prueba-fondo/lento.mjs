@@ -35,10 +35,11 @@ async function caso(camara, x) {
     fila.cargaMs = Date.now() - t0;
     // 12 s con el efecto andando (el aviso de lento salta a los ~2 s de promedio alto + 3 s seguidos)
     const muestras = [];
-    for (let i = 0; i < 24; i++) { muestras.push(await page.evaluate(() => ({ ms: S.motor?.ms ?? null, fps: S.motor?.fps ?? null }))); await espera(500); }
+    for (let i = 0; i < 24; i++) { muestras.push(await page.evaluate(() => ({ ms: S.motor?.ms ?? null, fps: S.motor?.fps ?? null, seg: S.motor?.msSeg ?? null, medias: !!S.motor?.medias }))); await espera(500); }
     const fin = await page.evaluate(() => ({ forma: S.motor?.forma ?? null, fondo: S.fondo, cam: S.cam, vivo: !!S.motor?.vivo,
       tam: S.video ? `${S.video.getSettings().width}x${S.video.getSettings().height}` : null, aviso: document.querySelector('#flotante')?.hidden === false ? document.querySelector('#flotante').textContent : '' }));
-    const ms = muestras.map((m) => m.ms).filter((v) => v != null), fps = muestras.map((m) => m.fps).filter((v) => v != null);
+    const ms = muestras.map((m) => m.ms).filter((v) => v != null), fps = muestras.map((m) => m.fps).filter((v) => v != null), seg = muestras.map((m) => m.seg).filter((v) => v != null);
+    fila.msSegMedio = seg.length ? Math.round(seg.reduce((a, b) => a + b) / seg.length) : null; fila.aMedias = muestras.some((m) => m.medias);
     Object.assign(fila, { msMedio: ms.length ? Math.round(ms.reduce((a, b) => a + b) / ms.length) : null, fpsMedio: fps.length ? Math.round(fps.reduce((a, b) => a + b) / fps.length * 10) / 10 : null,
       ...fin, saltoLento: avisos.includes('[fondo] fondoLento'), avisos });
     await page.emulateCPUThrottling(1);

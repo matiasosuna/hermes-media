@@ -161,7 +161,9 @@ jobs:
           VIDEO: ${{ github.workspace }}/apaisada.y4m
           VIDEO_V: ${{ github.workspace }}/parada.y4m
           OUT: ${{ github.workspace }}/fotos-lento
-        run: node prueba-fondo/lento.mjs
+        run: |
+          lscpu | grep -E 'Model name|^CPU\(s\)' | tee /dev/stderr | tr -s ' ' > cpu.txt; mkdir -p fotos-lento && cp cpu.txt fotos-lento/
+          node prueba-fondo/lento.mjs
       - if: always()
         uses: actions/upload-artifact@v4
         with: { name: fotos-lento, path: fotos-lento/, retention-days: 7 }
