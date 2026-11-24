@@ -17,6 +17,12 @@ async function caso(camara, x) {
   const fila = { camara, cpu: 'x' + x };
   try {
     const page = await browser.newPage();
+    // teléfono parado: la cámara entrega 360×640 como un teléfono de verdad (sin esto, Chrome la recorta a 360×360 por la
+    // forma que pide la sala, y se probaría el modelo apaisado)
+    if (camara === 'parada') await page.evaluateOnNewDocument(() => {
+      const md = navigator.mediaDevices, orig = md.getUserMedia.bind(md);
+      md.getUserMedia = (c = {}) => orig(c.video ? { ...c, video: true } : c);
+    });
     await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
     const avisos = []; page.on('console', (m) => { if (/^\[fondo\]/.test(m.text())) avisos.push(m.text()); });
     await page.goto(`${BASE}/entrar-como?u=owner`, { waitUntil: 'domcontentloaded', timeout: 90e3 });

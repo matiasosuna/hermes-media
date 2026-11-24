@@ -39,11 +39,15 @@ function camaraFalsa(foto) {
 }
 
 async function abrir(quien, tipo, opcCtx) {
-  const browser = await tipo.launch({ headless: true, args: tipo === chromium ? ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] : [] });
+  // Firefox sin placa de video (la máquina de GitHub) apaga WebGL2 y el botón no aparece, que es lo correcto; para probar el
+  // efecto igual se lo fuerza a usar WebGL por software (en una computadora o teléfono de verdad, WebGL2 viene prendido)
+  const browser = await tipo.launch({ headless: true, args: tipo === chromium ? ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] : [],
+    ...(tipo === firefox ? { firefoxUserPrefs: { 'webgl.force-enabled': true, 'webgl.disabled': false, 'webgl.enable-webgl2': true } } : {}) });
   const ctx = await browser.newContext(opcCtx);
   if (tipo !== chromium) await ctx.addInitScript(camaraFalsa, FOTO);
   const page = await ctx.newPage();
-  page.on('console', (m) => { if (['error', 'warning'].includes(m.type()) && !/club-app\.js|404/.test(m.text())) anotar(`[${quien}] ${m.type()}: ${m.text()}`); });
+  // del anfitrión en WebKit/Firefox se anota todo (MediaPipe avisa por consola en qué paso va)
+  page.on('console', (m) => { if ((['error', 'warning'].includes(m.type()) || (quien === 'owner' && tipo !== chromium)) && !/club-app\.js|404/.test(m.text())) anotar(`[${quien}] ${m.type()}: ${m.text().slice(0, 400)}`); });
   page.on('pageerror', (e) => anotar(`[${quien}] pageerror: ${e.message}`));
   await page.goto(`${BASE}/entrar-como?u=${quien}`, { waitUntil: 'domcontentloaded', timeout: 90e3 });
   await page.waitForFunction(() => { const b = document.querySelector('#entrar'); return b && !b.disabled && b.offsetParent !== null; }, null, { timeout: 90e3 });
@@ -53,7 +57,20 @@ const foto = async (page, n) => { await page.screenshot({ path: `${OUT}/${NAV}-$
 const tocar = (page, sel) => page.evaluate((s) => document.querySelector(s).click(), sel);
 const motor = (page) => page.evaluate(() => ({ vivo: !!S.motor?.vivo, ms: S.motor?.ms ?? null, fps: S.motor?.fps ?? null, forma: S.motor?.forma ?? null, fondo: S.fondo,
   manda: ((tr) => (!S.pub.video ? 'sin-publicar' : !tr ? 'nada' : tr === S.motor?.track ? 'efecto' : tr === S.video ? 'camara' : 'otro'))(S.pub.video?.sender.track) }));
-const hastaMotor = (page, ms = 120e3) => page.waitForFunction(() => S.motor?.vivo && !S.fondoCargando, null, { timeout: ms, polling: 250 });
+// espera a que el efecto ande o a que la sala lo saque (aviso de error o de equipo lento)
+const hastaMotor = (page, ms = 120e3) => page.waitForFunction(() => (S.motor?.vivo && !S.fondoCargando) || !S.fondo, null, { timeout: ms, polling: 250 });
+// si no arrancó: paso por paso, cuál se cuelga (cargar MediaPipe, play del video, avisos de cuadros, crear)
+const diagnostico = (page) => page.evaluate(async () => {
+  const r = {}, t = (p, ms) => Promise.race([Promise.resolve(p).then(() => 'ok', (e) => 'error: ' + (e?.message || e)), new Promise((ok) => setTimeout(() => ok('colgado'), ms))]);
+  let t0 = performance.now(); r.cargar = await t(SalaFondo.cargar('apaisado'), 60e3); r.cargarMs = Math.round(performance.now() - t0);
+  const cam = (await navigator.mediaDevices.getUserMedia({ video: true })).getVideoTracks()[0];
+  const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.style.cssText = 'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0'; document.body.append(v);
+  v.srcObject = new MediaStream([cam]); r.play = await t(v.play(), 5000);
+  await new Promise((ok) => setTimeout(ok, 1500)); r.ready = v.readyState; r.tam = v.videoWidth + 'x' + v.videoHeight;
+  r.rvfc = await t(new Promise((ok) => v.requestVideoFrameCallback(ok)), 3000);
+  t0 = performance.now(); r.crear = await t(SalaFondo.crear(cam, { modo: 'fuerte' }).then((m) => { r.crearMs = Math.round(performance.now() - t0); r.msCuadro = m.ms; m.parar(); }), 30e3);
+  return r;
+});
 
 const tipoHost = { webkit, firefox, chromium }[NAV];
 // (sin «permissions»: la cámara la da camaraFalsa, y WebKit no acepta ese permiso)
@@ -75,6 +92,11 @@ try {
   await tocar(A.page, '#lob-fondo'); await espera(600);
   await tocar(A.page, '.fx-op[data-f="fuerte"]');
   const t0 = Date.now(); await hastaMotor(A.page); datos.cargaMs = Date.now() - t0;
+  if (!(await A.page.evaluate(() => !!S.motor?.vivo))) {
+    await foto(A.page, '02-no-arranco');
+    datos.diagnostico = await diagnostico(A.page).catch((e) => ({ error: e.message })); anotar('diagnóstico: ' + JSON.stringify(datos.diagnostico));
+    throw new Error('el efecto no arrancó en ' + NAV + ' (aviso: ' + (await A.page.evaluate(() => document.querySelector('#flotante')?.textContent || '')) + ')');
+  }
   await espera(3000); await foto(A.page, '02-desenfoque');
   datos.desenfoque = await motor(A.page); anotar('desenfoque: ' + JSON.stringify(datos.desenfoque));
   await tocar(A.page, '.fx-op[data-f="biblioteca"]'); await espera(3000); await foto(A.page, '03-imagen');
