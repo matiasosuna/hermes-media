@@ -2738,6 +2738,28 @@
       "tiktok": {
         "omitir": true
       }
+    },
+    {
+      "id": "trial-10-wheel-of-fortune",
+      "carta": "Wheel of Fortune (trial)",
+      "archivo": "10-wheel-of-fortune.mp4",
+      "cuando": "2026-12-02T21:00:00-05:00",
+      "v2": {
+        "original": "10-wheel-of-fortune",
+        "fuente": "copia de Instagram 720p (el archivo original no estaba en el release)"
+      },
+      "nota": "Matías 24/11: trial con el video original; «Sí, agregalo» con la copia de IG en 720p",
+      "instagram": {
+        "caption": "What keeps repeating in your life?\nA potter, a turning wheel, and the lesson that comes back until you learn it. The Wheel of Fortune isn't about luck. ☿\nFree weekly tarot class → link in bio\n#tarot #wheeloffortune #tarotreading #learntarot #majorarcana",
+        "trial": "MANUAL",
+        "repost_de": "10-wheel-of-fortune"
+      },
+      "youtube": {
+        "omitir": true
+      },
+      "tiktok": {
+        "omitir": true
+      }
     }
   ],
   "requiere_v2": true,
