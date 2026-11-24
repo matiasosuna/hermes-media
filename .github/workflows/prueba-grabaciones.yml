@@ -1,0 +1,72 @@
+# Prueba de Recordings › Yours (tarot-web, 24/11/2026; Matías: «no podemos hacer una seccion en las cuentas para recordings y
+# ella solo puede ver esto?»). La página y la API reales de la rama de tarot-web, con D1 en memoria y archivos de prueba en vez
+# de Modal (prueba-grabaciones/server.mjs): no toca producción. Hermes asigna desde la página; cada cuenta mira la suya.
+# Sube las capturas (tamaño celular) como artefacto. Repo público: el código de tarot-web se baja con PRIVADO_TOKEN y no se
+# sube; las capturas son de cuentas de prueba.
+name: prueba-grabaciones
+on:
+  push:
+    branches: [prueba-grabaciones]
+    paths: ['prueba-grabaciones/**', '.github/workflows/prueba-grabaciones.yml']
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Rama de tarot-web'
+        default: 'grabaciones-privadas'
+permissions:
+  contents: read
+concurrency:
+  group: prueba-grabaciones
+  cancel-in-progress: true
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: matiasosuna/tarot-web
+          ref: ${{ inputs.ref || 'grabaciones-privadas' }}
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Tests de tarot-web
+        run: |
+          cd web
+          npm test > tests.log 2>&1 || { tail -60 tests.log; exit 1; }
+          grep -E '^ℹ (tests|pass|fail)' tests.log
+          python3 -m unittest discover -s scripts/telegram -p 'test_*.py' 2>&1 | tail -3
+      - name: Armar sitio
+        run: cd web && ./build.sh > /dev/null
+      - name: Dependencias
+        run: |
+          cd prueba-grabaciones && npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 >/dev/null
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null)
+      - name: Archivos de prueba (en vez de Modal)
+        run: |
+          mkdir -p archivos
+          ffmpeg -loglevel error -f lavfi -i "sine=frequency=330:duration=90" -c:a aac -b:a 64k -movflags +faststart archivos/prueba.m4a
+          ffmpeg -loglevel error -f lavfi -i "testsrc2=size=640x360:rate=25:duration=10" -f lavfi -i "sine=frequency=440:duration=10" \
+            -c:v libx264 -pix_fmt yuv420p -c:a aac -shortest -movflags +faststart archivos/prueba.mp4
+          ffmpeg -loglevel error -ss 2 -i archivos/prueba.mp4 -frames:v 1 -vf scale=640:-2 archivos/prueba.jpg
+          ls -la archivos
+      - name: Servidor de prueba
+        run: |
+          node prueba-grabaciones/server.mjs "$GITHUB_WORKSPACE/web" 8799 "$GITHUB_WORKSPACE/archivos" > servidor.log 2>&1 &
+          for i in $(seq 1 40); do curl -s -o /dev/null http://127.0.0.1:8799/debug/ids && break; sleep 1; done
+          curl -s http://127.0.0.1:8799/debug/ids
+      - name: Fotos
+        env:
+          OUT: ${{ github.workspace }}/fotos
+        run: node prueba-grabaciones/fotos.mjs
+      - if: always()
+        run: tail -60 servidor.log || true
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fotos
+          path: fotos/
+          retention-days: 7
