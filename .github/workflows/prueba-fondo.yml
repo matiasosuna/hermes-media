@@ -19,11 +19,17 @@ on:
       solo:
         description: 'Correr solo una parte (fotos, navegadores, lento, lejos); vacío = todas'
         default: ''
+      navs:
+        description: 'Navegadores (JSON), p. ej. ["webkit"]'
+        default: '["webkit","firefox"]'
+      vueltas:
+        description: 'Cuántas máquinas por navegador (JSON), p. ej. [1,2,3,4]: para ver si una falla es de la máquina o del código'
+        default: '[1]'
 permissions:
   contents: read
   actions: read
 concurrency:
-  group: prueba-fondo
+  group: prueba-fondo-${{ inputs.ref || 'sala-fondo' }}
   cancel-in-progress: true
 jobs:
   fotos:
@@ -84,14 +90,13 @@ jobs:
   # no se parece a Safari; en la Mac es el mismo motor que Safari y el iPhone.
   navegadores:
     if: ${{ (!inputs.minutos || inputs.minutos == '0') && (!inputs.solo || inputs.solo == 'navegadores') }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.nav == 'webkit' && 'macos-latest' || 'ubuntu-latest' }}
     timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - { nav: webkit, os: macos-latest }
-          - { nav: firefox, os: ubuntu-latest }
+        nav: ${{ fromJSON(inputs.navs || '["webkit","firefox"]') }}
+        vuelta: ${{ fromJSON(inputs.vueltas || '[1]') }}
     env:
       REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
       SALA: prueba-fondo
@@ -130,7 +135,7 @@ jobs:
           if [ "$RUNNER_OS" = Linux ]; then xvfb-run -a -s "-screen 0 1280x1024x24" node prueba-fondo/navegador.mjs; else node prueba-fondo/navegador.mjs; fi
       - if: always()
         uses: actions/upload-artifact@v4
-        with: { name: 'fotos-${{ matrix.nav }}', path: 'fotos-${{ matrix.nav }}/', retention-days: 7 }
+        with: { name: 'fotos-${{ matrix.nav }}${{ matrix.vuelta != 1 && format(''-{0}'', matrix.vuelta) || '''' }}', path: 'fotos-${{ matrix.nav }}/', retention-days: 7 }
 
   # Teléfonos lentos: la CPU de Chrome frenada (x1, x3, x6, x10) con la cámara apaisada y parada.
   lento:
