@@ -2492,7 +2492,11 @@
       "cuando": "2026-11-23T19:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Ace of Swords is about words that cut and hurt. It isn't.\nAce of Swords: clarity and truth, the breakthrough that cuts through confusion. ☿\nFree weekly tarot class → link in bio\n#tarot #aceofswords #swords #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18102530876422446",
+          "permalink": "https://www.instagram.com/reel/DgGnxtQCkO6/",
+          "fecha": "2026-11-24T00:03:16.000Z"
+        }
       },
       "youtube": {
         "titulo": "The truth always feels clear | Ace of Swords tarot ☿ #shorts",
@@ -2508,10 +2512,19 @@
           "swords",
           "clarity"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "x8bGVmKES_A",
+          "url": "https://youtube.com/shorts/x8bGVmKES_A",
+          "fecha": "2026-11-24T00:03:19.080Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6b04d4486734c08a2698246e",
+          "url": "https://tiktok.com/@hermestarot444/video/7711522110715235617",
+          "fecha": "2026-11-24T00:05:58.272Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-22T14:02:53Z",
