@@ -138,12 +138,19 @@ try {
   // Se carga antes de elegir el fondo: la sala espera hasta 60 s y acá se quiere probar el efecto, no la velocidad de esta máquina
   datos.cargaMediaPipe = await A.page.evaluate(async () => {
     const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.2.3', r = {}, ms = (t) => Math.round(performance.now() - t);
-    let t0 = performance.now(); const buf = await (await fetch(MP + '/wasm/vision_wasm_internal.wasm')).arrayBuffer(); r.bajarWasm = ms(t0); r.mb = Math.round(buf.byteLength / 1e5) / 10;
-    t0 = performance.now(); await WebAssembly.compile(buf); r.compilarWasm = ms(t0);
-    t0 = performance.now(); await SalaFondo.cargar('apaisado'); r.cargarSala = ms(t0);
+    const tope = (p, seg) => Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error(`más de ${seg} s`)), seg * 1000))]);
+    // ¿este navegador compila JavaScript (JIT) o lo interpreta? Con JIT, este bucle tarda ~50 ms; interpretado, segundos
+    let t0 = performance.now(), x = 0; for (let i = 0; i < 3e7; i++) x = (x + i * 7) % 1000003; r.bucleJs = ms(t0); r.x = x;
+    t0 = performance.now();
+    try {
+      const buf = await tope(fetch(MP + '/wasm/vision_wasm_internal.wasm').then((x) => x.arrayBuffer()), 60); r.bajarWasm = ms(t0); r.mb = Math.round(buf.byteLength / 1e5) / 10;
+      t0 = performance.now(); await tope(WebAssembly.compile(buf), 180); r.compilarWasm = ms(t0);
+      t0 = performance.now(); await tope(SalaFondo.cargar('apaisado'), 240); r.cargarSala = ms(t0);
+    } catch (e) { r.error = e.message + ' (a los ' + ms(t0) + ' ms)'; }
     return r;
   });
   anotar('MediaPipe la primera vez: ' + JSON.stringify(datos.cargaMediaPipe));
+  if (datos.cargaMediaPipe.error) throw new Error('MediaPipe no carga en ' + NAV + ': ' + datos.cargaMediaPipe.error);
   await tocar(A.page, '#lob-fondo'); await espera(600);
   await tocar(A.page, '.fx-op[data-f="fuerte"]');
   const t0 = Date.now(); await hastaMotor(A.page); datos.cargaMs = Date.now() - t0;

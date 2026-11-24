@@ -11,7 +11,7 @@ const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 const registro = []; const anotar = (s) => { const l = `${new Date().toISOString().slice(11, 19)} ${s}`; console.log(l); registro.push(l); };
 const guardar = () => writeFileSync(`${OUT}/registro-${ROL}.txt`, registro.join('\n') + '\n');
 
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: true,
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, protocolTimeout: 20 * 60e3, // el anfitrión espera a la alumna
   args: ['--no-sandbox', '--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required',
     ...(ROL === 'anfitrion' && process.env.VIDEO ? [`--use-file-for-fake-video-capture=${process.env.VIDEO}`] : []),
     '--enable-unsafe-swiftshader', '--use-angle=swiftshader', '--ignore-gpu-blocklist'] });
@@ -47,8 +47,16 @@ try {
     if (muestras.has('con-fondo:camara')) fallo = new Error('con un fondo elegido se mandó la cámara sin el fondo');
     await page.screenshot({ path: `${OUT}/anfitrion-fin.png` });
   } else {
-    await tocar('#entrar');
-    await page.waitForFunction(() => S.sid && S.pc?.connectionState === 'connected', { timeout: 120e3 });
+    // como una alumna de verdad: si llegó antes que Hermes y no la dejó pasar, vuelve a tocar «Entrar» unos segundos después
+    for (let i = 1; ; i++) {
+      await page.waitForFunction(() => { const b = document.querySelector('#entrar'); return b && !b.disabled && b.offsetParent !== null; }, { timeout: 120e3 });
+      await tocar('#entrar');
+      const ok = await page.waitForFunction(() => S.sid && S.pc?.connectionState === 'connected', { timeout: 25e3 }).then(() => true, () => false);
+      if (ok) break;
+      if (i === 8) throw new Error('la alumna no pudo entrar');
+      anotar(`intento ${i}: todavía no entra (${(await page.evaluate(() => document.querySelector('#flotante')?.textContent || '')).slice(0, 80)}); de nuevo en 5 s`);
+      await espera(5000);
+    }
     anotar('alumna en la sala');
     await page.waitForFunction(() => [...S.tiles.values()].some((t) => t.g && !t.g.yo && t.video?.videoWidth > 0), { timeout: 5 * 60e3, polling: 500 });
     anotar('le llega el video del anfitrión');
