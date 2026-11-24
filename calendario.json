@@ -2572,5 +2572,5 @@
     }
   ],
   "requiere_v2": true,
-  "prueba_horarios": "Matías, 11/11/2026 («dale rota»): desde el 12/11, 8, 12 y 19 h NY con días de 0, 1 y 2 posts (patrón jue 12 · vie 8+19 · sáb 12 · dom 0 · lun 8+19 · mar 12 · mié 0 = 7 por semana). Antes: todos a las 21 h. El alcance a las 48 h queda en instagram.metricas_48h de cada reel."
+  "prueba_horarios": "Hasta el 24/11: rotación 8, 12 y 19 h NY con días de 0, 1 y 2 posts (Matías, 11/11, «dale rota»). Desde el 25/11/2026 (Matías, 24/11: «1 por día», «Siempre 12 h NY»): 1 reel por día, todos los días, a las 12:00 NY; las fechas salen de cola-retirada-2026-11-17.json. Análisis: tarot investigaciones/frecuencia-ig.md (1 por día sin días vacíos dio más views de la cuenta; la hora no cambió nada a 48 h). El alcance a las 48 h queda en instagram.metricas_48h de cada reel."
 }
