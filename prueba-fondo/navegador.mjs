@@ -80,6 +80,28 @@ const diagnostico = (page) => page.evaluate(async () => {
     r.seg = 'ok ' + n;
   } catch (e) { r.seg = 'error: ' + (e?.message || e); }
   try { const g = document.createElement('canvas').getContext('webgl2'); r.gl = g ? g.getParameter(g.VERSION) + ' · ' + g.getParameter(g.SHADING_LANGUAGE_VERSION) : 'sin webgl2'; } catch (e) { r.gl = 'error: ' + e.message; }
+  // qué video escondido avanza en este navegador (Safari pausa los videos que «no se ven»)
+  const VARIANTES = {
+    actual: 'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none;z-index:-1',
+    atributos: 'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none;z-index:-1',
+    casiInvisible: 'position:fixed;right:0;bottom:0;width:64px;height:36px;opacity:.01;pointer-events:none',
+    visible: 'position:fixed;right:0;bottom:0;width:160px;height:90px;pointer-events:none',
+    unPixel: 'position:fixed;left:0;top:0;width:1px;height:1px;pointer-events:none',
+    afuera: 'position:fixed;left:-10000px;top:0;width:640px;height:360px;pointer-events:none',
+    enteroTransparente: 'position:fixed;left:0;top:0;width:640px;height:360px;opacity:0;pointer-events:none;z-index:-1',
+    detrasDelFondo: 'position:fixed;left:0;top:0;width:64px;height:36px;pointer-events:none;z-index:-1',
+  };
+  r.variantes = {};
+  for (const [nom, css] of Object.entries(VARIANTES)) {
+    const e = document.createElement('video'); e.muted = true; e.playsInline = true; e.style.cssText = css;
+    if (nom === 'atributos') { e.setAttribute('muted', ''); e.setAttribute('autoplay', ''); e.setAttribute('playsinline', ''); }
+    document.body.append(e); e.srcObject = new MediaStream([cam.clone()]);
+    const p = await t(e.play(), 3000); await new Promise((ok) => setTimeout(ok, 1000));
+    const f = await t(new Promise((ok) => e.requestVideoFrameCallback(ok)), 1500);
+    r.variantes[nom] = `play ${p} · ready ${e.readyState} · ${e.videoWidth}x${e.videoHeight} · cuadros ${f}`;
+    e.srcObject = null; e.remove();
+  }
+  r.gumPropio = String(navigator.mediaDevices.getUserMedia).includes('pistas');
   t0 = performance.now(); r.crear = await t(SalaFondo.crear(cam, { modo: 'fuerte' }).then((m) => { r.crearMs = Math.round(performance.now() - t0); r.msCuadro = m.ms; m.parar(); }), 30e3);
   return r;
 });
