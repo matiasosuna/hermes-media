@@ -105,7 +105,7 @@ jobs:
       - name: Dependencias
         run: |
           cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund playwright@1.65.1 ws@8.18.0 >/dev/null
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg xvfb >/dev/null
           npx playwright install --with-deps ${{ matrix.nav }} chromium >/dev/null
           cp -r node_modules ../prueba-sala/
           cd .. && ffmpeg -loglevel error -i prueba-fondo/persona.png -vf scale=704:396 -q:v 3 persona-640.jpg && ls -la persona-640.jpg
@@ -118,7 +118,7 @@ jobs:
           NAV: ${{ matrix.nav }}
           OUT: ${{ github.workspace }}/fotos-${{ matrix.nav }}
           FOTO: ${{ github.workspace }}/persona-640.jpg
-        run: node prueba-fondo/navegador.mjs
+        run: xvfb-run -a -s "-screen 0 1280x1024x24" node prueba-fondo/navegador.mjs
       - if: always()
         uses: actions/upload-artifact@v4
         with: { name: 'fotos-${{ matrix.nav }}', path: 'fotos-${{ matrix.nav }}/', retention-days: 7 }
@@ -217,6 +217,9 @@ jobs:
           [ -n "$U" ] || { tail -20 tunel.log; exit 1; }
           for i in $(seq 1 60); do [ "$(curl -s -o /dev/null -w '%{http_code}' "$U/control/hora" -H "x-prueba: $PRUEBA_TOKEN")" = 200 ] && break; sleep 2; done
           mkdir -p tunel && echo "$U" > tunel/url && echo "túnel listo"
+          # la subida del anfitrión también es de lejos: así el video con el fondo le llega a la alumna con 200 ms y 3 % de pérdida
+          # (solo UDP: el túnel y la API van por TCP y no se tocan)
+          sudo env RETARDO=200 JITTER=10 PERDIDA=3 bash prueba-sala/red.sh
       - uses: actions/upload-artifact@v4
         if: matrix.rol == 'anfitrion'
         with: { name: tunel-lejos, path: tunel/url, retention-days: 1 }

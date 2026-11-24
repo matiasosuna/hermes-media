@@ -41,7 +41,8 @@ function camaraFalsa(foto) {
 async function abrir(quien, tipo, opcCtx) {
   // Firefox sin placa de video (la máquina de GitHub) apaga WebGL2 y el botón no aparece, que es lo correcto; para probar el
   // efecto igual se lo fuerza a usar WebGL por software (en una computadora o teléfono de verdad, WebGL2 viene prendido)
-  const browser = await tipo.launch({ headless: true, args: tipo === chromium ? ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] : [],
+  // WebKit y Firefox con ventana (pantalla virtual xvfb, como un navegador de verdad); Chromium de la alumna sin ventana
+  const browser = await tipo.launch({ headless: tipo === chromium || !process.env.DISPLAY, args: tipo === chromium ? ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] : [],
     ...(tipo === firefox ? { firefoxUserPrefs: { 'webgl.force-enabled': true, 'webgl.disabled': false, 'webgl.enable-webgl2': true } } : {}) });
   const ctx = await browser.newContext(opcCtx);
   if (tipo !== chromium) await ctx.addInitScript(camaraFalsa, FOTO);
@@ -63,11 +64,22 @@ const hastaMotor = (page, ms = 120e3) => page.waitForFunction(() => (S.motor?.vi
 const diagnostico = (page) => page.evaluate(async () => {
   const r = {}, t = (p, ms) => Promise.race([Promise.resolve(p).then(() => 'ok', (e) => 'error: ' + (e?.message || e)), new Promise((ok) => setTimeout(() => ok('colgado'), ms))]);
   let t0 = performance.now(); r.cargar = await t(SalaFondo.cargar('apaisado'), 60e3); r.cargarMs = Math.round(performance.now() - t0);
-  const cam = (await navigator.mediaDevices.getUserMedia({ video: true })).getVideoTracks()[0];
+  // cámara de prueba propia (un canvas que cambia): no depende de getUserMedia ni de la cámara de la sala, que quedó apagada
+  const fc = document.createElement('canvas'); fc.width = 640; fc.height = 360; fc.style.cssText = 'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0'; document.body.append(fc);
+  const fx = fc.getContext('2d'); let k = 0;
+  setInterval(() => { k++; fx.fillStyle = `hsl(${(k * 7) % 360} 50% 60%)`; fx.fillRect(0, 0, 640, 360); fx.fillStyle = '#222'; fx.fillRect(220 + (k % 40), 60, 200, 300); }, 66);
+  const cam = fc.captureStream(15).getVideoTracks()[0];
   const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.style.cssText = 'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0'; document.body.append(v);
   v.srcObject = new MediaStream([cam]); r.play = await t(v.play(), 5000);
   await new Promise((ok) => setTimeout(ok, 1500)); r.ready = v.readyState; r.tam = v.videoWidth + 'x' + v.videoHeight;
   r.rvfc = await t(new Promise((ok) => v.requestVideoFrameCallback(ok)), 3000);
+  try { // MediaPipe solo, sobre la cámara achicada
+    const seg = await SalaFondo.cargar('apaisado'), c2 = document.createElement('canvas'); c2.width = 256; c2.height = 144;
+    c2.getContext('2d').drawImage(v, 0, 0, 256, 144); let n = null;
+    seg.segmentForVideo(c2, Math.round(performance.now()) + 1e6, (x) => { const m = x.confidenceMasks?.[0]; n = m ? m.width + 'x' + m.height : 'sin máscara'; });
+    r.seg = 'ok ' + n;
+  } catch (e) { r.seg = 'error: ' + (e?.message || e); }
+  try { const g = document.createElement('canvas').getContext('webgl2'); r.gl = g ? g.getParameter(g.VERSION) + ' · ' + g.getParameter(g.SHADING_LANGUAGE_VERSION) : 'sin webgl2'; } catch (e) { r.gl = 'error: ' + e.message; }
   t0 = performance.now(); r.crear = await t(SalaFondo.crear(cam, { modo: 'fuerte' }).then((m) => { r.crearMs = Math.round(performance.now() - t0); r.msCuadro = m.ms; m.parar(); }), 30e3);
   return r;
 });

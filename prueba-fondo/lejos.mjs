@@ -42,7 +42,7 @@ try {
     await espera(10e3); await tocar('#b-cam'); anotar('cámara prendida');
     await espera(30e3); await fondo('playa');
     await espera(40e3); fase = 'sin-fondo'; await fondo('');
-    await espera(40e3); clearInterval(vigilar);
+    await espera(110e3); clearInterval(vigilar); // hasta que la alumna termina sus 18 capturas (4,5 min)
     anotar('qué se mandó en toda la clase: ' + [...muestras].join(', ') + ' · ahora: ' + JSON.stringify(await estado()));
     if (muestras.has('con-fondo:camara')) fallo = new Error('con un fondo elegido se mandó la cámara sin el fondo');
     await page.screenshot({ path: `${OUT}/anfitrion-fin.png` });
