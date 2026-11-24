@@ -86,7 +86,8 @@ const diagnostico = (page) => page.evaluate(async () => {
   try { // MediaPipe solo, sobre la cámara achicada
     const seg = await SalaFondo.cargar('apaisado'), c2 = document.createElement('canvas'); c2.width = 256; c2.height = 144;
     c2.getContext('2d').drawImage(v, 0, 0, 256, 144); let n = null;
-    seg.segmentForVideo(c2, Math.round(performance.now()) + 1e6, (x) => { const m = x.confidenceMasks?.[0]; n = m ? m.width + 'x' + m.height : 'sin máscara'; });
+    const ts = Math.max((seg.ultimoTs || 0) + 1, Math.round(performance.now())); seg.ultimoTs = ts;
+    seg.segmentForVideo(c2, ts, (x) => { const m = x.confidenceMasks?.[0]; n = m ? m.width + 'x' + m.height : 'sin máscara'; });
     r.seg = 'ok ' + n;
   } catch (e) { r.seg = 'error: ' + (e?.message || e); }
   try { const g = document.createElement('canvas').getContext('webgl2'); r.gl = g ? g.getParameter(g.VERSION) + ' · ' + g.getParameter(g.SHADING_LANGUAGE_VERSION) : 'sin webgl2'; } catch (e) { r.gl = 'error: ' + e.message; }
@@ -133,6 +134,16 @@ try {
   anotar('soporte: ' + JSON.stringify(datos.soporte));
   await espera(1500); await foto(A.page, '01-lobby');
   if (!datos.soporte.boton) throw new Error('el botón del fondo no aparece en ' + NAV);
+  // cuánto tarda MediaPipe la primera vez en este navegador, por partes (bajar el wasm, compilarlo, armar el separador).
+  // Se carga antes de elegir el fondo: la sala espera hasta 60 s y acá se quiere probar el efecto, no la velocidad de esta máquina
+  datos.cargaMediaPipe = await A.page.evaluate(async () => {
+    const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.2.3', r = {}, ms = (t) => Math.round(performance.now() - t);
+    let t0 = performance.now(); const buf = await (await fetch(MP + '/wasm/vision_wasm_internal.wasm')).arrayBuffer(); r.bajarWasm = ms(t0); r.mb = Math.round(buf.byteLength / 1e5) / 10;
+    t0 = performance.now(); await WebAssembly.compile(buf); r.compilarWasm = ms(t0);
+    t0 = performance.now(); await SalaFondo.cargar('apaisado'); r.cargarSala = ms(t0);
+    return r;
+  });
+  anotar('MediaPipe la primera vez: ' + JSON.stringify(datos.cargaMediaPipe));
   await tocar(A.page, '#lob-fondo'); await espera(600);
   await tocar(A.page, '.fx-op[data-f="fuerte"]');
   const t0 = Date.now(); await hastaMotor(A.page); datos.cargaMs = Date.now() - t0;

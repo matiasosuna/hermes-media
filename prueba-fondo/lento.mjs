@@ -33,9 +33,11 @@ async function caso(camara, x) {
     await page.evaluate(() => document.querySelector('.fx-op[data-f="fuerte"]').click());
     await page.waitForFunction(() => (S.motor?.vivo && !S.fondoCargando) || !S.fondo, { timeout: 120e3, polling: 300 });
     fila.cargaMs = Date.now() - t0;
-    // 12 s con el efecto andando (el aviso de lento salta a los ~2 s de promedio alto + 3 s seguidos)
-    const muestras = [];
-    for (let i = 0; i < 24; i++) { muestras.push(await page.evaluate(() => ({ ms: S.motor?.ms ?? null, fps: S.motor?.fps ?? null, seg: S.motor?.msSeg ?? null, medias: !!S.motor?.medias }))); await espera(500); }
+    // 24 s con el efecto andando: si va justo, primero pasa a máscara a medias (~4 s) y, si ni así da abasto, el aviso de
+    // lento (~7 s más)
+    const muestras = []; const tLento = Date.now();
+    page.on('console', (m) => { if (m.text() === '[fondo] fondoLento' && !fila.segHastaLento) fila.segHastaLento = Math.round((Date.now() - tLento) / 100) / 10; });
+    for (let i = 0; i < 48; i++) { muestras.push(await page.evaluate(() => ({ ms: S.motor?.ms ?? null, fps: S.motor?.fps ?? null, seg: S.motor?.msSeg ?? null, medias: !!S.motor?.medias }))); await espera(500); }
     const fin = await page.evaluate(() => ({ forma: S.motor?.forma ?? null, fondo: S.fondo, cam: S.cam, vivo: !!S.motor?.vivo,
       tam: S.video ? `${S.video.getSettings().width}x${S.video.getSettings().height}` : null, aviso: document.querySelector('#flotante')?.hidden === false ? document.querySelector('#flotante').textContent : '' }));
     const ms = muestras.map((m) => m.ms).filter((v) => v != null), fps = muestras.map((m) => m.fps).filter((v) => v != null), seg = muestras.map((m) => m.seg).filter((v) => v != null);
