@@ -50,7 +50,7 @@ for (let i = 1; i <= +N; i++) {
 
 // lo que mide el servidor: duración por ruta y errores de los pulls (sin datos de nadie: son cuentas de prueba)
 const rutas = {}, errores = [];
-const tipos = { html: 'text/html', js: 'text/javascript', css: 'text/css', svg: 'image/svg+xml', png: 'image/png', json: 'application/json' };
+const tipos = { html: 'text/html', js: 'text/javascript', css: 'text/css', svg: 'image/svg+xml', png: 'image/png', json: 'application/json', jpg: 'image/jpeg', webp: 'image/webp', mjs: 'text/javascript' };
 
 // Control de la prueba repartida en varias máquinas (el director manda órdenes; cada máquina las busca con long-poll).
 // Con el túnel, todo pide PRUEBA_TOKEN: cookie «prueba» en el navegador, cabecera x-prueba en las máquinas.

@@ -1,0 +1,66 @@
+# Prueba del fondo de la cámara de la sala (tarot-web, 24/11/2026; Matías: blur y fondos con imágenes «como en google»).
+# La sala real (sala/index.html + functions/api de la rama de tarot-web) con D1 en memoria y el Realtime de PREVIEW
+# (prueba-sala/server.mjs): no toca producción ni la D1 compartida. Anfitrión con una persona (imagen IA, prueba-fondo/persona.png)
+# de cámara; una alumna entra y lo ve. Sube las capturas (tamaño celular) y los números como artefacto.
+# Repo público: el código de tarot-web se baja con PRIVADO_TOKEN y no se sube; el artefacto son capturas de cuentas de prueba.
+name: prueba-fondo
+on:
+  push:
+    branches: [prueba-fondo]
+    paths: ['prueba-fondo/**', 'prueba-sala/server.mjs', '.github/workflows/prueba-fondo.yml']
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Rama de tarot-web'
+        default: 'sala-fondo'
+permissions:
+  contents: read
+concurrency:
+  group: prueba-fondo
+  cancel-in-progress: true
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+      SALA: prueba-fondo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: matiasosuna/tarot-web
+          ref: ${{ inputs.ref || 'sala-fondo' }}
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Dependencias
+        run: |
+          cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 ws@8.18.0 >/dev/null
+          cp -r node_modules ../prueba-sala/ 
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null)
+          google-chrome --version
+      - name: Cámara falsa (la persona, moviéndose un poco)
+        run: |
+          ffmpeg -loglevel error -loop 1 -i prueba-fondo/persona.png -t 20 -r 15 \
+            -vf "scale=704:396,crop=640:360:'32+28*sin(2*PI*t/5)':'18+8*sin(2*PI*t/3)',format=yuv420p" persona.y4m
+          ls -la persona.y4m
+      - name: Sala de prueba
+        run: |
+          node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 2 > servidor.log 2>&1 &
+          for i in $(seq 1 40); do curl -s -o /dev/null http://127.0.0.1:8798/room/ && break; sleep 1; done
+      - name: Fotos
+        env:
+          VIDEO: ${{ github.workspace }}/persona.y4m
+          OUT: ${{ github.workspace }}/fotos
+        run: node prueba-fondo/fotos.mjs
+      - if: always()
+        run: tail -40 servidor.log || true
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fotos
+          path: fotos/
+          retention-days: 7
