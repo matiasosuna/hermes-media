@@ -71,6 +71,21 @@ async function abrir(quien, tipo, opcCtx) {
       try { const st = await g(c); console.log('[prueba] gUM ok ' + st.getTracks().map((t) => t.kind + ':' + t.readyState).join(',')); return st; }
       catch (e) { console.log('[prueba] gUM error ' + e.name + ' ' + e.message); throw e; }
     };
+    // la conexión de video paso a paso (en Safari, en un Mac de GitHub, a veces quedó en «new» sin probar ningún par)
+    const PC = window.RTCPeerConnection;
+    window.RTCPeerConnection = function (cfg) {
+      const pc = new PC(cfg), t0 = performance.now(), n = (window.__pcs = (window.__pcs || 0) + 1), log = (s) => console.log(`[prueba] pc${n} +${Math.round(performance.now() - t0)} ${s}`);
+      log('nueva, servidores: ' + JSON.stringify((cfg?.iceServers || []).map((x) => [].concat(x.urls).join(' '))));
+      for (const ev of ['iceconnectionstatechange', 'icegatheringstatechange', 'connectionstatechange', 'signalingstatechange'])
+        pc.addEventListener(ev, () => log(`${ev.replace('statechange', '')} → ${pc[{ iceconnectionstatechange: 'iceConnectionState', icegatheringstatechange: 'iceGatheringState', connectionstatechange: 'connectionState', signalingstatechange: 'signalingState' }[ev]]}`));
+      pc.addEventListener('icecandidate', (e) => log('candidato local ' + (e.candidate ? (e.candidate.candidate.split(' ').slice(2, 8).join(' ')) : 'fin')));
+      pc.addEventListener('icecandidateerror', (e) => log(`error de candidato ${e.url} ${e.errorCode} ${e.errorText}`));
+      const srd = pc.setRemoteDescription.bind(pc);
+      pc.setRemoteDescription = (d) => { const c = (d?.sdp || '').split('\n').filter((l) => l.startsWith('a=candidate')); log(`remota ${d?.type}: ${c.length} candidatos ${c.map((l) => l.split(' ').slice(2, 8).join(' ')).join(' | ')}`);
+        return srd(d).then((r) => { log('remota ok'); return r; }, (e) => { log('remota error ' + e.message); throw e; }); };
+      return pc;
+    };
+    window.RTCPeerConnection.prototype = PC.prototype;
     const rt = RTCRtpSender.prototype.replaceTrack;
     RTCRtpSender.prototype.replaceTrack = function (t) {
       const id = Math.random().toString(36).slice(2, 6); console.log(`[prueba] replaceTrack ${id} ${t ? t.kind : 'null'}`);
