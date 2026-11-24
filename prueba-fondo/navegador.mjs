@@ -48,11 +48,29 @@ async function abrir(quien, tipo, opcCtx) {
   if (tipo !== chromium) await ctx.addInitScript(camaraFalsa, FOTO);
   // el aviso de «equipo lento» se anota pero no se aplica: acá se prueba que el efecto ande en este navegador; la velocidad
   // de esta máquina (sin placa de video) no es la de un teléfono, y se informa aparte (ms por cuadro)
+  // qué pasa con la cámara y lo que se manda (para ver dónde se traba al apagar y prender la cámara)
+  if (quien === 'owner') await ctx.addInitScript(() => {
+    const md = navigator.mediaDevices, g = md.getUserMedia.bind(md);
+    md.getUserMedia = async (c) => {
+      console.log('[prueba] gUM pide ' + JSON.stringify(c));
+      try { const st = await g(c); console.log('[prueba] gUM ok ' + st.getTracks().map((t) => t.kind + ':' + t.readyState).join(',')); return st; }
+      catch (e) { console.log('[prueba] gUM error ' + e.name + ' ' + e.message); throw e; }
+    };
+    const rt = RTCRtpSender.prototype.replaceTrack;
+    RTCRtpSender.prototype.replaceTrack = function (t) {
+      const id = Math.random().toString(36).slice(2, 6); console.log(`[prueba] replaceTrack ${id} ${t ? t.kind : 'null'}`);
+      return rt.call(this, t).then((r) => { console.log(`[prueba] replaceTrack ${id} ok`); return r; }, (e) => { console.log(`[prueba] replaceTrack ${id} error ${e.message}`); throw e; });
+    };
+  });
   if (quien === 'owner') await ctx.addInitScript(() => {
     let sf;
     Object.defineProperty(window, 'SalaFondo', { configurable: true, get: () => sf, set: (v) => {
       const crear = v.crear;
-      v.crear = (f, o = {}) => crear(f, { ...o, alLento: () => { (window.__lentos ||= []).push(Math.round(performance.now())); console.warn('[prueba] lento (anotado, no aplicado)'); } });
+      v.crear = (f, o = {}) => {
+        console.log('[prueba] crear ' + o.modo);
+        return crear(f, { ...o, alLento: () => { (window.__lentos ||= []).push(Math.round(performance.now())); console.warn('[prueba] lento (anotado, no aplicado)'); } })
+          .then((m) => { console.log('[prueba] crear listo'); return m; }, (e) => { console.log('[prueba] crear falló: ' + (e?.message || e)); throw e; });
+      };
       sf = v;
     } });
   });
@@ -190,10 +208,18 @@ try {
     // apagar y prender la cámara: nunca sale la cámara sin el fondo
     await tocar(A.page, '#b-cam'); await espera(1500); await tocar(A.page, '#b-cam');
     const muestras = []; for (let i = 0; i < 25; i++) { muestras.push((await motor(A.page)).manda); await espera(150); }
-    await hastaMotor(A.page, 60e3).catch(() => {});
+    // cada segundo, cómo va (cámara, fondo preparándose, efecto) hasta que vuelve el efecto
+    let antes = '';
+    for (let i = 0; i < 70; i++) {
+      const e = await A.page.evaluate(() => JSON.stringify({ cam: S.cam, video: S.video?.readyState || null, fondo: S.fondo, cargando: S.fondoCargando, gen: S.fondoGen, motor: !!S.motor?.vivo }));
+      if (e !== antes) { anotar('estado: ' + e); antes = e; }
+      if (await A.page.evaluate(() => (S.motor?.vivo && !S.fondoCargando) || !S.fondo)) break;
+      await espera(1000);
+    }
     datos.camOffOn = { muestras: [...new Set(muestras)], despues: await motor(A.page) };
     anotar('cámara apagar/prender: ' + JSON.stringify(datos.camOffOn));
     if (muestras.includes('camara')) fallo = new Error('se mandó la cámara sin el fondo');
+    else if (datos.camOffOn.despues.manda !== 'efecto') fallo = new Error('al prender la cámara el fondo no volvió (a la alumna no le llega nada)');
     await espera(3000); await foto(B.page, '05-alumna-tras-prender');
   } finally { await B.browser.close().catch(() => {}); }
   if (datos.enLaSala.manda !== 'efecto') fallo ||= new Error('en la sala no se manda el efecto: ' + datos.enLaSala.manda);
