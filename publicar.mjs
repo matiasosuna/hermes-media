@@ -52,7 +52,11 @@ export function siguiente(cal, plataforma, ahora = Date.now()) {
 /** La cadena de corridas sigue mientras quede algo por publicar y el calendario no diga "pausado": true. */
 export const seguirCadena = (cal) => !cal.pausado && cal.items.some(falta);
 
-export const buscarDuplicadoIG = (media, caption) => media.find((m) => primeraLinea(m.caption) === primeraLinea(caption)) ?? null;
+// «desde» (republicar un reel como trial, Matías 24/11/2026): la primera línea es la del original, así que solo cuentan los
+// posts de después de desde (si no, toma el original como «ya publicado»).
+export const buscarDuplicadoIG = (media, caption, desde = 0) =>
+  media.find((m) => (!desde || Date.parse(m.timestamp) >= desde) && primeraLinea(m.caption) === primeraLinea(caption)) ?? null;
+export const desdeRepost = (item) => (item.instagram?.repost_de ? Date.parse(item.cuando) - 12 * 3600e3 : 0);
 export const buscarDuplicadoYT = (videos, titulo) => videos.find((v) => v.titulo.trim() === titulo.trim()) ?? null;
 export const parametrosContenedor = (item, repo = REPO) => ({
   media_type: 'REELS', video_url: assetUrl(item.archivo, repo), caption: item.instagram.caption,
@@ -96,7 +100,7 @@ async function esperarContenedor(id, vueltas = 72) {
 }
 
 async function publicarIG(item, guardar) {
-  const previo = buscarDuplicadoIG(await recientesIG(), item.instagram.caption);
+  const previo = buscarDuplicadoIG(await recientesIG(), item.instagram.caption, desdeRepost(item));
   if (previo) {
     log(`IG ${item.id}: ya estaba publicado, solo lo anoto → ${previo.permalink}`);
     return { id: previo.id, permalink: previo.permalink, fecha: new Date(previo.timestamp ?? Date.now()).toISOString() };
@@ -120,7 +124,7 @@ async function publicarIG(item, guardar) {
     // a veces publica y devuelve error: confirmar antes de dar la corrida por fallida
     log(`IG ${item.id}: media_publish respondió error (${e.message}); reviso si igual salió…`);
     await sleep(60000);
-    const m = buscarDuplicadoIG(await recientesIG(), item.instagram.caption);
+    const m = buscarDuplicadoIG(await recientesIG(), item.instagram.caption, desdeRepost(item));
     if (m) return { id: m.id, permalink: m.permalink, fecha: new Date().toISOString() };
     throw e;
   }
