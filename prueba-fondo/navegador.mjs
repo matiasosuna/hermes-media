@@ -38,6 +38,21 @@ function camaraFalsa(foto) {
   md.enumerateDevices = async () => [{ kind: 'videoinput', deviceId: 'falsa', label: 'Falsa', groupId: 'g' }, { kind: 'audioinput', deviceId: 'mic', label: 'Mic', groupId: 'g' }];
 }
 
+// espera a que la conexión de video quede armada; si no, anota en qué quedó (ICE, candidatos, avisos) para saber si es la red del runner o la sala
+async function conectada(page, quien) {
+  try { await page.waitForFunction(() => S.sid && S.pc?.connectionState === 'connected', null, { timeout: 90e3 }); }
+  catch (e) {
+    const est = await page.evaluate(async () => {
+      const pc = S.pc; if (!pc) return { pc: null, sid: S.sid };
+      const st = await pc.getStats().catch(() => null), pares = [], cand = {};
+      st?.forEach((x) => { if (x.type === 'candidate-pair') pares.push({ estado: x.state, nominado: x.nominated, env: x.bytesSent, rec: x.bytesReceived }); if (/candidate$/.test(x.type)) cand[x.type + ':' + x.candidateType + ':' + x.protocol] = (cand[x.type + ':' + x.candidateType + ':' + x.protocol] || 0) + 1; });
+      return { sid: !!S.sid, conexion: pc.connectionState, ice: pc.iceConnectionState, juntar: pc.iceGatheringState, senal: pc.signalingState, reconectando: !!S.reconectando, reintentos: S.reintentos ?? null,
+        aviso: document.querySelector('#flotante')?.hidden === false ? document.querySelector('#flotante').textContent : '', pares: pares.slice(0, 6), cand };
+    }).catch((x) => ({ error: x.message }));
+    anotar(quien + ' no conectó en 90 s: ' + JSON.stringify(est));
+    throw new Error(quien + ' no conectó (conexión ' + est.conexion + ', ICE ' + est.ice + ')');
+  }
+}
 async function abrir(quien, tipo, opcCtx) {
   // Firefox sin placa de video (la máquina de GitHub) apaga WebGL2 y el botón no aparece, que es lo correcto; para probar el
   // efecto igual se lo fuerza a usar WebGL por software (en una computadora o teléfono de verdad, WebGL2 viene prendido)
@@ -182,14 +197,14 @@ try {
   await tocar(A.page, '.fx-op[data-f="biblioteca"]'); await espera(3000); await foto(A.page, '03-imagen');
   datos.imagen = await motor(A.page); anotar('imagen: ' + JSON.stringify(datos.imagen));
   await tocar(A.page, '#fx-x'); await tocar(A.page, '#entrar');
-  await A.page.waitForFunction(() => S.sid && S.pc?.connectionState === 'connected', null, { timeout: 90e3 });
+  await conectada(A.page, 'anfitrión');
   await espera(2000);
   datos.enLaSala = await motor(A.page); anotar('en la sala: ' + JSON.stringify(datos.enLaSala));
 
   const B = await abrir('u1', chromium, { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   try {
     await tocar(B.page, '#entrar');
-    await B.page.waitForFunction(() => S.sid && S.pc?.connectionState === 'connected', null, { timeout: 90e3 });
+    await conectada(B.page, 'alumna');
     await B.page.waitForFunction(() => [...S.tiles.values()].some((t) => t.g && !t.g.yo && t.video?.videoWidth > 0), null, { timeout: 60e3, polling: 300 });
     await espera(5000);
     // lo que le llega a la alumna: cuadros, tamaño y si la imagen tiene algo (no negra ni lisa)
