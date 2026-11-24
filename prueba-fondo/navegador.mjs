@@ -171,6 +171,18 @@ const ctxHost = NAV === 'webkit' ? { ...devices['iPhone 13'] }
   : NAV === 'firefox' ? { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }
   : { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 };
 let fallo = null;
+// control: el anfitrión entra SIN fondo en este mismo navegador y máquina. Si ahí tampoco se arma la conexión de video, la
+// traba es del navegador/máquina de prueba y no del fondo.
+{
+  const C = await abrir('owner', tipoHost, ctxHost), t0 = Date.now();
+  try {
+    await tocar(C.page, '#entrar');
+    await conectada(C.page, 'control sin fondo');
+    datos.controlSinFondo = { conecto: true, ms: Date.now() - t0 };
+  } catch (e) { datos.controlSinFondo = { conecto: false, error: e.message }; }
+  anotar('control sin fondo: ' + JSON.stringify(datos.controlSinFondo));
+  await C.browser.close().catch(() => {});
+}
 const A = await abrir('owner', tipoHost, ctxHost);
 try {
   datos.ua = await A.page.evaluate(() => navigator.userAgent);
