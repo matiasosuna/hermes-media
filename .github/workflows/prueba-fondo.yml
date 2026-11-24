@@ -80,14 +80,18 @@ jobs:
           retention-days: 7
 
   # Otros navegadores: el anfitrión en WebKit (el motor de Safari, emulando un iPhone 13) o en Firefox; la alumna en Chromium.
+  # WebKit va en una Mac de GitHub: el WebKit de Linux compila el wasm de MediaPipe en más de 3 min (prueba del 24/11/2026),
+  # no se parece a Safari; en la Mac es el mismo motor que Safari y el iPhone.
   navegadores:
     if: ${{ (!inputs.minutos || inputs.minutos == '0') && (!inputs.solo || inputs.solo == 'navegadores') }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
-        nav: [webkit, firefox]
+        include:
+          - { nav: webkit, os: macos-latest }
+          - { nav: firefox, os: ubuntu-latest }
     env:
       REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
       SALA: prueba-fondo
@@ -105,10 +109,13 @@ jobs:
       - name: Dependencias
         run: |
           cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund playwright@1.65.1 ws@8.18.0 >/dev/null
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg xvfb >/dev/null
+          if [ "$RUNNER_OS" = Linux ]; then sudo apt-get update -qq && sudo apt-get install -y -qq xvfb >/dev/null; fi
           npx playwright install --with-deps ${{ matrix.nav }} chromium >/dev/null
-          cp -r node_modules ../prueba-sala/
-          cd .. && ffmpeg -loglevel error -i prueba-fondo/persona.png -vf scale=704:396 -q:v 3 persona-640.jpg && ls -la persona-640.jpg
+          cp -r node_modules ../prueba-sala/ && cd ..
+          # la foto de la cámara falsa (704×396): sips en la Mac, ffmpeg en Linux
+          if [ "$RUNNER_OS" = macOS ]; then sips -z 396 704 -s format jpeg -s formatOptions 80 prueba-fondo/persona.png --out persona-640.jpg >/dev/null
+          else (which ffmpeg || sudo apt-get install -y -qq ffmpeg >/dev/null) && ffmpeg -loglevel error -i prueba-fondo/persona.png -vf scale=704:396 -q:v 3 persona-640.jpg; fi
+          ls -la persona-640.jpg; uname -m; (sysctl -n machdep.cpu.brand_string 2>/dev/null || lscpu | grep 'Model name') | tee cpu.txt
       - name: Sala de prueba
         run: |
           node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 2 > servidor.log 2>&1 &
@@ -118,7 +125,9 @@ jobs:
           NAV: ${{ matrix.nav }}
           OUT: ${{ github.workspace }}/fotos-${{ matrix.nav }}
           FOTO: ${{ github.workspace }}/persona-640.jpg
-        run: xvfb-run -a -s "-screen 0 1280x1024x24" node prueba-fondo/navegador.mjs
+        run: |
+          mkdir -p "$OUT" && cp cpu.txt "$OUT/"
+          if [ "$RUNNER_OS" = Linux ]; then xvfb-run -a -s "-screen 0 1280x1024x24" node prueba-fondo/navegador.mjs; else node prueba-fondo/navegador.mjs; fi
       - if: always()
         uses: actions/upload-artifact@v4
         with: { name: 'fotos-${{ matrix.nav }}', path: 'fotos-${{ matrix.nav }}/', retention-days: 7 }
