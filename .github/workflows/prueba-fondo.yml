@@ -104,7 +104,8 @@ jobs:
         with: { node-version: 22 }
       - name: Dependencias
         run: |
-          cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund playwright@1.49.1 ws@8.18.0 >/dev/null
+          cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund playwright@1.65.1 ws@8.18.0 >/dev/null
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
           npx playwright install --with-deps ${{ matrix.nav }} chromium >/dev/null
           cp -r node_modules ../prueba-sala/
           cd .. && ffmpeg -loglevel error -i prueba-fondo/persona.png -vf scale=704:396 -q:v 3 persona-640.jpg && ls -la persona-640.jpg
@@ -145,6 +146,7 @@ jobs:
         run: |
           cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 ws@8.18.0 >/dev/null
           cp -r node_modules ../prueba-sala/ && cd ..
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null)
           ffmpeg -loglevel error -loop 1 -i prueba-fondo/persona.png -t 20 -r 15 \
             -vf "scale=704:396,crop=640:360:'32+28*sin(2*PI*t/5)':'18+8*sin(2*PI*t/3)',format=yuv420p" apaisada.y4m
           ffmpeg -loglevel error -loop 1 -i prueba-fondo/persona.png -t 20 -r 15 \
@@ -199,6 +201,7 @@ jobs:
         run: |
           cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 ws@8.18.0 >/dev/null
           cp -r node_modules ../prueba-sala/ && cd ..
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null)
           if [ "$ROL" = anfitrion ]; then
             ffmpeg -loglevel error -loop 1 -i prueba-fondo/persona.png -t 20 -r 15 \
               -vf "scale=704:396,crop=640:360:'32+28*sin(2*PI*t/5)':'18+8*sin(2*PI*t/3)',format=yuv420p" persona.y4m
