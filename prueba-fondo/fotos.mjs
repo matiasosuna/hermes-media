@@ -47,7 +47,8 @@ async function abrir(quien, movil = true) {
 const foto = async (page, nombre) => { await page.screenshot({ path: `${OUT}/${nombre}.png` }); anotar(`foto ${nombre}`); };
 const tocar = (page, sel) => page.evaluate((s) => document.querySelector(s).click(), sel);
 const motor = (page) => page.evaluate(() => ({ vivo: !!S.motor?.vivo, ms: S.motor?.ms ?? null, fps: S.motor?.fps ?? null, fondo: S.fondo,
-  manda: S.pub.video ? (S.pub.video.sender.track === S.motor?.track ? 'efecto' : S.pub.video.sender.track === S.video ? 'camara' : String(S.pub.video.sender.track)) : 'nada' }));
+  // qué le llega a los demás: nada (null), el efecto o la cámara tal cual (ojo: con la cámara apagada S.video también es null)
+  manda: ((tr) => (!S.pub.video ? 'sin-publicar' : !tr ? 'nada' : tr === S.motor?.track ? 'efecto' : tr === S.video ? 'camara' : 'otro'))(S.pub.video?.sender.track) }));
 async function hastaMotor(page, ms = 90e3) {
   const t0 = Date.now();
   await page.waitForFunction(() => S.motor?.vivo && !S.fondoCargando, { timeout: ms, polling: 200 });
