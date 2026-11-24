@@ -2447,6 +2447,15 @@
           "id": "18118263878032261",
           "permalink": "https://www.instagram.com/reel/DgDULVVga_G/",
           "fecha": "2026-11-22T17:14:06.647Z"
+        },
+        "metricas_48h": {
+          "medido": "2026-11-24T17:14:25.637Z",
+          "publicado_ny": "Sun 12:14",
+          "reach": 2900,
+          "views": 4104,
+          "saved": 86,
+          "shares": 22,
+          "total_interactions": 288
         }
       },
       "youtube": {
@@ -2541,7 +2550,11 @@
       "cuando": "2026-11-24T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Two of Swords is about keeping the peace. It isn't.\nTwo of Swords: a hard choice, and the decision we avoid by refusing to look. ☿\nFree weekly tarot class → link in bio\n#tarot #twoofswords #swords #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17968783283982610",
+          "permalink": "https://www.instagram.com/reel/DgIdjl8kaJ1/",
+          "fecha": "2026-11-24T17:12:24.048Z"
+        }
       },
       "youtube": {
         "titulo": "She's not blind. She chose the blindfold | Two of Swords tarot ☿ #shorts",
@@ -2557,10 +2570,19 @@
           "swords",
           "decisions"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "1KFTMP9Jn1c",
+          "url": "https://youtube.com/shorts/1KFTMP9Jn1c",
+          "fecha": "2026-11-24T17:12:26.956Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6b05c57c04f9f3a5e6fc5271",
+          "url": "https://tiktok.com/@hermestarot444/video/7711787140656467239",
+          "fecha": "2026-11-24T17:14:13.943Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-22T17:55:35Z",
