@@ -205,21 +205,29 @@ try {
     });
     anotar('alumna: ' + JSON.stringify(datos.alumna));
     await foto(B.page, '04-alumna-ve');
-    // apagar y prender la cámara: nunca sale la cámara sin el fondo
-    await tocar(A.page, '#b-cam'); await espera(1500); await tocar(A.page, '#b-cam');
-    const muestras = []; for (let i = 0; i < 25; i++) { muestras.push((await motor(A.page)).manda); await espera(150); }
-    // cada segundo, cómo va (cámara, fondo preparándose, efecto) hasta que vuelve el efecto
-    let antes = '';
-    for (let i = 0; i < 70; i++) {
-      const e = await A.page.evaluate(() => JSON.stringify({ cam: S.cam, video: S.video?.readyState || null, fondo: S.fondo, cargando: S.fondoCargando, gen: S.fondoGen, motor: !!S.motor?.vivo }));
-      if (e !== antes) { anotar('estado: ' + e); antes = e; }
-      if (await A.page.evaluate(() => (S.motor?.vivo && !S.fondoCargando) || !S.fondo)) break;
-      await espera(1000);
+    // apagar y prender la cámara 3 veces (con pausas distintas) y cambiar de fondo en plena llamada: nunca sale la cámara
+    // sin el fondo, y el efecto siempre vuelve
+    const fondoEnLlamada = async (id) => { await tocar(A.page, '#b-fondo'); await espera(400); await tocar(A.page, `.fx-op[data-f="${id}"]`); await espera(300); await tocar(A.page, '#fx-x'); };
+    const hastaEfecto = async () => {
+      let antes = '';
+      for (let i = 0; i < 70; i++) {
+        const e = await A.page.evaluate(() => JSON.stringify({ cam: S.cam, video: S.video?.readyState || null, fondo: S.fondo, cargando: S.fondoCargando, gen: S.fondoGen, motor: !!S.motor?.vivo }));
+        if (e !== antes) { anotar('estado: ' + e); antes = e; }
+        if (await A.page.evaluate(() => (S.motor?.vivo && !S.fondoCargando) || !S.fondo)) return;
+        await espera(1000);
+      }
+    };
+    datos.camOffOn = [];
+    for (const [pausa, fondoNuevo] of [[1500, null], [300, 'playa'], [4000, 'suave']]) {
+      if (fondoNuevo) { await fondoEnLlamada(fondoNuevo); anotar('fondo → ' + fondoNuevo); await hastaEfecto(); }
+      await tocar(A.page, '#b-cam'); await espera(pausa); await tocar(A.page, '#b-cam');
+      const muestras = []; for (let i = 0; i < 25; i++) { muestras.push((await motor(A.page)).manda); await espera(150); }
+      await hastaEfecto();
+      const vuelta = { pausa, fondo: fondoNuevo, muestras: [...new Set(muestras)], despues: await motor(A.page) };
+      datos.camOffOn.push(vuelta); anotar('cámara apagar/prender: ' + JSON.stringify(vuelta));
+      if (muestras.includes('camara')) fallo ||= new Error('se mandó la cámara sin el fondo');
+      else if (vuelta.despues.manda !== 'efecto') fallo ||= new Error(`al prender la cámara (pausa ${pausa} ms) el fondo no volvió: a la alumna no le llega nada`);
     }
-    datos.camOffOn = { muestras: [...new Set(muestras)], despues: await motor(A.page) };
-    anotar('cámara apagar/prender: ' + JSON.stringify(datos.camOffOn));
-    if (muestras.includes('camara')) fallo = new Error('se mandó la cámara sin el fondo');
-    else if (datos.camOffOn.despues.manda !== 'efecto') fallo = new Error('al prender la cámara el fondo no volvió (a la alumna no le llega nada)');
     await espera(3000); await foto(B.page, '05-alumna-tras-prender');
   } finally { await B.browser.close().catch(() => {}); }
   if (datos.enLaSala.manda !== 'efecto') fallo ||= new Error('en la sala no se manda el efecto: ' + datos.enLaSala.manda);
