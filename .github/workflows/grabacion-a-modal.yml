@@ -1,0 +1,47 @@
+# Una grabación que ya está en el canal privado de Telegram → Modal (24/11/2026: Recordings › Yours, las readings y clases
+# privadas que cada persona escucha en su cuenta). Para las que pasaron por «Grabaciones de la sala → Telegram» antes de que el
+# audio fuera también a Modal. La baja con la cuenta (TELEGRAM_SESSION; la Bot API no baja más de 20 MB) y la sube al Volume
+# hermes-grabaciones como g<ID>.m4a (o .mp4 + .jpg). No escribe en la D1: después se guarda video = g<ID> en la fila.
+# Repo público: el log solo muestra tamaños y duración. A mano: Actions → «Grabación de Telegram → Modal» → id y mensaje.
+name: Grabación de Telegram → Modal
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'ID de la fila de D1 «grabaciones»'
+        required: true
+      mensaje:
+        description: 'Número del mensaje en el canal (el final del link t.me/c/…/N)'
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: grabacion-a-modal
+  cancel-in-progress: false
+jobs:
+  a-modal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Dependencias
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          pip install -q telethon modal
+          pip install -q cryptg || echo "sin cryptg: anda igual, más lento"
+      - name: De Telegram a Modal
+        env:
+          ID: ${{ inputs.id }}
+          MENSAJE: ${{ inputs.mensaje }}
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
+          TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL }}
+          MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+          MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+        run: |
+          [[ "$ID" =~ ^[0-9]+$ && "$MENSAJE" =~ ^[0-9]+$ ]] || { echo "::error::id y mensaje tienen que ser números"; exit 1; }
+          python scripts/telegram/a_modal.py "$ID" "$MENSAJE"

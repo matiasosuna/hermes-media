@@ -4,7 +4,8 @@
   python3 pendientes.py
 
 Por cada grabación pendiente: la baja de /api/grabaciones/archivo/{id}, la pasa a MP4, la sube a Telegram (leyenda = título),
-(si es solo audio —«audio»: true, …-audio.webm, .m4a o sin pista de video— la pasa a M4A, va como audio y no a Recordings),
+(si es solo audio —«audio»: true, …-audio.webm, .m4a o sin pista de video— la pasa a M4A y va como audio; el M4A también va a
+Modal, g<ID>.m4a, para las readings y clases privadas que la persona escucha en Recordings › Yours; en la biblioteca no sale),
 el video lo sube a Modal (modal_video.py: lo que se ve en Club > Recordings; desde el 8/11/2026 en vez de YouTube no listado),
 saca transcripción y resumen con Gemini (resumen.py: la transcripción va al canal como .txt; el resumen, a la descripción),
 la agrega a la biblioteca (más un ítem "Transcripción · título") y avisa /hecha/{id} con el link (el servidor borra el
@@ -30,7 +31,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import resumen  # noqa: E402  (transcribir_y_resumir)
 import subir  # noqa: E402  (bajar, subir_telegram, subir_documento, agregar_biblioteca)
-import modal_video  # noqa: E402  (subir: el video de /club/recordings/)
+import modal_video  # noqa: E402  (subir: el video de /mentoring/recordings/)
 
 API = 'https://hermestarot444.com/api/grabaciones'
 
@@ -124,9 +125,9 @@ def procesar(g: dict) -> tuple:
             link = asyncio.run(subir.subir_telegram(archivo, titulo, carpeta))
         print(f'En Telegram: {link}')
         video = ''
-        if not audio and modal_video.hay():  # el video que se ve en /club/recordings/; si falla, queda solo en Telegram
+        if modal_video.hay():  # lo que se ve (o escucha) en /mentoring/recordings/; si falla, queda solo en Telegram
             try:
-                video = modal_video.subir(archivo, g['id'], carpeta)
+                video = modal_video.subir_audio(archivo, g['id']) if audio else modal_video.subir(archivo, g['id'], carpeta)
                 print('En Modal (Recordings): listo')
             except Exception as e:  # noqa: BLE001
                 print(f'  (no se pudo subir a Modal: {e.__class__.__name__})')

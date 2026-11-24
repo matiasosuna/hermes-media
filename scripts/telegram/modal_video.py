@@ -2,6 +2,7 @@
 
 Sube al Volume «hermes-grabaciones» g<ID>.mp4 (el video) y g<ID>.jpg (miniatura: un cuadro del minuto 1), con el ID de la
 fila de D1. Los sirve modal/grabaciones.py con link firmado. Devuelve 'g<ID>', que va a /api/grabaciones/hecha/ID como «video».
+Las de solo audio (24/11/2026: readings y clases privadas, que la persona escucha en Recordings › Yours): g<ID>.m4a, sin miniatura.
 Variables: MODAL_TOKEN_ID y MODAL_TOKEN_SECRET (bóveda modal-tarot; secretos de hermes-media). Sin ellas, hay() = False.
 """
 import os
@@ -59,4 +60,14 @@ def subir(video: Path, gid, carpeta: Path) -> str:
             b.put_file(str(jpg), f'/{nombre}.jpg')
     if web != video:
         web.unlink(missing_ok=True)
+    return nombre
+
+
+def subir_audio(m4a: Path, gid) -> str:
+    """Solo audio → g<ID>.m4a en el Volume (lo que escucha la persona en Recordings › Yours) → 'g<ID>'. Errores: excepción."""
+    import modal  # pip install modal (solo en el robot)
+    nombre = f'g{int(gid)}'
+    vol = modal.Volume.from_name(VOLUMEN, create_if_missing=True)
+    with vol.batch_upload(force=True) as b:
+        b.put_file(str(m4a), f'/{nombre}.m4a')
     return nombre
