@@ -16,14 +16,18 @@ on:
       minutos:
         description: 'Sala en vivo para probar con gente (minutos; 0 = solo las capturas automáticas)'
         default: '0'
+      solo:
+        description: 'Correr solo una parte (fotos, navegadores, lento, lejos); vacío = todas'
+        default: ''
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: prueba-fondo
   cancel-in-progress: true
 jobs:
   fotos:
-    if: ${{ !inputs.minutos || inputs.minutos == '0' }}
+    if: ${{ (!inputs.minutos || inputs.minutos == '0') && (!inputs.solo || inputs.solo == 'fotos') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -74,6 +78,169 @@ jobs:
           name: fotos
           path: fotos/
           retention-days: 7
+
+  # Otros navegadores: el anfitrión en WebKit (el motor de Safari, emulando un iPhone 13) o en Firefox; la alumna en Chromium.
+  navegadores:
+    if: ${{ (!inputs.minutos || inputs.minutos == '0') && (!inputs.solo || inputs.solo == 'navegadores') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        nav: [webkit, firefox]
+    env:
+      REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+      SALA: prueba-fondo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: matiasosuna/tarot-web
+          ref: ${{ inputs.ref || 'sala-fondo' }}
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Dependencias
+        run: |
+          cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund playwright@1.49.1 ws@8.18.0 >/dev/null
+          npx playwright install --with-deps ${{ matrix.nav }} chromium >/dev/null
+          cp -r node_modules ../prueba-sala/
+          cd .. && ffmpeg -loglevel error -i prueba-fondo/persona.png -vf scale=704:396 -q:v 3 persona-640.jpg && ls -la persona-640.jpg
+      - name: Sala de prueba
+        run: |
+          node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 2 > servidor.log 2>&1 &
+          for i in $(seq 1 40); do curl -s -o /dev/null http://127.0.0.1:8798/room/ && break; sleep 1; done
+      - name: ${{ matrix.nav }}
+        env:
+          NAV: ${{ matrix.nav }}
+          OUT: ${{ github.workspace }}/fotos-${{ matrix.nav }}
+          FOTO: ${{ github.workspace }}/persona-640.jpg
+        run: node prueba-fondo/navegador.mjs
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: 'fotos-${{ matrix.nav }}', path: 'fotos-${{ matrix.nav }}/', retention-days: 7 }
+
+  # Teléfonos lentos: la CPU de Chrome frenada (x1, x3, x6, x10) con la cámara apaisada y parada.
+  lento:
+    if: ${{ (!inputs.minutos || inputs.minutos == '0') && (!inputs.solo || inputs.solo == 'lento') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+      SALA: prueba-fondo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: matiasosuna/tarot-web
+          ref: ${{ inputs.ref || 'sala-fondo' }}
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Dependencias y cámaras falsas
+        run: |
+          cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 ws@8.18.0 >/dev/null
+          cp -r node_modules ../prueba-sala/ && cd ..
+          ffmpeg -loglevel error -loop 1 -i prueba-fondo/persona.png -t 20 -r 15 \
+            -vf "scale=704:396,crop=640:360:'32+28*sin(2*PI*t/5)':'18+8*sin(2*PI*t/3)',format=yuv420p" apaisada.y4m
+          ffmpeg -loglevel error -loop 1 -i prueba-fondo/persona.png -t 20 -r 15 \
+            -vf "crop=405:720:437:0,scale=380:676,crop=360:640:'10+8*sin(2*PI*t/5)':'18+10*sin(2*PI*t/3)',format=yuv420p" parada.y4m
+          ls -la *.y4m
+      - name: Sala de prueba
+        run: |
+          node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 2 > servidor.log 2>&1 &
+          for i in $(seq 1 40); do curl -s -o /dev/null http://127.0.0.1:8798/room/ && break; sleep 1; done
+      - name: CPU frenada
+        env:
+          VIDEO: ${{ github.workspace }}/apaisada.y4m
+          VIDEO_V: ${{ github.workspace }}/parada.y4m
+          OUT: ${{ github.workspace }}/fotos-lento
+        run: node prueba-fondo/lento.mjs
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: fotos-lento, path: fotos-lento/, retention-days: 7 }
+
+  # Dos máquinas en redes distintas: la sala (servidor + túnel + anfitrión) y una alumna lejos (200 ms, 3 % de pérdida en UDP)
+  # que entra por el túnel. La clave sale del secreto + el id de la corrida (enmascarada); el artefacto solo tiene la URL.
+  lejos:
+    if: ${{ (!inputs.minutos || inputs.minutos == '0') && (!inputs.solo || inputs.solo == 'lejos') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        rol: [anfitrion, alumna]
+    env:
+      REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+      GH_TOKEN: ${{ github.token }}
+      SALA: prueba-fondo
+      ROL: ${{ matrix.rol }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        if: matrix.rol == 'anfitrion'
+        with:
+          repository: matiasosuna/tarot-web
+          ref: ${{ inputs.ref || 'sala-fondo' }}
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Clave de la prueba
+        run: |
+          T=$(printf %s "$REALTIME_CLUB_APP_SECRET-$GITHUB_RUN_ID-lejos" | sha256sum | cut -c1-32)
+          echo "::add-mask::$T"; echo "PRUEBA_TOKEN=$T" >> "$GITHUB_ENV"
+      - name: Dependencias
+        run: |
+          cd prueba-fondo && npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 ws@8.18.0 >/dev/null
+          cp -r node_modules ../prueba-sala/ && cd ..
+          if [ "$ROL" = anfitrion ]; then
+            ffmpeg -loglevel error -loop 1 -i prueba-fondo/persona.png -t 20 -r 15 \
+              -vf "scale=704:396,crop=640:360:'32+28*sin(2*PI*t/5)':'18+8*sin(2*PI*t/3)',format=yuv420p" persona.y4m
+          fi
+      - name: Sala de prueba y túnel
+        if: matrix.rol == 'anfitrion'
+        run: |
+          node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 2 > servidor.log 2>&1 &
+          for i in $(seq 1 40); do curl -s -o /dev/null http://127.0.0.1:8798/control/hora -H "x-prueba: $PRUEBA_TOKEN" && break; sleep 1; done
+          curl -sL -o cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && chmod +x cloudflared
+          ./cloudflared tunnel --no-autoupdate --protocol http2 --url http://127.0.0.1:8798 > tunel.log 2>&1 &
+          U=""; for i in $(seq 1 60); do U=$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' tunel.log | head -1); [ -n "$U" ] && break; sleep 1; done
+          [ -n "$U" ] || { tail -20 tunel.log; exit 1; }
+          for i in $(seq 1 60); do [ "$(curl -s -o /dev/null -w '%{http_code}' "$U/control/hora" -H "x-prueba: $PRUEBA_TOKEN")" = 200 ] && break; sleep 2; done
+          mkdir -p tunel && echo "$U" > tunel/url && echo "túnel listo"
+      - uses: actions/upload-artifact@v4
+        if: matrix.rol == 'anfitrion'
+        with: { name: tunel-lejos, path: tunel/url, retention-days: 1 }
+      - name: Buscar el túnel y poner red de lejos
+        if: matrix.rol == 'alumna'
+        run: |
+          ID=""
+          for i in $(seq 1 120); do
+            ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" --jq '.artifacts[] | select(.name=="tunel-lejos") | .id' 2>/dev/null | head -1)
+            [ -n "$ID" ] && break; sleep 5
+          done
+          [ -n "$ID" ] || { echo "no apareció el túnel"; exit 1; }
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ID/zip" > t.zip && unzip -o -q t.zip -d tunel
+          echo "BASE=$(cat tunel/url)" >> "$GITHUB_ENV"
+          sudo env RETARDO=200 JITTER=10 PERDIDA=3 bash prueba-sala/red.sh
+      - name: Clase
+        env:
+          VIDEO: ${{ github.workspace }}/persona.y4m
+          OUT: ${{ github.workspace }}/fotos-lejos
+        run: |
+          [ "$ROL" = anfitrion ] && export BASE=http://127.0.0.1:8798
+          node prueba-fondo/lejos.mjs
+      - if: always()
+        run: tail -30 servidor.log 2>/dev/null || true
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: 'fotos-lejos-${{ matrix.rol }}', path: fotos-lejos/, retention-days: 7 }
 
   # Sala en vivo para probar con Matías (su Mac, su teléfono, otra persona): la misma sala de prueba (D1 en memoria,
   # Realtime de preview) detrás de un túnel de Cloudflare. Todo pide la clave de esta corrida (sale del secreto + el id de la
