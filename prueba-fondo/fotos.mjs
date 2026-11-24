@@ -19,11 +19,29 @@ async function abrir(quien, movil = true) {
       '--enable-unsafe-swiftshader', '--use-angle=swiftshader', '--ignore-gpu-blocklist'],
   });
   const page = await browser.newPage();
+  // En CI no hay GPU (SwiftShader, dos Chrome en 4 núcleos): el aviso de «equipo lento» se anota pero no se aplica, así se
+  // prueba el resto; el aviso de verdad queda en window.__lentoReal y se prueba al final. Fallas y errores se anotan.
+  await page.evaluateOnNewDocument(() => {
+    let sf;
+    Object.defineProperty(window, 'SalaFondo', { configurable: true, get: () => sf, set: (v) => {
+      const crear = v.crear;
+      v.crear = (f, o = {}) => {
+        window.__lentoReal = o.alLento;
+        return crear(f, { ...o,
+          alLento: () => { (window.__lentos ||= []).push(Math.round(performance.now())); console.warn('[prueba] lento (anotado, no aplicado)'); },
+          alFallar: (e) => { console.warn('[prueba] alFallar: ' + (e?.message || e)); o.alFallar?.(e); },
+        }).catch((e) => { console.warn('[prueba] crear falló: ' + (e?.message || e)); throw e; });
+      };
+      sf = v;
+    } });
+  });
+  page.on('response', (r) => { if (r.status() >= 400) anotar(`[${quien}] ${r.status()} ${r.url()}`); });
   await page.setViewport(movil ? { width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true } : { width: 1280, height: 800 });
   page.on('console', (m) => { if (['error', 'warn'].includes(m.type())) anotar(`[${quien}] ${m.type()}: ${m.text()}`); });
   page.on('pageerror', (e) => anotar(`[${quien}] pageerror: ${e.message}`));
   await page.goto(`${BASE}/entrar-como?u=${quien}`, { waitUntil: 'domcontentloaded', timeout: 90e3 });
   await page.waitForFunction(() => { const b = document.querySelector('#entrar'); return b && !b.disabled && b.offsetParent !== null; }, { timeout: 90e3 });
+  await page.evaluate(() => { const f = window.flotante; window.flotante = (h, ms) => { console.warn('[aviso] ' + String(h).replace(/<[^>]+>/g, '')); return f(h, ms); }; });
   return { browser, page };
 }
 const foto = async (page, nombre) => { await page.screenshot({ path: `${OUT}/${nombre}.png` }); anotar(`foto ${nombre}`); };
@@ -98,7 +116,17 @@ try {
     datos.sinFondo = await motor(A.page); anotar('sin fondo: ' + JSON.stringify(datos.sinFondo));
     if (datos.sinFondo.manda !== 'camara') fallo = new Error('sin fondo no volvió la cámara: ' + datos.sinFondo.manda);
     await foto(B.page, '12-alumna-ve-sin-fondo');
+    // equipo lento de verdad: se saca el fondo, se apaga la cámara y se avisa (nunca se manda la cámara sin el fondo)
+    await tocar(A.page, '#b-fondo'); await espera(400); await tocar(A.page, '.fx-op[data-f="fuerte"]');
+    await hastaMotor(A.page, 30e3); await tocar(A.page, '#fx-x'); await espera(1000);
+    await A.page.evaluate(() => window.__lentoReal?.()); await espera(1200);
+    datos.lento = await A.page.evaluate(() => ({ fondo: S.fondo, cam: S.cam, motor: !!S.motor, manda: S.pub.video?.sender.track ? 'algo' : 'nada',
+      aviso: document.querySelector('#flotante, .flotante')?.textContent || '' }));
+    anotar('lento: ' + JSON.stringify(datos.lento));
+    await foto(A.page, '13-anfitrion-lento');
+    if (datos.lento.fondo || datos.lento.cam || datos.lento.manda !== 'nada') fallo = new Error('lento: no se apagó bien ' + JSON.stringify(datos.lento));
   } finally { await B.browser.close().catch(() => {}); }
+  datos.lentosCI = await A.page.evaluate(() => window.__lentos || []).catch(() => null);
   if (datos.motorLlamada.manda !== 'efecto') fallo = new Error('en la sala no se manda el efecto: ' + datos.motorLlamada.manda);
   if (!datos.alumnaRecibe.length) fallo = new Error('a la alumna no le llegó video');
 } catch (e) { fallo = e; anotar('ERROR: ' + e.stack); await foto(A.page, 'zz-error').catch(() => {}); }

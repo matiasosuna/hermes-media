@@ -47,6 +47,12 @@ jobs:
           ffmpeg -loglevel error -loop 1 -i prueba-fondo/persona.png -t 20 -r 15 \
             -vf "scale=704:396,crop=640:360:'32+28*sin(2*PI*t/5)':'18+8*sin(2*PI*t/3)',format=yuv420p" persona.y4m
           ls -la persona.y4m
+      - name: Máscaras (tres modelos sobre la misma foto)
+        continue-on-error: true
+        env:
+          OUT: ${{ github.workspace }}/fotos
+          FONDO_IMG: web/sala/fondos/sala.jpg
+        run: node prueba-fondo/mascaras.mjs
       - name: Sala de prueba
         run: |
           node prueba-sala/server.mjs "$GITHUB_WORKSPACE/web" 8798 2 > servidor.log 2>&1 &
