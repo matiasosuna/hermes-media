@@ -37,7 +37,7 @@ jobs:
         run: |
           cd web
           npm test > tests.log 2>&1 || { tail -60 tests.log; exit 1; }
-          grep -E '^ℹ (tests|pass|fail)' tests.log
+          grep -E '^(ℹ|#) (tests|pass|fail) ' tests.log || true
           python3 -m unittest discover -s scripts/telegram -p 'test_*.py' 2>&1 | tail -3
       - name: Armar sitio
         run: cd web && ./build.sh > /dev/null
