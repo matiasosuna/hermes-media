@@ -2593,24 +2593,66 @@
       }
     },
     {
-      "id": "trial-28-seven-of-wands",
-      "carta": "Seven of Wands (trial)",
-      "archivo": "28-seven-of-wands.mp4",
-      "cuando": "2026-12-02T21:00:00-05:00",
+      "id": "trial-10-wheel-of-fortune",
+      "carta": "Wheel of Fortune (trial)",
+      "archivo": "10-wheel-of-fortune.mp4",
+      "cuando": "2026-11-25T09:00:00-05:00",
       "v2": {
-        "original": "28-seven-of-wands"
+        "original": "10-wheel-of-fortune",
+        "fuente": "copia de Instagram 720p (el archivo original no estaba en el release)"
       },
-      "nota": "Matías 24/11: republicar como trial (solo no seguidores) los reels con más views, video original tal cual («Video original»), caption sin Journal; 21 h NY, uno por día",
+      "nota": "Matías 24/11: trial con el video original; «Sí, agregalo» con la copia de IG en 720p",
       "instagram": {
-        "caption": "Most people think the Seven of Wands is about a fight you're going to lose. It isn't.\nSeven of Wands: courage and perseverance, defending what matters even when you're not ready. ☿\nFree weekly tarot class → link in bio\n#tarot #sevenofwands #wands #learntarot #minorarcana",
+        "caption": "What keeps repeating in your life?\nA potter, a turning wheel, and the lesson that comes back until you learn it. The Wheel of Fortune isn't about luck. ☿\nFree weekly tarot class → link in bio\n#tarot #wheeloffortune #tarotreading #learntarot #majorarcana",
         "trial": "MANUAL",
-        "repost_de": "28-seven-of-wands"
+        "repost_de": "10-wheel-of-fortune",
+        "publicado": {
+          "id": "17923260003242030",
+          "permalink": "https://www.instagram.com/reel/DgKtYzXMuUi/",
+          "fecha": "2026-11-25T14:09:09.733Z"
+        }
       },
       "youtube": {
         "omitir": true
       },
       "tiktok": {
         "omitir": true
+      }
+    },
+    {
+      "id": "53-four-of-swords",
+      "carta": "Four of Swords",
+      "archivo": "53-four-of-swords.mp4",
+      "cuando": "2026-11-26T12:00:00-05:00",
+      "instagram": {
+        "caption": "Most people think the Four of Swords is about being lazy. It isn't.\nFour of Swords: rest and recovery, taken on purpose, before you break. ☿\nFree weekly tarot class → link in bio\n#tarot #fourofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "Rest is not quitting | Four of Swords tarot ☿ #shorts",
+        "descripcion": "Most people think the Four of Swords is about being lazy. It isn't.\nFour of Swords: rest and recovery, taken on purpose, before you break. ☿\n\nFree weekly tarot class → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #fourofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "four of swords",
+          "swords",
+          "rest"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      },
+      "v2": {
+        "fecha": "2026-11-25T20:04:02Z",
+        "motor": "v6",
+        "commit": "7310c33",
+        "53-four-of-swords.mp4": "1f5db9c3b337",
+        "tiktok-53-four-of-swords.mp4": "5a907e953a12"
       }
     },
     {
@@ -2740,24 +2782,18 @@
       }
     },
     {
-      "id": "trial-10-wheel-of-fortune",
-      "carta": "Wheel of Fortune (trial)",
-      "archivo": "10-wheel-of-fortune.mp4",
-      "cuando": "2026-11-25T09:00:00-05:00",
+      "id": "trial-28-seven-of-wands",
+      "carta": "Seven of Wands (trial)",
+      "archivo": "28-seven-of-wands.mp4",
+      "cuando": "2026-12-02T21:00:00-05:00",
       "v2": {
-        "original": "10-wheel-of-fortune",
-        "fuente": "copia de Instagram 720p (el archivo original no estaba en el release)"
+        "original": "28-seven-of-wands"
       },
-      "nota": "Matías 24/11: trial con el video original; «Sí, agregalo» con la copia de IG en 720p",
+      "nota": "Matías 24/11: republicar como trial (solo no seguidores) los reels con más views, video original tal cual («Video original»), caption sin Journal; 21 h NY, uno por día",
       "instagram": {
-        "caption": "What keeps repeating in your life?\nA potter, a turning wheel, and the lesson that comes back until you learn it. The Wheel of Fortune isn't about luck. ☿\nFree weekly tarot class → link in bio\n#tarot #wheeloffortune #tarotreading #learntarot #majorarcana",
+        "caption": "Most people think the Seven of Wands is about a fight you're going to lose. It isn't.\nSeven of Wands: courage and perseverance, defending what matters even when you're not ready. ☿\nFree weekly tarot class → link in bio\n#tarot #sevenofwands #wands #learntarot #minorarcana",
         "trial": "MANUAL",
-        "repost_de": "10-wheel-of-fortune",
-        "publicado": {
-          "id": "17923260003242030",
-          "permalink": "https://www.instagram.com/reel/DgKtYzXMuUi/",
-          "fecha": "2026-11-25T14:09:09.733Z"
-        }
+        "repost_de": "28-seven-of-wands"
       },
       "youtube": {
         "omitir": true
