@@ -37,7 +37,8 @@ const log = (...a) => console.log(new Date().toISOString().slice(0, 19).replace(
  *  desde el último publicado (si el workflow estuvo apagado, se pone al día de a uno, sin ráfagas). */
 export function siguiente(cal, plataforma, ahora = Date.now()) {
   const gap = (cal.separacion_minima_horas ?? 0.5) * 3600e3;
-  const fechas = cal.items.map((i) => i[plataforma]?.publicado?.fecha).filter(Boolean).map((f) => Date.parse(f));
+  // los trials (solo los ven los que no siguen, Matías 25/11/2026) no corren la hora del reel principal
+  const fechas = cal.items.filter((i) => !i[plataforma]?.trial).map((i) => i[plataforma]?.publicado?.fecha).filter(Boolean).map((f) => Date.parse(f));
   const ultimo = fechas.length ? Math.max(...fechas) : 0;
   const item = cal.items.filter((i) => pendiente(i, plataforma)).sort((a, b) => Date.parse(a.cuando) - Date.parse(b.cuando))[0];
   if (!item) return { item: null, motivo: 'no queda nada pendiente' };

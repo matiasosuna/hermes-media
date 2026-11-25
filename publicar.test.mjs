@@ -37,3 +37,10 @@ test('repost: contenedor de trial, sin share_to_feed', () => {
   assert.equal(p.trial_params, '{"graduation_strategy":"MANUAL"}');
   assert.equal(p.share_to_feed, undefined);
 });
+
+test('trial: no corre la espera del reel principal', () => {
+  const cal = { separacion_minima_horas: 9, requiere_v2: true, items: [
+    { id: 't', cuando: '2026-11-25T14:00:00Z', v2: {}, instagram: { trial: 'MANUAL', publicado: { fecha: '2026-11-25T14:10:00Z' } } },
+    { id: 'r', cuando: '2026-11-25T17:00:00Z', v2: {}, instagram: {} } ] };
+  assert.equal(siguiente(cal, 'instagram', Date.parse('2026-11-25T17:05:00Z')).item?.id, 'r');
+});
