@@ -96,6 +96,19 @@ try {
   await foto(L, '14-alumna-eligio-mayo');
   await tocar(T, '#taller [data-a="mes"][data-v="1"]'); await hasta(T, () => !!document.querySelector('#taller .tl-mes.elegido'));
   await foto(T, '15-propio-eligio-febrero');
+  // Ana llega tarde (Hermes ya abrió el 3): primero saca su año, después elige el mes
+  const A = await abrir('u3', { cam: false });
+  await hasta(A, () => (document.querySelector('#taller .tl-cab small')?.textContent || '') === 'Step 3 of 5', null, 30e3);
+  await foto(A, '15b-tarde-llega-en-el-paso3');
+  for (let i = 0; i < 12; i++) {
+    const n = await cartasEnMesa(A);
+    await tocar(A, '#taller [data-a="sacar"]');
+    await hasta(A, (n) => document.querySelectorAll('#taller .tl-meses .c img').length > n, n);
+  }
+  await hasta(A, () => !!document.querySelector('#taller [data-a="mes"]'));
+  await tocar(A, '#taller [data-a="mes"][data-v="9"]'); await hasta(A, () => !!document.querySelector('#taller .tl-mes.elegido'));
+  await foto(A, '15c-tarde-ya-eligio-octubre');
+  await A.close();
 
   // 4 · la carta nueva (a cara vista)
   await abrirPaso(4);

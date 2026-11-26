@@ -2,7 +2,7 @@
 // La sala real (sala/) + la API real (functions/api) de tarot-web, con D1 en memoria (tests/helpers.js) y el Realtime de PREVIEW
 // (app hermes-club-sala). Nada toca producción ni la D1 compartida. Igual que prueba-sala/server.mjs (rama prueba-fondo), más:
 // un evento tipo «taller» con su sala bloqueada y dos compras pagadas (Lucía y Tomás), como queda en producción al comprar.
-// Cuentas de prueba: owner («Hermes», anfitrión), u1 (Lucía), u2 (Tomás). /entrar-como?u=… deja la cookie y va a la sala.
+// Cuentas de prueba: owner («Hermes», anfitrión), u1 (Lucía), u2 (Tomás), u3 (Ana). /entrar-como?u=… deja la cookie y va a la sala.
 // Con PRUEBA_TOKEN (la sala en vivo detrás de un túnel, para probar con Matías): todo pide esa clave (?k= en /entrar-como, después
 // la cookie «prueba»). /reiniciar?k=… borra lo hecho en el taller (vuelve al paso 0).
 // Uso: node server.mjs <repo tarot-web> <puerto>
@@ -36,6 +36,7 @@ const cuentas = {
   owner: H.claims({ sub: 'owner-1', email: 'owner@example.com', name: 'Hermes' }),
   u1: H.claims({ sub: 'u-1', email: 'u1@example.com', name: 'Lucía' }),
   u2: H.claims({ sub: 'u-2', email: 'u2@example.com', name: 'Tomás' }),
+  u3: H.claims({ sub: 'u-3', email: 'u3@example.com', name: 'Ana' }), // llega tarde
 };
 for (const c of Object.values(cuentas)) await H.login(env, key, c); // crea las cuentas
 
@@ -43,7 +44,7 @@ for (const c of Object.values(cuentas)) await H.login(env, key, c); // crea las 
 const ev = await crearEvento(env, { tipo: 'taller', inicio: Date.now() + 5 * 60e3, titulo: '12/12 Portal · Manifest your 2027',
   bajada: 'A live workshop on the last portal of the year.', minutos: 90, precio: 22 });
 const ahora = Date.now();
-for (const k of ['u1', 'u2']) {
+for (const k of ['u1', 'u2', 'u3']) {
   const u = raw.prepare('SELECT id, email, name FROM users WHERE lower(email) = ?').get(cuentas[k].email);
   raw.prepare(`INSERT INTO compras (session_id, producto, email, estado, monto, moneda, creada, pagada, evento_id, user_id, nombre)
     VALUES (?, ?, ?, 'pagada', 2200, 'usd', ?, ?, ?, ?, ?)`).run('cs_prueba_' + k, PRODUCTO, u.email, ahora, ahora, ev.id, String(u.id), u.name);

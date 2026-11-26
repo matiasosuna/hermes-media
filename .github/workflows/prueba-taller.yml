@@ -77,6 +77,46 @@ jobs:
           name: fotos
           path: fotos
 
+  safari:
+    # la alumna en Safari de iPhone (motor WebKit, Playwright en una Mac de GitHub); Hermes en Chromium
+    needs: leer
+    if: ${{ needs.leer.outputs.minutos == '0' }}
+    runs-on: macos-latest
+    timeout-minutes: 25
+    env:
+      REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: matiasosuna/tarot-web
+          ref: taller-1212
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Dependencias
+        run: |
+          cd prueba-taller && npm init -y >/dev/null && npm i --no-audit --no-fund playwright@1.49.1 ws@8.18.0 >/dev/null
+          npx playwright install webkit chromium >/dev/null
+      - name: Sala de prueba
+        run: |
+          cd prueba-taller && node server.mjs "$GITHUB_WORKSPACE/web" 8799 > ../servidor.log 2>&1 &
+          for i in $(seq 1 40); do curl -s -o /dev/null http://127.0.0.1:8799/room/ && break; sleep 1; done
+          cat servidor.log
+      - name: Safari de iPhone
+        env:
+          OUT: ${{ github.workspace }}/fotos-safari
+        run: cd prueba-taller && node safari.mjs
+      - if: always()
+        run: tail -40 servidor.log || true
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fotos-safari
+          path: fotos-safari
+
   vivo:
     needs: leer
     if: ${{ needs.leer.outputs.minutos != '0' }}
