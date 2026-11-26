@@ -2635,7 +2635,11 @@
       "cuando": "2026-11-26T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Four of Swords is about being lazy. It isn't.\nFour of Swords: rest and recovery, taken on purpose, before you break. ☿\nFree weekly tarot class → link in bio\n#tarot #fourofswords #swords #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "18147162880722207",
+          "permalink": "https://www.instagram.com/reel/DgNmr-0PFtT/",
+          "fecha": "2026-11-26T17:08:36.681Z"
+        }
       },
       "youtube": {
         "titulo": "Rest is not quitting | Four of Swords tarot ☿ #shorts",
@@ -2651,10 +2655,19 @@
           "swords",
           "rest"
         ],
-        "publicado": null
+        "publicado": {
+          "id": "tcma1RVEOus",
+          "url": "https://youtube.com/shorts/tcma1RVEOus",
+          "fecha": "2026-11-26T17:08:39.766Z",
+          "privacidad": "public"
+        }
       },
       "tiktok": {
-        "publicado": null
+        "publicado": {
+          "id": "6b0867991fa4091582805cf1",
+          "url": "https://tiktok.com/@hermestarot444/video/7712528346030083361",
+          "fecha": "2026-11-26T17:10:28.956Z"
+        }
       },
       "v2": {
         "fecha": "2026-11-25T20:04:02Z",
