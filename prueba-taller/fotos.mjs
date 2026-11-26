@@ -38,8 +38,7 @@ async function abrir(quien, { cam = true } = {}) {
 const foto = async (page, nombre) => { await espera(400); await page.screenshot({ path: `${OUT}/${nombre}.png` }); anotar(`foto ${nombre}`); };
 const tocar = (page, sel) => page.evaluate((s) => { const el = document.querySelector(s); if (!el) throw new Error('no está: ' + s); el.click(); }, sel);
 const hasta = (page, fn, arg, ms = 20e3) => page.waitForFunction(fn, { timeout: ms, polling: 200 }, arg);
-const enPaso = (page, n) => hasta(page, (n) => n ? (document.querySelector('#taller .tl-paso')?.textContent || '').includes(`Step ${n} of`)
-  : !!document.querySelector('#taller .tl-mazos'), n);
+const enPaso = (page, n) => hasta(page, (n) => (document.querySelector('#taller .tl-cab small')?.textContent || '') === (n ? `Step ${n} of 5` : ''), n);
 const cartasEnMesa = (page) => page.evaluate(() => document.querySelectorAll('#taller .tl-meses .c img').length);
 async function abrirPaso(n) { await tocar(H, '#taller [data-a="abrir"]'); await enPaso(H, n); await Promise.all([enPaso(L, n), enPaso(T, n)]); await espera(300); }
 
@@ -107,6 +106,7 @@ try {
   await tocar(L, `#tl-elegir [data-c="${nueva}"]`); await hasta(L, () => !!document.querySelector('#taller .lado.nueva img'));
   await foto(L, '18-alumna-carta-nueva');
   await foto(T, '19-propio-paso4');
+  await foto(H, '19b-hermes-paso4');
   await tocar(T, '#taller [data-a="listo"]'); await hasta(T, () => !!document.querySelector('#taller .tl-btn.hecho'));
 
   // 5 · como es arriba es abajo
