@@ -55,13 +55,24 @@ const foto = async (page, nombre) => { await espera(400); await page.screenshot(
 const tocar = async (page, sel) => { await page.locator(sel).first().tap(); }; // un toque de verdad (no .click() por código)
 const hasta = (page, fn, arg, ms = 20e3) => page.waitForFunction(fn, arg, { timeout: ms, polling: 200 });
 const enPaso = (page, n) => hasta(page, (n) => (document.querySelector('#taller .tl-cab small')?.textContent || '') === `Step ${n} of 5`, n);
+// los videos no quedan tapados por el panel: cada cuadro en 16:9 y su nombre adentro de lo que se ve de la grilla
+async function videosEnteros(page, cuando) {
+  const r = await page.evaluate(() => { const g = document.querySelector('#grilla').getBoundingClientRect();
+    return { g: [Math.round(g.top), Math.round(g.bottom)], tiles: [...document.querySelectorAll('#grilla .tile')].map((t) => { const b = t.getBoundingClientRect(), n = t.querySelector('.nombre')?.getBoundingClientRect();
+      return { w: Math.round(b.width), h: Math.round(b.height), nombreAbajo: n ? Math.round(n.bottom) : null }; }) }; });
+  anotar(`videos ${cuando}: ${JSON.stringify(r)}`);
+  for (const t of r.tiles) {
+    if (Math.abs(t.h - t.w * 9 / 16) > 8) fallas.push(`${cuando}: un video mide ${t.w}×${t.h} (no 16:9)`);
+    if (t.nombreAbajo != null && t.nombreAbajo > r.g[1] + 1) fallas.push(`${cuando}: el panel tapa un nombre`);
+  }
+}
 
 let H, L;
 try {
   H = await abrir('owner', chromium, { viewport: { width: 1280, height: 800 } });
   L = await abrir('u1', webkit, { ...devices['iPhone 13'] }, { cam: false });
   await hasta(L, () => !!document.querySelector('#taller .tl-mazos'), null, 30e3);
-  await foto(L, 's01-iphone-antes-de-empezar');
+  await espera(2500); await foto(L, 's01-iphone-antes-de-empezar'); await videosEnteros(L, 'antes de empezar');
   await tocar(L, '#taller .tl-mazo[data-v="web"]'); await hasta(L, () => !!document.querySelector('#taller .tl-mazo.on[data-v="web"]'));
   const abrirPaso = async (n) => { await H.locator('#taller [data-a="abrir"]').click(); await enPaso(H, n); await enPaso(L, n); await espera(300); };
 
@@ -75,7 +86,7 @@ try {
     await tocar(L, '#taller [data-a="sacar"]');
     await hasta(L, (n) => document.querySelectorAll('#taller .tl-meses .c img').length > n, n);
   }
-  await espera(800); await foto(L, 's03-iphone-su-anio');
+  await espera(800); await foto(L, 's03-iphone-su-anio'); await videosEnteros(L, 'paso 2');
 
   await abrirPaso(3);
   await tocar(L, '#taller [data-a="mes"][data-v="2"]'); await hasta(L, () => !!document.querySelector('#taller .tl-mes.elegido'));
@@ -92,7 +103,7 @@ try {
   await foto(L, 's07-iphone-carta-nueva');
 
   await abrirPaso(5);
-  await foto(L, 's08-iphone-paso5');
+  await foto(L, 's08-iphone-paso5'); await videosEnteros(L, 'paso 5');
   const marzo = await L.evaluate(() => document.querySelector('#taller .tl-mes.elegido img')?.getAttribute('src'));
   if (!marzo?.endsWith(`/${nueva}.webp`)) fallas.push('en el paso 5 marzo no tiene la carta nueva');
   await tocar(L, '#taller [data-a="plegar"]'); await foto(L, 's09-iphone-plegado');
