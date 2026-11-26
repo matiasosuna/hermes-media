@@ -2765,6 +2765,42 @@
       }
     },
     {
+      "id": "55-six-of-swords",
+      "carta": "Six of Swords",
+      "archivo": "55-six-of-swords.mp4",
+      "cuando": "2026-11-28T12:00:00-05:00",
+      "instagram": {
+        "caption": "Most people think the Six of Swords is about running away from your problems. It isn't.\nSix of Swords: transition and healing, moving through a hard time toward calmer water. ☿\nFree weekly tarot class → link in bio\n#tarot #sixofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "You only have to know you can't stay | Six of Swords tarot ☿ #shorts",
+        "descripcion": "Most people think the Six of Swords is about running away from your problems. It isn't.\nSix of Swords: transition and healing, moving through a hard time toward calmer water. ☿\n\nFree weekly tarot class → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #sixofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "six of swords",
+          "swords",
+          "transition"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      },
+      "v2": {
+        "fecha": "2026-11-26T19:46:26Z",
+        "motor": "v6",
+        "commit": "febbde6",
+        "55-six-of-swords.mp4": "22a42c6515b7",
+        "tiktok-55-six-of-swords.mp4": "5cc9ef18132f"
+      }
+    },
+    {
       "id": "trial-16-tower",
       "carta": "The Tower (trial)",
       "archivo": "16-tower.mp4",
