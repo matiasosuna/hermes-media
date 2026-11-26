@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Taller 12/12 · 4 propuestas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Maquetas de la herramienta del taller «12/12 Portal · Manifest your 2027» (26/11/2026). Colores de la sala en llamada
+   (tarot-web sala/marca.css): fondo #121212, tarjetas #1E1E1E, dorado #E2B857. Cartas: las de la web (/cartas/). */
+:root{--night:#121212;--card:#1E1E1E;--card2:#262626;--line:#2E2E2E;--gold:#E2B857;--gold-soft:rgba(226,184,87,.14);--text:#F5F5F5;--muted:#BDBDBD;--dim:#7d7d7d;
+  --display:"Manrope",system-ui,sans-serif;--body:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#555;font-family:var(--body);display:flex;flex-wrap:wrap;gap:40px;padding:40px}
+.phone{width:390px;height:844px;position:relative;overflow:hidden;background:var(--night);color:var(--text);font-family:var(--body)}
+/* barra del sistema */
+.sb{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 26px 0 30px;font:600 15px var(--body)}
+.sb .ic{display:flex;gap:6px;align-items:center}
+/* cabecera de la sala */
+.hd{height:44px;display:flex;align-items:center;padding:0 16px;gap:8px}
+.hd b{font:600 17px var(--display)}
+.hd span{color:var(--muted);font-size:14px}
+.hd .live{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.hd .live i{width:8px;height:8px;border-radius:50%;background:#e5484d;display:block}
+/* video de Hermes (de muestra) */
+.tile{position:relative;border-radius:14px;overflow:hidden;background:radial-gradient(120% 90% at 50% 20%,#4a3a2a 0%,#2a221b 55%,#17130f 100%)}
+.tile svg.persona{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:82%;opacity:.55}
+.tile .nom{position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.55);border-radius:8px;padding:4px 10px;font-size:13px}
+.tile .nom em{font-style:normal;color:var(--gold);font-weight:600}
+/* barra de abajo de la sala */
+.bar{position:absolute;left:0;right:0;bottom:0;height:76px;display:flex;justify-content:center;align-items:flex-start;gap:7px;padding-top:8px;background:var(--night)}
+.bar .b{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.bar .b.on{background:var(--gold);border-color:var(--gold)}
+.bar .b.red{background:#e5484d;border-color:#e5484d}
+.bar svg{width:20px;height:20px;stroke:var(--text);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bar .b.on svg{stroke:#1a1a1a}
+/* cartas */
+.c{display:block;aspect-ratio:596/1000;border-radius:5px;overflow:hidden;background:#222;position:relative}
+.c img{width:100%;height:100%;object-fit:cover;display:block}
+.c.back{background:repeating-linear-gradient(45deg,#1E1E1E 0 6px,#3a3220 6px 12px);border:1px solid rgba(226,184,87,.55)}
+.c.back.dim{opacity:.35}
+.eyebrow{font:500 13px var(--body);color:var(--gold)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;border-radius:999px;font:600 15px var(--body);border:1px solid var(--line);background:transparent;color:var(--text)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#1a1a1a}
+.lock{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;flex:none}
+
+/* ===== 1 · Paso a paso ===== */
+#p1 .tile{margin:4px 12px 0;height:196px}
+#p1 .panel{position:absolute;left:0;right:0;top:300px;bottom:76px;background:var(--card);border-top:1px solid var(--line);border-radius:18px 18px 0 0;padding:14px 16px}
+#p1 .row{display:flex;justify-content:space-between;align-items:center}
+#p1 h2{font:600 17px var(--display)}
+#p1 .seg{display:flex;background:var(--night);border:1px solid var(--line);border-radius:999px;padding:3px;font-size:12px}
+#p1 .seg span{padding:5px 10px;border-radius:999px;color:var(--muted)}
+#p1 .seg span.on{background:var(--gold);color:#1a1a1a;font-weight:600}
+#p1 .prog{display:flex;gap:5px;margin:14px 0 6px}
+#p1 .prog i{flex:1;height:4px;border-radius:4px;background:var(--line)}
+#p1 .prog i.done{background:rgba(226,184,87,.55)}
+#p1 .prog i.now{background:var(--gold)}
+#p1 .paso{font-size:12px;color:var(--muted)}
+#p1 h3{font:600 20px var(--display);margin:8px 0 4px}
+#p1 .ind{font-size:14px;color:var(--muted);line-height:1.4}
+#p1 .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px 7px;margin-top:14px}
+#p1 .m{text-align:center;font-size:11px;color:var(--muted)}
+#p1 .m .c{margin-bottom:4px}
+#p1 .m.next .c{outline:2px solid var(--gold);outline-offset:2px;opacity:1}
+#p1 .m.next{color:var(--gold);font-weight:600}
+#p1 .next-step{display:flex;align-items:center;gap:10px;margin-top:14px;padding:11px 12px;border:1px dashed var(--line);border-radius:12px;font-size:13px;color:var(--muted)}
+#p1 .next-step b{color:var(--text);font-weight:500}
+
+/* ===== 2 · La rueda ===== */
+#p2 .top{padding:6px 18px 0}
+#p2 .top h2{font:600 26px var(--display);margin-top:4px}
+#p2 .top p{font-size:13px;color:var(--muted);margin-top:4px}
+#p2 .bubble{position:absolute;right:14px;top:96px;width:84px;height:84px;border-radius:50%;border:2px solid var(--gold);overflow:hidden}
+#p2 .bubble .tile{width:100%;height:100%;border-radius:0}
+#p2 .bubble small{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:10px;background:rgba(0,0,0,.5);padding:1px 0}
+#p2 .wheel{position:absolute;left:0;right:0;top:206px;height:420px}
+#p2 .ring{position:absolute;left:50%;top:50%;width:300px;height:300px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(226,184,87,.18)}
+#p2 .slot{position:absolute;width:46px;transform:translate(-50%,-50%)}
+#p2 .slot .c{width:46px}
+#p2 .slot.now .c{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 22px rgba(226,184,87,.55)}
+#p2 .lab{position:absolute;transform:translate(-50%,-50%);font-size:11px;color:var(--dim)}
+#p2 .lab.on{color:var(--text)}
+#p2 .lab.now{color:var(--gold);font-weight:600}
+#p2 .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:70px;text-align:center}
+#p2 .center .c{width:70px;border-radius:7px;box-shadow:0 0 0 1px rgba(226,184,87,.6)}
+#p2 .sheet{position:absolute;left:12px;right:12px;bottom:84px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px}
+#p2 .sheet .q{font-size:14px;line-height:1.4;color:var(--muted);margin:4px 0 12px}
+#p2 .sheet .q b{color:var(--text);font-weight:500}
+#p2 .sheet .btns{display:flex;gap:8px}
+#p2 .sheet .btn{flex:1;height:44px;font-size:14px}
+
+/* ===== 3 · El año de la sala ===== */
+#p3 .tile{margin:4px 12px 0;height:150px}
+#p3 .sec{margin:14px 16px 0}
+#p3 .strip{display:flex;gap:4px;margin-top:10px;align-items:flex-end}
+#p3 .strip .m{flex:1;text-align:center;font-size:9px;color:var(--dim)}
+#p3 .strip .m .c{margin-bottom:3px}
+#p3 .strip .m.sel{flex:1.9;color:var(--gold);font-weight:600}
+#p3 .strip .m.sel .c{outline:2px solid var(--gold);outline-offset:2px;box-shadow:0 0 18px rgba(226,184,87,.5)}
+#p3 .swap{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:var(--muted)}
+#p3 .swap s{color:var(--dim)}
+#p3 .swap b{color:var(--gold);font-weight:600}
+#p3 .room{margin:14px 12px 0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+#p3 .room h3{font:600 17px var(--display);margin-top:2px}
+#p3 .room .n{font-size:13px;color:var(--muted);margin-top:2px}
+#p3 .bars{display:flex;gap:6px;align-items:flex-end;height:66px;margin-top:12px}
+#p3 .bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;height:100%}
+#p3 .bars i{display:block;width:100%;border-radius:4px 4px 2px 2px;background:rgba(226,184,87,.35)}
+#p3 .bars div.top i{background:var(--gold)}
+#p3 .bars span{font-size:10px;color:var(--dim)}
+#p3 .bars div.top span{color:var(--gold);font-weight:600}
+#p3 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+#p3 .chip{display:flex;align-items:center;gap:6px;background:var(--gold-soft);border:1px solid rgba(226,184,87,.45);border-radius:999px;padding:3px 10px 3px 3px;font-size:12px}
+#p3 .chip .c{width:16px;border-radius:3px}
+#p3 .chip em{font-style:normal;color:var(--muted)}
+
+/* ===== 4 · Tu calendario 2027 ===== */
+#p4 .nav{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+#p4 .nav .back{font-size:15px;color:var(--gold);display:flex;align-items:center;gap:4px}
+#p4 .nav .mini{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+#p4 .nav .mini .tile{width:54px;height:34px;border-radius:8px}
+#p4 .tt{padding:4px 18px 0}
+#p4 .tt h2{font:600 28px var(--display);margin-top:2px}
+#p4 .tt p{font-size:13px;color:var(--muted);margin-top:3px}
+#p4 .list{margin:12px 12px 0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:4px 12px}
+#p4 .r{display:flex;align-items:center;gap:12px;height:38.5px;border-bottom:1px solid var(--line);font-size:14px}
+#p4 .r:last-child{border-bottom:0}
+#p4 .r .mo{width:34px;color:var(--muted);font-size:12px}
+#p4 .r .c{width:19px;border-radius:3px}
+#p4 .r.chg{background:var(--gold-soft);margin:0 -12px;padding:0 12px;border-bottom-color:rgba(226,184,87,.3)}
+#p4 .r.chg .mo{color:var(--gold);font-weight:600}
+#p4 .r.chg b{font-weight:600}
+#p4 .r.chg s{color:var(--dim);font-size:12px;margin-left:auto}
+#p4 .acts{position:absolute;left:12px;right:12px;bottom:22px;display:flex;flex-direction:column;gap:8px}
+#p4 .tog{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:14px}
+#p4 .tog small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+#p4 .sw{width:44px;height:26px;border-radius:999px;background:var(--gold);position:relative;flex:none}
+#p4 .sw::after{content:"";position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#1a1a1a}
+</style>
+</head>
+<body>
+
+<!-- piezas que se repiten (se copian con JS para no repetir el SVG) -->
+<template id="t-sb"><div class="sb"><span>11:24</span><span class="ic"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#F5F5F5"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#F5F5F5"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#F5F5F5"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#F5F5F5"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#F5F5F5" opacity=".5"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#F5F5F5"/><rect x="24" y="4" width="1.5" height="4" rx=".7" fill="#F5F5F5" opacity=".5"/></svg></span></div></template>
+<template id="t-persona"><svg class="persona" viewBox="0 0 100 100"><circle cx="50" cy="34" r="17" fill="#d9c2a3"/><path d="M14 100c2-26 18-40 36-40s34 14 36 40z" fill="#1d1a17"/></svg></template>
+<template id="t-bar"><div class="bar">
+  <div class="b"><svg viewBox="0 0 24 24"><path d="M9 9v3a3 3 0 0 0 5.1 2.1M15 9.3V5a3 3 0 0 0-5.9-.7"/><path d="M19 11a7 7 0 0 1-1.2 3.9M5 11a7 7 0 0 0 11.5 5.4M12 18v3"/><path d="M3 3l18 18"/></svg></div>
+  <div class="b"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="12" height="10" rx="2"/><path d="M15 11l6-3v8l-6-3"/></svg></div>
+  <div class="b"><svg viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-6.5V4a1.5 1.5 0 0 1 3 0v7m0-5.5a1.5 1.5 0 0 1 3 0V12m0-3.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-5-2.7L5 14a1.5 1.5 0 0 1 2.4-1.8L8 13"/></svg></div>
+  <div class="b"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4 4 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/></svg></div>
+  <div class="b on"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="9" height="14" rx="1.5"/><rect x="11" y="7" width="9" height="14" rx="1.5"/></svg></div>
+  <div class="b red"><svg viewBox="0 0 24 24" style="stroke:#fff"><path d="M3 14c5-4.5 13-4.5 18 0l-2 2.5-3.2-1.6.3-2.2a10 10 0 0 0-8.2 0l.3 2.2L5 16.5z"/></svg></div>
+  <div class="b"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5z"/></svg></div>
+</div></template>
+<template id="t-lock"><svg class="lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></template>
+
+<!-- ======================= 1 · Paso a paso ======================= -->
+<div class="phone" id="p1">
+  <div data-t="t-sb"></div>
+  <div class="hd"><b>12/12 Portal</b><span>· 14 in the room</span><span class="live"><i></i>Live</span></div>
+  <div class="tile"><div data-t="t-persona"></div><span class="nom">Hermes <em>· Host</em></span></div>
+  <div class="panel">
+    <div class="row"><h2>Manifest your 2027</h2><div class="seg"><span>My deck</span><span class="on">Web deck</span></div></div>
+    <div class="prog"><i class="done"></i><i class="done"></i><i class="now"></i><i></i><i></i></div>
+    <div class="paso">Step 3 of 5</div>
+    <h3>Draw your year</h3>
+    <p class="ind">One card for each month, in order.</p>
+    <div class="grid" id="g1"></div>
+    <div class="next-step"><span data-t="t-lock"></span><span><b>4 · Choose the month to change</b><br>Hermes opens it live</span></div>
+  </div>
+  <div data-t="t-bar"></div>
+</div>
+
+<!-- ======================= 2 · La rueda del año ======================= -->
+<div class="phone" id="p2">
+  <div data-t="t-sb"></div>
+  <div class="top">
+    <div class="eyebrow">12/12 Portal · month by month</div>
+    <h2>March is open</h2>
+    <p>Hermes opens one month at a time.</p>
+  </div>
+  <div class="bubble"><div class="tile"><div data-t="t-persona"></div></div><small>Hermes</small></div>
+  <div class="wheel" id="w2"><div class="ring"></div></div>
+  <div class="sheet">
+    <div class="eyebrow">March</div>
+    <p class="q"><b>What does March ask of you?</b> Hold the question, then draw.</p>
+    <div class="btns"><span class="btn gold">Draw for March</span><span class="btn">Drew it from my deck</span></div>
+  </div>
+  <div data-t="t-bar"></div>
+</div>
+
+<!-- ======================= 3 · El año de la sala ======================= -->
+<div class="phone" id="p3">
+  <div data-t="t-sb"></div>
+  <div class="hd"><b>12/12 Portal</b><span>· 17 in the room</span><span class="live"><i></i>Live</span></div>
+  <div class="tile"><div data-t="t-persona"></div><span class="nom">Hermes <em>· Host</em></span></div>
+  <div class="sec">
+    <div class="eyebrow">Your 2027 · step 5</div>
+    <div class="strip" id="s3"></div>
+    <div class="swap">June: <s>Five of Pentacles</s> → <b>The Sun</b></div>
+  </div>
+  <div class="room">
+    <div class="eyebrow">The room</div>
+    <h3>17 of you changed a month</h3>
+    <div class="bars" id="b3"></div>
+    <div class="chips" id="ch3"></div>
+  </div>
+  <div data-t="t-bar"></div>
+</div>
+
+<!-- ======================= 4 · Tu calendario 2027 ======================= -->
+<div class="phone" id="p4">
+  <div data-t="t-sb"></div>
+  <div class="nav"><span class="back"><svg width="10" height="16" viewBox="0 0 10 16"><path d="M8 2L2 8l6 6" stroke="#E2B857" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Room</span>
+    <span class="mini">Hermes is live<span class="tile"><div data-t="t-persona"></div></span></span></div>
+  <div class="tt"><div class="eyebrow">12/12 Portal · saved to your account</div><h2>Your 2027</h2></div>
+  <div class="list" id="l4"></div>
+  <div class="acts">
+    <div class="tog"><span>Email me each month's card<small>On the 1st of every month</small></span><span class="sw"></span></div>
+    <span class="btn gold">Save as wallpaper</span>
+  </div>
+</div>
+
+<script>
+const IMG = (id) => `https://hermestarot444.com/cartas/${id}.jpg`;
+const carta = (id, cls = '') => id ? `<span class="c ${cls}"><img src="${IMG(id)}" alt=""></span>` : `<span class="c back ${cls}"></span>`;
+document.querySelectorAll('[data-t]').forEach((el) => el.replaceWith(document.getElementById(el.dataset.t).content.cloneNode(true)));
+
+const MESES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const LARGO = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const ANO = ['W3','C2','XVII','P8','S5','P5','W12','IX','C10','P1','S3','XXI'];
+const NOMBRE = {W3:'Three of Wands',C2:'Two of Cups',XVII:'The Star',P8:'Eight of Pentacles',S5:'Five of Swords',P5:'Five of Pentacles',W12:'Knight of Wands',IX:'The Hermit',C10:'Ten of Cups',P1:'Ace of Pentacles',S3:'Three of Swords',XXI:'The World',XIX:'The Sun',XIV:'Temperance'};
+
+// 1: enero–abril sacadas, mayo la siguiente
+document.getElementById('g1').innerHTML = MESES.map((m, i) => i < 4 ? `<div class="m">${carta(ANO[i])}${m}</div>`
+  : i === 4 ? `<div class="m next">${carta(null)}${m}</div>` : `<div class="m">${carta(null, 'dim')}${m}</div>`).join('');
+
+// 2: rueda; enero y febrero sacadas, marzo abierto, el resto cerrado; en el centro, la carta del año (Greer)
+const w = document.getElementById('w2'), cx = 195, cy = 210, R = 150, RL = 104;
+let h = '';
+MESES.forEach((m, i) => {
+  const a = -Math.PI / 2 + i * Math.PI / 6, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
+  const lx = cx + RL * Math.cos(a), ly = cy + RL * Math.sin(a);
+  const est = i < 2 ? 'on' : i === 2 ? 'now' : '';
+  h += `<div class="slot ${est}" style="left:${x}px;top:${y}px">${i < 2 ? carta(ANO[i]) : carta(null, i === 2 ? '' : 'dim')}</div>`;
+  h += `<div class="lab ${est}" style="left:${lx}px;top:${ly}px">${m}</div>`;
+});
+h += `<div class="center">${carta('XIV')}</div>`;
+w.insertAdjacentHTML('beforeend', h);
+
+// 3: las 12 en fila, junio cambiada; tablero de la sala
+const A3 = ANO.slice(); A3[5] = 'XIX';
+document.getElementById('s3').innerHTML = MESES.map((m, i) => `<div class="m ${i === 5 ? 'sel' : ''}">${carta(A3[i])}${m[0]}</div>`).join('');
+const cuantos = [1, 2, 1, 0, 2, 4, 1, 0, 1, 2, 3, 0];
+document.getElementById('b3').innerHTML = MESES.map((m, i) => `<div class="${i === 5 ? 'top' : ''}"><i style="height:${Math.max(3, cuantos[i] * 12)}px"></i><span>${m[0]}</span></div>`).join('');
+document.getElementById('ch3').innerHTML = [['XIX', 4], ['C10', 3], ['XVII', 2], ['P1', 2], ['III', 1], ['W1', 1]]
+  .map(([id, n]) => `<span class="chip">${carta(id)}${{XIX:'The Sun',C10:'Ten of Cups',XVII:'The Star',P1:'Ace of Pentacles',III:'The Empress',W1:'Ace of Wands'}[id]} <em>×${n}</em></span>`).join('');
+
+// 4: el calendario
+document.getElementById('l4').innerHTML = LARGO.map((m, i) => i === 5
+  ? `<div class="r chg"><span class="mo">${MESES[i]}</span>${carta('XIX')}<b>✦ The Sun</b><s>Five of Pentacles</s></div>`
+  : `<div class="r"><span class="mo">${MESES[i]}</span>${carta(ANO[i])}${NOMBRE[ANO[i]]}</div>`).join('');
+</script>
+</body>
+</html>

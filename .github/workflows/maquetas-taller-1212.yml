@@ -1,0 +1,30 @@
+# Maquetas del taller 12/12 (solo rama maquetas-taller-1212): saca las imágenes de celular de maquetas/taller-1212/.
+# No publica nada; las imágenes quedan como artefacto «maquetas».
+name: maquetas-taller-1212
+on:
+  push:
+    branches: [maquetas-taller-1212]
+permissions:
+  contents: read
+jobs:
+  capturar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: maquetas/taller-1212
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Playwright
+        run: |
+          npm i --no-save --no-package-lock -s playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Capturar
+        run: node capturar.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: maquetas
+          path: maquetas/taller-1212/out
