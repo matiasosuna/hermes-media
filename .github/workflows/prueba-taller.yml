@@ -1,0 +1,64 @@
+# Prueba de la herramienta del taller 12/12 (tarot-web rama taller-1212, 26/11/2026; solo rama maquetas-taller-1212).
+# La sala real con D1 en memoria y el Realtime de PREVIEW (prueba-taller/server.mjs): no toca producción ni la D1 compartida.
+# Hermes abre los 5 pasos; Lucía usa el mazo de la web y Tomás el suyo. Sube las capturas (tamaño celular) como artefacto «fotos».
+# Repo público: el código de tarot-web se baja con PRIVADO_TOKEN y no se sube; el artefacto son capturas de cuentas de prueba.
+name: prueba-taller
+on:
+  push:
+    branches: [maquetas-taller-1212]
+    paths: ['prueba-taller/**', '.github/workflows/prueba-taller.yml']
+permissions:
+  contents: read
+concurrency:
+  group: prueba-taller
+  cancel-in-progress: true
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: matiasosuna/tarot-web
+          ref: taller-1212
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - name: La persona de la cámara de Hermes (rama prueba-fondo)
+        uses: actions/checkout@v4
+        with:
+          ref: prueba-fondo
+          path: pf
+          sparse-checkout: prueba-fondo/persona.png
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Dependencias
+        run: |
+          cd prueba-taller && npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core@23.11.1 ws@8.18.0 >/dev/null
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null)
+          google-chrome --version
+      - name: Cámara falsa (la persona, moviéndose un poco)
+        run: |
+          ffmpeg -loglevel error -loop 1 -i pf/prueba-fondo/persona.png -t 20 -r 15 \
+            -vf "scale=704:396,crop=640:360:'32+28*sin(2*PI*t/5)':'18+8*sin(2*PI*t/3)',format=yuv420p" persona.y4m
+      - name: Sala de prueba
+        run: |
+          cd prueba-taller && node server.mjs "$GITHUB_WORKSPACE/web" 8799 > ../servidor.log 2>&1 &
+          for i in $(seq 1 40); do curl -s -o /dev/null http://127.0.0.1:8799/room/ && break; sleep 1; done
+          cat servidor.log
+      - name: Fotos
+        env:
+          VIDEO: ${{ github.workspace }}/persona.y4m
+          OUT: ${{ github.workspace }}/fotos
+        run: cd prueba-taller && node fotos.mjs
+      - if: always()
+        run: tail -40 servidor.log || true
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fotos
+          path: fotos

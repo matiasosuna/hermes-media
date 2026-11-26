@@ -4,6 +4,7 @@ name: maquetas-taller-1212
 on:
   push:
     branches: [maquetas-taller-1212]
+    paths: ['maquetas/taller-1212/**', '.github/workflows/maquetas-taller-1212.yml']
 permissions:
   contents: read
 jobs:
