@@ -2,6 +2,9 @@
 # La sala real con D1 en memoria y el Realtime de PREVIEW (prueba-taller/server.mjs): no toca producción ni la D1 compartida.
 # Hermes abre los 5 pasos; Lucía usa el mazo de la web y Tomás el suyo. Sube las capturas (tamaño celular) como artefacto «fotos».
 # Repo público: el código de tarot-web se baja con PRIVADO_TOKEN y no se sube; el artefacto son capturas de cuentas de prueba.
+# Sala en vivo para probar con Matías: prueba-taller/vivo.json con {"minutos": N} > 0 → en vez de las fotos, la misma sala detrás
+# de un túnel de Cloudflare N minutos. Todo pide la clave de esta corrida (sale del secreto + el id de la corrida; enmascarada en
+# los logs): sin ella el link no abre nada. El log y el artefacto «tunel» solo tienen la URL del túnel.
 name: prueba-taller
 on:
   push:
@@ -13,7 +16,18 @@ concurrency:
   group: prueba-taller
   cancel-in-progress: true
 jobs:
+  leer:
+    runs-on: ubuntu-latest
+    outputs:
+      minutos: ${{ steps.m.outputs.minutos }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { sparse-checkout: prueba-taller }
+      - id: m
+        run: echo "minutos=$(node -p "try { Math.max(0, Math.min(110, +require('./prueba-taller/vivo.json').minutos || 0)) } catch { 0 }")" >> "$GITHUB_OUTPUT"
   fotos:
+    needs: leer
+    if: ${{ needs.leer.outputs.minutos == '0' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -62,3 +76,46 @@ jobs:
         with:
           name: fotos
           path: fotos
+
+  vivo:
+    needs: leer
+    if: ${{ needs.leer.outputs.minutos != '0' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      REALTIME_CLUB_APP_SECRET: ${{ secrets.REALTIME_CLUB_APP_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: matiasosuna/tarot-web
+          ref: taller-1212
+          path: web
+          token: ${{ secrets.PRIVADO_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Clave de la prueba
+        run: |
+          T=$(printf %s "$REALTIME_CLUB_APP_SECRET-$GITHUB_RUN_ID-taller" | sha256sum | cut -c1-32)
+          echo "::add-mask::$T"; echo "PRUEBA_TOKEN=$T" >> "$GITHUB_ENV"
+      - name: Sala de prueba y túnel
+        run: |
+          cd prueba-taller && npm init -y >/dev/null && npm i --no-audit --no-fund ws@8.18.0 >/dev/null
+          node server.mjs "$GITHUB_WORKSPACE/web" 8799 > ../servidor.log 2>&1 &
+          cd ..
+          for i in $(seq 1 40); do curl -s -o /dev/null "http://127.0.0.1:8799/room/" && break; sleep 1; done
+          curl -sL -o cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && chmod +x cloudflared
+          ./cloudflared tunnel --no-autoupdate --protocol http2 --url http://127.0.0.1:8799 > tunel.log 2>&1 &
+          U=""; for i in $(seq 1 60); do U=$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' tunel.log | head -1); [ -n "$U" ] && break; sleep 1; done
+          [ -n "$U" ] || { tail -20 tunel.log; exit 1; }
+          for i in $(seq 1 60); do [ "$(curl -s -o /dev/null -w '%{http_code}' "$U/room/" -b "prueba=$PRUEBA_TOKEN")" = 200 ] && break; sleep 2; done
+          mkdir -p tunel && echo "$U" > tunel/url && echo "túnel listo: $U"
+      - uses: actions/upload-artifact@v4
+        with: { name: tunel, path: tunel/url, retention-days: 1 }
+      - name: Abierta ${{ needs.leer.outputs.minutos }} minutos
+        run: |
+          FIN=$(( $(date +%s) + ${{ needs.leer.outputs.minutos }} * 60 ))
+          while [ "$(date +%s)" -lt "$FIN" ]; do sleep 60; grep -ciE "error" servidor.log | xargs echo "errores en el servidor:"; done
+      - if: always()
+        run: tail -60 servidor.log || true

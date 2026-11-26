@@ -3,6 +3,8 @@
 // (app hermes-club-sala). Nada toca producción ni la D1 compartida. Igual que prueba-sala/server.mjs (rama prueba-fondo), más:
 // un evento tipo «taller» con su sala bloqueada y dos compras pagadas (Lucía y Tomás), como queda en producción al comprar.
 // Cuentas de prueba: owner («Hermes», anfitrión), u1 (Lucía), u2 (Tomás). /entrar-como?u=… deja la cookie y va a la sala.
+// Con PRUEBA_TOKEN (la sala en vivo detrás de un túnel, para probar con Matías): todo pide esa clave (?k= en /entrar-como, después
+// la cookie «prueba»). /reiniciar?k=… borra lo hecho en el taller (vuelve al paso 0).
 // Uso: node server.mjs <repo tarot-web> <puerto>
 import http from 'node:http';
 import { readFileSync, existsSync, statSync, writeFileSync } from 'node:fs';
@@ -53,6 +55,8 @@ writeFileSync(process.env.SALA_FILE || 'sala.txt', SALA);
 const tipos = { html: 'text/html', js: 'text/javascript', css: 'text/css', svg: 'image/svg+xml', png: 'image/png', json: 'application/json',
   jpg: 'image/jpeg', webp: 'image/webp', mjs: 'text/javascript', woff2: 'font/woff2', ico: 'image/x-icon' };
 const errores = [];
+const TOKEN = process.env.PRUEBA_TOKEN || '';
+const galleta = (req) => Object.fromEntries((req.headers.cookie || '').split(/;\s*/).map((c) => c.split('=')));
 const archivo = (p) => { // /room/ → sala/ (la fuente); lo demás, de sitio/ (lo que se publica) o del repo
   if (p.startsWith('/room/')) return REPO + '/sala/' + (p.slice(6) || 'index.html');
   for (const base of [REPO + '/sitio', REPO]) {
@@ -64,10 +68,21 @@ const archivo = (p) => { // /room/ → sala/ (la fuente); lo demás, de sitio/ (
 };
 const servidor = http.createServer(async (req, res) => {
   try {
-    const url = new URL(req.url, `http://${req.headers.host}`);
+    const url = new URL(req.url, `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`); // detrás del túnel: https
+    if (TOKEN && !(['/entrar-como', '/reiniciar'].includes(url.pathname) ? url.searchParams.get('k') === TOKEN : galleta(req).prueba === TOKEN)) {
+      res.writeHead(403, { 'content-type': 'text/plain; charset=utf-8' }); return res.end('Sin clave');
+    }
     if (url.pathname === '/entrar-como') {
-      const c = await H.login(env, key, cuentas[url.searchParams.get('u')]);
-      res.writeHead(302, { 'set-cookie': [c + '; Path=/; HttpOnly; SameSite=Lax'], location: '/room/?r=' + SALA }); return res.end();
+      const quien = url.searchParams.get('u');
+      if (!cuentas[quien]) { res.writeHead(404); return res.end(); }
+      const c = await H.login(env, key, cuentas[quien]);
+      const galletas = [c + '; Path=/; HttpOnly; SameSite=Lax'];
+      if (TOKEN) galletas.push(`prueba=${TOKEN}; Path=/; HttpOnly; SameSite=Lax`);
+      res.writeHead(302, { 'set-cookie': galletas, location: '/room/?r=' + SALA }); return res.end();
+    }
+    if (url.pathname === '/reiniciar') {
+      raw.prepare('DELETE FROM taller_estado WHERE sala = ?').run(SALA); raw.prepare('DELETE FROM taller_tiradas WHERE sala = ?').run(SALA);
+      res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' }); return res.end('Listo: el taller vuelve al paso 0.');
     }
     if (url.pathname === '/debug/errores') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify(errores)); }
     if (url.pathname.startsWith('/api/')) {
@@ -87,8 +102,8 @@ const servidor = http.createServer(async (req, res) => {
 });
 servidor.on('upgrade', async (req, socket, head) => { // WebSocket de /api/sala/eventos: lo valida la sala real y lo acepta el «Durable Object» de arriba
   try {
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    if (url.pathname !== '/api/sala/eventos') return socket.destroy();
+    const url = new URL(req.url, `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`);
+    if ((TOKEN && galleta(req).prueba !== TOKEN) || url.pathname !== '/api/sala/eventos') return socket.destroy();
     const r = await onRequest({ request: new Request(url, { method: 'GET', headers: req.headers }), env, params: {}, waitUntil: () => {}, next: () => new Response(null, { status: 404 }) });
     const sala = r.headers.get('x-aviso-sala');
     if (!sala) { socket.write(`HTTP/1.1 ${r.status} No\r\n\r\n`); return socket.destroy(); }
