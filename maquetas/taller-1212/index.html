@@ -74,15 +74,16 @@ body{background:#555;font-family:var(--body);display:flex;flex-wrap:wrap;gap:40p
 #p2 .bubble .tile{width:100%;height:100%;border-radius:0}
 #p2 .bubble small{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:10px;background:rgba(0,0,0,.5);padding:1px 0}
 #p2 .wheel{position:absolute;left:0;right:0;top:206px;height:420px}
-#p2 .ring{position:absolute;left:50%;top:50%;width:300px;height:300px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(226,184,87,.18)}
-#p2 .slot{position:absolute;width:46px;transform:translate(-50%,-50%)}
-#p2 .slot .c{width:46px}
+#p2 .ring{position:absolute;left:37px;top:39px;width:316px;height:320px;border-radius:50%;border:1px solid rgba(226,184,87,.18)}
+#p2 .slot{position:absolute;width:40px;transform:translate(-50%,-50%)}
+#p2 .slot .c{width:40px}
 #p2 .slot.now .c{outline:2px solid var(--gold);outline-offset:3px;box-shadow:0 0 22px rgba(226,184,87,.55)}
 #p2 .lab{position:absolute;transform:translate(-50%,-50%);font-size:11px;color:var(--dim)}
 #p2 .lab.on{color:var(--text)}
 #p2 .lab.now{color:var(--gold);font-weight:600}
-#p2 .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:70px;text-align:center}
-#p2 .center .c{width:70px;border-radius:7px;box-shadow:0 0 0 1px rgba(226,184,87,.6)}
+#p2 .center{position:absolute;left:195px;top:199px;transform:translate(-50%,-50%);width:64px;text-align:center}
+#p2 .center .c{width:64px;border-radius:7px;box-shadow:0 0 0 1px rgba(226,184,87,.6)}
+#p2 .center small{position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 6px);white-space:nowrap;font-size:11px;color:var(--gold)}
 #p2 .sheet{position:absolute;left:12px;right:12px;bottom:84px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px}
 #p2 .sheet .q{font-size:14px;line-height:1.4;color:var(--muted);margin:4px 0 12px}
 #p2 .sheet .q b{color:var(--text);font-weight:500}
@@ -184,7 +185,7 @@ body{background:#555;font-family:var(--body);display:flex;flex-wrap:wrap;gap:40p
   <div class="sheet">
     <div class="eyebrow">March</div>
     <p class="q"><b>What does March ask of you?</b> Hold the question, then draw.</p>
-    <div class="btns"><span class="btn gold">Draw for March</span><span class="btn">Drew it from my deck</span></div>
+    <div class="btns"><span class="btn gold">Draw for March</span><span class="btn">From my deck</span></div>
   </div>
   <div data-t="t-bar"></div>
 </div>
@@ -236,16 +237,16 @@ document.getElementById('g1').innerHTML = MESES.map((m, i) => i < 4 ? `<div clas
   : i === 4 ? `<div class="m next">${carta(null)}${m}</div>` : `<div class="m">${carta(null, 'dim')}${m}</div>`).join('');
 
 // 2: rueda; enero y febrero sacadas, marzo abierto, el resto cerrado; en el centro, la carta del año (Greer)
-const w = document.getElementById('w2'), cx = 195, cy = 210, R = 150, RL = 104;
+const w = document.getElementById('w2'), cx = 195, cy = 199, RX = 158, RY = 160;
 let h = '';
 MESES.forEach((m, i) => {
-  const a = -Math.PI / 2 + i * Math.PI / 6, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
-  const lx = cx + RL * Math.cos(a), ly = cy + RL * Math.sin(a);
+  const a = -Math.PI / 2 + i * Math.PI / 6, x = cx + RX * Math.cos(a), y = cy + RY * Math.sin(a);
+  const lx = cx + (RX - 50) * Math.cos(a), ly = cy + (RY - 54) * Math.sin(a);
   const est = i < 2 ? 'on' : i === 2 ? 'now' : '';
   h += `<div class="slot ${est}" style="left:${x}px;top:${y}px">${i < 2 ? carta(ANO[i]) : carta(null, i === 2 ? '' : 'dim')}</div>`;
   h += `<div class="lab ${est}" style="left:${lx}px;top:${ly}px">${m}</div>`;
 });
-h += `<div class="center">${carta('XIV')}</div>`;
+h += `<div class="center">${carta('XIV')}<small>Your 2027</small></div>`;
 w.insertAdjacentHTML('beforeend', h);
 
 // 3: las 12 en fila, junio cambiada; tablero de la sala
@@ -254,7 +255,8 @@ document.getElementById('s3').innerHTML = MESES.map((m, i) => `<div class="m ${i
 const cuantos = [1, 2, 1, 0, 2, 4, 1, 0, 1, 2, 3, 0];
 document.getElementById('b3').innerHTML = MESES.map((m, i) => `<div class="${i === 5 ? 'top' : ''}"><i style="height:${Math.max(3, cuantos[i] * 12)}px"></i><span>${m[0]}</span></div>`).join('');
 document.getElementById('ch3').innerHTML = [['XIX', 4], ['C10', 3], ['XVII', 2], ['P1', 2], ['III', 1], ['W1', 1]]
-  .map(([id, n]) => `<span class="chip">${carta(id)}${{XIX:'The Sun',C10:'Ten of Cups',XVII:'The Star',P1:'Ace of Pentacles',III:'The Empress',W1:'Ace of Wands'}[id]} <em>×${n}</em></span>`).join('');
+  .map(([id, n]) => `<span class="chip">${carta(id)}${{XIX:'The Sun',C10:'Ten of Cups',XVII:'The Star',P1:'Ace of Pentacles',III:'The Empress',W1:'Ace of Wands'}[id]} <em>×${n}</em></span>`).join('')
+  + '<span class="chip" style="padding-left:10px;background:none"><em>+4 more</em></span>';
 
 // 4: el calendario
 document.getElementById('l4').innerHTML = LARGO.map((m, i) => i === 5
