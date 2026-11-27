@@ -1,20 +1,26 @@
 # Publica en @hermestarot444 las historias con fecha de historias-programadas.json (las de los eventos en vivo, 26/11/2026).
-# Cada hora mira si alguna tocó; los JPG ya están en el release «videos», aprobados por Matías tal cual.
+# Los JPG ya están en el release «videos», aprobados por Matías tal cual.
+# Cadena propia, como publicar.yml (27/11: el cron de cada hora no corrió ni una vez en 9 h): cada corrida hace una pasada,
+# espera ~14 min, hace otra y se vuelve a lanzar mientras quede alguna por salir. El cron de abajo solo la reinicia si se corta.
 # Frenar todo: "pausado": true en historias-programadas.json (o gh workflow disable historias-programadas -R matiasosuna/hermes-media).
 name: historias-programadas
 on:
   schedule:
-    - cron: '13 * * * *'  # minuto impar: a la hora en punto GitHub demora o saltea crons
+    - cron: '13,43 * * * *'  # reiniciador; minutos impares (a la hora en punto GitHub demora o saltea crons)
   workflow_dispatch:
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: historias-programadas
   cancel-in-progress: false
 jobs:
   publicar:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
+    env:
+      HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
+      HT_IG_USER_ID: ${{ secrets.HT_IG_USER_ID }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,12 +28,9 @@ jobs:
           node-version: 22
       - name: Tests
         run: node --test historias-programadas.test.mjs
-      - name: Publicar la que toca
-        env:
-          HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
-          HT_IG_USER_ID: ${{ secrets.HT_IG_USER_ID }}
+      - name: Pasada 1
         run: node historias-programadas.mjs
-      - name: Guardar
+      - name: Guardar (pasada 1)
         if: always()
         run: |
           if git diff --quiet historias-programadas.json; then echo "sin cambios"; exit 0; fi
@@ -37,3 +40,28 @@ jobs:
           git commit -m "Historias programadas: $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && exit 0; sleep 7; done
           exit 1
+      - name: Esperar ~14 min
+        if: always()
+        run: sleep 840
+      - name: Pasada 2
+        if: always()
+        run: git pull --rebase -q; node historias-programadas.mjs
+      - name: Guardar (pasada 2)
+        if: always()
+        run: |
+          if git diff --quiet historias-programadas.json; then echo "sin cambios"; exit 0; fi
+          git config user.name "hermes-media"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add historias-programadas.json
+          git commit -m "Historias programadas: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && exit 0; sleep 7; done
+          exit 1
+      - name: ¿Sigue la cadena?
+        id: cadena
+        if: always()
+        run: git pull --rebase -q || true; node historias-programadas.mjs --seguir
+      - name: Lanzar la próxima corrida
+        if: always() && steps.cadena.outputs.seguir == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run historias-programadas -R "$GITHUB_REPOSITORY" --ref main
