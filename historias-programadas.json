@@ -1,5 +1,5 @@
 {
-  "nota": "Historias del taller 12/12, junto al reel «evento-2027» (12:00 NY: 27/11, 5/12 y 10/12; Matías, 27/11: «27/11 junto al reel» … «y el resto de las fechas tambien»). Diseño «la fecha como imagen», «Reply 2027» (el bot manda el link). Los JPG en el release videos son los que aprobó. pausado: true frena todo.",
+  "nota": "Historias del taller 12/12, junto al reel «evento-2027» (12:00 NY: 27/11, 5/12 y 10/12; Matías, 27/11: «27/11 junto al reel» … «y el resto de las fechas tambien»). Diseño «la fecha como imagen», «Reply 2027» (el bot manda el link). Los JPG en el release videos son los que aprobó. pausado: true frena todo. + «Today» el 12/12, 7 AM NY, vence al empezar (11 AM) (Matías, 27/11: «Sí, sumala»).",
   "pausado": false,
   "release": "videos",
   "items": [
@@ -20,6 +20,12 @@
       "cuando": "2026-12-10T12:00:00-05:00",
       "hasta": "2026-12-10T19:00:00-05:00",
       "jpg": "historia-evento-portal.jpg"
+    },
+    {
+      "id": "portal-hoy-12-12",
+      "cuando": "2026-12-12T07:00:00-05:00",
+      "hasta": "2026-12-12T11:00:00-05:00",
+      "jpg": "historia-evento-portal-hoy.jpg"
     }
   ]
 }
