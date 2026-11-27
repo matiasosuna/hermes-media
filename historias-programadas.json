@@ -1,55 +1,25 @@
 {
-  "nota": "Historias del taller 12/12, día por medio desde el 28/11 hasta la fecha, 7 AM NY (Matías, 27/11: solo el 12/12; diseño «la fecha como imagen», «Reply 2027»). Los JPG en el release videos son los que aprobó. pausado: true frena todo.",
+  "nota": "Historias del taller 12/12, junto al reel «evento-2027» (12:00 NY: 27/11, 5/12 y 10/12; Matías, 27/11: «27/11 junto al reel» … «y el resto de las fechas tambien»). Diseño «la fecha como imagen», «Reply 2027» (el bot manda el link). Los JPG en el release videos son los que aprobó. pausado: true frena todo.",
   "pausado": false,
   "release": "videos",
   "items": [
     {
-      "id": "portal-28-11",
-      "cuando": "2026-11-28T07:00:00-05:00",
-      "hasta": "2026-11-28T19:00:00-05:00",
+      "id": "portal-27-11",
+      "cuando": "2026-11-27T12:00:00-05:00",
+      "hasta": "2026-11-27T19:00:00-05:00",
       "jpg": "historia-evento-portal.jpg"
     },
     {
-      "id": "portal-30-11",
-      "cuando": "2026-11-30T07:00:00-05:00",
-      "hasta": "2026-11-30T19:00:00-05:00",
-      "jpg": "historia-evento-portal.jpg"
-    },
-    {
-      "id": "portal-2-12",
-      "cuando": "2026-12-02T07:00:00-05:00",
-      "hasta": "2026-12-02T19:00:00-05:00",
-      "jpg": "historia-evento-portal.jpg"
-    },
-    {
-      "id": "portal-4-12",
-      "cuando": "2026-12-04T07:00:00-05:00",
-      "hasta": "2026-12-04T19:00:00-05:00",
-      "jpg": "historia-evento-portal.jpg"
-    },
-    {
-      "id": "portal-6-12",
-      "cuando": "2026-12-06T07:00:00-05:00",
-      "hasta": "2026-12-06T19:00:00-05:00",
-      "jpg": "historia-evento-portal.jpg"
-    },
-    {
-      "id": "portal-8-12",
-      "cuando": "2026-12-08T07:00:00-05:00",
-      "hasta": "2026-12-08T19:00:00-05:00",
+      "id": "portal-5-12",
+      "cuando": "2026-12-05T12:00:00-05:00",
+      "hasta": "2026-12-05T19:00:00-05:00",
       "jpg": "historia-evento-portal.jpg"
     },
     {
       "id": "portal-10-12",
-      "cuando": "2026-12-10T07:00:00-05:00",
+      "cuando": "2026-12-10T12:00:00-05:00",
       "hasta": "2026-12-10T19:00:00-05:00",
       "jpg": "historia-evento-portal.jpg"
-    },
-    {
-      "id": "portal-hoy-12-12",
-      "cuando": "2026-12-12T07:00:00-05:00",
-      "hasta": "2026-12-12T11:00:00-05:00",
-      "jpg": "historia-evento-portal-hoy.jpg"
     }
   ]
 }
