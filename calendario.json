@@ -2713,6 +2713,42 @@
       }
     },
     {
+      "id": "52-three-of-swords",
+      "carta": "Three of Swords",
+      "archivo": "52-three-of-swords.mp4",
+      "cuando": "2026-11-27T12:00:00-05:00",
+      "instagram": {
+        "caption": "Most people think the Three of Swords is about a heartbreak you never get over. It isn't.\nThree of Swords: heartbreak and grief, and pain you let yourself feel so it can move. ☿\nFree weekly tarot class → link in bio\n#tarot #threeofswords #swords #learntarot #minorarcana",
+        "publicado": null
+      },
+      "youtube": {
+        "titulo": "The card nobody wants, and the most honest | Three of Swords tarot ☿ #shorts",
+        "descripcion": "Most people think the Three of Swords is about a heartbreak you never get over. It isn't.\nThree of Swords: heartbreak and grief, and pain you let yourself feel so it can move. ☿\n\nFree weekly tarot class → https://hermestarot444.pages.dev/?utm_source=youtube\n\n#tarot #threeofswords #swords #learntarot #minorarcana",
+        "etiquetas": [
+          "tarot",
+          "learn tarot",
+          "tarot for beginners",
+          "rider waite",
+          "minor arcana",
+          "tarot story",
+          "three of swords",
+          "swords",
+          "heartbreak"
+        ],
+        "publicado": null
+      },
+      "tiktok": {
+        "publicado": null
+      },
+      "v2": {
+        "fecha": "2026-11-27T03:10:59Z",
+        "motor": "v6",
+        "commit": "04e88cf",
+        "52-three-of-swords.mp4": "7f27be1e27d3",
+        "tiktok-52-three-of-swords.mp4": "565590523e36"
+      }
+    },
+    {
       "id": "trial-26-five-of-wands",
       "carta": "Five of Wands (trial)",
       "archivo": "26-five-of-wands.mp4",
