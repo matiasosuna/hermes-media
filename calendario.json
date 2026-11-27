@@ -2713,10 +2713,31 @@
       }
     },
     {
+      "id": "trial-26-five-of-wands",
+      "carta": "Five of Wands (trial)",
+      "archivo": "26-five-of-wands.mp4",
+      "cuando": "2026-11-27T21:00:00-05:00",
+      "v2": {
+        "original": "26-five-of-wands"
+      },
+      "nota": "Matías 24/11: republicar como trial (solo no seguidores) los reels con más views, video original tal cual («Video original»), caption sin Journal; 21 h NY, uno por día",
+      "instagram": {
+        "caption": "Most people think the Five of Wands is about a fight someone has to lose. It isn't.\nFive of Wands: competition and friction, and the bridge it can become when someone listens. ☿\nFree weekly tarot class → link in bio\n#tarot #fiveofwands #wands #learntarot #minorarcana",
+        "trial": "MANUAL",
+        "repost_de": "26-five-of-wands"
+      },
+      "youtube": {
+        "omitir": true
+      },
+      "tiktok": {
+        "omitir": true
+      }
+    },
+    {
       "id": "54-five-of-swords",
       "carta": "Five of Swords",
       "archivo": "54-five-of-swords.mp4",
-      "cuando": "2026-11-27T12:00:00-05:00",
+      "cuando": "2026-11-28T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Five of Swords is about coming out on top. It isn't.\nFive of Swords: conflict and pride, and the win that costs more than it's worth. ☿\nFree weekly tarot class → link in bio\n#tarot #fiveofswords #swords #learntarot #minorarcana",
         "publicado": null
@@ -2749,18 +2770,18 @@
       }
     },
     {
-      "id": "trial-26-five-of-wands",
-      "carta": "Five of Wands (trial)",
-      "archivo": "26-five-of-wands.mp4",
-      "cuando": "2026-11-27T21:00:00-05:00",
+      "id": "trial-16-tower",
+      "carta": "The Tower (trial)",
+      "archivo": "16-tower.mp4",
+      "cuando": "2026-11-28T21:00:00-05:00",
       "v2": {
-        "original": "26-five-of-wands"
+        "original": "16-tower"
       },
       "nota": "Matías 24/11: republicar como trial (solo no seguidores) los reels con más views, video original tal cual («Video original»), caption sin Journal; 21 h NY, uno por día",
       "instagram": {
-        "caption": "Most people think the Five of Wands is about a fight someone has to lose. It isn't.\nFive of Wands: competition and friction, and the bridge it can become when someone listens. ☿\nFree weekly tarot class → link in bio\n#tarot #fiveofwands #wands #learntarot #minorarcana",
+        "caption": "What if the scariest card in the tarot is actually a gift?\nA tower built on \"we are never wrong\", and the lightning that set the truth free. The Tower, card XVI. ☿\nFree weekly tarot class → link in bio\n#tarot #thetower #change #learntarot #majorarcana",
         "trial": "MANUAL",
-        "repost_de": "26-five-of-wands"
+        "repost_de": "16-tower"
       },
       "youtube": {
         "omitir": true
@@ -2773,7 +2794,7 @@
       "id": "55-six-of-swords",
       "carta": "Six of Swords",
       "archivo": "55-six-of-swords.mp4",
-      "cuando": "2026-11-28T12:00:00-05:00",
+      "cuando": "2026-11-29T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Six of Swords is about running away from your problems. It isn't.\nSix of Swords: transition and healing, moving through a hard time toward calmer water. ☿\nFree weekly tarot class → link in bio\n#tarot #sixofswords #swords #learntarot #minorarcana",
         "publicado": null
@@ -2803,27 +2824,6 @@
         "commit": "febbde6",
         "55-six-of-swords.mp4": "22a42c6515b7",
         "tiktok-55-six-of-swords.mp4": "5cc9ef18132f"
-      }
-    },
-    {
-      "id": "trial-16-tower",
-      "carta": "The Tower (trial)",
-      "archivo": "16-tower.mp4",
-      "cuando": "2026-11-28T21:00:00-05:00",
-      "v2": {
-        "original": "16-tower"
-      },
-      "nota": "Matías 24/11: republicar como trial (solo no seguidores) los reels con más views, video original tal cual («Video original»), caption sin Journal; 21 h NY, uno por día",
-      "instagram": {
-        "caption": "What if the scariest card in the tarot is actually a gift?\nA tower built on \"we are never wrong\", and the lightning that set the truth free. The Tower, card XVI. ☿\nFree weekly tarot class → link in bio\n#tarot #thetower #change #learntarot #majorarcana",
-        "trial": "MANUAL",
-        "repost_de": "16-tower"
-      },
-      "youtube": {
-        "omitir": true
-      },
-      "tiktok": {
-        "omitir": true
       }
     },
     {
