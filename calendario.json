@@ -2628,6 +2628,15 @@
           "id": "17923260003242030",
           "permalink": "https://www.instagram.com/reel/DgKtYzXMuUi/",
           "fecha": "2026-11-25T14:09:09.733Z"
+        },
+        "metricas_48h": {
+          "medido": "2026-11-27T14:16:25.168Z",
+          "publicado_ny": "Wed 09:09",
+          "reach": 1280,
+          "views": 1433,
+          "saved": 37,
+          "shares": 10,
+          "total_interactions": 108
         }
       },
       "youtube": {
@@ -2722,7 +2731,12 @@
       "nota": "Reel del taller 12/12 (hermes-videos rama reel-2027, src/evento-01). Matías 27/11: aprobado; «pausar por hoy y solo poner este video» a las 12:00 NY; la cola se corre un día. Repite el 5 y el 10/12. Instagram (cierra con «comment 2027»: bot de tarot-web).",
       "instagram": {
         "caption": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nComment 2027 to join\n#tarot #tarotreading #manifestation #2027 #tarotreader",
-        "portada": "portada-evento-2027.jpg"
+        "portada": "portada-evento-2027.jpg",
+        "publicado": {
+          "id": "18100317191243461",
+          "permalink": "https://www.instagram.com/reel/DgP31ctTcv8/",
+          "fecha": "2026-11-27T14:16:25.166Z"
+        }
       },
       "youtube": {
         "omitir": true
