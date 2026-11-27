@@ -49,6 +49,7 @@ for (const k of ['u1', 'u2', 'u3']) {
   raw.prepare(`INSERT INTO compras (session_id, producto, email, estado, monto, moneda, creada, pagada, evento_id, user_id, nombre)
     VALUES (?, ?, ?, 'pagada', 2200, 'usd', ?, ?, ?, ?, ?)`).run('cs_prueba_' + k, PRODUCTO, u.email, ahora, ahora, ev.id, String(u.id), u.name);
 }
+raw.prepare("UPDATE eventos SET practica = 'manifest-2027' WHERE id = ?").run(ev.id); // como lo deja la migración 0080 en el del 12/12
 await sincronizar(env, ev);
 const SALA = ev.sala;
 writeFileSync(process.env.SALA_FILE || 'sala.txt', SALA);
