@@ -1,4 +1,5 @@
-# Publica en Instagram + YouTube + TikTok (Buffer) lo que ya venció en calendario.json y anota los links.
+# Publica en Instagram lo que ya venció en calendario.json y anota los links (YouTube y TikTok apagados desde el 27/11/2026:
+# publicar.mjs, PLATAFORMAS).
 # Cadena propia: cada corrida hace una pasada, espera ~14 min, hace otra y se vuelve a lanzar
 # (gh workflow run con GITHUB_TOKEN). El cron de abajo solo la reinicia si alguna vez se corta.
 # La cadena se detiene sola cuando todo está publicado o con "pausado": true en calendario.json.

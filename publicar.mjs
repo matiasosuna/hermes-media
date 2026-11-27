@@ -21,7 +21,9 @@ const CAL = new URL('./calendario.json', import.meta.url);
 const V = 'v21.0';
 const env = process.env;
 const SECRETOS = ['HT_PAGE_TOKEN', 'HT_YT_CLIENT_SECRET', 'HT_YT_REFRESH_TOKEN', 'BUFFER_API_KEY', 'HT_STATS_TOKEN'].map((k) => env[k]).filter(Boolean);
-export const PLATAFORMAS = ['instagram', 'youtube', 'tiktok'];
+// Solo Instagram desde el 27/11/2026 (Matías: «no hagas mas youtube y tiktok proque ni los abro. ni se cuantos seguidores tengo»).
+// Lo de YouTube y TikTok queda abajo sin usar: para volver, sumarlas acá.
+export const PLATAFORMAS = ['instagram'];
 export const BUFFER_ORG = '6acc932a96c596c8b8c17194', BUFFER_TIKTOK = '6ad3219a778b240e2f368ecb';
 // "omitir": true en una plataforma = ese ítem no va ahí (ej. el reel del Club, solo IG: «comment CLUB» no sirve en YouTube/TikTok)
 export const pendiente = (i, p) => !i[p]?.publicado && !i[p]?.omitir;
