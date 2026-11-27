@@ -19,3 +19,12 @@ h1{font-family:Cinzel;font-weight:700;color:var(--dorado);letter-spacing:3px;lin
 .precio{font-style:italic;font-size:52px}
 .grab{font-style:italic;font-size:41px;opacity:.86}
 .link{font-weight:600;font-size:54px;color:var(--dorado);letter-spacing:.5px;text-shadow:0 0 30px rgba(242,184,75,.45)}
+/* 27/11: Matías eligió «la fecha como imagen»: una hoja de calendario con la carta detrás (solo para el 12/12). */
+.hoja{position:absolute;left:50%;top:400px;width:540px;height:620px;margin-left:-300px;background:var(--crema);border-radius:30px;overflow:hidden;
+  box-shadow:0 0 70px rgba(242,184,75,.30),0 30px 60px rgba(0,0,0,.6);transform:rotate(-4deg)}
+.hoja .mes{height:136px;background:#A0522D;color:var(--crema);font-family:Cinzel;font-weight:700;font-size:50px;letter-spacing:10px;line-height:136px;padding-left:10px}
+.hoja .dia{font-family:Cinzel;font-weight:700;font-size:280px;line-height:1;color:var(--noche);margin-top:34px;letter-spacing:-6px}
+.hoja .sem{font-family:Cinzel;font-weight:700;font-size:44px;letter-spacing:8px;color:var(--noche);margin-top:10px}
+.hoja .hora{font-style:italic;font-size:40px;color:#5C554C;margin-top:10px}
+.atras{position:absolute;top:470px;left:610px;height:520px;border-radius:16px;border:3px solid var(--dorado);transform:rotate(9deg);
+  box-shadow:0 0 50px rgba(242,184,75,.35),0 24px 50px rgba(0,0,0,.55)}
