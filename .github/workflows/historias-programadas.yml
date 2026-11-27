@@ -1,0 +1,39 @@
+# Publica en @hermestarot444 las historias con fecha de historias-programadas.json (las de los eventos en vivo, 26/11/2026).
+# Cada hora mira si alguna tocó; los JPG ya están en el release «videos», aprobados por Matías tal cual.
+# Frenar todo: "pausado": true en historias-programadas.json (o gh workflow disable historias-programadas -R matiasosuna/hermes-media).
+name: historias-programadas
+on:
+  schedule:
+    - cron: '13 * * * *'  # minuto impar: a la hora en punto GitHub demora o saltea crons
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: historias-programadas
+  cancel-in-progress: false
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tests
+        run: node --test historias-programadas.test.mjs
+      - name: Publicar la que toca
+        env:
+          HT_PAGE_TOKEN: ${{ secrets.HT_PAGE_TOKEN }}
+          HT_IG_USER_ID: ${{ secrets.HT_IG_USER_ID }}
+        run: node historias-programadas.mjs
+      - name: Guardar
+        if: always()
+        run: |
+          if git diff --quiet historias-programadas.json; then echo "sin cambios"; exit 0; fi
+          git config user.name "hermes-media"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add historias-programadas.json
+          git commit -m "Historias programadas: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && exit 0; sleep 7; done
+          exit 1
