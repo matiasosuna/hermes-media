@@ -2713,6 +2713,51 @@
       }
     },
     {
+      "id": "evento-2027",
+      "carta": "12/12 Portal",
+      "archivo": "evento-2027.mp4",
+      "cuando": "2026-11-27T12:00:00-05:00",
+      "v2": true,
+      "sin_espera": true,
+      "nota": "Reel del taller 12/12 (hermes-videos rama reel-2027, src/evento-01). Matías 27/11: aprobado; «pausar por hoy y solo poner este video» a las 12:00 NY; la cola se corre un día. Repite el 5 y el 10/12. Instagram (cierra con «comment 2027»: bot de tarot-web).",
+      "instagram": {
+        "caption": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nComment 2027 to join\n#tarot #tarotreading #manifestation #2027 #tarotreader",
+        "portada": "portada-evento-2027.jpg"
+      },
+      "youtube": {
+        "omitir": true
+      },
+      "tiktok": {
+        "omitir": true
+      }
+    },
+    {
+      "id": "evento-2027-web",
+      "carta": "12/12 Portal",
+      "archivo": "evento-2027-web.mp4",
+      "cuando": "2026-11-27T12:00:00-05:00",
+      "v2": true,
+      "sin_espera": true,
+      "nota": "Reel del taller 12/12 (hermes-videos rama reel-2027, src/evento-01). Matías 27/11: aprobado; «pausar por hoy y solo poner este video» a las 12:00 NY; la cola se corre un día. Repite el 5 y el 10/12. TikTok y YouTube (cierra con la web: ahí no hay bot). instagram.caption = texto de TikTok.",
+      "instagram": {
+        "omitir": true,
+        "caption": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nJoin at hermestarot444.com/events\n#tarot #tarotreading #manifestation #2027 #tarotreader"
+      },
+      "youtube": {
+        "titulo": "12/12 Portal · Manifest your 2027 | Live tarot reading ☿ #shorts",
+        "descripcion": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nJoin at hermestarot444.com/events\n\n#tarot #tarotreading #manifestation #2027 #tarotreader",
+        "etiquetas": [
+          "tarot",
+          "tarot reading",
+          "live tarot",
+          "2027",
+          "manifestation",
+          "12/12 portal"
+        ]
+      },
+      "tiktok": {}
+    },
+    {
       "id": "52-three-of-swords",
       "carta": "Three of Swords",
       "archivo": "52-three-of-swords.mp4",
@@ -2741,11 +2786,11 @@
         "publicado": null
       },
       "v2": {
-        "fecha": "2026-11-27T03:10:59Z",
+        "fecha": "2026-11-27T05:21:19Z",
         "motor": "v6",
-        "commit": "04e88cf",
-        "52-three-of-swords.mp4": "7f27be1e27d3",
-        "tiktok-52-three-of-swords.mp4": "565590523e36"
+        "commit": "14a4531",
+        "52-three-of-swords.mp4": "10265b2aee8d",
+        "tiktok-52-three-of-swords.mp4": "9ed88bc191b5"
       }
     },
     {
@@ -2945,51 +2990,6 @@
       "tiktok": {
         "omitir": true
       }
-    },
-    {
-      "id": "evento-2027",
-      "carta": "12/12 Portal",
-      "archivo": "evento-2027.mp4",
-      "cuando": "2026-11-27T12:00:00-05:00",
-      "v2": true,
-      "sin_espera": true,
-      "nota": "Reel del taller 12/12 (hermes-videos rama reel-2027, src/evento-01). Matías 27/11: aprobado; «pausar por hoy y solo poner este video» a las 12:00 NY; la cola se corre un día. Repite el 5 y el 10/12. Instagram (cierra con «comment 2027»: bot de tarot-web).",
-      "instagram": {
-        "caption": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nComment 2027 to join\n#tarot #tarotreading #manifestation #2027 #tarotreader",
-        "portada": "portada-evento-2027.jpg"
-      },
-      "youtube": {
-        "omitir": true
-      },
-      "tiktok": {
-        "omitir": true
-      }
-    },
-    {
-      "id": "evento-2027-web",
-      "carta": "12/12 Portal",
-      "archivo": "evento-2027-web.mp4",
-      "cuando": "2026-11-27T12:00:00-05:00",
-      "v2": true,
-      "sin_espera": true,
-      "nota": "Reel del taller 12/12 (hermes-videos rama reel-2027, src/evento-01). Matías 27/11: aprobado; «pausar por hoy y solo poner este video» a las 12:00 NY; la cola se corre un día. Repite el 5 y el 10/12. TikTok y YouTube (cierra con la web: ahí no hay bot). instagram.caption = texto de TikTok.",
-      "instagram": {
-        "omitir": true,
-        "caption": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nJoin at hermestarot444.com/events\n#tarot #tarotreading #manifestation #2027 #tarotreader"
-      },
-      "youtube": {
-        "titulo": "12/12 Portal · Manifest your 2027 | Live tarot reading ☿ #shorts",
-        "descripcion": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nJoin at hermestarot444.com/events\n\n#tarot #tarotreading #manifestation #2027 #tarotreader",
-        "etiquetas": [
-          "tarot",
-          "tarot reading",
-          "live tarot",
-          "2027",
-          "manifestation",
-          "12/12 portal"
-        ]
-      },
-      "tiktok": {}
     }
   ],
   "requiere_v2": true,
