@@ -1,0 +1,21 @@
+/* Historias de IG de los eventos pagos en vivo (26/11/2026): estilo de la historia de la Q&A del 25/11 (fondo #12142E, dorado,
+   Cinzel + EB Garamond, una carta con halo). Todo el texto entre y≈300 y 1540: Instagram tapa arriba (perfil) y abajo (responder). */
+:root{--noche:#12142E;--dorado:#F2B84B;--crema:#F6EBD2}
+*{margin:0;box-sizing:border-box}
+body{width:1080px;height:1920px;background:radial-gradient(ellipse at 50% 36%,#2a2d5e 0%,var(--noche) 58%,#08091a 100%);color:var(--crema);font-family:'EB Garamond',serif;overflow:hidden;position:relative;text-align:center}
+.estrellas{position:absolute;inset:0}
+.estrellas i{position:absolute;border-radius:50%;background:#fff}
+.fila{position:absolute;left:0;width:100%}
+.k{top:300px;font-family:Cinzel;font-weight:700;letter-spacing:10px;color:var(--dorado);font-size:30px;opacity:.9}
+.k .sym{font-family:'Apple Symbols','Segoe UI Symbol','DejaVu Sans',serif;font-size:38px;letter-spacing:0;margin-right:22px;vertical-align:-2px}
+.carta{position:absolute;left:50%;transform:translateX(-50%);border-radius:18px;border:3px solid var(--dorado);
+  box-shadow:0 0 70px rgba(242,184,75,.42),0 30px 60px rgba(0,0,0,.55)}
+h1{font-family:Cinzel;font-weight:700;color:var(--dorado);letter-spacing:3px;line-height:1;text-shadow:0 0 44px rgba(242,184,75,.5)}
+.t2{font-family:Cinzel;font-weight:700;color:var(--crema);letter-spacing:4px;line-height:1}
+.sub{font-style:italic;line-height:1.2}
+.cuando{font-family:Cinzel;font-weight:700;font-size:56px;letter-spacing:2px;line-height:1;color:var(--crema)}
+.cuando .p{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--crema);margin:0 26px;vertical-align:.32em}
+.ny{font-style:italic;font-size:44px;opacity:.9}
+.precio{font-style:italic;font-size:52px}
+.grab{font-style:italic;font-size:41px;opacity:.86}
+.link{font-weight:600;font-size:54px;color:var(--dorado);letter-spacing:.5px;text-shadow:0 0 30px rgba(242,184,75,.45)}
