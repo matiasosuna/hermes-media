@@ -2716,7 +2716,7 @@
       "id": "52-three-of-swords",
       "carta": "Three of Swords",
       "archivo": "52-three-of-swords.mp4",
-      "cuando": "2026-11-27T12:00:00-05:00",
+      "cuando": "2026-11-28T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Three of Swords is about a heartbreak you never get over. It isn't.\nThree of Swords: heartbreak and grief, and pain you let yourself feel so it can move. ☿\nFree weekly tarot class → link in bio\n#tarot #threeofswords #swords #learntarot #minorarcana",
         "publicado": null
@@ -2752,7 +2752,7 @@
       "id": "trial-26-five-of-wands",
       "carta": "Five of Wands (trial)",
       "archivo": "26-five-of-wands.mp4",
-      "cuando": "2026-11-27T21:00:00-05:00",
+      "cuando": "2026-11-28T21:00:00-05:00",
       "v2": {
         "original": "26-five-of-wands"
       },
@@ -2773,7 +2773,7 @@
       "id": "54-five-of-swords",
       "carta": "Five of Swords",
       "archivo": "54-five-of-swords.mp4",
-      "cuando": "2026-11-28T12:00:00-05:00",
+      "cuando": "2026-11-29T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Five of Swords is about coming out on top. It isn't.\nFive of Swords: conflict and pride, and the win that costs more than it's worth. ☿\nFree weekly tarot class → link in bio\n#tarot #fiveofswords #swords #learntarot #minorarcana",
         "publicado": null
@@ -2809,7 +2809,7 @@
       "id": "trial-16-tower",
       "carta": "The Tower (trial)",
       "archivo": "16-tower.mp4",
-      "cuando": "2026-11-28T21:00:00-05:00",
+      "cuando": "2026-11-29T21:00:00-05:00",
       "v2": {
         "original": "16-tower"
       },
@@ -2830,7 +2830,7 @@
       "id": "55-six-of-swords",
       "carta": "Six of Swords",
       "archivo": "55-six-of-swords.mp4",
-      "cuando": "2026-11-29T12:00:00-05:00",
+      "cuando": "2026-11-30T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Six of Swords is about running away from your problems. It isn't.\nSix of Swords: transition and healing, moving through a hard time toward calmer water. ☿\nFree weekly tarot class → link in bio\n#tarot #sixofswords #swords #learntarot #minorarcana",
         "publicado": null
@@ -2866,7 +2866,7 @@
       "id": "trial-24-three-of-wands",
       "carta": "Three of Wands (trial)",
       "archivo": "24-three-of-wands.mp4",
-      "cuando": "2026-11-29T21:00:00-05:00",
+      "cuando": "2026-11-30T21:00:00-05:00",
       "v2": {
         "original": "24-three-of-wands"
       },
@@ -2887,7 +2887,7 @@
       "id": "trial-15-devil",
       "carta": "The Devil (trial)",
       "archivo": "15-devil.mp4",
-      "cuando": "2026-11-30T21:00:00-05:00",
+      "cuando": "2026-12-01T21:00:00-05:00",
       "v2": {
         "original": "15-devil"
       },
@@ -2908,7 +2908,7 @@
       "id": "trial-25-four-of-wands",
       "carta": "Four of Wands (trial)",
       "archivo": "25-four-of-wands.mp4",
-      "cuando": "2026-12-01T21:00:00-05:00",
+      "cuando": "2026-12-02T21:00:00-05:00",
       "v2": {
         "original": "25-four-of-wands"
       },
@@ -2929,7 +2929,7 @@
       "id": "trial-28-seven-of-wands",
       "carta": "Seven of Wands (trial)",
       "archivo": "28-seven-of-wands.mp4",
-      "cuando": "2026-12-02T21:00:00-05:00",
+      "cuando": "2026-12-03T21:00:00-05:00",
       "v2": {
         "original": "28-seven-of-wands"
       },
@@ -2945,6 +2945,51 @@
       "tiktok": {
         "omitir": true
       }
+    },
+    {
+      "id": "evento-2027",
+      "carta": "12/12 Portal",
+      "archivo": "evento-2027.mp4",
+      "cuando": "2026-11-27T12:00:00-05:00",
+      "v2": true,
+      "sin_espera": true,
+      "nota": "Reel del taller 12/12 (hermes-videos rama reel-2027, src/evento-01). Matías 27/11: aprobado; «pausar por hoy y solo poner este video» a las 12:00 NY; la cola se corre un día. Repite el 5 y el 10/12. Instagram (cierra con «comment 2027»: bot de tarot-web).",
+      "instagram": {
+        "caption": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nComment 2027 to join\n#tarot #tarotreading #manifestation #2027 #tarotreader",
+        "portada": "portada-evento-2027.jpg"
+      },
+      "youtube": {
+        "omitir": true
+      },
+      "tiktok": {
+        "omitir": true
+      }
+    },
+    {
+      "id": "evento-2027-web",
+      "carta": "12/12 Portal",
+      "archivo": "evento-2027-web.mp4",
+      "cuando": "2026-11-27T12:00:00-05:00",
+      "v2": true,
+      "sin_espera": true,
+      "nota": "Reel del taller 12/12 (hermes-videos rama reel-2027, src/evento-01). Matías 27/11: aprobado; «pausar por hoy y solo poner este video» a las 12:00 NY; la cola se corre un día. Repite el 5 y el 10/12. TikTok y YouTube (cierra con la web: ahí no hay bot). instagram.caption = texto de TikTok.",
+      "instagram": {
+        "omitir": true,
+        "caption": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nJoin at hermestarot444.com/events\n#tarot #tarotreading #manifestation #2027 #tarotreader"
+      },
+      "youtube": {
+        "titulo": "12/12 Portal · Manifest your 2027 | Live tarot reading ☿ #shorts",
+        "descripcion": "12/12 Portal · Manifest your 2027 ☿\nA live reading for the year, all together. Each of you draws your own year with our tool, and we do a little magic to manifest what we want.\nSat, Dec 12 · 11 AM New York · Recording included\nJoin at hermestarot444.com/events\n\n#tarot #tarotreading #manifestation #2027 #tarotreader",
+        "etiquetas": [
+          "tarot",
+          "tarot reading",
+          "live tarot",
+          "2027",
+          "manifestation",
+          "12/12 portal"
+        ]
+      },
+      "tiktok": {}
     }
   ],
   "requiere_v2": true,
