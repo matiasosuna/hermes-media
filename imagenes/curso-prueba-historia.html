@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset="utf-8">
 <!-- Historia del Hermes Tarot Course: 5 días gratis (Matías, 28/11/2026: «quiero que hagamos una historia del curso que hay 5 dias gratis para probar»).
-     Textos tal cual /course/join/ en vivo (28/11): «5 days free», «$22 a month, after 5 free days», «Cancel anytime», «Exercises for your level, and Hermes reads every one.».
+     Textos tal cual /course/join/ en vivo (28/11): «5 days free», «Exercises for your level, and Hermes reads every one.». Sin precio (Matías, 28/11: «Sin el precio»).
      Estilo de la historia del Q&A (25/11) y del 12/12: fondo #12142E, dorado, Cinzel + EB Garamond, una carta con halo. Texto entre y≈300 y 1540.
      ?cta=link: deja el lugar del sticker de link (se pone en la app); ?cta=link&muestra=1 lo dibuja solo para la vista previa.
      Render: gh workflow run historia -R matiasosuna/hermes-media --ref curso-5-dias -f archivo=imagenes/curso-prueba-historia.html -->
@@ -21,12 +21,11 @@
 <h1 class="fila" style="top:1066px;font-size:112px">5 DAYS FREE</h1>
 <p class="fila t2" style="top:1210px;font-size:48px">HERMES TAROT COURSE</p>
 <p class="fila lead" style="top:1292px">Exercises for your level,<br>and Hermes reads every one.</p>
-<p class="fila despues" style="top:1424px">Then $22 a month · Cancel anytime</p>
-<p class="fila reply" id="reply" style="top:1516px">REPLY TAROT</p>
+<p class="fila reply" id="reply" style="top:1452px">REPLY TAROT</p>
 <script>
 const q=new URLSearchParams(location.search);
 if(q.get('cta')==='link'){document.getElementById('reply').remove();
-  if(q.get('muestra')){const s=document.createElement('div');s.className='sticker';s.style.top="1522px";s.textContent='🔗 START YOUR FREE TRIAL';document.body.appendChild(s)}}
+  if(q.get('muestra')){const s=document.createElement('div');s.className='sticker';s.style.top="1460px";s.textContent='🔗 START YOUR FREE TRIAL';document.body.appendChild(s)}}
 let s=11;const r=()=>(s=(s*9301+49297)%233280)/233280;const e=document.getElementById("e");for(let i=0;i<140;i++){const d=document.createElement("i");const x=r()*1080,y=r()*1920,z=1+r()*3,o=.2+r()*.6;if(x>110&&x<970&&y>270&&y<1590)continue;d.style.left=x+"px";d.style.top=y+"px";d.style.width=d.style.height=z+"px";d.style.opacity=o;e.appendChild(d)}
 </script>
 </body></html>
