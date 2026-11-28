@@ -2657,6 +2657,15 @@
           "id": "18147162880722207",
           "permalink": "https://www.instagram.com/reel/DgNmr-0PFtT/",
           "fecha": "2026-11-26T17:08:36.681Z"
+        },
+        "metricas_48h": {
+          "medido": "2026-11-28T17:09:14.885Z",
+          "publicado_ny": "Thu 12:08",
+          "reach": 3230,
+          "views": 4719,
+          "saved": 98,
+          "shares": 20,
+          "total_interactions": 359
         }
       },
       "youtube": {
@@ -2778,7 +2787,11 @@
       "cuando": "2026-11-28T12:00:00-05:00",
       "instagram": {
         "caption": "Most people think the Three of Swords is about a heartbreak you never get over. It isn't.\nThree of Swords: heartbreak and grief, and pain you let yourself feel so it can move. ☿\nFree weekly tarot class → link in bio\n#tarot #threeofswords #swords #learntarot #minorarcana",
-        "publicado": null
+        "publicado": {
+          "id": "17942680278406259",
+          "permalink": "https://www.instagram.com/reel/DgSwWFsudlu/",
+          "fecha": "2026-11-28T17:09:14.884Z"
+        }
       },
       "youtube": {
         "titulo": "The card nobody wants, and the most honest | Three of Swords tarot ☿ #shorts",
