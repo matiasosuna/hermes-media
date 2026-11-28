@@ -2808,6 +2808,25 @@
       }
     },
     {
+      "id": "curso-5-dias",
+      "carta": "Hermes Tarot Course",
+      "archivo": "curso-5-dias.mp4",
+      "cuando": "2026-11-28T15:00:00-05:00",
+      "v2": true,
+      "sin_espera": true,
+      "nota": "Reel del Hermes Tarot Course: 5 días gratis (hermes-videos rama reel-curso, src/curso-02; sobre el reel del curso que ya estaba, mentoring-r2). Matías 28/11: aprobado reel, portada y caption; «Hoy, 15 h NY» (extra, entre el reel de las 12 y el trial de las 21). Solo Instagram; cierra con «comment TAROT» (bot de tarot-web).",
+      "instagram": {
+        "caption": "5 days free · Hermes Tarot Course ☿\nPersonal exercises for your level, answered by Hermes · Live Q&A · Study: all 78 cards · Recordings · Hermes Reader certificate\nComment TAROT to try it or know more\n#tarot #learntarot #tarotstudy #tarotcourse #tarotreader",
+        "portada": "portada-curso-5-dias.jpg"
+      },
+      "youtube": {
+        "omitir": true
+      },
+      "tiktok": {
+        "omitir": true
+      }
+    },
+    {
       "id": "trial-26-five-of-wands",
       "carta": "Five of Wands (trial)",
       "archivo": "26-five-of-wands.mp4",
